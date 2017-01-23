@@ -1,0 +1,6 @@
+framework module Pods_Pensive {
+  umbrella header "Pods-Pensive-umbrella.h"
+
+  export *
+  module * { export * }
+}

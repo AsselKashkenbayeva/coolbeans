@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
-class ThirdViewController: NSObject {
+class ThirdViewController: UIViewController {
 
+    
+    
 }
