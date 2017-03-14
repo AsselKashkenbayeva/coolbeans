@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldLoginPassword: UITextField!
     @IBOutlet weak var LogoutButton: UIButton!
     @IBOutlet weak var EnterButton: UIButton!
-    
+    let blob = "blob"
     override func viewDidLoad() {
     super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
