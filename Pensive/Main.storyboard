@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map Search-->
+        <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,6 +38,17 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="StU-9n-GEJ" customClass="GMSMapView">
                                 <rect key="frame" x="16" y="78" width="343" height="484"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qzv-cL-Pze">
+                                        <rect key="frame" x="-18" y="-78" width="372" height="616"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="EZs-Xi-p8M">
+                                            <rect key="frame" x="0.0" y="0.0" width="372" height="616"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -57,10 +68,10 @@
                             <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Map Search" id="Juh-e5-Ova">
+                    <navigationItem key="navigationItem" id="Juh-e5-Ova">
                         <barButtonItem key="leftBarButtonItem" title="More Info" id="iNo-bj-51K">
                             <connections>
-                                <action selector="infoVIew:" destination="9pv-A4-QxB" id="hm1-ba-cXa"/>
+                                <action selector="addButton:" destination="9pv-A4-QxB" id="hvr-Oc-NEZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="LKY-Cc-bCN">
@@ -70,11 +81,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addNewItemView" destination="de4-bM-pn7" id="Aff-Ks-Gpg"/>
+                        <outlet property="detailView" destination="sq2-vj-0S1" id="2aj-2o-GEV"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
+                        <outlet property="visualEffectsView" destination="qzv-cL-Pze" id="H1U-n4-3kb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="sq2-vj-0S1" userLabel="customInfoView">
+                <view contentMode="scaleToFill" id="sq2-vj-0S1" userLabel="detailView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,10 +98,40 @@
                         <action selector="handleLongtapWithRecognizer:" destination="9pv-A4-QxB" id="Txt-hg-RjG"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <view contentMode="scaleToFill" id="de4-bM-pn7" userLabel="addNewItemView">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="3060" y="-1357"/>
+            <point key="canvasLocation" x="3060" y="-1357.8710644677662"/>
         </scene>
-        <!--3-->
+        <!--ProfilePageViewController-->
+        <scene sceneID="mte-Pa-9Wo">
+            <objects>
+                <viewController id="CSw-il-j6w" userLabel="ProfilePageViewController" customClass="ProfilePageViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l55-M8-2re"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wip-JR-19g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EyG-ZD-vFg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="ProfileIcon" selectedImage="ProfileIcon" id="ym2-ae-bqe">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                                <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8hy-J9-fdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3920" y="-1032"/>
+        </scene>
+        <!--Connect-->
         <scene sceneID="s1n-yZ-pui">
             <objects>
                 <viewController id="1qH-IJ-xUa" customClass="ThirdViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
@@ -101,7 +145,7 @@
                         <color key="backgroundColor" red="1" green="0.82864887242524854" blue="0.69376074811149735" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="1" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="3" id="OkF-9M-bPP"/>
+                    <tabBarItem key="tabBarItem" title="Connect" image="ConnectIcon" selectedImage="ConnectIcon" id="OkF-9M-bPP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="Hq7-4M-QSS" id="0N6-tC-Obk"/>
@@ -118,26 +162,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="6021.6000000000004" y="-558.17091454272872"/>
-        </scene>
-        <!--4-->
-        <scene sceneID="DIL-38-BDm">
-            <objects>
-                <viewController id="4WP-6k-L4s" customClass="FourthViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="byl-gP-wmv"/>
-                        <viewControllerLayoutGuide type="bottom" id="VIn-Gr-Pjm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dgu-TV-UO1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.72763195352372556" blue="0.57016496236999692" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="4" id="nR6-KV-NFk"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AvT-09-vCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3900" y="-1023.2383808095952"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="N3v-0Q-F5f">
@@ -306,18 +330,51 @@
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.92160996969999998" green="0.99835759400000001" blue="0.80829004029999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
+                        <segue destination="CSw-il-j6w" kind="relationship" relationship="viewControllers" id="7bY-fE-YiX"/>
+                        <segue destination="dZC-aw-Pdm" kind="relationship" relationship="viewControllers" id="AHn-xj-kTd"/>
                         <segue destination="eCY-Ew-5Hk" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="1qH-IJ-xUa" kind="relationship" relationship="viewControllers" id="Qrp-Ex-7dU"/>
-                        <segue destination="4WP-6k-L4s" kind="relationship" relationship="viewControllers" id="yxy-OM-jtx"/>
-                        <segue destination="dZC-aw-Pdm" kind="relationship" relationship="viewControllers" id="AHn-xj-kTd"/>
+                        <segue destination="95R-CA-wwO" kind="relationship" relationship="viewControllers" id="aTh-8U-zK9"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-638" y="-974"/>
+        </scene>
+        <!--R.I.-->
+        <scene sceneID="bwG-jO-jZO">
+            <objects>
+                <viewController id="95R-CA-wwO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wgo-Pt-WaJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="n66-lY-bxt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gvt-t5-NZs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="R.I." image="BrainIcon" selectedImage="BrainIcon" id="6Co-6y-hTB">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                                <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6FD-RD-CgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1226" y="-333"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="mrU-Dt-PpS">
@@ -626,15 +683,16 @@
             </objects>
             <point key="canvasLocation" x="5261.6000000000004" y="-240.62968515742131"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="GmE-HQ-MlH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="U7P-sZ-EOa"/>
+                    <tabBarItem key="tabBarItem" title="List" image="ListIcon" selectedImage="ListIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.53670061950000003" blue="0.2415962086" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -645,13 +703,19 @@
             </objects>
             <point key="canvasLocation" x="2797.5999999999999" y="80.50974512743629"/>
         </scene>
-        <!--1-->
+        <!--Cattche-->
         <scene sceneID="Nw2-4W-wzK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="1" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Cattche" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -666,7 +730,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BrainIcon" width="25" height="25"/>
+        <image name="ConnectIcon" width="25" height="25"/>
+        <image name="ListIcon" width="25" height="25"/>
+        <image name="MapIcon" width="23" height="22"/>
+        <image name="ProfileIcon" width="25" height="25"/>
         <image name="defaultPhoto" width="600" height="400"/>
-        <image name="first" width="30" height="30"/>
     </resources>
 </document>

@@ -14,14 +14,22 @@ import CoreData
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import BTNavigationDropdownMenu
 
 //var storedPlaces: [StoredPlace] = []
 var storedPlaces: [NSManagedObject] = []
  
-class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate {
+class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, UINavigationBarDelegate {
 
  
+    @IBOutlet var addNewItemView: UIView!
    
+    @IBOutlet var detailView: UIView!
+    
+    @IBOutlet weak var visualEffectsView: UIVisualEffectView!
+    
+   let items = ["Restaurants", "Museums", "Landmarks", "Favourites"]
+    
    
    
     @IBOutlet weak var mapView: GMSMapView!
@@ -62,6 +70,16 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
+        let menuView = BTNavigationDropdownMenu(title: "Sort By", items: items as [AnyObject])
+        self.navigationItem.titleView = menuView
+        
+        visualEffectsView.isHidden = true
+        //visualEffectView?.effect = nil
+        addNewItemView.layer.cornerRadius = 5
+        
+        
+        
         //Initially uploading googleMaps
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 22.300000, longitude: 70.783300, zoom: 10.0)
         vwGMap = GMSMapView.map(withFrame: self.view.frame, camera: camera)
@@ -167,7 +185,25 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 
     }
  
- 
+    func animatedIn() {
+        self.view.addSubview(addNewItemView)
+        addNewItemView.center = self.view.center
+        
+        addNewItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        addNewItemView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+            //self.visualEffectView?.effect = self.effect
+            self.visualEffectsView?.isHidden = false
+            self.addNewItemView.alpha = 1
+            self.addNewItemView.transform = CGAffineTransform.identity
+            
+        }
+        
+    }
+    @IBAction func addButton(_ sender: Any) {
+        animatedIn()
+    }
     
 //MARK: current location permission requests
     

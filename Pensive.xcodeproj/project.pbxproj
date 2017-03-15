@@ -22,6 +22,7 @@
 		CF122FA81DFF2F6B0011725E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA71DFF2F6B0011725E /* Photos.framework */; };
 		CF122FAA1DFF2F720011725E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA91DFF2F720011725E /* PhotosUI.framework */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
+		CF5DDAA21E799162000A0BAA /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5DDAA11E799162000A0BAA /* ProfilePageViewController.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF69C17B1E0DC7BA0095A29E /* useCoreData.xcdatamodeld */; };
@@ -61,7 +62,6 @@
 		CFBBE14E1DBEA75200635E2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14D1DBEA75200635E2C /* Security.framework */; };
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
-		CFBFD5921DBF7929008EB6E6 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5911DBF7929008EB6E6 /* FourthViewController.swift */; };
 		CFCBA3A61DE5B73100E7CD7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */; };
 		CFD1D05B1DDF6B4B00012115 /* FoodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */; };
 		CFD1D05D1DDFBD5700012115 /* DrinksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */; };
@@ -97,6 +97,7 @@
 		CF122FA71DFF2F6B0011725E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CF122FA91DFF2F720011725E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CF5DDAA11E799162000A0BAA /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF69C17C1E0DC7BA0095A29E /* useCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = useCoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -143,7 +144,6 @@
 		CFBFD51F1DBEC20C008EB6E6 /* Pensive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pensive-Bridging-Header.h"; sourceTree = "<group>"; };
 		CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "bridging-header.m"; path = "../bridging-header.m"; sourceTree = "<group>"; };
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
-		CFBFD5911DBF7929008EB6E6 /* FourthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
 		CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodTableViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF5DDAA11E799162000A0BAA /* ProfilePageViewController.swift */,
 				CF0063531E15561B007B828F /* name.swift */,
 				CF91F9D21DFDDC20001EE137 /* RatingControl.swift */,
 				CF122FA51DFF0DA00011725E /* DetailViewController.swift */,
@@ -253,7 +254,6 @@
 				CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */,
 				CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */,
 				CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */,
-				CFBFD5911DBF7929008EB6E6 /* FourthViewController.swift */,
 				CF0F89C91DE2BE5300BC7462 /* module.modulemap */,
 				CF0F89C81DE2BE2400BC7462 /* Firebase.h */,
 				CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */,
@@ -521,10 +521,10 @@
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */,
-				CFBFD5921DBF7929008EB6E6 /* FourthViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CF0063541E15561B007B828F /* name.swift in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* FoodTableViewController.swift in Sources */,
+				CF5DDAA21E799162000A0BAA /* ProfilePageViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,
 				CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */,
