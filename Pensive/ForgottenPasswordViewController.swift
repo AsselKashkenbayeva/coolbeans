@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class ForgottenPasswordViewController: UIViewController {
 
+    @IBOutlet weak var EmailField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +23,44 @@ class ForgottenPasswordViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    @IBAction func submitAction(_ sender: AnyObject) {
+        if self.EmailField.text == ""
+        {
+            let alertController = UIAlertController(title: "Oops!", message: "Please enter an email.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            alertController.addAction(defaultAction)
+            
+             self .present(alertController, animated: true, completion: nil)
+            
+        }
+        else
+        {
+            FIRAuth.auth()?.sendPasswordReset(withEmail: self.EmailField.text!, completion: { (error) in
+                var title = ""
+                var message = ""
+                
+                if error != nil
+                {
+                    title = "Oops!"
+                    message = (error?.localizedDescription)!
+                }
+                else
+                {
+                    title = "Success!"
+                    message = "Password reset email sent."
+                    self.EmailField.text = ""
+                }
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self .present(alertController, animated: true, completion: nil)
+            })
+        }
+        }
+    
 }

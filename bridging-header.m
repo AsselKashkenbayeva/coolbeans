@@ -6,4 +6,6 @@
 //  Copyright © 2016 Assel Kashkenbayeva. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <GoogleMaps/GoogleMaps.h>
+#import <Corelocation/Corelocation.h>
+#import <GooglePlaces/GooglePlaces.h>
