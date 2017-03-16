@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import CoreData
 
 
 class LoginViewController: UIViewController {
@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldLoginPassword: UITextField!
     @IBOutlet weak var LogoutButton: UIButton!
     @IBOutlet weak var EnterButton: UIButton!
-    let blob = "blob"
+    var textValue: String = ""
     override func viewDidLoad() {
     super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -34,6 +34,8 @@ class LoginViewController: UIViewController {
             self.LogoutButton.alpha = 0.0
             self.EnterButton.alpha = 0.0
         }
+      textFieldLoginEmail.text = textValue
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,6 +59,16 @@ class LoginViewController: UIViewController {
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                      self.performSegue(withIdentifier: self.loginToList, sender: nil)
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let context = appDelegate.persistentContainer.viewContext
+
+                    let newPlace = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
+                    
+                    newPlace.setValue(self.textFieldLoginEmail.text, forKeyPath: "userEmail")
+                    newPlace.setValue(self.textFieldLoginPassword.text, forKeyPath: "userPassword")
+                    print(newPlace)
+
         }
                 else
                 {
@@ -120,5 +132,15 @@ class LoginViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
+/*
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      let tabCtrl = segue.destination as! UITabBarController
+        let destinationVC = tabCtrl.viewControllers?[0] as! ProfilePageViewController
+        
+            destinationVC.emailTextField.text = textValue
+       // if let textPassword: String = textFieldLoginPassword.text {
+       // destinationVC.passwordTextField.text = textPassword
+    
+    }
+ */
 }
