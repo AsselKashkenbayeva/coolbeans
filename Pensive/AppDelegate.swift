@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
+       
+      //  UITabBarItem.appearance().image?.withRenderingMode(.alwaysOriginal)
         GMSServices.provideAPIKey("AIzaSyArYf3iVy0e1e8IHFRRah7CImHJWzBx_wU")
         GMSPlacesClient.provideAPIKey("AIzaSyDk4pJ3kW9POyBYaI9-dNW2qvTJIbttS_A")
     FIRApp.configure()

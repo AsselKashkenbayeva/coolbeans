@@ -26,6 +26,7 @@
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF69C17B1E0DC7BA0095A29E /* useCoreData.xcdatamodeld */; };
 		CF69C1F91E1195310095A29E /* StoredPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF69C1F81E1195310095A29E /* StoredPlace.swift */; };
+		CF75AD401E673CCE002F054F /* AddItemPopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF75AD3F1E673CCE002F054F /* AddItemPopupWindow.swift */; };
 		CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */; };
 		CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */; };
 		CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */; };
@@ -61,10 +62,11 @@
 		CFBBE14E1DBEA75200635E2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14D1DBEA75200635E2C /* Security.framework */; };
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
-		CFBFD5921DBF7929008EB6E6 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5911DBF7929008EB6E6 /* FourthViewController.swift */; };
 		CFCBA3A61DE5B73100E7CD7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */; };
 		CFD1D05B1DDF6B4B00012115 /* FoodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */; };
 		CFD1D05D1DDFBD5700012115 /* DrinksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */; };
+		CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */; };
+		CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,10 +99,12 @@
 		CF122FA71DFF2F6B0011725E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CF122FA91DFF2F720011725E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF69C17C1E0DC7BA0095A29E /* useCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = useCoreData.xcdatamodel; sourceTree = "<group>"; };
 		CF69C1F81E1195310095A29E /* StoredPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoredPlace.swift; sourceTree = "<group>"; };
+		CF75AD3F1E673CCE002F054F /* AddItemPopupWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemPopupWindow.swift; sourceTree = "<group>"; };
 		CF7EC84E1DBE68A1005C8D06 /* Pensive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pensive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -143,11 +147,12 @@
 		CFBFD51F1DBEC20C008EB6E6 /* Pensive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pensive-Bridging-Header.h"; sourceTree = "<group>"; };
 		CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "bridging-header.m"; path = "../bridging-header.m"; sourceTree = "<group>"; };
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
-		CFBFD5911DBF7929008EB6E6 /* FourthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
 		CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodTableViewController.swift; sourceTree = "<group>"; };
 		CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksViewController.swift; sourceTree = "<group>"; };
+		CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersTableViewController.swift; sourceTree = "<group>"; };
+		CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		D2D5432937B31CD5607F9103 /* Pods-Pensive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pensive.release.xcconfig"; path = "Pensive.xcodeproj/Pods/Target Support Files/Pods-Pensive/Pods-Pensive.release.xcconfig"; sourceTree = "<group>"; };
 		D39947249997693F44925AD2 /* Pods-Pensive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pensive.debug.xcconfig"; path = "Pensive.xcodeproj/Pods/Target Support Files/Pods-Pensive/Pods-Pensive.debug.xcconfig"; sourceTree = "<group>"; };
 		F1BCBE87591EE6D1AC25ABB8 /* Pods_PensiveTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PensiveTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +250,8 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */,
+				CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */,
 				CF0063531E15561B007B828F /* name.swift */,
 				CF91F9D21DFDDC20001EE137 /* RatingControl.swift */,
 				CF122FA51DFF0DA00011725E /* DetailViewController.swift */,
@@ -253,9 +260,10 @@
 				CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */,
 				CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */,
 				CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */,
-				CFBFD5911DBF7929008EB6E6 /* FourthViewController.swift */,
+				CF75AD3F1E673CCE002F054F /* AddItemPopupWindow.swift */,
 				CF0F89C91DE2BE5300BC7462 /* module.modulemap */,
 				CF0F89C81DE2BE2400BC7462 /* Firebase.h */,
+				CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */,
 				CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */,
 				CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */,
 				CF7EC85F1DBE68A1005C8D06 /* Info.plist */,
@@ -518,10 +526,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF69C1F91E1195310095A29E /* StoredPlace.swift in Sources */,
+				CF75AD401E673CCE002F054F /* AddItemPopupWindow.swift in Sources */,
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */,
-				CFBFD5921DBF7929008EB6E6 /* FourthViewController.swift in Sources */,
+				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
+				CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CF0063541E15561B007B828F /* name.swift in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* FoodTableViewController.swift in Sources */,
@@ -669,11 +679,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8ZWQ68LWUK;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Pensive",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -718,11 +723,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8ZWQ68LWUK;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Pensive",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",

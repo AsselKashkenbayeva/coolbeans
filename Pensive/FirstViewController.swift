@@ -9,29 +9,41 @@ import UIKit
 
 import GoogleMaps
 import GooglePlaces
-import GoogleMapsDirections
+
 import CoreData
+
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 
+import BTNavigationDropdownMenu
+import IGLDropDownMenu
+
+
 //var storedPlaces: [StoredPlace] = []
 var storedPlaces: [NSManagedObject] = []
  
-class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate {
-
- 
+class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate {
+    
    
    
-   
+   //Container for viewing Gmaps
     @IBOutlet weak var mapView: GMSMapView!
     var locationManager = CLLocationManager()
     var vwGMap = GMSMapView()
     var Markers = [GMSMarker]()
-    @IBAction func handleLongtap(sender: UILongPressGestureRecognizer) {
-        print("PRESSED")
+    
+    @IBOutlet var addNewItem: UIView!
+
+    @IBOutlet var mapCustomInfoWindow: UIView!
+    
+    @IBAction func dismissPopup(_ sender: Any) {
+        
     }
-   
+  
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
+    
     var place:GMSPlace?
     
     var marker = GMSMarker()
@@ -50,18 +62,44 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var latitudeText = ""
     var longitudeText = ""
     var newPlaceNameText = ""
+
     
   //var newPlaceLongitude =  0.0
   //  var newPlacelatitude = 0.0
     var user = FIRAuth.auth()?.currentUser
     var databaseRef = FIRDatabase.database().reference()
 
-
-
-
+    var effect:UIVisualEffect!
+    
+   var dropDownMenuFolder = IGLDropDownMenu()
+    var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
+    var dataImage: [UIImage] = [UIImage(named: "restIcon")!, UIImage(named: "brainIcon")!]
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+    setupInIt()
+       
+       // self.view = dropDownMenuFolder
+        // removes the navigation bar
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        
+        // this is for the sort by drop down menu
+        effect = visualEffectView?.effect
+        visualEffectView?.isHidden = true
+        visualEffectView?.effect = nil
+        addNewItem.layer.cornerRadius = 5
+  
+
+        /*
+        var blur = UIBlurEffect(style: UIBlurEffectStyle.light )
+        var blurview = UIVisualEffectView(effect: blur)
+        blurview.alpha = 0.8
+        blurview.frame = mapView.bounds
+        self.view.addSubview(blurview)
+        */
+        
         //Initially uploading googleMaps
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 22.300000, longitude: 70.783300, zoom: 10.0)
         vwGMap = GMSMapView.map(withFrame: self.view.frame, camera: camera)
@@ -83,7 +121,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
         self.view = vwGMap
        
-     // Google Maps Directions
+  /*   // Google Maps Directions
         GoogleMapsDirections.provide(apiKey: "AIzaSyC-i5xPkUJ9yObNcwhGRjBYI8Q_wNsWZr4")
         let origin = GoogleMapsDirections.Place.placeID(id: "ChIJxc4vk9QEdkgRjJ2al7_P9uw")
         let destination = GoogleMapsDirections.Place.placeID(id: "ChIJb9sw59k0K4gRZZlYrnOomfc")
@@ -94,10 +132,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 debugPrint(response?.errorMessage)
                 return
             }
+            */
         //        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
          //       self.vwGMap.addGestureRecognizer(longPressRecognizer)
             
-        }
+        //}
        //let mapView = GMSMapView.map(withFrame:  .zero, camera: camera)
        // mapView.settings.myLocationButton = true
        // mapView.delegate = self
@@ -157,19 +196,97 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 
             }
         
-            }
+        }
             
         
    catch
    {
     //ERROR
         }
+        var logoImages = [UIImage]()
+        logoImages.append(UIImage(named: "MapIcon")!)
+        
+           let items = ["Restaurants" , "Museums", "Landmarks", "Favourites"]
+        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
+        
+        self.navigationItem.titleView = menuView
+       menuView.cellTextLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+       menuView.menuTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    menuView.cellSelectionColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
+            print("Did select item at index: \(indexPath)")
+            
+            
+        }
+    }
+    
+         //Dropdown menu for the add new place pop up variables (folders)
+      
+        
+      func setupInIt() {
+            
+            var dropdownItems: NSMutableArray = NSMutableArray()
+            
+            for i in 0...(dataTitle.count-1) {
+                
+                var item = IGLDropDownItem()
+                item.text = "\(dataTitle[i])"
+                //item.iconImage = dataImage
+                dropdownItems.add(addObject:item)
+            }
+            
+            dropDownMenuFolder.menuText = "Choose Folder"
+            dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
+            dropDownMenuFolder.paddingLeft = 15
+            dropDownMenuFolder.frame = CGRect(x: 40, y: 60, width: 200, height: 45)
+            dropDownMenuFolder.delegate = self
+            dropDownMenuFolder.type = IGLDropDownMenuType.stack
+            dropDownMenuFolder.gutterY = 5
+            dropDownMenuFolder.itemAnimationDelay = 0.1
+            dropDownMenuFolder.reloadView()
+            
+            var myLabel = UILabel()
+            myLabel.text = "SwiftyOS Blog"
+            myLabel.textColor = UIColor.white
+            myLabel.font = UIFont(name: "Halverica-Neue", size: 17)
+            myLabel.textAlignment = NSTextAlignment.center
+          myLabel.frame = CGRect(x: 40, y: 60, width: 200, height: 45)
+            
+            self.mapCustomInfoWindow.addSubview(myLabel)
+            self.mapCustomInfoWindow.addSubview(self.dropDownMenuFolder)
+        
+        }
 
+        
+        func dropDownMenu(dropDownMenu: IGLDropDownMenu!, selectedItemAtIndex index: Int) {
+            
+            var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
+            print("Selected weather")
+        
+        }
+    
+    func animatedIn() {
+        self.view.addSubview(addNewItem)
+        addNewItem.center = self.view.center
+        
+        addNewItem.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        addNewItem.alpha = 0
+       
+        UIView.animate(withDuration: 0.4) {
+            self.visualEffectView?.effect = self.effect
+            self.visualEffectView?.isHidden = false
+            self.addNewItem.alpha = 1
+            self.addNewItem.transform = CGAffineTransform.identity
+            
+        }
+    
     }
  
- 
-    
-//MARK: current location permission requests
+    @IBAction func addButton(_ sender: Any) {
+        animatedIn()
+    }
+     
+   //MARK: current location permission requests
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
@@ -320,11 +437,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-    
-        let alert = UIAlertController(title: "Add this place to wishlist?",
+    animatedIn()
+      /*  let alert = UIAlertController(title: "Add this place to wishlist?",
                                       message: newPlaceNameText,
                                       preferredStyle: .alert)
-  
+
         
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
        self.save()
@@ -346,24 +463,35 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
        
         self.present(alert, animated: true, completion: nil)
-
-
+*/
+       
+       
+    return false
+}
+    
+    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+        let location = marker.position
+        print(location)
+        mapCustomInfoWindow.center = mapView.projection.point(for: location)
+        self.view.addSubview(mapCustomInfoWindow)
+        print("YOU PRESSED HERE")
+    }
       //  let location = CLLocationCoordinate2D(latitude: (marker.userData as! location).lat, longitude: (marker.userData as! location).lon)
         
       
-   /*     infoWindow.Name.text = (marker.userData as! location).name
+   /*    infoWindow.Name.text = (marker.userData as! location).name
         infoWindow.Price.text = (marker.userData as! location).price.description
         infoWindow.Zone.text = (marker.userData as! location).zone.rawValue
         infoWindow.center = mapView.projection.point(for: location)
         infoWindow.button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
  */
-        
+      /*
         // Remember to return false
         // so marker event is still handled by delegate
  
         return false
     }
-    
+
     // let the custom infowindow follows the camera
   //  func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
   //      if (tappedMarker.userData != nil){
@@ -373,7 +501,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
   //          infoWindow.center = mapView.projection.point(for: location)
    //     }
  //   }
-   /* func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
         print("tapped")
         let newalert = UIAlertController(title: "would you like to remove this from wishlist?",
                                       message: newPlaceNameText,
@@ -387,8 +515,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 self.present(newalert, animated: true, completion: nil)
 
     }
-    */
+ */
+
+    
+ 
+
+   
+    
+   
+    
+    
+
 }
-
-
-
