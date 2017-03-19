@@ -14,6 +14,8 @@ class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
 
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
+    
+    var dataImage: [UIImage] = [UIImage(named: "restIcon")!, UIImage(named: "museumIcon")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,9 +32,15 @@ class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
             
             var item = IGLDropDownItem()
             item.text = "\(dataTitle[i])"
+            item.iconImage = dataImage[i]
             dropdownItems.add(addObject:item)
         }
-        
+        /*for element in dataImage {
+            var item = IGLDropDownItem()
+            item.iconImage = element
+        }
+
+        */
         dropDownMenuFolder.menuText = "Choose Folder"
         dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
         dropDownMenuFolder.paddingLeft = 15

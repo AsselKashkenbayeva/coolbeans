@@ -73,7 +73,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
    var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
-    var dataImage: [UIImage] = [UIImage(named: "restIcon")!, UIImage(named: "brainIcon")!]
+   var dataImage: [UIImage] = [UIImage(named: "restIcon")!, UIImage(named: "museumIcon")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -216,6 +216,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
             print("Did select item at index: \(indexPath)")
             
+            for i in 0...(items.count-1) {
+                menuView.arrowImage = self?.dataImage[i]
+                menuView.checkMarkImage = self?.dataImage[i]
+            }
             
         }
     }
@@ -231,10 +235,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 
                 var item = IGLDropDownItem()
                 item.text = "\(dataTitle[i])"
-                //item.iconImage = dataImage
+                item.iconImage = dataImage[i]
                 dropdownItems.add(addObject:item)
             }
-            
+    
             dropDownMenuFolder.menuText = "Choose Folder"
             dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
             dropDownMenuFolder.paddingLeft = 15
@@ -453,7 +457,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             let post : [String: AnyObject] = ["storedName" : Pname as AnyObject, "placeID" : PplaceID as AnyObject]
             
             let databaseRef = FIRDatabase.database().reference()
-            databaseRef.child("PlaceNames").child((self.user?.uid)!).childByAutoId().setValue(post)
+            databaseRef.child((self.user?.uid)!)..child("PlaceNames").childByAutoId().setValue(post)
         }
                        let cancelAction = UIAlertAction(title: "Remove",
                                          style: .default) { _ in marker.map = nil}

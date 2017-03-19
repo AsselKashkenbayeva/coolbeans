@@ -21,5 +21,6 @@ pod ‘GoogleSymbolUtilities’
 pod ‘GoogleInterchangeUtilities’
 pod ‘BTNavigationDropdownMenu’, :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
 pod ‘IGLDropDownMenu’
+pod ‘Firebase/Storage’
 
 end

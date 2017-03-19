@@ -12,7 +12,7 @@ import CoreData
 
 
 class LoginViewController: UIViewController {
-    
+   
     let loginToList = "LoginToList"
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
         {
             self.LogoutButton.alpha = 1.0
             self.EnterButton.alpha = 1.0
+            
             
         }
         else
@@ -54,6 +55,15 @@ class LoginViewController: UIViewController {
             FIRAuth.auth()?.createUser(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
+                    var user = FIRAuth.auth()?.currentUser
+                    var databaseRef = FIRDatabase.database().reference()
+                    let userEmail = self.textFieldLoginEmail.text
+                    let userPassword = self.textFieldLoginPassword.text
+                    let userDataEmail : [String: AnyObject] = ["userEmail" : userEmail as AnyObject]
+                    let userDataPassword :[String: AnyObject] = ["userPassword" : userPassword as AnyObject]
+                    databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
+                    databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                    
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
@@ -96,11 +106,22 @@ class LoginViewController: UIViewController {
             FIRAuth.auth()?.signIn(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
+                    var user = FIRAuth.auth()?.currentUser
+                    var databaseRef = FIRDatabase.database().reference()
+                    let userEmail = self.textFieldLoginEmail.text
+                    let userPassword = self.textFieldLoginPassword.text
+                    let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
+                    let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
+                    databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
+                    databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                    
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                     self.performSegue(withIdentifier: self.loginToList, sender: nil)
+                    //putting the current user email and password into Firebase database
+                  
                 }
                 else
                 {
@@ -132,15 +153,5 @@ class LoginViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-/*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      let tabCtrl = segue.destination as! UITabBarController
-        let destinationVC = tabCtrl.viewControllers?[0] as! ProfilePageViewController
-        
-            destinationVC.emailTextField.text = textValue
-       // if let textPassword: String = textFieldLoginPassword.text {
-       // destinationVC.passwordTextField.text = textPassword
-    
-    }
- */
+   
 }

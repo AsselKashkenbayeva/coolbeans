@@ -223,13 +223,13 @@
                                     <action selector="emailTextFieldAction:" destination="4WP-6k-L4s" eventType="editingDidEnd" id="HnE-LM-cbd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xoI-n3-lnS">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xoI-n3-lnS">
                                 <rect key="frame" x="30" y="287" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8298189426" green="0.98182314110000002" blue="1" alpha="0.55177801719999997" colorSpace="calibratedRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="passwordTextFieldAction:" destination="4WP-6k-L4s" eventType="editingDidEnd" id="eDi-ln-40y"/>
                                 </connections>
@@ -849,7 +849,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

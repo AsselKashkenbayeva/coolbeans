@@ -9,9 +9,17 @@
 import UIKit
 import Firebase
 
+
 class ProfilePageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate {
 
     @IBOutlet weak var profilePhoto: UIImageView!
+    
+    
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var dobTextField: UITextField!
+    @IBOutlet weak var sexPickerTextFeild: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +31,56 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         profilePhoto.layer.cornerRadius = profilePhoto.frame.height/2
         profilePhoto.clipsToBounds = true
       
-        emailTextField.text = "Hello"
-    }
+       //Retreiving data from Firebase for text-field- Username
+        let ref = FIRDatabase.database().reference()
+        let userID: String = (FIRAuth.auth()?.currentUser?.uid)!
+        ref.child(userID).child("Username").observe(.value, with: { (snapshot) in
+           let username = (snapshot.value as? NSDictionary)?["Username"] as? String ?? ""
+            self.usernameTextField.text = username
+        })
+        //Retreiving data from Firebase for text-field- Email
+        ref.child(userID).child("Email").observe(.value, with: { (snapshot) in
+            let email = (snapshot.value as? NSDictionary)?["Email"] as? String ?? ""
+            self.emailTextField.text = email
+        })
+        //Retreiving data from Firebase for text-field- Password
+        ref.child(userID).child("Password").observe(.value, with: { (snapshot) in
+            let password = (snapshot.value as? NSDictionary)?["Password"] as? String ?? ""
+            self.passwordTextField.text = password
+        })
+        //Retreiving data from Firebase for text-field- DOB
+        ref.child(userID).child("DOB").observe(.value, with: { (snapshot) in
+            let dob = (snapshot.value as? NSDictionary)?["DOB"] as? String ?? ""
+            self.dobTextField.text = dob
+        })
+        
+        //Retreiving data from Firebase for text-field- Gender
+        ref.child(userID).child("Gender").observe(.value, with: { (snapshot) in
+            let gender = (snapshot.value as? NSDictionary)?["Gender"] as? String ?? ""
+            self.sexPickerTextFeild.text = gender
+        })
+        
+       //hide pickerview until textfield selected
+      sexPicker.isHidden = true
+        
+        //retreive profile photo from Firebase 
+        let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
+        ref.child(userID).observe(.value, with: { (snapshot) in
+            if snapshot.hasChild("ProfilePic"){
+    
+            storageRef.child(userID).child("ProfilePic").data(withMaxSize: 10*1024*1024, completion: {(data, error) in
+                    let profilePhoto = UIImage(data: data!)
+                    self.profilePhoto.image = profilePhoto
+                }
+                )}
+        }
+        )}
 
-    //Allows you the action to upload profile picture 
+    //Allows you the action to upload profile picture
   
    
     @IBAction func selectImageFromPhotoLibrary(_ sender: Any) {
     
-    //@IBAction func selectImageFromPhotoLibrary(_ sender: AnyObject) {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
@@ -45,41 +94,87 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    func uploadImageToFirebaseStorage(data: NSData) {
+        let userID: String = (FIRAuth.auth()?.currentUser?.uid)!
+        let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
+        let uploadMetadata = FIRStorageMetadata()
+        uploadMetadata.contentType = "image/jpeg"
+        storageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
+            if (error != nil) {
+                print("I received an error")
+            } else {
+                print("Upload conplete!")
+            }
+            
+        }
+        
+        
+    }
+    
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
+      let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         profilePhoto.image = selectedImage
-        dismiss(animated: true, completion: nil)
+         dismiss(animated: true, completion: nil)
+        let userID: String = (FIRAuth.auth()?.currentUser?.uid)!
+        let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
+        var uploadData = NSData()
+        uploadData = UIImagePNGRepresentation(profilePhoto.image!)! as NSData
+        let uploadMetadata = FIRStorageMetadata()
+        uploadMetadata.contentType = "image/jpeg"
+        storageRef.put(uploadData as Data , metadata: uploadMetadata) { (metadata, error) in
+            if (error != nil) {
+                print("I received an error")
+            } else {
+                print("Upload conplete!")
+            }
+            
+        }
       
-    }
+            }
+ 
 
     //MARK: filling in the textfields
     
-    @IBOutlet weak var usernameTextField: UITextField!
     
     @IBAction func usernameTextFieldAction(_ sender: Any) {
+        
+        var user = FIRAuth.auth()?.currentUser
+        var databaseRef = FIRDatabase.database().reference()
+        let userUsername = self.usernameTextField.text
+        let userData : [String: AnyObject] = ["Username" : userUsername as AnyObject]
+            databaseRef.child((user?.uid)!).child("Username").setValue(userData)
     }
     
-    @IBOutlet weak var emailTextField: UITextField!
+   
     
     @IBAction func emailTextFieldAction(_ sender: Any) {
     }
     
-    @IBOutlet weak var passwordTextField: UITextField!
     
     
     @IBAction func passwordTextFieldAction(_ sender: Any) {
+        var user = FIRAuth.auth()?.currentUser
+        var databaseRef = FIRDatabase.database().reference()
+        let password = self.passwordTextField.text
+        let userDataPassword : [String: AnyObject] = ["Password" : password as AnyObject]
+        databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+      
     }
     
-    @IBOutlet weak var dobTextField: UITextField!
     
     @IBAction func dobTextFieldAction(_ sender: Any) {
+        var user = FIRAuth.auth()?.currentUser
+        var databaseRef = FIRDatabase.database().reference()
+        let dob = self.dobTextField.text
+        let userDataDOB : [String: AnyObject] = ["DOB" : dob as AnyObject]
+        databaseRef.child((user?.uid)!).child("DOB").setValue(userDataDOB)
     }
     //MARK: Sex selection
     
     
-    @IBOutlet weak var sexPickerTextFeild: UITextField!
+   
     @IBOutlet weak var sexPicker: UIPickerView!
     
     var gender = ["Male","Female"]
@@ -102,6 +197,12 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         
         self.sexPickerTextFeild.text = self.gender[row]
         self.sexPicker.isHidden = true
+        
+        var user = FIRAuth.auth()?.currentUser
+        var databaseRef = FIRDatabase.database().reference()
+        let gender = self.sexPickerTextFeild.text
+        let userDataGender : [String: AnyObject] = ["Gender" : gender as AnyObject]
+    databaseRef.child((user?.uid)!).child("Gender").setValue(userDataGender)
         
     }
     
