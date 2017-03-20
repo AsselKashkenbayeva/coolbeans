@@ -65,16 +65,23 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         
         //retreive profile photo from Firebase 
         let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
-        ref.child(userID).observe(.value, with: { (snapshot) in
-            if snapshot.hasChild("ProfilePic"){
-    
-            storageRef.child(userID).child("ProfilePic").data(withMaxSize: 10*1024*1024, completion: {(data, error) in
+      ref.child(userID).child("ProfilePic").observe(.value, with: { (snapshot) in
+                storageRef.data(withMaxSize: 10*1024*1024, completion: {(data, error) -> Void in
+                    if (error != nil) {
+                        print("got no pic")
+                    } else {
+                    
                     let profilePhoto = UIImage(data: data!)
                     self.profilePhoto.image = profilePhoto
-                }
-                )}
+                        print("I HAVE YOUR PHOTO")
+                    }
         }
         )}
+        )}
+
+
+
+
 
     //Allows you the action to upload profile picture
   
