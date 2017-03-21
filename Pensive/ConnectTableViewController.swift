@@ -9,25 +9,36 @@
 import UIKit
 import Firebase
 
-class ConnectTableViewCellController: UITableViewCell {
-    
-    
-    @IBOutlet weak var userPhoto: UIImageView!
-    
-    @IBOutlet weak var userUsername: UILabel!
-
-    @IBOutlet weak var viewCattche: UIButton!
-    
-    
-    
-}
-
     class ConnectTableViewController: UITableViewController {
         
-        var username = ["Billy", "Sam", "Gill"]
+       
     override func viewDidLoad() {
         super.viewDidLoad()
-
+ let ref = FIRDatabase.database().reference()
+       refHandle = ref.observe(.childAdded, with: { (snapshot) in
+        if let Dictionary = snapshot.value as? String {
+            print(Dictionary)
+            let user = USER()
+            user.setNilValueForKey(Dictionary)
+            self.userList.append(user)
+            
+            self.tableView.reloadData()
+         
+        }
+       })
+      
+   
+        ref.queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+            if let username = (snapshot.value as? NSDictionary)?["Username"] as? String {
+                print("\(snapshot.key) was \(username)")
+            }
+        })
+        
+        
+        
+        
+        
+        
       navigationItem.title = "User Feed"
     }
 
@@ -45,14 +56,14 @@ class ConnectTableViewCellController: UITableViewCell {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+       return 4
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! ConnectTableViewCellController
-        let userName = username[indexPath.row]
-        cell.userUsername?.text = userName
+        
+        //cell.userUsername?.text = username[indexPath.row]
         cell.userPhoto?.image = UIImage(named: "")
         return cell
     }
