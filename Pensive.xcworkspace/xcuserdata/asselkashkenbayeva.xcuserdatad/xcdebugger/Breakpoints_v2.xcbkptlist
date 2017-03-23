@@ -229,46 +229,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pensive/ConnectTableViewController.swift"
-            timestampString = "511826532.854758"
+            filePath = "Pensive/User.swift"
+            timestampString = "511796296.564703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Pensive.ConnectTableViewController.viewDidLoad () -&gt; ()"
-                  moduleName = "Pensive"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/asselkashkenbayeva/Desktop/Pensive/Pensive/ConnectTableViewController.swift"
-                  timestampString = "511789330.627939"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "382">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Pensive.ConnectTableViewController.(viewDidLoad () -&gt; ()).(closure #1)"
-                  moduleName = "Pensive"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/asselkashkenbayeva/Desktop/Pensive/Pensive/ConnectTableViewController.swift"
-                  timestampString = "511789330.632136"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "1789">
-               </Location>
-            </Locations>
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "USER"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -277,13 +245,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pensive/User.swift"
-            timestampString = "511796296.564703"
+            filePath = "Pensive/ConnectTableViewController.swift"
+            timestampString = "511988216.85927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
-            landmarkName = "User"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pensive/ConnectTableViewController.swift"
+            timestampString = "511988216.85927"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "UserCell"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pensive/ConnectTableViewController.swift"
+            timestampString = "511987459.223676"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "ConnectTableViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

@@ -511,7 +511,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" rowHeight="164" id="2zq-SF-yeB" customClass="ConnectTableViewCellController" customModule="Pensive" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="164" id="2zq-SF-yeB" customClass="UserCell" customModule="Pensive" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="164"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2zq-SF-yeB" id="F8U-Lh-rvi">
@@ -838,7 +838,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -857,7 +857,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" shadowImage="a" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="a" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.60482219827586203" colorSpace="calibratedRGB"/>

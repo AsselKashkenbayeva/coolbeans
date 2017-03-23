@@ -37,27 +37,32 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         ref.child(userID).child("Username").observe(.value, with: { (snapshot) in
            let username = (snapshot.value as? NSDictionary)?["Username"] as? String ?? ""
             self.usernameTextField.text = username
+            //.child("Username")
         })
         //Retreiving data from Firebase for text-field- Email
         ref.child(userID).child("Email").observe(.value, with: { (snapshot) in
             let email = (snapshot.value as? NSDictionary)?["Email"] as? String ?? ""
             self.emailTextField.text = email
+            //.child("Email")
         })
         //Retreiving data from Firebase for text-field- Password
         ref.child(userID).child("Password").observe(.value, with: { (snapshot) in
             let password = (snapshot.value as? NSDictionary)?["Password"] as? String ?? ""
             self.passwordTextField.text = password
+            //.child("Password")
         })
         //Retreiving data from Firebase for text-field- DOB
         ref.child(userID).child("DOB").observe(.value, with: { (snapshot) in
             let dob = (snapshot.value as? NSDictionary)?["DOB"] as? String ?? ""
             self.dobTextField.text = dob
+            //.child("DOB")
         })
         
         //Retreiving data from Firebase for text-field- Gender
         ref.child(userID).child("Gender").observe(.value, with: { (snapshot) in
             let gender = (snapshot.value as? NSDictionary)?["Gender"] as? String ?? ""
             self.sexPickerTextFeild.text = gender
+            //.child("Gender")
         })
         
        //hide pickerview until textfield selected
@@ -152,6 +157,7 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         let userUsername = self.usernameTextField.text
         let userData : [String: AnyObject] = ["Username" : userUsername as AnyObject]
             databaseRef.child((user?.uid)!).child("Username").setValue(userData)
+        //.child("Username")
     }
     
    
@@ -167,7 +173,7 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         let password = self.passwordTextField.text
         let userDataPassword : [String: AnyObject] = ["Password" : password as AnyObject]
         databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
-      
+      //.child("Password")
     }
     
     
@@ -177,6 +183,7 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         let dob = self.dobTextField.text
         let userDataDOB : [String: AnyObject] = ["DOB" : dob as AnyObject]
         databaseRef.child((user?.uid)!).child("DOB").setValue(userDataDOB)
+        //.child("DOB")
     }
     //MARK: Sex selection
     
@@ -210,7 +217,7 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         let gender = self.sexPickerTextFeild.text
         let userDataGender : [String: AnyObject] = ["Gender" : gender as AnyObject]
     databaseRef.child((user?.uid)!).child("Gender").setValue(userDataGender)
-        
+        //.child("Gender")
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

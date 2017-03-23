@@ -11,107 +11,87 @@ import Firebase
 
     class ConnectTableViewController: UITableViewController {
         
-       
+        let cellId = "cellId"
+        
+       var users = [USER]()
+        var profilePicArray = [UIImage]()
     override func viewDidLoad() {
         super.viewDidLoad()
- let ref = FIRDatabase.database().reference()
-       refHandle = ref.observe(.childAdded, with: { (snapshot) in
-        if let Dictionary = snapshot.value as? String {
-            print(Dictionary)
-            let user = USER()
-            user.setNilValueForKey(Dictionary)
-            self.userList.append(user)
-            
-            self.tableView.reloadData()
-         
+ 
+            navigationItem.title = "User Feed"
+        
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+        
+       fetchUser()
+    }
+
+       func fetchUser() {
+            let ref = FIRDatabase.database().reference()
+            ref.observe( .childAdded, with: { (snapshot) in
+             print(snapshot)
+               if let dictionary = snapshot.value as? [String: AnyObject] {
+                //print(dictionary)
+                let user = USER()
+                user.Username = dictionary["Username"]?["Username"] as? String
+                user.Email = dictionary["Email"]?["Email"] as? String
+              
+                self.users.append(user)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+           
+                }
+                }
         }
-       })
-      
-   
-        ref.queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
-            if let username = (snapshot.value as? NSDictionary)?["Username"] as? String {
-                print("\(snapshot.key) was \(username)")
-            }
-        })
+        )
         
-        
-        
-        
-        
-        
-      navigationItem.title = "User Feed"
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+        let storageRef = FIRStorage.storage().reference()
+        ref.observe(.childAdded, with: { (snapshot) in
+            if let dictionary =  snapshot.value as? [String: AnyObject] {
+                 let user = USER()
+                user.ProfilePic = dictionary["ProfilePic"] as! UIImage?
+            
+           
+            storageRef.data(withMaxSize: 10*1024*1024, completion: {(data, error) -> Void in
+                if (error != nil) {
+                    print("got no pic")
+                } else {
+                    
+                    let profilePhoto = UIImage(data: data!)
+                    //self.profilePhoto.image = profilePhoto
+                    print("THIS BIT IS WORKING")
+                }
+                }
+                )}
+        }
+        )}
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-       return 4
+       return users.count
     }
 
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-   let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! ConnectTableViewCellController
+   
+     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
-        //cell.userUsername?.text = username[indexPath.row]
-        cell.userPhoto?.image = UIImage(named: "")
+        let user = users[indexPath.row]
+        cell.textLabel?.text = user.Username
+        cell .detailTextLabel?.text = user.Email
+       // cell.imageView?.image = UIImage(named: profilePicArray)
         return cell
     }
-   
+        
+}
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+class UserCell: UITableViewCell {
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

@@ -23,6 +23,7 @@
 		CF122FAA1DFF2F720011725E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA91DFF2F720011725E /* PhotosUI.framework */; };
 		CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17D7161E808783006E493D /* ConnectTableViewController.swift */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
+		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF69C17B1E0DC7BA0095A29E /* useCoreData.xcdatamodeld */; };
@@ -102,6 +103,7 @@
 		CF17D7161E808783006E493D /* ConnectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectTableViewController.swift; sourceTree = "<group>"; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
+		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF69C17C1E0DC7BA0095A29E /* useCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = useCoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */,
 				CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */,
 				CF0063531E15561B007B828F /* name.swift */,
+				CF4CAFB61E826F0E000872E2 /* USER.swift */,
 				CF91F9D21DFDDC20001EE137 /* RatingControl.swift */,
 				CF122FA51DFF0DA00011725E /* DetailViewController.swift */,
 				CF4BED141DE35F490087EFC3 /* LoginViewController.swift */,
@@ -532,6 +535,7 @@
 				CF75AD401E673CCE002F054F /* AddItemPopupWindow.swift in Sources */,
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
+				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
 				CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */,
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
 				CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */,

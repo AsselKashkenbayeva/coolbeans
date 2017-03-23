@@ -59,11 +59,11 @@ class LoginViewController: UIViewController {
                     var databaseRef = FIRDatabase.database().reference()
                     let userEmail = self.textFieldLoginEmail.text
                     let userPassword = self.textFieldLoginPassword.text
-                    let userDataEmail : [String: AnyObject] = ["userEmail" : userEmail as AnyObject]
-                    let userDataPassword :[String: AnyObject] = ["userPassword" : userPassword as AnyObject]
+                    let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
+                    let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
                     databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
-                    databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
-                    
+                  databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                 
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
@@ -113,8 +113,8 @@ class LoginViewController: UIViewController {
                     let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
                     let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
                     databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
-                    databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
-                    
+                databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                    //.child("Email") .child("Password")
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
