@@ -17,7 +17,7 @@ import Firebase
         var profilePicArray = [UIImage]()
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+// FIRDatabase.database().persistenceEnabled = true
             navigationItem.title = "User Feed"
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
@@ -28,13 +28,14 @@ import Firebase
        func fetchUser() {
             let ref = FIRDatabase.database().reference()
             ref.observe( .childAdded, with: { (snapshot) in
-             print(snapshot)
+             //print(snapshot)
                if let dictionary = snapshot.value as? [String: AnyObject] {
                 //print(dictionary)
                 let user = USER()
                 user.Username = dictionary["Username"]?["Username"] as? String
                 user.Email = dictionary["Email"]?["Email"] as? String
-              
+                user.ProfilePicURL = dictionary["ProfilePicURL"]?["ProfilePicURL"] as? String
+             
                 self.users.append(user)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -42,29 +43,8 @@ import Firebase
                 }
                 }
         }
-        )
-        
-        let storageRef = FIRStorage.storage().reference()
-        ref.observe(.childAdded, with: { (snapshot) in
-            if let dictionary =  snapshot.value as? [String: AnyObject] {
-                 let user = USER()
-                user.ProfilePic = dictionary["ProfilePic"] as! UIImage?
-            
-           
-            storageRef.data(withMaxSize: 10*1024*1024, completion: {(data, error) -> Void in
-                if (error != nil) {
-                    print("got no pic")
-                } else {
-                    
-                    let profilePhoto = UIImage(data: data!)
-                    //self.profilePhoto.image = profilePhoto
-                    print("THIS BIT IS WORKING")
-                }
-                }
-                )}
-        }
         )}
-
+        
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
        return users.count
@@ -78,7 +58,28 @@ import Firebase
         let user = users[indexPath.row]
         cell.textLabel?.text = user.Username
         cell .detailTextLabel?.text = user.Email
-       // cell.imageView?.image = UIImage(named: profilePicArray)
+        
+       if let profileImageURL = user.ProfilePicURL {
+            let url = URL(string: profileImageURL)
+            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    cell.imageView?.image = UIImage(data: data!)
+                }
+            }).resume()
+        }
+        
+        cell.imageView?.layer.borderWidth = 1
+        cell.imageView?.layer.masksToBounds = false
+       cell.imageView?.layer.borderColor = UIColor.orange.cgColor
+        cell.imageView?.layer.cornerRadius = 70
+        cell.imageView?.clipsToBounds = true
+ 
         return cell
     }
         
@@ -86,8 +87,13 @@ import Firebase
 
 class UserCell: UITableViewCell {
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    
     }
     
     required init?(coder aDecoder: NSCoder) {

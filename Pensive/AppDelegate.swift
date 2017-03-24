@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyArYf3iVy0e1e8IHFRRah7CImHJWzBx_wU")
         GMSPlacesClient.provideAPIKey("AIzaSyDk4pJ3kW9POyBYaI9-dNW2qvTJIbttS_A")
     FIRApp.configure()
+        
         FIRAnalyticsConfiguration.sharedInstance().setAnalyticsCollectionEnabled(false)
     return true
     }

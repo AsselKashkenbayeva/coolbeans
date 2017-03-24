@@ -15,6 +15,6 @@ class USER: NSObject {
     var Gender: String?
     var Password: String?
     var Username: String?
+    var ProfilePicURL: String?
     
-    var ProfilePic: UIImage?
 }

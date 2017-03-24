@@ -12,6 +12,7 @@ import Firebase
 
 class ProfilePageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate {
 
+    
     @IBOutlet weak var profilePhoto: UIImageView!
     
     
@@ -23,7 +24,7 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//FIRDatabase.database().persistenceEnabled = true
         //Making the profile picture a circle
         profilePhoto.layer.borderWidth = 1
         profilePhoto.layer.masksToBounds = false
@@ -106,24 +107,6 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    func uploadImageToFirebaseStorage(data: NSData) {
-        let userID: String = (FIRAuth.auth()?.currentUser?.uid)!
-        let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
-        let uploadMetadata = FIRStorageMetadata()
-        uploadMetadata.contentType = "image/jpeg"
-        storageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
-            if (error != nil) {
-                print("I received an error")
-            } else {
-                print("Upload conplete!")
-            }
-            
-        }
-        
-        
-    }
-    
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
       let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -140,6 +123,14 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
                 print("I received an error")
             } else {
                 print("Upload conplete!")
+                if let downloadURL = metadata!.downloadURL()?.absoluteString {
+                    
+                    var user = FIRAuth.auth()?.currentUser
+                    var databaseRef = FIRDatabase.database().reference()
+
+                    let userDataProfilePicURL : [String: AnyObject] = ["ProfilePicURL" : downloadURL as AnyObject]
+                    databaseRef.child((user?.uid)!).child("ProfilePicURL").setValue(userDataProfilePicURL)
+                }
             }
             
         }
