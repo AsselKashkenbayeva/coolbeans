@@ -43,6 +43,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
   
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
+    @IBOutlet weak var AddNewPlaceButton: UIButton!
     
     var place:GMSPlace?
     
@@ -51,6 +52,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var newPlaceName = ""
     var newPlaceAddress = ""
     var newPlacePlaceID = ""
+    var folderItem = ""
     
     var telephone = ""
     var openNowStatus = ""
@@ -73,7 +75,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
    var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
-   var dataImage: [UIImage] = [UIImage(named: "restIcon")!, UIImage(named: "museumIcon")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
+   var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,8 +135,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 return
             }
             */
-        //        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
-         //       self.vwGMap.addGestureRecognizer(longPressRecognizer)
+        
             
         //}
        //let mapView = GMSMapView.map(withFrame:  .zero, camera: camera)
@@ -262,11 +263,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
 
         
-        func dropDownMenu(dropDownMenu: IGLDropDownMenu!, selectedItemAtIndex index: Int) {
+        func dropDownMenu(_ dropDownMenu: IGLDropDownMenu!, selectedItemAt index: Int) {
             
             var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
-            print("Selected weather")
-        
+            let folderItem = item.text
+            self.folderItem = folderItem!
+           print(item.index)
+            print(item.text)
         }
     
     func animatedIn() {
@@ -338,12 +341,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         marker.icon = GMSMarker.markerImage(with: UIColor.blue)
        //marker.tracksViewChanges = true
         self.dismiss(animated: true, completion: nil)
-        //print("Place name: ", place.name)
-        //print("Place address: ", place.formattedAddress)
-        //print("Place placeID: ", place.placeID)
-        //print("Place attributions: ", place.attributions)
-        //print("Place Coordinate:", place.coordinate)
-        //The printing only happens in the terminal
+      
         
         let newPlaceName = place.name
         self.newPlaceName = place.name
@@ -406,11 +404,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        // let entity = NSEntityDescription.entity(forEntityName: "StoredPlace",
-        //                          in: context)!
-        
-        // let newPlace = NSManagedObject(entity: entity,
-        //       insertInto: context)
+      
         let newPlace = NSEntityDescription.insertNewObject(forEntityName: "StoredPlace", into: context)
         
         newPlace.setValue(newPlaceName, forKeyPath: "name")
@@ -450,7 +444,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
        self.save()
          marker.icon = GMSMarker.markerImage(with: UIColor.purple)
-            let Pname: String = self.newPlaceNameText
+            let PlaceName: String = self.newPlaceNameText
             print(Pname)
             let PplaceID = self.newPlacePlaceID
             //this is not correct because it shows the whole array in one part
@@ -523,10 +517,32 @@ self.present(newalert, animated: true, completion: nil)
 
     
  
+    @IBOutlet weak var CancelAddNewPlace: UIButton!
 
    
+    @IBAction func AddNewPlaceAction(_ sender: Any) {
+        
+        let PlaceName: String = self.newPlaceNameText
+        print(PlaceName)
+        let PlaceID = self.newPlacePlaceID
+        let PlaceUnderFolder = self.folderItem
+        let LongitudeCoordinate = self.longitudeText
+        let LatitudeCoordinate = self.latitudeText
+        //this is not correct because it shows the whole array in one part
+        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "PlaceUnderFolder" : PlaceUnderFolder as AnyObject, "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject]
+        
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
+         marker.icon = UIImage(named: PlaceUnderFolder )
+       mapCustomInfoWindow.removeFromSuperview()
+       mapCustomInfoWindow.layer.borderWidth = 2
+       mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
+    }
     
    
+    @IBAction func CancelAddNewPlace(_ sender: Any) {
+        mapCustomInfoWindow.removeFromSuperview()
+    }
     
     
 

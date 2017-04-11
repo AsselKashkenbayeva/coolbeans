@@ -7,20 +7,66 @@
 //
 
 import UIKit
+import CoreData
+import Firebase
+import IGLDropDownMenu
 
-class FoldersTableViewController: UITableViewController {
-  var folders = ["Restaurants", "Museums", "Landmarks", "Favourites"]
+class FOLDER: NSObject {
+    
+    var name: String?
+}
+
+class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate {
+    
+    @IBOutlet weak var AddFolderTextField: UITextField!
+    @IBOutlet weak var AddFolderCancelButton: UIButton!
+    @IBOutlet weak var AddFolderButton: UIButton!
+    @IBOutlet var AddNewFolderPopUp: UIView!
+    var dropDownMenuFolder = IGLDropDownMenu()
+    var dataTitle: NSArray = ["1", "2", "3", "4"]
+    var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
+    var folders = [FOLDER]()
+    var folderIndex = ""
+     let user = FIRAuth.auth()?.currentUser
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        var folders = ["Restaurants", "Museums", "Landmarks", "Favourites"]
+setupInIt()
+    
+       // var folders = ["Restaurants", "Museums", "Landmarks", "Favourites"]
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        fetchFolder()
     }
+    
+    func fetchFolder() {
+        let ref = FIRDatabase.database().reference()
+        ref.observe( .childAdded, with: { (snapshot) in
+            //print(snapshot)
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                //print(dictionary)
+                let folder = FOLDER()
+                
+                folder.name = dictionary["UserFolders"]?["FolderName"] as? String
+        
+                self.folders.append(folder)
+                print(folder.name)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }
+            }
+        }
+        )}
 
+  /*  override func viewWillAppear(_ animated: Bool) {
+        getData()
+        
+        tableView.reloadData()
+    }
+*/
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,9 +86,11 @@ class FoldersTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-
-      cell.textLabel?.text = folders[indexPath.row]
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+let cell = UITableViewCell()
+        let folder = self.folders[indexPath.row]
+        cell.textLabel?.text = folder.name
+      //cell.textLabel?.text = folders[indexPath.row]
 
         return cell
     }
@@ -92,10 +140,73 @@ class FoldersTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    //this is the dropdown in the pop up menu 
+    func setupInIt() {
+        
+        var dropdownItems: NSMutableArray = NSMutableArray()
+        
+        for i in 0...(dataImage.count-1) {
+            
+            var item = IGLDropDownItem()
+            item.text = "\(dataTitle[i])"
+            item.iconImage = dataImage[i]
+            
+            dropdownItems.add(addObject:item)
+        }
+        
+        dropDownMenuFolder.menuText = "Icon"
+        dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
+        dropDownMenuFolder.paddingLeft = 15
+        dropDownMenuFolder.frame = CGRect(x: 150, y: 80, width: 70, height: 45)
+        dropDownMenuFolder.delegate = self
+        dropDownMenuFolder.type = IGLDropDownMenuType.stack
+        dropDownMenuFolder.gutterY = 5
+        dropDownMenuFolder.itemAnimationDelay = 0.1
+        dropDownMenuFolder.reloadView()
+        
+        
+        var myLabel = UILabel()
+        myLabel.text = "SwiftyOS Blog"
+        myLabel.textColor = UIColor.white
+        myLabel.font = UIFont(name: "Halverica-Neue", size: 17)
+        myLabel.textAlignment = NSTextAlignment.center
+        myLabel.frame = CGRect(x: 40, y: 500, width: 250, height: 45)
+        
+        self.AddNewFolderPopUp.addSubview(myLabel)
+        self.AddNewFolderPopUp.addSubview(self.dropDownMenuFolder)
+        
+        
+    }
+    
+    
+    func dropDownMenu(_ dropDownMenu: IGLDropDownMenu!, selectedItemAt index: Int) {
+        
+        var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
+       
+        let folderIndex = item.text
+        self.folderIndex = folderIndex!
+       
+    }
+    
 
+    
+   /* func getData() {
+         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+          
+        folders = try context.fetch(Folder.fetchRequest())
+            
+            
+           
+        }
+        catch {
+            print("FAILED!")
+        }
+    }
+*/
     @IBAction func addNewFolder(_ sender: Any) {
     
-            let alert = UIAlertController(title: "Name of new folder",
+          /*  let alert = UIAlertController(title: "Name of new folder",
                                       message: "Please write the name of your new folder",
                                       preferredStyle: .alert)
         
@@ -107,11 +218,51 @@ class FoldersTableViewController: UITableViewController {
             }
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
                //this doesn't work. it does not append the text
-               self.folders.append((alert.textFields?[0].text)!)
+               let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                
+                let folder = Folder(context: context)
+                var textField = (alert.textFields!.first! as UITextField).text
+                folder.name = textField
+                
+               (UIApplication.shared.delegate as! AppDelegate).saveContext()
             }
         
         alert.addAction(cancelAction)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
+ */
+      
+        self.view.addSubview(AddNewFolderPopUp)
+        //this is to allow the icons to be clickable
+        self.view.addSubview(self.dropDownMenuFolder)
+        AddNewFolderPopUp.center = CGPoint(x: 180, y: 90)
+        AddNewFolderPopUp.layer.borderWidth = 2
+        AddNewFolderPopUp.layer.borderColor = UIColor.darkGray.cgColor
+       
     }
+    
+    
+    @IBAction func AddFolderActionButton(_ sender: Any) {
+       
+       
+        let folderName = AddFolderTextField.text
+        let folderIcon = folderIndex
+       
+        //this is not correct because it shows the whole array in one part
+        let post : [String: AnyObject] = ["FolderName" : folderName as AnyObject, "FolderIcon" : folderIcon as AnyObject ]
+        
+        let databaseRef = FIRDatabase.database().reference()
+        
+        databaseRef.child((self.user?.uid)!).child("UserFolders").childByAutoId().setValue(post)
+        
+        AddNewFolderPopUp.removeFromSuperview()
+        dropDownMenuFolder.removeFromSuperview()
+    }
+    
+    @IBAction func AddFolderCancelButton(_ sender: Any) {
+          AddNewFolderPopUp.removeFromSuperview()
+        dropDownMenuFolder.removeFromSuperview()
+    }
+    
+    
 }

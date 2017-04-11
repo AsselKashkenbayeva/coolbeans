@@ -97,6 +97,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="AddNewPlaceButton" destination="se1-kN-K1e" id="77z-fr-FUZ"/>
+                        <outlet property="CancelAddNewPlace" destination="SjL-h6-9Zb" id="Jn1-DX-DVP"/>
                         <outlet property="addNewItem" destination="sq2-vj-0S1" id="isz-7r-8Ag"/>
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
@@ -126,8 +128,39 @@
                     <color key="backgroundColor" white="1" alpha="0.76508620689655171" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="VeW-K7-HuV" userLabel="mapInfoWindow">
-                    <rect key="frame" x="0.0" y="0.0" width="295" height="277"/>
+                    <rect key="frame" x="0.0" y="0.0" width="295" height="215"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="se1-kN-K1e">
+                            <rect key="frame" x="190" y="172" width="69" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Add Place"/>
+                            <connections>
+                                <action selector="AddNewPlaceAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="iav-dC-Mve"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sp-Um-pda">
+                            <rect key="frame" x="21" y="7" width="252" height="69"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <attributedString key="attributedText">
+                                <fragment content="What folder would you like to save this in? ">
+                                    <attributes>
+                                        <font key="NSFont" metaFont="system" size="17"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SjL-h6-9Zb">
+                            <rect key="frame" x="38" y="172" width="48" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="CancelAddNewPlace:" destination="9pv-A4-QxB" eventType="touchUpInside" id="hle-gR-Bj1"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -584,8 +617,58 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="AddFolderButton" destination="zcr-Yp-vOR" id="kFG-AW-xTP"/>
+                        <outlet property="AddFolderCancelButton" destination="Tb9-D6-LeQ" id="UT4-c1-IJK"/>
+                        <outlet property="AddFolderTextField" destination="PPX-im-LqN" id="1as-EJ-06o"/>
+                        <outlet property="AddNewFolderPopUp" destination="Cuq-Jk-Pxd" id="LZI-qa-6eI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97h-FB-vIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Cuq-Jk-Pxd">
+                    <rect key="frame" x="0.0" y="0.0" width="291" height="182"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add new folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GV7-w6-G3P">
+                            <rect key="frame" x="16" y="9" width="116" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Folder icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wne-pu-6NE">
+                            <rect key="frame" x="16" y="76" width="85" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Folder name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPX-im-LqN">
+                            <rect key="frame" x="16" y="38" width="259" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb9-D6-LeQ">
+                            <rect key="frame" x="43" y="143" width="48" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="AddFolderCancelButton:" destination="MK9-6H-BTP" eventType="touchUpInside" id="ekw-sB-zQq"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcr-Yp-vOR">
+                            <rect key="frame" x="174" y="143" width="75" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Add Folder"/>
+                            <connections>
+                                <action selector="AddFolderActionButton:" destination="MK9-6H-BTP" eventType="touchUpInside" id="HPP-ao-IgS"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95825652938981098" green="1" blue="0.97045139814862424" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <tableViewSection id="jRr-Nc-Pfv" userLabel="Table Demos">
                     <cells>
                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="6qf-va-kky" style="IBUITableViewCellStyleDefault" id="YHq-XB-cge">
@@ -838,7 +921,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -857,7 +940,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="a" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" shadowImage="a" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.60482219827586203" colorSpace="calibratedRGB"/>
@@ -877,7 +960,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ujF-n2-8Xs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="ConnectIcon" selectedImage="ConnectIcon" id="4VW-ei-Pba"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FMa-4V-PDg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FMa-4V-PDg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -900,5 +983,5 @@
         <image name="defaultPhoto" width="25" height="25"/>
         <image name="listIcon" width="25" height="25"/>
     </resources>
-    <color key="tintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

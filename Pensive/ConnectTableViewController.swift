@@ -12,6 +12,7 @@ import Firebase
     class ConnectTableViewController: UITableViewController {
         
         let cellId = "cellId"
+        var profilePic = UIImage()
         
        var users = [USER]()
         var profilePicArray = [UIImage]()
@@ -46,19 +47,25 @@ import Firebase
         )}
         
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
        return users.count
     }
-
+        func imageWithImage(image:UIImage,scaledToSize newSize:CGSize)->UIImage{
+            
+            UIGraphicsBeginImageContext( newSize )
+            image.draw(in: CGRect(x: 0,y: 0,width: newSize.width,height: newSize.height))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage!.withRenderingMode(.alwaysTemplate)
+        }
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    
-     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        
+ let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+       // let cell: UserCell = UserCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         let user = users[indexPath.row]
         cell.textLabel?.text = user.Username
         cell .detailTextLabel?.text = user.Email
-        
+        cell.imageView?.image = imageWithImage(image: UIImage(named: "a")!, scaledToSize: CGSize(width: 40, height: 40))
        if let profileImageURL = user.ProfilePicURL {
             let url = URL(string: profileImageURL)
             URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
@@ -69,30 +76,56 @@ import Firebase
                 }
                 
                 DispatchQueue.main.async {
-                    cell.imageView?.image = UIImage(data: data!)
+                    
+                    print("THIS IS GOING TO BE A PIC")
+                 cell.imageView?.image = UIImage(data: data!)
+                    
+      
+                    
                 }
             }).resume()
         }
+      
         
         cell.imageView?.layer.borderWidth = 1
         cell.imageView?.layer.masksToBounds = false
        cell.imageView?.layer.borderColor = UIColor.orange.cgColor
         cell.imageView?.layer.cornerRadius = 70
         cell.imageView?.clipsToBounds = true
- 
+        cell.imageView?.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+       
         return cell
+     
     }
-        
+
 }
 
 class UserCell: UITableViewCell {
     
+    
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "a")
+        imageView.translatesAutoresizingMaskIntoConstraints = true
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier:
+            reuseIdentifier)
+        addSubview(profileImageView)
+        profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        profileImageView.widthAnchor.constraint(equalToConstant: 40)
+        profileImageView.heightAnchor.constraint(equalToConstant: 40)
+        
     
     }
     

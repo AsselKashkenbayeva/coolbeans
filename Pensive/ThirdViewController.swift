@@ -15,7 +15,7 @@ class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
     
-    var dataImage: [UIImage] = [UIImage(named: "restIcon")!, UIImage(named: "museumIcon")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
+    var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
     override func viewDidLoad() {
         super.viewDidLoad()
         
