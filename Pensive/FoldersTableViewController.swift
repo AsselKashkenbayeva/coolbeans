@@ -11,6 +11,7 @@ import CoreData
 import Firebase
 import IGLDropDownMenu
 
+
 class FOLDER: NSObject {
     
     var name: String?
@@ -25,48 +26,68 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["1", "2", "3", "4"]
     var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
-    var folders = [FOLDER]()
+    var folders: [FOLDER] = []
     var folderIndex = ""
      let user = FIRAuth.auth()?.currentUser
     override func viewDidLoad() {
         super.viewDidLoad()
-setupInIt()
-    
-       // var folders = ["Restaurants", "Museums", "Landmarks", "Favourites"]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+       setupInIt()
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         fetchFolder()
+     
     }
     
     func fetchFolder() {
-        let ref = FIRDatabase.database().reference()
+        let ref = FIRDatabase.database().reference().child((user?.uid)!).child("UserFolders")
         ref.observe( .childAdded, with: { (snapshot) in
-            //print(snapshot)
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                //print(dictionary)
-                let folder = FOLDER()
-                
-                folder.name = dictionary["UserFolders"]?["FolderName"] as? String
-        
-                self.folders.append(folder)
-                print(folder.name)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+               
+        //for snap in snapshots {
+                if let dictionary = snapshot.value as? [String: AnyObject] {
                     
-                }
+                  //  let key = snap.key
+                    //print(key)
+                    let folder = FOLDER()
+                  print(dictionary)
+                folder.name = (dictionary["FolderName"] as? String)!
+                   
+                   // print(dictionary)
+                    //folder.name = dictionary["Username"] as? String
+                   print(folder.name!)
+                   
+                   self.folders.append(folder)
+                    
+                   // if self.folders.contains(folder) {
+                       // print("YES")
+                    //}
+                        DispatchQueue.main.async {
+                            
+                           self.tableView.reloadData()
+                        
+                    }
             }
+                }
+              
+                
         }
-        )}
+    )
+    
+        
+            
+        
+              
+        
+        }
 
-  /*  override func viewWillAppear(_ animated: Bool) {
-        getData()
+    
+   override func viewWillAppear(_ animated: Bool) {
+    
         
         tableView.reloadData()
     }
-*/
+
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -184,6 +205,7 @@ let cell = UITableViewCell()
         var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
        
         let folderIndex = item.text
+        
         self.folderIndex = folderIndex!
        
     }
@@ -257,6 +279,7 @@ let cell = UITableViewCell()
         
         AddNewFolderPopUp.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
+        
     }
     
     @IBAction func AddFolderCancelButton(_ sender: Any) {

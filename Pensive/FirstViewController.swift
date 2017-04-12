@@ -76,9 +76,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
    var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
+    
+    var folders = [String]()
+    var foldersS = [""]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchFolder()
     setupInIt()
        
        // self.view = dropDownMenuFolder
@@ -206,8 +209,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
         var logoImages = [UIImage]()
         logoImages.append(UIImage(named: "MapIcon")!)
-        
-           let items = ["Restaurants" , "Museums", "Landmarks", "Favourites"]
+        print(folders)
+        let items = dataTitle
         let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
         
         self.navigationItem.titleView = menuView
@@ -223,11 +226,36 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
             
         }
+        
     }
     
          //Dropdown menu for the add new place pop up variables (folders)
       
+    func fetchFolder() {
+        let ref = FIRDatabase.database().reference().child((user?.uid)!).child("UserFolders")
+        ref.observe( .childAdded, with: { (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+  
+                if let dictionary = snapshot.value
+                    
+                    as? [String: AnyObject] {
+                   
+                   var folder = ""
+                    
+                    folder = (dictionary["FolderName"] as? String)!
+                  
+                    self.folders.append(folder)
+                  
         
+                }
+            }
+            
+           
+        }
+    )
+    }
+
+
       func setupInIt() {
             
             var dropdownItems: NSMutableArray = NSMutableArray()
@@ -436,34 +464,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
     animatedIn()
-      /*  let alert = UIAlertController(title: "Add this place to wishlist?",
-                                      message: newPlaceNameText,
-                                      preferredStyle: .alert)
-
+        let location = marker.position
+        print(location)
+        addNewItem.center = mapView.projection.point(for: location)
+        addNewItem.center.y -= 150
         
-        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
-       self.save()
-         marker.icon = GMSMarker.markerImage(with: UIColor.purple)
-            let PlaceName: String = self.newPlaceNameText
-            print(Pname)
-            let PplaceID = self.newPlacePlaceID
-            //this is not correct because it shows the whole array in one part
-            let post : [String: AnyObject] = ["storedName" : Pname as AnyObject, "placeID" : PplaceID as AnyObject]
-            
-            let databaseRef = FIRDatabase.database().reference()
-            databaseRef.child((self.user?.uid)!)..child("PlaceNames").childByAutoId().setValue(post)
-        }
-                       let cancelAction = UIAlertAction(title: "Remove",
-                                         style: .default) { _ in marker.map = nil}
-      
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-       
-        self.present(alert, animated: true, completion: nil)
-*/
-       
-       
     return false
 }
     
@@ -471,6 +476,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let location = marker.position
         print(location)
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
+        mapCustomInfoWindow.center.y -= 150
         self.view.addSubview(mapCustomInfoWindow)
         print("YOU PRESSED HERE")
     }
