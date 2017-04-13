@@ -38,7 +38,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet var mapCustomInfoWindow: UIView!
     
     @IBAction func dismissPopup(_ sender: Any) {
-        
+        addNewItem.removeFromSuperview()
     }
   
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -53,6 +53,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var newPlaceAddress = ""
     var newPlacePlaceID = ""
     var folderItem = ""
+    var folderIconIndex = ""
     
     var telephone = ""
     var openNowStatus = ""
@@ -65,9 +66,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var longitudeText = ""
     var newPlaceNameText = ""
 
-    
-  //var newPlaceLongitude =  0.0
-  //  var newPlacelatitude = 0.0
     var user = FIRAuth.auth()?.currentUser
     var databaseRef = FIRDatabase.database().reference()
 
@@ -75,16 +73,19 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
    var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
-   var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
+   var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
     
-    var folders = [String]()
-    var foldersS = [""]
+    @IBOutlet weak var placeNameinInfoView: UILabel!
+   var Folders = [String]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchFolder()
+        
+  
+        fetchFolders()
     setupInIt()
-       
-       // self.view = dropDownMenuFolder
+   print(Folders)
+              // self.view = dropDownMenuFolder
         // removes the navigation bar
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -144,7 +145,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
        //let mapView = GMSMapView.map(withFrame:  .zero, camera: camera)
        // mapView.settings.myLocationButton = true
        // mapView.delegate = self
-    
+    /*
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredPlace")
@@ -177,25 +178,45 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                   
                     if let lat = result.value(forKey: "latitude") as? NSString, let long = result.value(forKey: "longitude") as? NSString, let address = result.value(forKey: "address") as? String, let name = result.value(forKey: "name") as? String
                     {
-                 let latitude = (lat as NSString).doubleValue
+               */
+                        
+    let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
+                        
+    ref.observe( .childAdded, with: { (snapshot) in
+    if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                                
+    if let dictionary = snapshot.value as? [String: AnyObject] {
+    let storedPlace = (dictionary["StoredPlaceName"] as? String?)!
+    let lat = (dictionary["Latitude"] as? String?)!
+    let long = (dictionary["Longitude"] as? String?)!
+    let placeIcon = (dictionary["FolderIcon"] as? String?)!
+    
+        //this used to be as NSString
+    let latitude = (lat! as NSString).doubleValue
                     
-                   
-                    
-                      let longitude = (long as NSString).doubleValue
-                      
-                    
-                
-                       
-                
-                        let markers = GMSMarker()
+    let longitude = (long! as NSString).doubleValue
+        
+        
+    let markers = GMSMarker()
                     markers.position = CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
                     print(markers.position)
-                        markers.icon = GMSMarker.markerImage(with: UIColor.purple)
+                        markers.icon = UIImage(named: placeIcon!)
+        
+                            //GMSMarker.markerImage(with: UIColor.purple)
+        
                         markers.tracksViewChanges = true
-                        markers.title = name
-                        markers.snippet = address
-                       markers.map = vwGMap
-                    }
+        
+                        //markers.title = storedPlace
+                       // markers.snippet =
+                       markers.map = self.vwGMap
+       // self.placeNameinInfoView.text = storedPlace
+        
+        }
+        }
+        } )
+        
+        /*
+        }
                 }
                 
             }
@@ -207,10 +228,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    {
     //ERROR
         }
+ */
         var logoImages = [UIImage]()
         logoImages.append(UIImage(named: "MapIcon")!)
-        print(folders)
-        let items = dataTitle
+        let items = Folders
         let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
         
         self.navigationItem.titleView = menuView
@@ -223,38 +244,76 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             for i in 0...(items.count-1) {
                 menuView.arrowImage = self?.dataImage[i]
                 menuView.checkMarkImage = self?.dataImage[i]
+                
+                
             }
             
         }
-        
+       
     }
     
          //Dropdown menu for the add new place pop up variables (folders)
-      
-    func fetchFolder() {
+    /*
+    func fetchFolders(ref: FIRDatabaseReference, completion:(_ currentArray:[String])->()) {
+           var currentDetails = [String]()
         let ref = FIRDatabase.database().reference().child((user?.uid)!).child("UserFolders")
         ref.observe( .childAdded, with: { (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-  
+                
                 if let dictionary = snapshot.value
                     
                     as? [String: AnyObject] {
-                   
-                   var folder = ""
                     
-                    folder = (dictionary["FolderName"] as? String)!
-                  
-                    self.folders.append(folder)
-                  
-        
+                    
+                    
+                    let folder = (dictionary["FolderName"] as? String?)!
+                    
+                    currentDetails.append(folder!)
                 }
             }
-            
-           
-        }
-    )
+            self.currentArray = currentDetails
+            completion(currentArray)
+        })
     }
-
+    */
+    
+    
+    func fetchFolders() -> Array<Any> {
+        
+        var folders = [String]()
+        let ref = FIRDatabase.database().reference().child((self.user?.uid)!).child("UserFolders")
+        ref.observe( .childAdded, with: { (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                
+                if let dictionary = snapshot.value
+                    
+                    as? [String: AnyObject] {
+                    
+                    
+                    
+                    let folder = (dictionary["FolderName"] as? String?)!
+                    
+                    folders.append(folder!)
+                    DispatchQueue.main.async {
+                        
+                         self.Folders = folders
+                        print(self.Folders)
+                    }
+                   
+                
+        
+    }
+                
+            }
+            
+        }
+            
+        )
+        return folders
+        
+    }
+    
+ 
 
       func setupInIt() {
             
@@ -286,7 +345,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
           myLabel.frame = CGRect(x: 40, y: 60, width: 200, height: 45)
             
             self.mapCustomInfoWindow.addSubview(myLabel)
-            self.mapCustomInfoWindow.addSubview(self.dropDownMenuFolder)
+        mapCustomInfoWindow.addSubview(dropDownMenuFolder)
+        
         
         }
 
@@ -296,8 +356,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
             let folderItem = item.text
             self.folderItem = folderItem!
-           print(item.index)
-            print(item.text)
+           let folderIconIndex = String(item.index)
+           self.folderIconIndex = folderIconIndex
         }
     
     func animatedIn() {
@@ -317,9 +377,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     }
  
-    @IBAction func addButton(_ sender: Any) {
-        animatedIn()
-    }
+ 
      
    //MARK: current location permission requests
     
@@ -471,6 +529,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
     return false
 }
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+         let location = marker.position
+      //  addNewItem.center = mapView.projection.point(for: location)
+        mapCustomInfoWindow.center = mapView.projection.point(for: location)
+        mapCustomInfoWindow.center.y -= 150
+       // addNewItem.center.y -= 150
+    }
     
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
         let location = marker.position
@@ -495,16 +560,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
  
         return false
     }
-
-    // let the custom infowindow follows the camera
-  //  func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-  //      if (tappedMarker.userData != nil){
-
-  //        let location = CLLocationCoordinate2D(latitude: (tappedMarker.userData as! location).lat, longitude: (tappedMarker.userData as! location).lon)
- 
-  //          infoWindow.center = mapView.projection.point(for: location)
-   //     }
- //   }
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
         print("tapped")
         let newalert = UIAlertController(title: "would you like to remove this from wishlist?",
@@ -534,12 +589,13 @@ self.present(newalert, animated: true, completion: nil)
         let PlaceUnderFolder = self.folderItem
         let LongitudeCoordinate = self.longitudeText
         let LatitudeCoordinate = self.latitudeText
+        let FolderIcon = self.folderIconIndex
         //this is not correct because it shows the whole array in one part
-        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "PlaceUnderFolder" : PlaceUnderFolder as AnyObject, "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject]
+        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject]
         
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
-         marker.icon = UIImage(named: PlaceUnderFolder )
+         marker.icon = UIImage(named: FolderIcon )
        mapCustomInfoWindow.removeFromSuperview()
        mapCustomInfoWindow.layer.borderWidth = 2
        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
@@ -548,6 +604,7 @@ self.present(newalert, animated: true, completion: nil)
    
     @IBAction func CancelAddNewPlace(_ sender: Any) {
         mapCustomInfoWindow.removeFromSuperview()
+        dropDownMenuFolder.removeFromSuperview()
     }
     
     

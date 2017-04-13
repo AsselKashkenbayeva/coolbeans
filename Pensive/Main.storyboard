@@ -83,12 +83,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" selectedImage="MapIcon" id="rd5-he-lZ6"/>
                     <navigationItem key="navigationItem" id="Juh-e5-Ova">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="add" id="Rst-2D-knq">
-                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <connections>
-                                <action selector="addButton:" destination="9pv-A4-QxB" id="qJn-jZ-exi"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="LKY-Cc-bCN">
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
@@ -102,6 +96,7 @@
                         <outlet property="addNewItem" destination="sq2-vj-0S1" id="isz-7r-8Ag"/>
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
+                        <outlet property="placeNameinInfoView" destination="Cdr-Ah-nSR" id="9sd-RB-J7t"/>
                         <outlet property="visualEffectView" destination="N1I-Vf-GhM" id="fUO-NW-Mmv"/>
                     </connections>
                 </viewController>
@@ -114,10 +109,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="242" height="169"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09a-rq-ke5">
-                            <rect key="frame" x="210" y="0.0" width="30" height="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PlaceName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdr-Ah-nSR">
+                            <rect key="frame" x="29" y="31" width="87" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="X">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09a-rq-ke5">
+                            <rect key="frame" x="195" y="0.0" width="39" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Close">
                                 <color key="titleColor" red="1" green="0.53670061950000003" blue="0.2415962086" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>

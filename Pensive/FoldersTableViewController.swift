@@ -24,8 +24,8 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     @IBOutlet weak var AddFolderButton: UIButton!
     @IBOutlet var AddNewFolderPopUp: UIView!
     var dropDownMenuFolder = IGLDropDownMenu()
-    var dataTitle: NSArray = ["1", "2", "3", "4"]
-    var dataImage: [UIImage] = [UIImage(named: "Restaurant")!, UIImage(named: "Museum")!, UIImage(named:"landmarksIcon")!, UIImage(named: "favIcon")!]
+    var dataTitle: NSArray = ["0", "1", "2", "3"]
+    var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
     var folders: [FOLDER] = []
     var folderIndex = ""
      let user = FIRAuth.auth()?.currentUser
@@ -35,6 +35,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
 
         fetchFolder()
      
+        
     }
     
     func fetchFolder() {
@@ -53,7 +54,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
                    
                    // print(dictionary)
                     //folder.name = dictionary["Username"] as? String
-                   print(folder.name!)
+                  // print(folder.name!)
                    
                    self.folders.append(folder)
                     
@@ -169,7 +170,7 @@ let cell = UITableViewCell()
         for i in 0...(dataImage.count-1) {
             
             var item = IGLDropDownItem()
-            item.text = "\(dataTitle[i])"
+           // item.text = "\(dataTitle[i])"
             item.iconImage = dataImage[i]
             
             dropdownItems.add(addObject:item)
@@ -204,9 +205,9 @@ let cell = UITableViewCell()
         
         var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
        
-        let folderIndex = item.text
+        let folderIndex = String(item.index)
         
-        self.folderIndex = folderIndex!
+        self.folderIndex = folderIndex
        
     }
     
