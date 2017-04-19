@@ -93,10 +93,11 @@
                     <connections>
                         <outlet property="AddNewPlaceButton" destination="se1-kN-K1e" id="77z-fr-FUZ"/>
                         <outlet property="CancelAddNewPlace" destination="SjL-h6-9Zb" id="Jn1-DX-DVP"/>
-                        <outlet property="addNewItem" destination="sq2-vj-0S1" id="isz-7r-8Ag"/>
+                        <outlet property="detailsPopUp" destination="sq2-vj-0S1" id="SKX-YG-i0o"/>
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
-                        <outlet property="placeNameinInfoView" destination="Cdr-Ah-nSR" id="9sd-RB-J7t"/>
+                        <outlet property="placeAddressinDetailsPopUp" destination="zAc-20-DGk" id="kMO-VF-dId"/>
+                        <outlet property="placeNameinDetailsPopUp" destination="cfz-m7-fE2" id="Lyj-P2-YzU"/>
                         <outlet property="visualEffectView" destination="N1I-Vf-GhM" id="fUO-NW-Mmv"/>
                     </connections>
                 </viewController>
@@ -105,29 +106,26 @@
                         <action selector="handleLongtapWithRecognizer:" destination="9pv-A4-QxB" id="Txt-hg-RjG"/>
                     </connections>
                 </pongPressGestureRecognizer>
-                <view contentMode="scaleToFill" id="sq2-vj-0S1" userLabel="customInfoWindow">
+                <view contentMode="scaleToFill" id="sq2-vj-0S1" userLabel="detailsPopUp" customClass="CustomInfoView" customModule="Pensive" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="242" height="169"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PlaceName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdr-Ah-nSR">
-                            <rect key="frame" x="29" y="31" width="87" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="placeName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfz-m7-fE2">
+                            <rect key="frame" x="28" y="33" width="153" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAc-20-DGk">
+                            <rect key="frame" x="28" y="74" width="153" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09a-rq-ke5">
-                            <rect key="frame" x="195" y="0.0" width="39" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Close">
-                                <color key="titleColor" red="1" green="0.53670061950000003" blue="0.2415962086" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="dismissPopup:" destination="9pv-A4-QxB" eventType="touchUpInside" id="hFn-dB-SHL"/>
-                            </connections>
-                        </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="0.76508620689655171" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="VeW-K7-HuV" userLabel="mapInfoWindow">
                     <rect key="frame" x="0.0" y="0.0" width="295" height="215"/>
