@@ -27,7 +27,8 @@ import IGLDropDownMenu
 
 var storedPlaces: [NSManagedObject] = []
 var firebaseStoredPlaces: [placeFromFirebase] = []
-
+var STOREDPlaces = [[String:AnyObject]]()
+var STOREDFolders = [[String:AnyObject]]()
 class placeFromFirebase: NSObject {
     
     var name: String?
@@ -50,11 +51,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var Markers = [GMSMarker]()
     
    
+    @IBOutlet var detailsPopUp: UIView!
 
     @IBOutlet var mapCustomInfoWindow: UIView!
-    @IBOutlet var detailsPopUp: UIView!
-    @IBOutlet weak var placeAddressinDetailsPopUp: UILabel!
-    @IBOutlet weak var placeNameinDetailsPopUp: UILabel!
+    
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var AddNewPlaceButton: UIButton!
     
@@ -98,31 +98,43 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    var Folders = [String]()
    var Names = [String]()
  var NK = [String]()
-    var 
+    var tappedMarker = GMSMarker()
     
 override func viewDidLoad() {
     super.viewDidLoad()
-    fetchPlace(completion: { (Place) in
-       // self.blob = Place
-   // print(self.blob.name!)
-       //self.NK.append(self.blob.name!)
+   /* fetchPlace(completion: { (Place) in
+
         let place = Place
+       // print(place.name!)
+        self.Names.append(place.name!)
+        
+       // print(self.Names[5])
+     
+    })
+ */
+//dont forget to set trackchanges for updates to the info window
+    /*
+        let latitude = (place.latitude! as NSString).doubleValue
+        print(latitude)
+        let longitude = (place.longitude! as NSString).doubleValue
+        print(longitude)
         let markers = GMSMarker()
+        markers.position = CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
         markers.icon = UIImage(named: place.folderIcon!)
         markers.userData = place
         markers.tracksViewChanges = true
-        let name = (markers.userData as! placeFromFirebase).name
-        let location = CLLocationCoordinate2D(latitude: (markers.userData as! placeFromFirebase).latitude as! Double, longitude: (markers.userData as! placeFromFirebase).longitude as! Double)
-        //print(name!)
+    let name = (markers.userData as! placeFromFirebase).name
         self.placeNameinDetailsPopUp.text = name
         self.Names.append(name!)
-        print(self.Names[5])
+       
     }
-    )
+ 
+ */
+    
     //print(self.NK)
     fetchFolders()
     
-    setupInIt()
+   
               // self.view = dropDownMenuFolder
         // removes the navigation bar
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -220,69 +232,50 @@ self.view = vwGMap
                         
     let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
                         
-    ref.observe( .childAdded, with: { (snapshot) in
-    if snapshot.children.allObjects is [FIRDataSnapshot] {
-                                
-    if let dictionary = snapshot.value as? [String: AnyObject] {
-        let place = placeFromFirebase()
-    place.name = (dictionary["StoredPlaceName"] as? String?)!
-        self.Names.append(place.name!)
-        //print(self.Names)
-      //  print(firebaseStoredPlaces)
-     //   self.bloBB.append(self.storedPlaceNamefromFirebase)
-      //  print(self.bloBB)
-    place.address = (dictionary["StoredPlaceAddress"] as? String?)!
-    place.telephone = (dictionary["StoredPlaceTelephone"] as? String?)!
-    place.latitude = (dictionary["Latitude"] as? String?)!
-    place.longitude = (dictionary["Longitude"] as? String?)!
-        self.storedPlaceLongitude = place.longitude!
-    place.folderIcon = (dictionary["FolderIcon"] as? String?)!
-    self.storedPlaceLatitude = place.latitude!
-        //this used to be as NSString
-        
-    let latitude = (place.latitude! as NSString).doubleValue
-    let longitude = (place.longitude! as NSString).doubleValue
-        
-  /*
-    let markers = GMSMarker()
-    markers.position = CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
-    markers.icon = UIImage(named: place.folderIcon!)
-        markers.userData = place
-    markers.tracksViewChanges = true
-        let name = (markers.userData as! placeFromFirebase).name
-        self.placeNameinDetailsPopUp.text = name
-        self.Names.append(name!)
+    ref.observe( .value, with: { (snapshot) in
+     if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+        for snap in snapshots {
+             if let dictionary = snapshot.value as? [String: AnyObject] {
+            let key = snap.key
+                let PLACE = (dictionary[key] as? [String: AnyObject]!)!
+          STOREDPlaces.append(PLACE!)
+               
+        }
+        }
+      
+   
+        for p in STOREDPlaces {
+            let latitude = (p["Latitude"] as? NSString)?.doubleValue
+            let longitude = (p["Longitude"] as? NSString)?.doubleValue
+            let markers = GMSMarker()
+            markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+            let folderIcon = p["FolderIcon"] as? String
+            markers.icon = UIImage(named:folderIcon!)
+          markers.tracksViewChanges = true
+            markers.map = self.vwGMap
+        }
+            }
+    }
+    )
+    let refFolders = FIRDatabase.database().reference().child((user?.uid)!).child("UserFolders")
     
-        markers.snippet = place.address
-        markers.map = self.vwGMap
-      //  self.placeNameinDetailsPopUp.text = markers.title
-      //  self.placeAddressinDetailsPopUp.text = markers.snippet
-      //  self.placeNameinDetailsPopUp.text = markers.title
-    // print(self.placeNameinDetailsPopUp)
- */
+    refFolders.observe( .value, with: { (snapshot) in
+        if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            for snap in snapshots {
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    // STOREDPlaces = dictionary
+                    let key = snap.key
+                    print(key)
+                    let FOLDER = (dictionary[key] as? [String: AnyObject]!)!
+                    STOREDFolders.append(FOLDER!)
+                    
+                }
+            }
         }
-        }
-        })
-        
-        /*
-        } 
-        }
-        }
-        }
-   catch
-   {
-    //ERROR
-        }
- */
-/* FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
-    let query = ref.queryOrdered(byChild: "storedName").queryEqual(toValue: Names)
+    }
+    )
     
-    query.observe(.childAdded, with: { (snapshot) in
-        snapshot.ref.child(["Thing": aaa as AnyObject])
  
-    })
-    */
-    
 //This is the drop down in the navigation bar to sort through markers on map
     var logoImages = [UIImage]()
     logoImages.append(UIImage(named: "MapIcon")!)
@@ -301,6 +294,14 @@ self.view = vwGMap
                 menuView.checkMarkImage = self?.dataImage[i]
             }
         }
+    let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+    DispatchQueue.main.asyncAfter(deadline: when) {
+        // Your code with delay
+     self.setupInIt()
+      
+       
+    }
+    
     }
     
          //Dropdown menu for the add new place pop up variables (folders)
@@ -327,6 +328,7 @@ self.view = vwGMap
         })
     }
     */
+    /*
 func fetchPlace(completion: @escaping (placeFromFirebase) -> (Void)) {
     let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
         ref.observe( .childAdded, with: { (snapshot) in
@@ -348,7 +350,7 @@ func fetchPlace(completion: @escaping (placeFromFirebase) -> (Void)) {
         }
         )}
     
-    
+    */
     
 //This is fetching the folders from Firebase
     func fetchFolders() {
@@ -376,13 +378,17 @@ let ref = FIRDatabase.database().reference().child((self.user?.uid)!).child("Use
   
 //This is setting up the dropdown menu in the add new place pop up
 func setupInIt() {
+  
     let dropdownItems: NSMutableArray = NSMutableArray()
-            for i in 0...(dataTitle.count-1) {
+    print(STOREDFolders.count)
+            for i in 0...(STOREDFolders.count-1) {
                 let item = IGLDropDownItem()
-                item.text = "\(dataTitle[i])"
-                item.iconImage = dataImage[i]
+                item.text = (STOREDFolders[i]["FolderName"] as! String!)
+                item.iconImage = UIImage(named: STOREDFolders[i]["FolderIcon"] as! String!)
                 dropdownItems.add(addObject:item)
+
             }
+ 
     
     dropDownMenuFolder.menuText = "Choose Folder"
     dropDownMenuFolder.dropDownItems  = dropdownItems as [AnyObject]
@@ -416,6 +422,7 @@ func dropDownMenu(_ dropDownMenu: IGLDropDownMenu!, selectedItemAt index: Int) {
     
 //This is setting up the details infoWindow pop up
 func animatedIn() {
+    
         self.view.addSubview(detailsPopUp)
         detailsPopUp.center = self.view.center
         
@@ -548,12 +555,13 @@ let newPlace = NSEntityDescription.insertNewObject(forEntityName: "StoredPlace",
     }
  */
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let marker = GMSMarker()
-      
+      self.view.addSubview(detailsPopUp)
+        print(STOREDPlaces)
        // let name = (marker.userData as! placeFromFirebase).name
-        //self.placeNameinDetailsPopUp.text = name
+       // self.placeNameinDetailsPopUp.text = name
         return false
     }
+   
 //This produces the coordinate of where it tapped on the map, doesn't work on tapped markers
 /*func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         print(String(coordinate.latitude))
@@ -576,16 +584,16 @@ func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
     }
  
 //This is setting the custom infoWindow
-func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+
+    /*func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         let infoWindow = detailsPopUp
         return infoWindow
     }
- 
+ */
 //When doing long press, it shows pop up window above icon
 func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-        
+    
         let location = marker.position
-        print(location)
         
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
         mapCustomInfoWindow.center.y -= 150
@@ -632,6 +640,8 @@ databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setVa
             snapshot.ref.updateChildValues(["StoredPlaceID": self.aaa] )
             })
  */
+        print("After cancel button")
+        print(STOREDPlaces)
         mapCustomInfoWindow.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
     }
