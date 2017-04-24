@@ -53,6 +53,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    
     @IBOutlet var detailsPopUp: UIView!
 
+    @IBOutlet weak var detailsName: UILabel!
     @IBOutlet var mapCustomInfoWindow: UIView!
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -94,44 +95,18 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
     var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
-    var aaa = "AAAA"
    var Folders = [String]()
    var Names = [String]()
  var NK = [String]()
-    var tappedMarker = GMSMarker()
+    var tappedMarker = CLLocationCoordinate2D()
+    var folderNames = [String]()
+    var markersArray = [CLLocationCoordinate2D]()
     
 override func viewDidLoad() {
     super.viewDidLoad()
-   /* fetchPlace(completion: { (Place) in
 
-        let place = Place
-       // print(place.name!)
-        self.Names.append(place.name!)
-        
-       // print(self.Names[5])
-     
-    })
- */
 //dont forget to set trackchanges for updates to the info window
-    /*
-        let latitude = (place.latitude! as NSString).doubleValue
-        print(latitude)
-        let longitude = (place.longitude! as NSString).doubleValue
-        print(longitude)
-        let markers = GMSMarker()
-        markers.position = CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
-        markers.icon = UIImage(named: place.folderIcon!)
-        markers.userData = place
-        markers.tracksViewChanges = true
-    let name = (markers.userData as! placeFromFirebase).name
-        self.placeNameinDetailsPopUp.text = name
-        self.Names.append(name!)
-       
-    }
  
- */
-    
-    //print(self.NK)
     fetchFolders()
     
    
@@ -195,41 +170,7 @@ self.view = vwGMap
        //let mapView = GMSMapView.map(withFrame:  .zero, camera: camera)
        // mapView.settings.myLocationButton = true
        // mapView.delegate = self
-    /*
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredPlace")
-        
-        request.returnsObjectsAsFaults = false
-        
-        do
-        {
-            let results = try context.fetch(request)
-            storedPlaces = results as! [NSManagedObject]
-            if results.count > 0
-            {
-                for result in results as! [NSManagedObject]
-                {
-                    if let name = result.value(forKey: "name") as? String
-                    {
-                       print(name)
-                    }
-                    if let address = result.value(forKey: "address") as? String
-                    {
-                       // print(address)
-                    }
-                    if let placeID = result.value(forKey: "placeID") as? String
-                    {
-                      //  print(placeID)
-                    }
-                
-                        
-            
-                  
-                    if let lat = result.value(forKey: "latitude") as? NSString, let long = result.value(forKey: "longitude") as? NSString, let address = result.value(forKey: "address") as? String, let name = result.value(forKey: "name") as? String
-                    {
-               */
-                        
+    
     let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
                         
     ref.observe( .value, with: { (snapshot) in
@@ -249,10 +190,13 @@ self.view = vwGMap
             let longitude = (p["Longitude"] as? NSString)?.doubleValue
             let markers = GMSMarker()
             markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+           self.markersArray.append(markers.position)
             let folderIcon = p["FolderIcon"] as? String
-            markers.icon = UIImage(named:folderIcon!)
-          markers.tracksViewChanges = true
-            markers.map = self.vwGMap
+           markers.icon = UIImage(named:folderIcon!)
+         markers.tracksViewChanges = true
+            //this does not match which place was tapped
+            self.detailsName.text = p["StoredPlaceName"] as? String
+          markers.map = self.vwGMap
         }
             }
     }
@@ -263,9 +207,7 @@ self.view = vwGMap
         if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
             for snap in snapshots {
                 if let dictionary = snapshot.value as? [String: AnyObject] {
-                    // STOREDPlaces = dictionary
                     let key = snap.key
-                    print(key)
                     let FOLDER = (dictionary[key] as? [String: AnyObject]!)!
                     STOREDFolders.append(FOLDER!)
                     
@@ -274,12 +216,33 @@ self.view = vwGMap
         }
     }
     )
-    
+    let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+    DispatchQueue.main.asyncAfter(deadline: when) {
+        // Your code with delay
+        for r in STOREDFolders {
+               let folder = r["FolderName"] as? String
+            self.folderNames.append(folder!)
+        }
+       // print(self.folderNames)
+        self.setupInIt()
+        let items = self.folderNames
+        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
+        
+        self.navigationItem.titleView = menuView
+        menuView.cellTextLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        menuView.menuTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        menuView.cellSelectionColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
+            print("Did select item at index: \(indexPath)")
+            
+            
+        }
+    }
  
 //This is the drop down in the navigation bar to sort through markers on map
-    var logoImages = [UIImage]()
+ /*   var logoImages = [UIImage]()
     logoImages.append(UIImage(named: "MapIcon")!)
-        let items = Folders
+    let items = folderNames
         let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
         
     self.navigationItem.titleView = menuView
@@ -294,14 +257,7 @@ self.view = vwGMap
                 menuView.checkMarkImage = self?.dataImage[i]
             }
         }
-    let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
-    DispatchQueue.main.asyncAfter(deadline: when) {
-        // Your code with delay
-     self.setupInIt()
-      
-       
-    }
-    
+    */
     }
     
          //Dropdown menu for the add new place pop up variables (folders)
@@ -555,10 +511,56 @@ let newPlace = NSEntityDescription.insertNewObject(forEntityName: "StoredPlace",
     }
  */
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        tappedMarker = marker.position
+       
+        detailsPopUp.center = mapView.projection.point(for: tappedMarker)
+        detailsPopUp.center.y -= 100
       self.view.addSubview(detailsPopUp)
-        print(STOREDPlaces)
-       // let name = (marker.userData as! placeFromFirebase).name
-       // self.placeNameinDetailsPopUp.text = name
+       let index = markersArray.index { (item) -> Bool in
+        
+        }
+        print(index)
+        
+        detailsName.text = STOREDPlaces[2]["StoredPlaceName"] as? String
+       /* markersArray.contains(where: { (tappedMarker) -> Bool in
+          
+            return true
+        })
+     */
+       /* for i in 0...(STOREDPlaces.count-1) {
+           let bob = STOREDPlaces[i]["Latitude"] as! String!
+            print(bob!)
+            if bob! == tappedMarker.latitude as? String
+            {
+                print("THIS IS WORKING")
+            }
+            
+            }
+   */
+        /*
+        //showing the right name in label
+        let latitude = tappedMarker.latitude as AnyObject
+        for i in 0...(STOREDPlaces.count-1) {
+            if (STOREDPlaces[i]["Latitude"] as! String!).contains(latitude as! String) {
+                print("There is latitude ")
+            } else {
+                print("There is no latitude")
+            }
+            
+        }
+        print(STOREDPlaces[5])
+        /*
+        do {
+        if try! STOREDPlaces.contains(where: ["Latitutde"], value(forKey: latitude)) {
+            print("THIS WORKS")
+            } } catch let error {
+                
+            }
+        */
+        //contains(where: { $0.values.contains(where: latitude as! (AnyObject) throws -> Bool)}) {
+            //print("YES IT IS FOUND")
+      */
+        
         return false
     }
    
@@ -578,9 +580,12 @@ func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
          let location = marker.position
         
       //  addNewItem.center = mapView.projection.point(for: location)
+  //detailsPopUp.center = mapView.projection.point(for: )
+     detailsPopUp.center = mapView.projection.point(for: tappedMarker)
+   detailsPopUp.center.y -= 100
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
         mapCustomInfoWindow.center.y -= 150
-       // addNewItem.center.y -= 150
+    
     }
  
 //This is setting the custom infoWindow
@@ -594,7 +599,6 @@ func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
 func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
     
         let location = marker.position
-        
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
         mapCustomInfoWindow.center.y -= 150
         
@@ -626,6 +630,8 @@ databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setVa
         
        marker.icon = UIImage(named: FolderIcon )
        mapCustomInfoWindow.removeFromSuperview()
+        //this drop down menu does not appear after opening the window once
+        dropDownMenuFolder.removeFromSuperview()
        mapCustomInfoWindow.layer.borderWidth = 2
        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
     }

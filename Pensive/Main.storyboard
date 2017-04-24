@@ -156,6 +156,7 @@
                     <connections>
                         <outlet property="AddNewPlaceButton" destination="se1-kN-K1e" id="77z-fr-FUZ"/>
                         <outlet property="CancelAddNewPlace" destination="SjL-h6-9Zb" id="Jn1-DX-DVP"/>
+                        <outlet property="detailsName" destination="iOK-EF-lsV" id="Tbt-BI-tdY"/>
                         <outlet property="detailsPopUp" destination="sq2-vj-0S1" id="dZ2-Iq-GdJ"/>
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
