@@ -54,6 +54,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet var detailsPopUp: UIView!
 
     @IBOutlet weak var detailsName: UILabel!
+    
+    @IBOutlet weak var detailAddress: UILabel!
+    
+    @IBOutlet weak var detailRatingControl: RatingControl!
+    
+    @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet var mapCustomInfoWindow: UIView!
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -101,14 +107,14 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var tappedMarker = CLLocationCoordinate2D()
     var folderNames = [String]()
     var markersArray = [CLLocationCoordinate2D]()
-    
+
 override func viewDidLoad() {
     super.viewDidLoad()
 
 //dont forget to set trackchanges for updates to the info window
  
     fetchFolders()
-    
+
    
               // self.view = dropDownMenuFolder
         // removes the navigation bar
@@ -190,7 +196,8 @@ self.view = vwGMap
             let longitude = (p["Longitude"] as? NSString)?.doubleValue
             let markers = GMSMarker()
             markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-           self.markersArray.append(markers.position)
+            
+       self.markersArray.append(markers.position)
             let folderIcon = p["FolderIcon"] as? String
            markers.icon = UIImage(named:folderIcon!)
          markers.tracksViewChanges = true
@@ -349,7 +356,7 @@ func setupInIt() {
     dropDownMenuFolder.menuText = "Choose Folder"
     dropDownMenuFolder.dropDownItems  = dropdownItems as [AnyObject]
     dropDownMenuFolder.paddingLeft = 15
-    dropDownMenuFolder.frame = CGRect(x: 40, y: 60, width: 200, height: 45)
+    dropDownMenuFolder.frame = CGRect(x: 85, y: 120, width: 200, height: 45)
     dropDownMenuFolder.delegate = self
     dropDownMenuFolder.type = IGLDropDownMenuType.stack
     dropDownMenuFolder.gutterY = 5
@@ -374,6 +381,7 @@ func dropDownMenu(_ dropDownMenu: IGLDropDownMenu!, selectedItemAt index: Int) {
         self.folderItem = folderItem!
         let folderIconIndex = String(item.index)
         self.folderIconIndex = folderIconIndex
+
     }
     
 //This is setting up the details infoWindow pop up
@@ -516,50 +524,18 @@ let newPlace = NSEntityDescription.insertNewObject(forEntityName: "StoredPlace",
         detailsPopUp.center = mapView.projection.point(for: tappedMarker)
         detailsPopUp.center.y -= 100
       self.view.addSubview(detailsPopUp)
-       let index = markersArray.index { (item) -> Bool in
         
-        }
-        print(index)
-        
-        detailsName.text = STOREDPlaces[2]["StoredPlaceName"] as? String
-       /* markersArray.contains(where: { (tappedMarker) -> Bool in
-          
-            return true
-        })
-     */
-       /* for i in 0...(STOREDPlaces.count-1) {
-           let bob = STOREDPlaces[i]["Latitude"] as! String!
-            print(bob!)
-            if bob! == tappedMarker.latitude as? String
+        for i in 0...(markersArray.count-1) {
+            if  markersArray[i].latitude == tappedMarker.latitude &&  markersArray[i].longitude == tappedMarker.longitude
             {
-                print("THIS IS WORKING")
-            }
-            
-            }
-   */
-        /*
-        //showing the right name in label
-        let latitude = tappedMarker.latitude as AnyObject
-        for i in 0...(STOREDPlaces.count-1) {
-            if (STOREDPlaces[i]["Latitude"] as! String!).contains(latitude as! String) {
-                print("There is latitude ")
+                print(i)
+                detailsName.text = STOREDPlaces[i]["StoredPlaceName"] as? String
             } else {
-                print("There is no latitude")
+               
             }
             
-        }
-        print(STOREDPlaces[5])
-        /*
-        do {
-        if try! STOREDPlaces.contains(where: ["Latitutde"], value(forKey: latitude)) {
-            print("THIS WORKS")
-            } } catch let error {
-                
             }
-        */
-        //contains(where: { $0.values.contains(where: latitude as! (AnyObject) throws -> Bool)}) {
-            //print("YES IT IS FOUND")
-      */
+   
         
         return false
     }
@@ -582,7 +558,7 @@ func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
       //  addNewItem.center = mapView.projection.point(for: location)
   //detailsPopUp.center = mapView.projection.point(for: )
      detailsPopUp.center = mapView.projection.point(for: tappedMarker)
-   detailsPopUp.center.y -= 100
+   detailsPopUp.center.y -= 110
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
         mapCustomInfoWindow.center.y -= 150
     
@@ -603,7 +579,7 @@ func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordin
         mapCustomInfoWindow.center.y -= 150
         
         self.view.addSubview(mapCustomInfoWindow)
-      
+      self.view.addSubview(dropDownMenuFolder)
     }
       //  let location = CLLocationCoordinate2D(latitude: (marker.userData as! location).lat, longitude: (marker.userData as! location).lon)
         
@@ -647,8 +623,18 @@ databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setVa
             })
  */
         print("After cancel button")
-        print(STOREDPlaces)
+        
         mapCustomInfoWindow.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
     }
+   
+    @IBAction func detailCloseAction(_ sender: Any) {
+        detailsPopUp.removeFromSuperview()
+    }
+    
+    @IBAction func detailMoreDetailAction(_ sender: Any) {
+       
+    }
+    
 }
+
