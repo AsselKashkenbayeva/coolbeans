@@ -1,5 +1,5 @@
 //
-//  DrinksViewController.swift
+//  FoodTableViewController.swift
 //  Pensive
 //
 //  Created by Assel Kashkenbayeva on 18/11/2016.
@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
-class DrinksViewController: UITableViewController {
-var drinks = ["Gin", "Vodka", "Rum"]
+
+class InsideFoldersTableViewController: UITableViewController {
+    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+ 
+    
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,19 +36,21 @@ var drinks = ["Gin", "Vodka", "Rum"]
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return drinks.count
+       
+        return 1
     }
     
     
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "DLabelCell", for: indexPath)
-     
-    cell.textLabel?.text = drinks[indexPath.row]
-     
-     return cell
-     }
-     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+
+        return cell
+        
+    }
     
+   // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+     //   return "Section \(section)"
+  //  }
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -91,6 +95,15 @@ var drinks = ["Gin", "Vodka", "Rum"]
      // Pass the selected object to the new view controller.
      }
      */
-    
+  
+ /* override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailViewController,
+            let indexPath = tableView.indexPathForSelectedRow {
+          destination.detailPlace = storedPlaces[indexPath.row]
+            //This is not correct
+        }
+    }
+
+    */
 }
 

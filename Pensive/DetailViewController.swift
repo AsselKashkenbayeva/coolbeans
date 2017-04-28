@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import BEMCheckBox
 
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 //MARK: Properties
@@ -15,6 +16,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
   
     @IBOutlet weak var placeAddressLabel: UILabel!
    
+    @IBOutlet var checkBox: BEMCheckBox!
     
     @IBOutlet weak var placeNameLabel: UILabel!
   
@@ -35,21 +37,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkBox.offAnimationType = BEMAnimationType.flat
+        checkBox.onAnimationType = BEMAnimationType.oneStroke
         
-        if let name = detailPlace.value(forKey: "name") as? String {
-                   placeNameLabel.text = name
-            
-                     
-                        print()
-                        //print(name)
-                    }
-                    if let address = detailPlace.value(forKey: "address") as? String
-                    {
-                       placeAddressLabel.text = address
-                        //Print(address)
-                    }
-                  
-                    
+        
+        placeNameLabel.text = STOREDPlaces[itemIndex]["StoredPlaceName"] as? String
+        placeAddressLabel.text = STOREDPlaces[itemIndex]["StoredPlaceAddress"] as? String
                 }
                 
     

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D256E6FA00DCAD0F132037E /* Pods_Pensive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70E659EA77274B2996401E5B /* Pods_Pensive.framework */; };
-		CF0063541E15561B007B828F /* name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0063531E15561B007B828F /* name.swift */; };
-		CF0063561E171FE4007B828F /* Coredata.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0063551E171FE4007B828F /* Coredata.swift */; };
 		CF0F89BB1DE2BD2D00BC7462 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89BA1DE2BD2D00BC7462 /* FirebaseAnalytics.framework */; };
 		CF0F89BD1DE2BD3B00BC7462 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89BC1DE2BD3B00BC7462 /* FirebaseCore.framework */; };
 		CF0F89BF1DE2BD6400BC7462 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89BE1DE2BD6400BC7462 /* FirebaseInstanceID.framework */; };
@@ -26,7 +24,6 @@
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
-		CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF69C17B1E0DC7BA0095A29E /* useCoreData.xcdatamodeld */; };
 		CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */; };
 		CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */; };
 		CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */; };
@@ -63,8 +60,7 @@
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
 		CFCBA3A61DE5B73100E7CD7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */; };
-		CFD1D05B1DDF6B4B00012115 /* FoodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */; };
-		CFD1D05D1DDFBD5700012115 /* DrinksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */; };
+		CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */; };
 		CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */; };
 		CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */; };
 /* End PBXBuildFile section */
@@ -83,8 +79,6 @@
 		573ABB0618A4EBAEBD9B9EF3 /* Pods-Pensive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pensive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pensive/Pods-Pensive.debug.xcconfig"; sourceTree = "<group>"; };
 		70E659EA77274B2996401E5B /* Pods_Pensive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pensive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E4EC88EF3A916E990559BE /* Pods-Pensive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pensive.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pensive/Pods-Pensive.release.xcconfig"; sourceTree = "<group>"; };
-		CF0063531E15561B007B828F /* name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = name.swift; path = ../../../.Trash/name.swift; sourceTree = "<group>"; };
-		CF0063551E171FE4007B828F /* Coredata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coredata.swift; sourceTree = "<group>"; };
 		CF0F89BA1DE2BD2D00BC7462 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		CF0F89BC1DE2BD3B00BC7462 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
 		CF0F89BE1DE2BD6400BC7462 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
@@ -104,7 +98,6 @@
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
-		CF69C17C1E0DC7BA0095A29E /* useCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = useCoreData.xcdatamodel; sourceTree = "<group>"; };
 		CF7EC84E1DBE68A1005C8D06 /* Pensive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pensive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -149,8 +142,7 @@
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
 		CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodTableViewController.swift; sourceTree = "<group>"; };
-		CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrinksViewController.swift; sourceTree = "<group>"; };
+		CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideFoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		D2D5432937B31CD5607F9103 /* Pods-Pensive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pensive.release.xcconfig"; path = "Pensive.xcodeproj/Pods/Target Support Files/Pods-Pensive/Pods-Pensive.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,14 +245,12 @@
 				CF17D7161E808783006E493D /* ConnectTableViewController.swift */,
 				CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */,
 				CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */,
-				CF0063531E15561B007B828F /* name.swift */,
 				CF4CAFB61E826F0E000872E2 /* USER.swift */,
 				CF91F9D21DFDDC20001EE137 /* RatingControl.swift */,
 				CF122FA51DFF0DA00011725E /* DetailViewController.swift */,
 				CF4BED141DE35F490087EFC3 /* LoginViewController.swift */,
 				CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */,
-				CFD1D05C1DDFBD5700012115 /* DrinksViewController.swift */,
-				CFD1D05A1DDF6B4B00012115 /* FoodTableViewController.swift */,
+				CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */,
 				CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */,
 				CF0F89C91DE2BE5300BC7462 /* module.modulemap */,
 				CF0F89C81DE2BE2400BC7462 /* Firebase.h */,
@@ -344,7 +334,6 @@
 				CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */,
 				CF91F9CD1DF1CFCE001EE137 /* SearchResultsController.swift */,
 				CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */,
-				CF0063551E171FE4007B828F /* Coredata.swift */,
 			);
 			name = GoogleMaps;
 			sourceTree = "<group>";
@@ -352,7 +341,6 @@
 		CFDE42CC1DCFE27F00F0C111 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CF69C17B1E0DC7BA0095A29E /* useCoreData.xcdatamodeld */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -528,18 +516,14 @@
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
-				CF69C17D1E0DC7BA0095A29E /* useCoreData.xcdatamodeld in Sources */,
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
 				CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
-				CF0063541E15561B007B828F /* name.swift in Sources */,
-				CFD1D05B1DDF6B4B00012115 /* FoodTableViewController.swift in Sources */,
+				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
 				CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */,
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,
 				CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */,
-				CFD1D05D1DDFBD5700012115 /* DrinksViewController.swift in Sources */,
-				CF0063561E171FE4007B828F /* Coredata.swift in Sources */,
 				CF91F9D31DFDDC20001EE137 /* RatingControl.swift in Sources */,
 				CF91F9CE1DF1CFCE001EE137 /* SearchResultsController.swift in Sources */,
 				CF91F9CF1DF55D63001EE137 /* FirstViewController.swift in Sources */,
@@ -815,19 +799,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		CF69C17B1E0DC7BA0095A29E /* useCoreData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CF69C17C1E0DC7BA0095A29E /* useCoreData.xcdatamodel */,
-			);
-			currentVersion = CF69C17C1E0DC7BA0095A29E /* useCoreData.xcdatamodel */;
-			path = useCoreData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CF7EC8461DBE68A0005C8D06 /* Project object */;
 }

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BEMCheckBox.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BTNavigationDropdownMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +57,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>144645DF6DF0700F6A9CD43DDBD9C52E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2D00FFF3DD67618D076F449029E7B868</key>
+		<key>11E52F59E7AC3B93D65EF3198076BDD4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,12 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BC19A72FB7D1DB0B2CC5F6C5CF2400F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BC7966C75765C0018C7101616AB676D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F1B9AFC6AEF369ED691FD312F29BB6E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

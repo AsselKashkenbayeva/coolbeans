@@ -12,3 +12,4 @@
 
 #endif /* Googleplacepickerheader_h */
 #import <GooglePlacePicker.h>
+#import "BEMCheckBox.h"

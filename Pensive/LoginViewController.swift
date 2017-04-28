@@ -8,8 +8,6 @@
 
 import UIKit
 import Firebase
-import CoreData
-
 
 class LoginViewController: UIViewController {
    
@@ -27,8 +25,6 @@ class LoginViewController: UIViewController {
         {
             self.LogoutButton.alpha = 1.0
             self.EnterButton.alpha = 1.0
-            
-            
         }
         else
         {
@@ -41,6 +37,7 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     @IBAction func didTapSignUp(_ sender: AnyObject) {
         if self.textFieldLoginEmail.text == "" && self.textFieldLoginPassword.text == ""
         {
@@ -51,7 +48,7 @@ class LoginViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
            
     }
-        else{
+        else {
             FIRAuth.auth()?.createUser(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
@@ -70,15 +67,6 @@ class LoginViewController: UIViewController {
                     self.textFieldLoginPassword.text = ""
                      self.performSegue(withIdentifier: self.loginToList, sender: nil)
                     
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let context = appDelegate.persistentContainer.viewContext
-
-                    let newPlace = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
-                    
-                    newPlace.setValue(self.textFieldLoginEmail.text, forKeyPath: "userEmail")
-                    newPlace.setValue(self.textFieldLoginPassword.text, forKeyPath: "userPassword")
-                    print(newPlace)
-
         }
                 else
                 {
@@ -114,7 +102,6 @@ class LoginViewController: UIViewController {
                     let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
                     databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
                 databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
-                    //.child("Email") .child("Password")
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""

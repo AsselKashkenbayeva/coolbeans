@@ -14,7 +14,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-import CoreData
+
 
 import Firebase
 import FirebaseDatabase
@@ -25,10 +25,11 @@ import IGLDropDownMenu
 
 
 
-var storedPlaces: [NSManagedObject] = []
+
 var firebaseStoredPlaces: [placeFromFirebase] = []
 var STOREDPlaces = [[String:AnyObject]]()
 var STOREDFolders = [[String:AnyObject]]()
+var itemIndex = Int()
 class placeFromFirebase: NSObject {
     
     var name: String?
@@ -54,8 +55,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet var detailsPopUp: UIView!
 
     @IBOutlet weak var detailsName: UILabel!
-    
-    @IBOutlet weak var detailAddress: UILabel!
+   
+    @IBOutlet var detailWebsite: UILabel!
     
     @IBOutlet weak var detailRatingControl: RatingControl!
     
@@ -73,7 +74,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var newPlaceAddress = ""
     var newPlacePlaceID = ""
     var newPlaceTelephone = ""
-    var newPlaceWebsite = ""
+ //   var newPlaceWebsite = ""
     var folderItem = ""
     var folderIconIndex = ""
     
@@ -81,7 +82,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var openNowStatus = ""
     var types = ""
     var priceLevel = ""
-    var website = ""
+    var website: URL!
     
     
     var latitudeText = ""
@@ -447,26 +448,20 @@ func viewController(_ viewController: GMSAutocompleteViewController, didAutocomp
         self.newPlaceAddress = place.formattedAddress!
         let newPlacePlaceID = place.placeID
         self.newPlacePlaceID = place.placeID
- 
-        //let newPlaceLatitude = place.coordinate.latitude
+
         let newPlaceLatitude = place.coordinate.latitude
-        //print(newPlaceLatitude)
         var latitudeText:String = "\(newPlaceLatitude)"
         self.latitudeText = "\(newPlaceLatitude)"
-        
+    
+    
         let newPlaceLongitude = place.coordinate.longitude
-        //print(newPlaceLongitude)
-       
         var longitudeText:String = "\(newPlaceLongitude)"
         self.longitudeText = "\(newPlaceLongitude)"
-      
+    
         let telephone = place.phoneNumber
-        
-        let openNowStatus = place.openNowStatus
-        let priceLevel = place.priceLevel
-        let types = place.types
+        self.telephone = telephone!
         let website = place.website
-        //self.newPlaceWebsite = website
+        self.website = website
     }
     
 //Initiated if autocomplete failed
@@ -476,8 +471,8 @@ func viewController(_ viewcontroller: GMSAutocompleteViewController, didFailAuto
 //Initiated if autocomplete cancelled
 func wasCancelled(_ viewController:GMSAutocompleteViewController) {
             self.dismiss(animated: true, completion: nil)   }
-    
-    //I don't think this works
+   
+    //This allows the search button to be clicked
     @IBAction func searchWithAddress(_ sender: AnyObject) {
         let searchWithAddress = GMSAutocompleteViewController()
         searchWithAddress.delegate = self
@@ -488,36 +483,7 @@ func wasCancelled(_ viewController:GMSAutocompleteViewController) {
         
     self.present(searchWithAddress, animated: true, completion: nil)
     }
-    
-/*    func save(){
-//this function adds place to CoreData
-let appDelegate = UIApplication.shared.delegate as! AppDelegate
-let context = appDelegate.persistentContainer.viewContext
-let newPlace = NSEntityDescription.insertNewObject(forEntityName: "StoredPlace", into: context)
-        
-     newPlace.setValue(newPlaceName, forKeyPath: "name")
-     newPlace.setValue(newPlaceAddress, forKeyPath: "address")
-     newPlace.setValue(newPlacePlaceID
-            , forKeyPath: "placeID")
-     newPlace.setValue(latitudeText, forKeyPath: "latitude")
-     newPlace.setValue(longitudeText, forKeyPath: "longitude")
-     newPlace.setValue(telephone, forKey: "telephone")
-     newPlace.setValue(openNowStatus, forKey: "opennowstatus")
-     newPlace.setValue(types, forKey: "types")
-     newPlace.setValue(priceLevel, forKey: "pricelevel")
-     newPlace.setValue(website, forKey: "website")
-    
-        do
-        {
-            try context.save()
-            print("SAVED")
-        }
-            //PROCESS ERROR
-        catch  let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
- */
+ 
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         tappedMarker = marker.position
        
@@ -530,12 +496,16 @@ let newPlace = NSEntityDescription.insertNewObject(forEntityName: "StoredPlace",
             {
                 print(i)
                 detailsName.text = STOREDPlaces[i]["StoredPlaceName"] as? String
+                detailWebsite.text = STOREDPlaces[i]["StoredPlaceAddress"] as? String
+                itemIndex = i
+                //if picture of person who it is taken from
             } else {
                
             }
             
             }
    
+        detailImageView.image = UIImage(named: "b")
         
         return false
     }
@@ -564,13 +534,7 @@ func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
     
     }
  
-//This is setting the custom infoWindow
 
-    /*func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        let infoWindow = detailsPopUp
-        return infoWindow
-    }
- */
 //When doing long press, it shows pop up window above icon
 func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
     
@@ -581,9 +545,6 @@ func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordin
         self.view.addSubview(mapCustomInfoWindow)
       self.view.addSubview(dropDownMenuFolder)
     }
-      //  let location = CLLocationCoordinate2D(latitude: (marker.userData as! location).lat, longitude: (marker.userData as! location).lon)
-        
-    
  
     @IBOutlet weak var CancelAddNewPlace: UIButton!
 
@@ -592,14 +553,15 @@ func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordin
         
         let PlaceName: String = self.newPlaceNameText
         let PlaceAddress: String = self.newPlaceAddress
-        let PlaceTelephone: String = self.newPlaceTelephone
+        let PlaceTelephone: String = self.telephone
+        let PlaceWebsite = self.website as! String
         let PlaceID = self.newPlacePlaceID
         let PlaceUnderFolder = self.folderItem
         let LongitudeCoordinate = self.longitudeText
         let LatitudeCoordinate = self.latitudeText
         let FolderIcon = self.folderIconIndex
         //this is not correct because it shows the whole array in one part
-        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject, "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject ]
+        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject ]
         
 let databaseRef = FIRDatabase.database().reference()
 databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
