@@ -36,7 +36,8 @@ import Firebase
                 user.Username = dictionary["Username"]?["Username"] as? String
                 user.Email = dictionary["Email"]?["Email"] as? String
                 user.ProfilePicURL = dictionary["ProfilePicURL"]?["ProfilePicURL"] as? String
-             
+                user.StoredPlaceOfUser = (dictionary["StoredPlaces"] as? [String: AnyObject])!
+                print(user.StoredPlaceOfUser)
                 self.users.append(user)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -97,7 +98,11 @@ import Firebase
         return cell
      
     }
-
+override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+            // Segue to the second view controller
+            self.performSegue(withIdentifier: "connectMapView", sender: self)
+        }
 }
 
 class UserCell: UITableViewCell {

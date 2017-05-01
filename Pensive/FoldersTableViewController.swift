@@ -14,6 +14,7 @@ import IGLDropDownMenu
 class FOLDER: NSObject {
     
     var name: String?
+    var icon: String?
 }
 
 class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate {
@@ -25,7 +26,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["0", "1", "2", "3"]
     var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
-    var folders: [FOLDER] = []
+   var folders: [FOLDER] = []
     var folderIndex = ""
      let user = FIRAuth.auth()?.currentUser
     override func viewDidLoad() {
@@ -48,15 +49,14 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
                   //  let key = snap.key
                     //print(key)
                     let folder = FOLDER()
-                  print(dictionary)
                 folder.name = (dictionary["FolderName"] as? String)!
-                   
+                   folder.icon = (dictionary["FolderIcon"] as? String)!
                    // print(dictionary)
                     //folder.name = dictionary["Username"] as? String
                   // print(folder.name!)
                    
                    self.folders.append(folder)
-                    
+                  
                    // if self.folders.contains(folder) {
                        // print("YES")
                     //}
@@ -72,10 +72,6 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
         }
     )
     
-        
-            
-        
-              
         
         }
 
@@ -109,7 +105,8 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
 let cell = UITableViewCell()
-        let folder = self.folders[indexPath.row]
+        
+        let folder = folders[indexPath.row]
         cell.textLabel?.text = folder.name
       //cell.textLabel?.text = folders[indexPath.row]
 
