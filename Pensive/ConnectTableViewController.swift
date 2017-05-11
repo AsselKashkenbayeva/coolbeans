@@ -9,11 +9,13 @@
 import UIKit
 import Firebase
 
+var combinedCourseArray: [[String: AnyObject]] = [[:]]
     class ConnectTableViewController: UITableViewController {
         
         let cellId = "cellId"
         var profilePic = UIImage()
-        
+        var userStoredPlaces = [String: AnyObject]()
+        var longitudeArray = [Double]()
        var users = [USER]()
         var profilePicArray = [UIImage]()
     override func viewDidLoad() {
@@ -24,27 +26,45 @@ import Firebase
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
        fetchUser()
+      
     }
 
        func fetchUser() {
             let ref = FIRDatabase.database().reference()
             ref.observe( .childAdded, with: { (snapshot) in
-             //print(snapshot)
+            
                if let dictionary = snapshot.value as? [String: AnyObject] {
+             
+               
                 //print(dictionary)
                 let user = USER()
                 user.Username = dictionary["Username"]?["Username"] as? String
                 user.Email = dictionary["Email"]?["Email"] as? String
                 user.ProfilePicURL = dictionary["ProfilePicURL"]?["ProfilePicURL"] as? String
-                user.StoredPlaceOfUser = (dictionary["StoredPlaces"] as? [String: AnyObject])!
-                print(user.StoredPlaceOfUser)
+               
+                    let bob = (dictionary["StoredPlaces"] as? [String:AnyObject])!
+                print(bob.count)
+               
+                for snap in bob {
+                        let key = snap.key
+                   // var placeLatitude = (bob[key]?["Latitude"] as? [String:AnyObject]!)!
+        let longitude = (bob[key]?["Longitude"] as? NSString)?.doubleValue
+                    self.longitudeArray.append(longitude!)
+                    print(self.userStoredPlaces)
+                }
+                
                 self.users.append(user)
+             
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-           
                 }
-                }
+                let when = DispatchTime.now() + 2
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                 print(self.userStoredPlaces)
+                    }
+                
         }
+            }
         )}
         
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

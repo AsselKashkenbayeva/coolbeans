@@ -26,7 +26,7 @@ import IGLDropDownMenu
 
 
 
-var firebaseStoredPlaces: [placeFromFirebase] = []
+
 var STOREDPlaces = [[String:AnyObject]]()
 var STOREDFolders = [[String:AnyObject]]()
 var itemIndex = Int()
