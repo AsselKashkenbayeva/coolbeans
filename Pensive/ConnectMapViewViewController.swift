@@ -11,11 +11,19 @@ import UIKit
 class ConnectMapViewViewController: UIViewController {
 
     @IBOutlet var friendProfilePic: UIImageView!
-  
+    var selectedUser = (USER)()
+    var longitudeArray = [Double]()
     override func viewDidLoad() {
         super.viewDidLoad()
  friendProfilePic.image = UIImage(named: "b")
-   
+
+        for snap in selectedUser.StoredPlacesOfUser {
+            let key = snap.key
+          
+            let longitude = (selectedUser.StoredPlacesOfUser[key]?["Longitude"] as? NSString)?.doubleValue
+            self.longitudeArray.append(longitude!)
+        }
+print(longitudeArray)
         // Do any additional setup after loading the view.
     }
 

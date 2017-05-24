@@ -572,7 +572,7 @@
         <!--Connect Map View View Controller-->
         <scene sceneID="STr-Vh-2pz">
             <objects>
-                <viewController id="WjQ-xn-Itp" customClass="ConnectMapViewViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectMapViewController" id="WjQ-xn-Itp" customClass="ConnectMapViewViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sBT-68-wHW"/>
                         <viewControllerLayoutGuide type="bottom" id="dFe-uL-pNI"/>

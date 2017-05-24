@@ -108,9 +108,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var tappedMarker = CLLocationCoordinate2D()
     var folderNames = [String]()
     var markersArray = [CLLocationCoordinate2D]()
+    var filterSelected = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       self.filterSelected = "All"
         
         //dont forget to set trackchanges for updates to the info window
         
@@ -192,7 +194,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                 }
               
-                self.markersArray.removeAll()
+                              /* if self.filterSelected == "All"
+                    
+                {
                 for p in STOREDPlaces {
                     let latitude = (p["Latitude"] as? NSString)?.doubleValue
                     let longitude = (p["Longitude"] as? NSString)?.doubleValue
@@ -207,6 +211,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     self.detailsName.text = p["StoredPlaceName"] as? String
                     markers.map = self.vwGMap
                 }
+                }
+                else  {
+                    print("NOT WORKING!!!!!")
+                }
+ */
+                
             }
         }
         )
@@ -228,7 +238,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         )
-        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -242,16 +252,143 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 self.folderNames.append(folder!)
                 
             }
+        
             self.setupInIt()
-            self.sortByDropDown()
+           self.sortByDropDown()
+            self.markersArray.removeAll()
+            if self.filterSelected == "All"
+                
+            {
+                for p in STOREDPlaces {
+                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
+                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
+                    let markers = GMSMarker()
+                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+                    
+                    self.markersArray.append(markers.position)
+                    let folderIcon = p["FolderIcon"] as? String
+                    markers.icon = UIImage(named:folderIcon!)
+                    markers.tracksViewChanges = true
+                    //this does not match which place was tapped
+                    self.detailsName.text = p["StoredPlaceName"] as? String
+                    markers.map = self.vwGMap
+                    print("ALL IS WoRK")
+                    self.vwGMap.setNeedsDisplay()
+                }
+            }
+            else if self.filterSelected != "All"  {
+                for p in STOREDPlaces {
+                    if p["FolderName"] as? String == self.filterSelected {
+                        let latitude = (p["Latitude"] as? NSString)?.doubleValue
+                        let longitude = (p["Longitude"] as? NSString)?.doubleValue
+                        let markers = GMSMarker()
+                        markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+                        self.markersArray.append(markers.position)
+                        let folderIcon = p["FolderIcon"] as? String
+                        markers.icon = UIImage(named:folderIcon!)
+                        markers.tracksViewChanges = true
+                        //this does not match which place was tapped
+                        self.detailsName.text = p["StoredPlaceName"] as? String
+                        markers.map = self.vwGMap
+                        self.vwGMap.reloadInputViews()
+                        print("FILTERED VIWE")
+                        self.vwGMap.setNeedsDisplay()
+                    }
+                }
+            }
+            
+print(self.markersArray)
+          
         }
         
     }
     
   
+    func filterPlaces() {
+        self.markersArray.removeAll()
+        self.vwGMap.clear()
+        print("Filter places function is being called")
+        if self.filterSelected == "All"
+            
+        {
+            for p in STOREDPlaces {
+                let latitude = (p["Latitude"] as? NSString)?.doubleValue
+                let longitude = (p["Longitude"] as? NSString)?.doubleValue
+                let markers = GMSMarker()
+                markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+                
+                self.markersArray.append(markers.position)
+                let folderIcon = p["FolderIcon"] as? String
+                markers.icon = UIImage(named:folderIcon!)
+                markers.tracksViewChanges = true
+                //this does not match which place was tapped
+                self.detailsName.text = p["StoredPlaceName"] as? String
+                markers.map = self.vwGMap
+               
+                self.vwGMap.setNeedsDisplay()
+            }
+        }
+        else if self.filterSelected != "All"  {
+            for p in STOREDPlaces {
+                if p["PlaceUnderFolder"] as? String == self.filterSelected {
+                    print(self.filterSelected)
+                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
+                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
+                    let markers = GMSMarker()
+                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+                    self.markersArray.append(markers.position)
+                    let folderIcon = p["FolderIcon"] as? String
+                    markers.icon = UIImage(named:folderIcon!)
+                    markers.tracksViewChanges = true
+                    //this does not match which place was tapped
+                  //  self.detailsName.text = p["StoredPlaceName"] as? String
+                    markers.map = self.vwGMap
+                   // self.vwGMap.reloadInputViews()
+                    self.vwGMap.setNeedsDisplay()
+                
+                }
+                
+            }
+            /*
+            for p in STOREDPlaces {
+                if p["FolderName"] as? String == self.filterSelected {
+                    print(self.filterSelected)
+                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
+                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
+                    let markers = GMSMarker()
+                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+                    self.markersArray.append(markers.position)
+                    let folderIcon = p["FolderIcon"] as? String
+                    markers.icon = UIImage(named:folderIcon!)
+                    markers.tracksViewChanges = true
+                    //this does not match which place was tapped
+                    self.detailsName.text = p["StoredPlaceName"] as? String
+                    markers.map = self.vwGMap
+                    self.vwGMap.reloadInputViews()
+                    print("FILTERED VIWE")
+                    self.vwGMap.setNeedsDisplay()
+                    */
+               // }
+           // }
+        }
+      
+    }
+    func trying() {
+        
+        let Mark = GMSMarker()
+        Mark.position = CLLocationCoordinate2D(latitude: 51.5073509 , longitude: -0.1277583)
     
+        Mark.icon = UIImage(named:"ProfileIcon")
+   
+        //this does not match which place was tapped
+        Mark.map = self.vwGMap
+        self.vwGMap.reloadInputViews()
+        print("FILTERED VIWE")
+        self.vwGMap.setNeedsDisplay()
+    }
     func sortByDropDown() {
         let items = self.folderNames
+        folderNames.append("All")
         let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
         menuView.updateItems(self.folderNames as [AnyObject])
         self.navigationItem.titleView = menuView
@@ -259,9 +396,17 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         menuView.menuTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         menuView.cellSelectionColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
-            print("Did select item at index: \(indexPath)")
-           print(self?.folderNames[indexPath])
-            
+           // print("Did select item at index: \(indexPath)")
+          // print(self?.folderNames[indexPath])
+   //   self?.filterSelected  = (self?.folderNames[indexPath])!
+    
+        //  print(self?.filterSelected)
+           // print(indexPath)
+            if indexPath != nil {
+          self?.filterSelected = (self?.folderNames[indexPath])!
+               // print((self?.filterSelected)!)
+            self?.filterPlaces()
+            }
         }
         
         
@@ -295,11 +440,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     func setupInIt() {
         
         let dropdownItems: NSMutableArray = NSMutableArray()
+
         if STOREDFolders.count > 0 {
             for i in 0...(STOREDFolders.count-1) {
                 let item = IGLDropDownItem()
                 item.text = (STOREDFolders[i]["FolderName"] as! String!)
                 item.iconImage = UIImage(named: STOREDFolders[i]["FolderIcon"] as! String!)
+                item.iconImage.accessibilityIdentifier = STOREDFolders[i]["FolderIcon"] as! String!
                 dropdownItems.add(addObject:item)
             }
         }
@@ -336,8 +483,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
         let folderItem = item.text
         self.folderItem = folderItem!
-        let folderIconIndex = String(item.index)
-        self.folderIconIndex = folderIconIndex
+        let folderIconIndex = item.iconImage.accessibilityIdentifier
+        self.folderIconIndex = folderIconIndex!
         
     }
     //This is setting up the details infoWindow pop up
@@ -459,7 +606,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         for i in 0...(markersArray.count-1) {
             if  markersArray[i].latitude == tappedMarker.latitude &&  markersArray[i].longitude == tappedMarker.longitude
             {
-                print(i)
                 detailsName.text = STOREDPlaces[i]["StoredPlaceName"] as? String
                 detailWebsite.text = STOREDPlaces[i]["StoredPlaceWebsite"] as? String
                 itemIndex = i

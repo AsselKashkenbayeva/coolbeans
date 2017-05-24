@@ -16,5 +16,5 @@ class USER: NSObject {
     var Password: String?
     var Username: String?
     var ProfilePicURL: String?
-    var StoredPlaceOfUser = [String:AnyObject]()
+    var StoredPlacesOfUser = [String:AnyObject]()
 }

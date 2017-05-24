@@ -42,25 +42,27 @@ var combinedCourseArray: [[String: AnyObject]] = [[:]]
                 user.Email = dictionary["Email"]?["Email"] as? String
                 user.ProfilePicURL = dictionary["ProfilePicURL"]?["ProfilePicURL"] as? String
                
-                    let bob = (dictionary["StoredPlaces"] as? [String:AnyObject])!
-                print(bob.count)
+                    user.StoredPlacesOfUser = (dictionary["StoredPlaces"] as? [String:AnyObject])!
+               // print(user.StoredPlacesOfUser)
+               /* print(bob.count)
                
                 for snap in bob {
                         let key = snap.key
                    // var placeLatitude = (bob[key]?["Latitude"] as? [String:AnyObject]!)!
         let longitude = (bob[key]?["Longitude"] as? NSString)?.doubleValue
                     self.longitudeArray.append(longitude!)
-                    print(self.userStoredPlaces)
+                   // print(self.userStoredPlaces)
                 }
-                
+                */
                 self.users.append(user)
-             
+           
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 let when = DispatchTime.now() + 2
                 DispatchQueue.main.asyncAfter(deadline: when) {
-                 print(self.userStoredPlaces)
+                // print(self.userStoredPlaces)
+                  
                     }
                 
         }
@@ -121,7 +123,14 @@ var combinedCourseArray: [[String: AnyObject]] = [[:]]
 override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
             // Segue to the second view controller
-            self.performSegue(withIdentifier: "connectMapView", sender: self)
+    
+    print("SELECTED INDEX")
+   print(indexPath.row)
+    
+    let myVC = storyboard?.instantiateViewController(withIdentifier: "ConnectMapViewController") as! ConnectMapViewViewController
+    myVC.selectedUser = users[indexPath.row]
+     // self.performSegue(withIdentifier: "connectMapView", sender: self)
+   navigationController?.pushViewController(myVC, animated: true)
         }
 }
 
