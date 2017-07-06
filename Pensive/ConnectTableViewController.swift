@@ -9,20 +9,20 @@
 import UIKit
 import Firebase
 
-var combinedCourseArray: [[String: AnyObject]] = [[:]]
+//var combinedCourseArray: [[String: AnyObject]] = [[:]]
     class ConnectTableViewController: UITableViewController {
         
         let cellId = "cellId"
         var profilePic = UIImage()
         var userStoredPlaces = [String: AnyObject]()
         var longitudeArray = [Double]()
-       var users = [USER]()
+        var users = [USER]()
         var profilePicArray = [UIImage]()
     override func viewDidLoad() {
         super.viewDidLoad()
 // FIRDatabase.database().persistenceEnabled = true
-            navigationItem.title = "User Feed"
         
+        navigationItem.title = "User Feed"
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
        fetchUser()
@@ -35,25 +35,14 @@ var combinedCourseArray: [[String: AnyObject]] = [[:]]
             
                if let dictionary = snapshot.value as? [String: AnyObject] {
              
-               
-                //print(dictionary)
                 let user = USER()
                 user.Username = dictionary["Username"]?["Username"] as? String
                 user.Email = dictionary["Email"]?["Email"] as? String
                 user.ProfilePicURL = dictionary["ProfilePicURL"]?["ProfilePicURL"] as? String
                
-                    user.StoredPlacesOfUser = (dictionary["StoredPlaces"] as? [String:AnyObject])!
-               // print(user.StoredPlacesOfUser)
-               /* print(bob.count)
-               
-                for snap in bob {
-                        let key = snap.key
-                   // var placeLatitude = (bob[key]?["Latitude"] as? [String:AnyObject]!)!
-        let longitude = (bob[key]?["Longitude"] as? NSString)?.doubleValue
-                    self.longitudeArray.append(longitude!)
-                   // print(self.userStoredPlaces)
-                }
-                */
+                user.StoredPlacesOfUser = (dictionary["StoredPlaces"] as? [String:AnyObject])!
+                user.StoredFoldersOfUser = (dictionary["UserFolders"] as? [String:AnyObject])!
+                
                 self.users.append(user)
            
                 DispatchQueue.main.async {
@@ -61,7 +50,7 @@ var combinedCourseArray: [[String: AnyObject]] = [[:]]
                 }
                 let when = DispatchTime.now() + 2
                 DispatchQueue.main.asyncAfter(deadline: when) {
-                // print(self.userStoredPlaces)
+              
                   
                     }
                 
@@ -99,23 +88,19 @@ var combinedCourseArray: [[String: AnyObject]] = [[:]]
                 }
                 
                 DispatchQueue.main.async {
-                    
                     print("THIS IS GOING TO BE A PIC")
                  cell.imageView?.image = UIImage(data: data!)
-                    
-      
-                    
                 }
             }).resume()
         }
       
-        
+        cell.imageView?.sizeToFit()
         cell.imageView?.layer.borderWidth = 1
         cell.imageView?.layer.masksToBounds = false
-       cell.imageView?.layer.borderColor = UIColor.orange.cgColor
+        cell.imageView?.layer.borderColor = UIColor.orange.cgColor
         cell.imageView?.layer.cornerRadius = 70
         cell.imageView?.clipsToBounds = true
-        cell.imageView?.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+        cell.imageView?.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
        
         return cell
      
@@ -123,9 +108,6 @@ var combinedCourseArray: [[String: AnyObject]] = [[:]]
 override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
             // Segue to the second view controller
-    
-    print("SELECTED INDEX")
-   print(indexPath.row)
     
     let myVC = storyboard?.instantiateViewController(withIdentifier: "ConnectMapViewController") as! ConnectMapViewViewController
     myVC.selectedUser = users[indexPath.row]

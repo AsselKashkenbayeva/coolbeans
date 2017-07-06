@@ -17,4 +17,5 @@ class USER: NSObject {
     var Username: String?
     var ProfilePicURL: String?
     var StoredPlacesOfUser = [String:AnyObject]()
+    var StoredFoldersOfUser = [String:AnyObject]()
 }

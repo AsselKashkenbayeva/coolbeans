@@ -182,7 +182,7 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
    
     @IBOutlet weak var sexPicker: UIPickerView!
     
-    var gender = ["Male","Female"]
+    var gender = ["Male","Female","Prefer not to say", "Other"]
     
     //drop down sex selection picker 
     

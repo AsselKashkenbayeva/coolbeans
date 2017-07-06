@@ -29,6 +29,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
    var folders: [FOLDER] = []
     var folderIndex = ""
      let user = FIRAuth.auth()?.currentUser
+    var valueToPass: String!
     override func viewDidLoad() {
         super.viewDidLoad()
        setupInIt()
@@ -149,15 +150,42 @@ let cell = UITableViewCell()
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+ 
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // print(folders[indexPath.row].name!)
+        let indexPath = tableView.indexPathForSelectedRow!
+        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        valueToPass = currentCell.textLabel?.text
+        self.performSegue(withIdentifier: "foldersSegue" , sender: self)
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "foldersSegue") {
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destination as! InsideFoldersTableViewController
+            // your new view controller should have property that will store passed value
+            viewController.selectedFolder = valueToPass
+           // print(viewController.selectedFolder)
+           // print(valueToPass)
+        }
+        /*
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? InsideFoldersTableViewController {
+            // let indexPath = self.tableView.indexPathForSelectedRow()
+            let index = (sender as! NSIndexPath).row
+            InsideFoldersTableViewController.selectedFolder = folders[index].name!
+        }
+ */
     }
-    */
+ 
     //this is the dropdown in the pop up menu 
     func setupInIt() {
         

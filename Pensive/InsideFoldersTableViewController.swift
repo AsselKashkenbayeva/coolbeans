@@ -13,12 +13,17 @@ import FirebaseAuth
 
 
 class InsideFoldersTableViewController: UITableViewController {
-    
- 
+    var filteredStoredPlaces = [[String:AnyObject]]()
+    var selectedFolder: String!
+    var valueToPass = [String:AnyObject]()
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-    
+        for p in STOREDPlaces {
+            if p["PlaceUnderFolder"] as? String == self.selectedFolder {
+               self.filteredStoredPlaces.append(p)
+            }
+        }
+
     }
     
 
@@ -37,17 +42,40 @@ class InsideFoldersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
        
-        return 1
+        return filteredStoredPlaces.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-
+       
+        let cell = UITableViewCell()
+       let placeName = filteredStoredPlaces[indexPath.row]["StoredPlaceName"]
+        cell.textLabel?.text = placeName as! String?
         return cell
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // print(folders[indexPath.row].name!)
+        let indexPath = tableView.indexPathForSelectedRow!
+        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        let place = filteredStoredPlaces[indexPath.row]
+        valueToPass = place
+        self.performSegue(withIdentifier: "connectTableMapView" , sender: self)
+        print(valueToPass)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if (segue.identifier == "connectTableMapView") {
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destination as! TableMapViewController
+            // your new view controller should have property that will store passed value
+            viewController.selectedPlace = valueToPass
+            // print(viewController.selectedFolder)
+            // print(valueToPass)
+        }
+    }
    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
      //   return "Section \(section)"
   //  }

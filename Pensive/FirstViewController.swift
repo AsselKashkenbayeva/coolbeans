@@ -74,7 +74,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var newPlaceAddress = ""
     var newPlacePlaceID = ""
     var newPlaceTelephone = ""
-    //   var newPlaceWebsite = ""
+   
     var folderItem = ""
     var folderIconIndex = ""
     
@@ -90,7 +90,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var newPlaceNameText = ""
     
     var storedPlaceNamefromFirebase = ""
-    var bloBB = [String]()
+
     var storedPlaceLatitude = ""
     var storedPlaceLongitude = ""
     
@@ -100,14 +100,18 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var effect:UIVisualEffect!
     var blob = placeFromFirebase()
     var dropDownMenuFolder = IGLDropDownMenu()
-    var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
-    var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
+
+  
     var Folders = [String]()
     var Names = [String]()
     var NK = [String]()
     var tappedMarker = CLLocationCoordinate2D()
     var folderNames = [String]()
+    
     var markersArray = [CLLocationCoordinate2D]()
+    var placeNamesArray = [String]()
+    var placeWebsiteArray = [String]()
+    
     var filterSelected = ""
     
     override func viewDidLoad() {
@@ -141,6 +145,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
          */
         
         //Initially uploading googleMaps
+        
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 22.300000, longitude: 70.783300, zoom: 10.0)
         vwGMap = GMSMapView.map(withFrame: self.view.frame, camera: camera)
         vwGMap.camera = camera
@@ -149,6 +154,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         vwGMap.settings.myLocationButton = true
         vwGMap.settings.compassButton = true
         vwGMap.settings.allowScrollGesturesDuringRotateOrZoom = true
+ 
         //setting the delegate
         vwGMap.delegate = self
         
@@ -160,25 +166,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.startUpdatingLocation()
         
         self.view = vwGMap
-        
-        /*   // Google Maps Directions
-         GoogleMapsDirections.provide(apiKey: "AIzaSyC-i5xPkUJ9yObNcwhGRjBYI8Q_wNsWZr4")
-         let origin = GoogleMapsDirections.Place.placeID(id: "ChIJxc4vk9QEdkgRjJ2al7_P9uw")
-         let destination = GoogleMapsDirections.Place.placeID(id: "ChIJb9sw59k0K4gRZZlYrnOomfc")
-         
-         GoogleMapsDirections.direction(fromOrigin: origin, toDestination: destination) { (response, error) -> Void in
-         
-         guard response?.status == GoogleMapsDirections.StatusCode.ok else {
-         debugPrint(response?.errorMessage)
-         return
-         }
-         */
-        
-        
-        //}
-        //let mapView = GMSMapView.map(withFrame:  .zero, camera: camera)
-        // mapView.settings.myLocationButton = true
-        // mapView.delegate = self
         
         let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
         
@@ -193,29 +180,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                       
                     }
                 }
-              
-                              /* if self.filterSelected == "All"
-                    
-                {
-                for p in STOREDPlaces {
-                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                    let markers = GMSMarker()
-                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                    
-                    self.markersArray.append(markers.position)
-                    let folderIcon = p["FolderIcon"] as? String
-                    markers.icon = UIImage(named:folderIcon!)
-                    markers.tracksViewChanges = true
-                    //this does not match which place was tapped
-                    self.detailsName.text = p["StoredPlaceName"] as? String
-                    markers.map = self.vwGMap
-                }
-                }
-                else  {
-                    print("NOT WORKING!!!!!")
-                }
- */
                 
             }
         }
@@ -255,57 +219,18 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
             self.setupInIt()
            self.sortByDropDown()
-            self.markersArray.removeAll()
-            if self.filterSelected == "All"
-                
-            {
-                for p in STOREDPlaces {
-                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                    let markers = GMSMarker()
-                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                    
-                    self.markersArray.append(markers.position)
-                    let folderIcon = p["FolderIcon"] as? String
-                    markers.icon = UIImage(named:folderIcon!)
-                    markers.tracksViewChanges = true
-                    //this does not match which place was tapped
-                    self.detailsName.text = p["StoredPlaceName"] as? String
-                    markers.map = self.vwGMap
-                    print("ALL IS WoRK")
-                    self.vwGMap.setNeedsDisplay()
-                }
-            }
-            else if self.filterSelected != "All"  {
-                for p in STOREDPlaces {
-                    if p["FolderName"] as? String == self.filterSelected {
-                        let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                        let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                        let markers = GMSMarker()
-                        markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                        self.markersArray.append(markers.position)
-                        let folderIcon = p["FolderIcon"] as? String
-                        markers.icon = UIImage(named:folderIcon!)
-                        markers.tracksViewChanges = true
-                        //this does not match which place was tapped
-                        self.detailsName.text = p["StoredPlaceName"] as? String
-                        markers.map = self.vwGMap
-                        self.vwGMap.reloadInputViews()
-                        print("FILTERED VIWE")
-                        self.vwGMap.setNeedsDisplay()
-                    }
-                }
-            }
-            
-print(self.markersArray)
-          
+           // self.filterPlaces()
+           
         }
         
     }
     
   
     func filterPlaces() {
+        self.detailsPopUp.removeFromSuperview()
         self.markersArray.removeAll()
+        self.placeNamesArray.removeAll()
+        self.placeWebsiteArray.removeAll()
         self.vwGMap.clear()
         print("Filter places function is being called")
         if self.filterSelected == "All"
@@ -321,11 +246,16 @@ print(self.markersArray)
                 let folderIcon = p["FolderIcon"] as? String
                 markers.icon = UIImage(named:folderIcon!)
                 markers.tracksViewChanges = true
-                //this does not match which place was tapped
-                self.detailsName.text = p["StoredPlaceName"] as? String
+                let name = p["StoredPlaceName"] as? String
+                let website = p["StoredPlaceName"] as? String
+                
+                self.placeNamesArray.append(name!)
+                self.placeWebsiteArray.append(website!)
+
                 markers.map = self.vwGMap
                
                 self.vwGMap.setNeedsDisplay()
+               
             }
         }
         else if self.filterSelected != "All"  {
@@ -337,56 +267,27 @@ print(self.markersArray)
                     let markers = GMSMarker()
                     markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
                     self.markersArray.append(markers.position)
+                 
                     let folderIcon = p["FolderIcon"] as? String
+                    let name = p["StoredPlaceName"] as? String
+                    let website = p["StoredPlaceName"] as? String
+                    
+                    self.placeNamesArray.append(name!)
+                self.placeWebsiteArray.append(website!)
                     markers.icon = UIImage(named:folderIcon!)
                     markers.tracksViewChanges = true
-                    //this does not match which place was tapped
-                  //  self.detailsName.text = p["StoredPlaceName"] as? String
                     markers.map = self.vwGMap
-                   // self.vwGMap.reloadInputViews()
+                 
                     self.vwGMap.setNeedsDisplay()
-                
+                  
                 }
-                
             }
-            /*
-            for p in STOREDPlaces {
-                if p["FolderName"] as? String == self.filterSelected {
-                    print(self.filterSelected)
-                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                    let markers = GMSMarker()
-                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                    self.markersArray.append(markers.position)
-                    let folderIcon = p["FolderIcon"] as? String
-                    markers.icon = UIImage(named:folderIcon!)
-                    markers.tracksViewChanges = true
-                    //this does not match which place was tapped
-                    self.detailsName.text = p["StoredPlaceName"] as? String
-                    markers.map = self.vwGMap
-                    self.vwGMap.reloadInputViews()
-                    print("FILTERED VIWE")
-                    self.vwGMap.setNeedsDisplay()
-                    */
-               // }
-           // }
         }
       
     }
-    func trying() {
-        
-        let Mark = GMSMarker()
-        Mark.position = CLLocationCoordinate2D(latitude: 51.5073509 , longitude: -0.1277583)
-    
-        Mark.icon = UIImage(named:"ProfileIcon")
-   
-        //this does not match which place was tapped
-        Mark.map = self.vwGMap
-        self.vwGMap.reloadInputViews()
-        print("FILTERED VIWE")
-        self.vwGMap.setNeedsDisplay()
-    }
+
     func sortByDropDown() {
+        self.detailsPopUp.removeFromSuperview()
         let items = self.folderNames
         folderNames.append("All")
         let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
@@ -422,6 +323,8 @@ print(self.markersArray)
                     
                     let folder = (dictionary["FolderName"] as? String?)!
                     self.Folders.append(folder!)
+                   
+                    
                     // print(self.Folders)
                     /*
                      folders.append(folder!)
@@ -438,7 +341,6 @@ print(self.markersArray)
     
     //This is setting up the dropdown menu in the add new place pop up
     func setupInIt() {
-        
         let dropdownItems: NSMutableArray = NSMutableArray()
 
         if STOREDFolders.count > 0 {
@@ -515,7 +417,16 @@ print(self.markersArray)
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last
         vwGMap.camera = GMSCameraPosition.camera(withTarget: newLocation!.coordinate, zoom: 15.0)
+     
+        let circleCenter = newLocation?.coordinate ;
+        let circ = GMSCircle(position: circleCenter!, radius: 200)
+        circ.fillColor = UIColor(red: 0.0, green: 0.7, blue: 0, alpha: 0.1)
+        circ.strokeColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 0.5)
+        circ.strokeWidth = 2.5;
+         let CLocation = CLLocation(latitude: 51.5074, longitude: 0.1278)
+        let location = newLocation?.distance(from: CLocation)
         
+        circ.map = self.vwGMap
         self.view = self.vwGMap }
     
     //MARK: GMSMapview Delegate
@@ -606,9 +517,11 @@ print(self.markersArray)
         for i in 0...(markersArray.count-1) {
             if  markersArray[i].latitude == tappedMarker.latitude &&  markersArray[i].longitude == tappedMarker.longitude
             {
-                detailsName.text = STOREDPlaces[i]["StoredPlaceName"] as? String
-                detailWebsite.text = STOREDPlaces[i]["StoredPlaceWebsite"] as? String
-                itemIndex = i
+            detailsName.text = self.placeNamesArray[i]
+                
+            detailWebsite.text = self.placeWebsiteArray[i]
+                
+            itemIndex = i
                 //if picture of person who it is taken from
                
             } else {
@@ -628,6 +541,7 @@ print(self.markersArray)
      print(String(coordinate.longitude))
      }
      */
+    
     //This prints out the details just by clicking on a place need to enable this
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
     }
@@ -637,8 +551,6 @@ print(self.markersArray)
         
         let location = marker.position
         
-        //  addNewItem.center = mapView.projection.point(for: location)
-        //detailsPopUp.center = mapView.projection.point(for: )
         detailsPopUp.center = mapView.projection.point(for: tappedMarker)
         detailsPopUp.center.y -= 110
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
