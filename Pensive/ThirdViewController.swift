@@ -12,14 +12,20 @@ import IGLDropDownMenu
 
 class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
 
+    @IBOutlet var labeltest: UILabel!
+    @IBOutlet var secondView: UIView!
+    @IBOutlet var firstView: UIView!
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["Restaurant", "Museum", "Landmarks", "Favourites"]
+    
+    @IBAction func closebutton(_ sender: Any) {
+        secondView.removeFromSuperview()
+    }
+    var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupInIt()
-        
-        
     }
     
     func setupInIt() {
@@ -30,30 +36,38 @@ class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
             
             var item = IGLDropDownItem()
             item.text = "\(dataTitle[i])"
+            item.iconImage = dataImage[i]
             dropdownItems.add(addObject:item)
         }
-        
+        /*for element in dataImage {
+            var item = IGLDropDownItem()
+            item.iconImage = element
+        }
+
+        */
         dropDownMenuFolder.menuText = "Choose Folder"
         dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
         dropDownMenuFolder.paddingLeft = 15
-        dropDownMenuFolder.frame = CGRect(x: 75, y: 250, width: 200, height: 45)
+        dropDownMenuFolder.frame = CGRect(x: secondView.frame.origin.x+200 , y: secondView.frame.origin.y+10, width: 200, height: 45)
        // dropDownMenuFolder.bounds = CGRect(x: -10, y: -70, width: 200, height: 45)
         dropDownMenuFolder.delegate = self
-        dropDownMenuFolder.type = IGLDropDownMenuType.stack
+        dropDownMenuFolder.type = IGLDropDownMenuType.slidingInBoth
         dropDownMenuFolder.gutterY = 5
         dropDownMenuFolder.itemAnimationDelay = 0.1
         dropDownMenuFolder.reloadView()
-        
+        dropDownMenuFolder.direction = IGLDropDownMenuDirection.up
+        /*
         var myLabel = UILabel()
        // myLabel.text = "SwiftyOS Blog"
         myLabel.textColor = UIColor.white
         myLabel.font = UIFont(name: "Halverica-Neue", size: 17)
         myLabel.textAlignment = NSTextAlignment.center
-        myLabel.frame = CGRect(x: 75, y: 250, width: 200, height: 45)
+        myLabel.frame = CGRect(x: secondView.frame.origin.x+200 , y: secondView.frame.origin.y+10 , width: 200, height: 45)
        // myLabel.bounds = CGRect(x: -10, y: -70, width: 200, height: 45)
         
-        self.view.addSubview(myLabel)
-        self.view.addSubview(self.dropDownMenuFolder)
+        secondView.addSubview(myLabel)
+        */
+     secondView.addSubview(self.dropDownMenuFolder)
         
     }
     
@@ -65,4 +79,15 @@ class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
         
     }
 
+    @IBAction func showSubview(_ sender: Any) {
+    firstView.addSubview(secondView)
+       // secondView.center = CGPoint(x: 150, y: 590)
+  let bob = firstView.bounds.width
+        let bkb = firstView.bounds.height
+         secondView.center = CGPoint(x: bob/2, y: bkb)
+    let l = "THIS TEST"
+        labeltest.text =  ("which folder would you like to add \(l) to ?" )
+        print(bob,bkb)
+        
+    }
 }

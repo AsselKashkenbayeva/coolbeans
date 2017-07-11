@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G31" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="StoredPlace" representedClassName="StoredPlace" syncable="YES">
+    <entity name="Folder" representedClassName="Folder" syncable="YES" codeGenerationType="class">
+        <attribute name="marker" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="StoredPlace" representedClassName="StoredPlace" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coordinate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,12 +17,8 @@
         <attribute name="types" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="userEmail" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userPassword" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <elements>
+        <element name="Folder" positionX="178" positionY="21" width="128" height="75"/>
         <element name="StoredPlace" positionX="-63" positionY="-18" width="128" height="210"/>
-        <element name="User" positionX="-63" positionY="63" width="128" height="75"/>
     </elements>
 </model>

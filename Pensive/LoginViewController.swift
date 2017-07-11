@@ -8,11 +8,9 @@
 
 import UIKit
 import Firebase
-import CoreData
-
 
 class LoginViewController: UIViewController {
-    
+   
     let loginToList = "LoginToList"
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
@@ -27,7 +25,6 @@ class LoginViewController: UIViewController {
         {
             self.LogoutButton.alpha = 1.0
             self.EnterButton.alpha = 1.0
-            
         }
         else
         {
@@ -40,6 +37,7 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     @IBAction func didTapSignUp(_ sender: AnyObject) {
         if self.textFieldLoginEmail.text == "" && self.textFieldLoginPassword.text == ""
         {
@@ -50,25 +48,25 @@ class LoginViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
            
     }
-        else{
+        else {
             FIRAuth.auth()?.createUser(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
+                    var user = FIRAuth.auth()?.currentUser
+                    var databaseRef = FIRDatabase.database().reference()
+                    let userEmail = self.textFieldLoginEmail.text
+                    let userPassword = self.textFieldLoginPassword.text
+                    let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
+                    let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
+                    databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
+                  databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                 
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                      self.performSegue(withIdentifier: self.loginToList, sender: nil)
                     
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    let context = appDelegate.persistentContainer.viewContext
-
-                    let newPlace = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
-                    
-                    newPlace.setValue(self.textFieldLoginEmail.text, forKeyPath: "userEmail")
-                    newPlace.setValue(self.textFieldLoginPassword.text, forKeyPath: "userPassword")
-                    print(newPlace)
-
         }
                 else
                 {
@@ -96,11 +94,21 @@ class LoginViewController: UIViewController {
             FIRAuth.auth()?.signIn(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
+                    var user = FIRAuth.auth()?.currentUser
+                    var databaseRef = FIRDatabase.database().reference()
+                    let userEmail = self.textFieldLoginEmail.text
+                    let userPassword = self.textFieldLoginPassword.text
+                    let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
+                    let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
+                    databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
+                databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                     self.performSegue(withIdentifier: self.loginToList, sender: nil)
+                    //putting the current user email and password into Firebase database
+                  
                 }
                 else
                 {
@@ -132,15 +140,5 @@ class LoginViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-/*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      let tabCtrl = segue.destination as! UITabBarController
-        let destinationVC = tabCtrl.viewControllers?[0] as! ProfilePageViewController
-        
-            destinationVC.emailTextField.text = textValue
-       // if let textPassword: String = textFieldLoginPassword.text {
-       // destinationVC.passwordTextField.text = textPassword
-    
-    }
- */
+   
 }

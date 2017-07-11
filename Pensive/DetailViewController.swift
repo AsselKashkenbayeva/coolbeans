@@ -8,13 +8,14 @@
 
 import UIKit
 import CoreData
+import BEMCheckBox
+import Firebase
 
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//MARK: Properties
-    
-  
+var user = FIRAuth.auth()?.currentUser
     @IBOutlet weak var placeAddressLabel: UILabel!
    
+    @IBOutlet var checkBox: BEMCheckBox!
     
     @IBOutlet weak var placeNameLabel: UILabel!
   
@@ -30,26 +31,26 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     var storedName = ""
     var storedAddresses = [String]()
     var storedAddress = ""
-
+    var onCheckbox: Bool = false
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkBox.offAnimationType = BEMAnimationType.flat
+        checkBox.onAnimationType = BEMAnimationType.oneStroke
+       // onCheckbox = (STOREDPlaces[itemIndex]["VisitedCheckbox"] as? Bool)!
+   self.checkBox.setOn(onCheckbox, animated: true)
         
-        if let name = detailPlace.value(forKey: "name") as? String {
-                   placeNameLabel.text = name
-            
-                     
-                        print()
-                        //print(name)
-                    }
-                    if let address = detailPlace.value(forKey: "address") as? String
-                    {
-                       placeAddressLabel.text = address
-                        //Print(address)
-                    }
-                  
-                    
+        placeNameLabel.text = STOREDPlaces[itemIndex]["StoredPlaceName"] as? String
+        placeAddressLabel.text = STOREDPlaces[itemIndex]["StoredPlaceAddress"] as? String
+        
+       // checkBox.delegate = self.checkBox as! BEMCheckBoxDelegate?
+        print(checkBox.delegate?.didTap!(checkBox))
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child((self.user?.uid)!).child("StoredPlaces").didChangeValue(forKey: "VisitedCheckbox")
+      
+        
+        
                 }
                 
     
