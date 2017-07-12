@@ -11,7 +11,7 @@ import GoogleMaps
 import GooglePlaces
 
 class TableMapViewController: UIViewController,GMSMapViewDelegate {
-
+let gradientLayer = CAGradientLayer()
     @IBOutlet var mapView: GMSMapView!
     var selectedPlace = [String:AnyObject]()
     
@@ -28,6 +28,15 @@ class TableMapViewController: UIViewController,GMSMapViewDelegate {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        self.view.backgroundColor = UIColor.clear
+        gradientLayer.frame = self.view.bounds
+        let color1 = UIColor.clear.cgColor
+        let color2 = UIColor.lightGray.cgColor
+        let color3 = UIColor.white.cgColor
+        gradientLayer.colors = [color1,color3]
+        gradientLayer.locations = [0.6,0.8]
+        self.view.layer.addSublayer(gradientLayer)
+
         mapView.delegate = self
         let lat = (selectedPlace["Latitude"] as? NSString)?.doubleValue
         let long = (selectedPlace["Longitude"] as? NSString)?.doubleValue
