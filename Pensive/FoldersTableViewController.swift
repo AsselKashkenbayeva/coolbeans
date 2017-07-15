@@ -35,8 +35,9 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
        setupInIt()
 
         fetchFolder()
-     
-        
+     //let w = UIScreen.main.bounds.width
+   // let l = UIScreen.main.bounds.height
+       // AddNewFolderPopUp.center = self.view.center
     }
     
     func fetchFolder() {
@@ -212,11 +213,11 @@ let cell = UITableViewCell()
         
         
         var myLabel = UILabel()
-        myLabel.text = "SwiftyOS Blog"
+      //  myLabel.text = "SwiftyOS Blog"
         myLabel.textColor = UIColor.white
         myLabel.font = UIFont(name: "Halverica-Neue", size: 17)
         myLabel.textAlignment = NSTextAlignment.center
-        myLabel.frame = CGRect(x: 40, y: 500, width: 250, height: 45)
+       // myLabel.frame = CGRect(x: 40, y: 500, width: 250, height: 45)
         
         self.AddNewFolderPopUp.addSubview(myLabel)
         self.AddNewFolderPopUp.addSubview(self.dropDownMenuFolder)
@@ -282,7 +283,9 @@ let cell = UITableViewCell()
         self.view.addSubview(AddNewFolderPopUp)
         //this is to allow the icons to be clickable
         self.view.addSubview(self.dropDownMenuFolder)
-        AddNewFolderPopUp.center = CGPoint(x: 180, y: 90)
+        let y = self.view.center.y
+        AddNewFolderPopUp.center = CGPoint(x: self.view.center.x, y: y/2.8)
+            //CGPoint(x: 180, y: 90)
         AddNewFolderPopUp.layer.borderWidth = 2
         AddNewFolderPopUp.layer.borderColor = UIColor.darkGray.cgColor
        

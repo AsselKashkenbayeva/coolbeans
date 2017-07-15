@@ -15,6 +15,7 @@ let gradientLayer = CAGradientLayer()
     @IBOutlet var mapView: GMSMapView!
     var selectedPlace = [String:AnyObject]()
     
+    @IBOutlet var detailView: UIView!
     @IBOutlet var nameLabel: UILabel!
     
     @IBOutlet var addressLabel: UILabel!
@@ -31,10 +32,10 @@ let gradientLayer = CAGradientLayer()
         self.view.backgroundColor = UIColor.clear
         gradientLayer.frame = self.view.bounds
         let color1 = UIColor.clear.cgColor
-        let color2 = UIColor.lightGray.cgColor
-        let color3 = UIColor.white.cgColor
-        gradientLayer.colors = [color1,color3]
-        gradientLayer.locations = [0.6,0.8]
+        let color2 = UIColor.white.cgColor
+        let color3 = UIColor.lightGray.cgColor
+        gradientLayer.colors = [color1,color2]
+        gradientLayer.locations = [0.6,0.7]
         self.view.layer.addSublayer(gradientLayer)
 
         mapView.delegate = self
@@ -59,6 +60,7 @@ let gradientLayer = CAGradientLayer()
         telephoneLabel.text = selectedPlace["StoredPlaceTelephone"] as! String?
         websiteLabel.text = selectedPlace["StoredPlaceWebsite"] as! String?
         
+    self.view.addSubview(detailView)
     }
 
     override func didReceiveMemoryWarning() {
