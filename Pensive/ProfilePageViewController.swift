@@ -24,6 +24,9 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
 //FIRDatabase.database().persistenceEnabled = true
         //Making the profile picture a circle
         profilePhoto.layer.borderWidth = 1
@@ -86,7 +89,10 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         )}
 
 
-
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 
 
     //Allows you the action to upload profile picture

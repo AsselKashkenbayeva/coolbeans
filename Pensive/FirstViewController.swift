@@ -123,6 +123,18 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        dropDownMenuFolder.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector (TapFuncTwo(_sender:)))
+        tap.numberOfTapsRequired = 1
+        dropDownMenuFolder.addGestureRecognizer(tap)
+        
+        
+        
+        
+        
+        
        self.filterSelected = "All"
         
         //dont forget to set trackchanges for updates to the info window
@@ -328,7 +340,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     let folderIcon = p["FolderIcon"] as? String
                     let name = p["StoredPlaceName"] as? String
                     let website = p["StoredPlaceName"] as? String
-                    
+                    let address = p["StoredPlaceAddress"] as? String
+                    markers.title = name
+                    markers.snippet = address
                     self.placeNamesArray.append(name!)
                 self.placeWebsiteArray.append(website!)
                     markers.icon = UIImage(named:folderIcon!)
@@ -417,7 +431,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     */
     
     //This is setting up the dropdown menu in the add new place pop up
-    func TapFuncTwo(sender: UITapGestureRecognizer) {
+    func TapFuncTwo(_sender: UITapGestureRecognizer) {
         print("THIS IS BEING TAPPED")
         
         
@@ -447,8 +461,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
      //   let x = mapCustomInfoWindow.frame.width
      //   let y = mapCustomInfoWindow.frame.height
         
-        dropDownMenuFolder.frame = CGRect(x: 0, y: 0, width: 200, height: 45)
-      dropDownMenuFolder.center = mapCustomInfoWindow.center
+        dropDownMenuFolder.frame = CGRect(x: 50, y: 145 , width: 200, height: 45)
+     // dropDownMenuFolder.center = mapCustomInfoWindow.center
         //85 x, 120 y
         dropDownMenuFolder.delegate = self
         dropDownMenuFolder.type = IGLDropDownMenuType.stack
@@ -468,13 +482,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
      
        
         dropDownMenuFolder.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: dropDownMenuFolder, action: #selector (TapFuncTwo(sender:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector (TapFuncTwo(_sender:)))
         tap.numberOfTapsRequired = 1
         dropDownMenuFolder.addGestureRecognizer(tap)
   
+ 
         
-        
-        mapCustomInfoWindow.addSubview(dropDownMenuFolder)
+    //mapCustomInfoWindow.addSubview(dropDownMenuFolder)
     }
   
     
@@ -660,7 +674,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 //        detailsPopUp.center.y -= 110
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
         mapCustomInfoWindow.center.y -= 150
-        
+        dropDownMenuFolder.center = mapCustomInfoWindow.center
         //dropDownMenuFolder.center = mapView.projection.point(for: location)
     
         
@@ -674,7 +688,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let location = marker.position
         mapCustomInfoWindow.center = mapView.projection.point(for: location)
         mapCustomInfoWindow.center.y -= 150
- 
+       dropDownMenuFolder.center = mapCustomInfoWindow.center
     //mapCustomInfoWindow.addSubview(dropDownMenuFolder)
         self.view.addSubview(mapCustomInfoWindow)
         self.view.addSubview(dropDownMenuFolder)
