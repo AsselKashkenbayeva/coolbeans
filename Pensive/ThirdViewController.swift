@@ -21,10 +21,20 @@ class ThirdViewController: UIViewController,IGLDropDownMenuDelegate {
     @IBAction func closebutton(_ sender: Any) {
         secondView.removeFromSuperview()
     }
+    let gradientLayer = CAGradientLayer()
     var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
     override func viewDidLoad() {
         super.viewDidLoad()
         
+            
+            self.view.backgroundColor = UIColor.blue
+            gradientLayer.frame = self.view.bounds
+
+        let color1 = UIColor.yellow.cgColor
+        let color2 = UIColor.black.cgColor
+        gradientLayer.colors = [color1,color2]
+        gradientLayer.locations = [0.7,1]
+        self.view.layer.addSublayer(gradientLayer)
         setupInIt()
     }
     

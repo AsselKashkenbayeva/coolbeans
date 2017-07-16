@@ -11,10 +11,11 @@ import GoogleMaps
 import GooglePlaces
 
 class TableMapViewController: UIViewController,GMSMapViewDelegate {
-
+let gradientLayer = CAGradientLayer()
     @IBOutlet var mapView: GMSMapView!
     var selectedPlace = [String:AnyObject]()
     
+    @IBOutlet var detailView: UIView!
     @IBOutlet var nameLabel: UILabel!
     
     @IBOutlet var addressLabel: UILabel!
@@ -28,6 +29,15 @@ class TableMapViewController: UIViewController,GMSMapViewDelegate {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        self.view.backgroundColor = UIColor.clear
+        gradientLayer.frame = self.view.bounds
+        let color1 = UIColor.clear.cgColor
+        let color2 = UIColor.white.cgColor
+        let color3 = UIColor.lightGray.cgColor
+        gradientLayer.colors = [color1,color2]
+        gradientLayer.locations = [0.6,0.7]
+        self.view.layer.addSublayer(gradientLayer)
+
         mapView.delegate = self
         let lat = (selectedPlace["Latitude"] as? NSString)?.doubleValue
         let long = (selectedPlace["Longitude"] as? NSString)?.doubleValue
@@ -50,6 +60,7 @@ class TableMapViewController: UIViewController,GMSMapViewDelegate {
         telephoneLabel.text = selectedPlace["StoredPlaceTelephone"] as! String?
         websiteLabel.text = selectedPlace["StoredPlaceWebsite"] as! String?
         
+    self.view.addSubview(detailView)
     }
 
     override func didReceiveMemoryWarning() {
