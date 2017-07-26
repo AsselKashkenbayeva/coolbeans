@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HockeySDK-HockeySDKResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>IGLDropDownMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -54,20 +59,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>nanopb.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>11E52F59E7AC3B93D65EF3198076BDD4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>144645DF6DF0700F6A9CD43DDBD9C52E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2D00FFF3DD67618D076F449029E7B868</key>
+		<key>5A474F60A830A6F144BBFFB0CF17F0E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +107,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1B9AFC6AEF369ED691FD312F29BB6E7</key>
+		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB9AD825427F216B54E693242E671FA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F22EA98CA1B1199C95D3DBE68FEA191D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

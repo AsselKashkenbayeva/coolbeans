@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import Firebase
+import HockeySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,12 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
+        BITHockeyManager.shared().configure(withIdentifier: "d5ed5a5db7fd499d91970d7a47d05020")
+        // Do some additional configuration if needed here
+        BITHockeyManager.shared().start()
+        BITHockeyManager.shared().authenticator.authenticateInstallation()
+
        
  GMSServices.provideAPIKey("AIzaSyArYf3iVy0e1e8IHFRRah7CImHJWzBx_wU")
         GMSPlacesClient.provideAPIKey("AIzaSyDk4pJ3kW9POyBYaI9-dNW2qvTJIbttS_A")
-    FIRApp.configure()
+    FirebaseApp.configure()
         
-        FIRAnalyticsConfiguration.sharedInstance().setAnalyticsCollectionEnabled(false)
+        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(false)
     return true
     }
 

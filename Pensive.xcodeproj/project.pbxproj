@@ -20,6 +20,7 @@
 		CF122FA81DFF2F6B0011725E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA71DFF2F6B0011725E /* Photos.framework */; };
 		CF122FAA1DFF2F720011725E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA91DFF2F720011725E /* PhotosUI.framework */; };
 		CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17D7161E808783006E493D /* ConnectTableViewController.swift */; };
+		CF17DA4A1F24C4C500E664FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
@@ -61,7 +62,6 @@
 		CFBBE14E1DBEA75200635E2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14D1DBEA75200635E2C /* Security.framework */; };
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
-		CFCBA3A61DE5B73100E7CD7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */; };
 		CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */; };
 		CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */; };
 		CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */; };
@@ -95,6 +95,7 @@
 		CF122FA71DFF2F6B0011725E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CF122FA91DFF2F720011725E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		CF17D7161E808783006E493D /* ConnectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectTableViewController.swift; sourceTree = "<group>"; };
+		CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
@@ -145,7 +146,6 @@
 		CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "bridging-header.m"; path = "../bridging-header.m"; sourceTree = "<group>"; };
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
-		CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideFoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
@@ -263,8 +263,8 @@
 				CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */,
 				CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */,
 				CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */,
+				CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */,
 				CF7EC85F1DBE68A1005C8D06 /* Info.plist */,
-				CFCBA3A51DE5B73100E7CD7B /* GoogleService-Info.plist */,
 				CFDE42CC1DCFE27F00F0C111 /* Resources */,
 			);
 			path = Pensive;
@@ -364,6 +364,7 @@
 				CF7EC84C1DBE68A0005C8D06 /* Resources */,
 				F445BD4059544F25EA46D9DF /* [CP] Embed Pods Frameworks */,
 				03120D8A0A06BB4B4A666AA7 /* [CP] Copy Pods Resources */,
+				CF245D491F27522A0009417B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -404,9 +405,9 @@
 				TargetAttributes = {
 					CF7EC84D1DBE68A0005C8D06 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8ZWQ68LWUK;
+						DevelopmentTeam = 46Z532PWY8;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -447,13 +448,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFCBA3A61DE5B73100E7CD7B /* GoogleService-Info.plist in Resources */,
 				CFB5B19B1DC24C6000CF071E /* GooglePlacePicker.bundle in Resources */,
 				CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */,
 				CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */,
 				CF7EC8841DBE81C0005C8D06 /* GoogleMaps.bundle in Resources */,
 				CFB5B1991DC24C2F00CF071E /* GooglePlaces.bundle in Resources */,
 				CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */,
+				CF17DA4A1F24C4C500E664FB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +497,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		CF245D491F27522A0009417B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
 		};
 		F445BD4059544F25EA46D9DF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -611,6 +625,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "da335adb-8427-438b-8c0b-a906e611c6d8";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -654,6 +669,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "ac3eee23-f952-4c48-b609-f66d147318aa";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -669,7 +685,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Pensive/Pensive.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8ZWQ68LWUK;
+				DEVELOPMENT_TEAM = 46Z532PWY8;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -695,8 +711,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pensive.Pensive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cattche.July17Cattche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "da335adb-8427-438b-8c0b-a906e611c6d8";
+				PROVISIONING_PROFILE_SPECIFIER = Cattche_provisioning_profile;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pensive-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -712,8 +730,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Pensive/Pensive.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8ZWQ68LWUK;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 46Z532PWY8;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -739,8 +757,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pensive.Pensive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cattche.July17Cattche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ac3eee23-f952-4c48-b609-f66d147318aa";
+				PROVISIONING_PROFILE_SPECIFIER = Cattche_provisioning_profile_ad_hoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pensive-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -10,6 +10,7 @@
 #import <Corelocation/Corelocation.h>
 #import <GooglePlaces/GooglePlaces.h>
 #import "IGLDropDownMenu.h"
+#import <HockeySDK/HockeySDK.h>
 
 
 

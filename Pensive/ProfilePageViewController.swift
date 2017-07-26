@@ -36,8 +36,8 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         profilePhoto.clipsToBounds = true
       
        //Retreiving data from Firebase for text-field- Username
-        let ref = FIRDatabase.database().reference()
-        let userID: String = (FIRAuth.auth()?.currentUser?.uid)!
+        let ref = Database.database().reference()
+        let userID: String = (Auth.auth().currentUser?.uid)!
         ref.child(userID).child("Username").observe(.value, with: { (snapshot) in
            let username = (snapshot.value as? NSDictionary)?["Username"] as? String ?? ""
             self.usernameTextField.text = username
@@ -73,9 +73,9 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
       sexPicker.isHidden = true
         
         //retreive profile photo from Firebase 
-        let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
+        let storageRef = Storage.storage().reference().child(userID).child("ProfilePic")
       ref.child(userID).child("ProfilePic").observe(.value, with: { (snapshot) in
-                storageRef.data(withMaxSize: 10*1024*1024, completion: {(data, error) -> Void in
+        storageRef.getData(maxSize: 10*1024*1024, completion: {(data, error) -> Void in
                     if (error != nil) {
                         print("got no pic")
                     } else {
@@ -118,21 +118,22 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
       let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         profilePhoto.image = selectedImage
          dismiss(animated: true, completion: nil)
-        let userID: String = (FIRAuth.auth()?.currentUser?.uid)!
-        let storageRef = FIRStorage.storage().reference().child(userID).child("ProfilePic")
+        let userID: String = (Auth.auth().currentUser?.uid)!
+        let storageRef = Storage.storage().reference().child(userID).child("ProfilePic")
         var uploadData = NSData()
         uploadData = UIImagePNGRepresentation(profilePhoto.image!)! as NSData
-        let uploadMetadata = FIRStorageMetadata()
+        let uploadMetadata = StorageMetadata()
         uploadMetadata.contentType = "image/jpeg"
-        storageRef.put(uploadData as Data , metadata: uploadMetadata) { (metadata, error) in
+    
+        storageRef.putData(uploadData as Data , metadata: uploadMetadata) { (metadata, error) in
             if (error != nil) {
                 print("I received an error")
             } else {
                 print("Upload conplete!")
                 if let downloadURL = metadata!.downloadURL()?.absoluteString {
                     
-                    var user = FIRAuth.auth()?.currentUser
-                    var databaseRef = FIRDatabase.database().reference()
+                    var user = Auth.auth().currentUser
+                    var databaseRef = Database.database().reference()
 
                     let userDataProfilePicURL : [String: AnyObject] = ["ProfilePicURL" : downloadURL as AnyObject]
                     databaseRef.child((user?.uid)!).child("ProfilePicURL").setValue(userDataProfilePicURL)
@@ -149,8 +150,8 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func usernameTextFieldAction(_ sender: Any) {
         
-        var user = FIRAuth.auth()?.currentUser
-        var databaseRef = FIRDatabase.database().reference()
+        var user = Auth.auth().currentUser
+        var databaseRef = Database.database().reference()
         let userUsername = self.usernameTextField.text
         let userData : [String: AnyObject] = ["Username" : userUsername as AnyObject]
             databaseRef.child((user?.uid)!).child("Username").setValue(userData)
@@ -165,8 +166,8 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     
     @IBAction func passwordTextFieldAction(_ sender: Any) {
-        var user = FIRAuth.auth()?.currentUser
-        var databaseRef = FIRDatabase.database().reference()
+        var user = Auth.auth().currentUser
+        var databaseRef = Database.database().reference()
         let password = self.passwordTextField.text
         let userDataPassword : [String: AnyObject] = ["Password" : password as AnyObject]
         databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
@@ -175,8 +176,8 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     
     @IBAction func dobTextFieldAction(_ sender: Any) {
-        var user = FIRAuth.auth()?.currentUser
-        var databaseRef = FIRDatabase.database().reference()
+        var user = Auth.auth().currentUser
+        var databaseRef = Database.database().reference()
         let dob = self.dobTextField.text
         let userDataDOB : [String: AnyObject] = ["DOB" : dob as AnyObject]
         databaseRef.child((user?.uid)!).child("DOB").setValue(userDataDOB)
@@ -209,8 +210,8 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
         self.sexPickerTextFeild.text = self.gender[row]
         self.sexPicker.isHidden = true
         
-        var user = FIRAuth.auth()?.currentUser
-        var databaseRef = FIRDatabase.database().reference()
+        var user = Auth.auth().currentUser
+        var databaseRef = Database.database().reference()
         let gender = self.sexPickerTextFeild.text
         let userDataGender : [String: AnyObject] = ["Gender" : gender as AnyObject]
     databaseRef.child((user?.uid)!).child("Gender").setValue(userDataGender)

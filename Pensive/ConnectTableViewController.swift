@@ -30,7 +30,7 @@ import Firebase
     }
 
        func fetchUser() {
-            let ref = FIRDatabase.database().reference()
+            let ref = Database.database().reference()
             ref.observe( .childAdded, with: { (snapshot) in
             
                if let dictionary = snapshot.value as? [String: AnyObject] {

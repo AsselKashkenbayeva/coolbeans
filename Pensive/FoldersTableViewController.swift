@@ -28,7 +28,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
    var folders: [FOLDER] = []
     var folderIndex = ""
-     let user = FIRAuth.auth()?.currentUser
+     let user = Auth.auth().currentUser
     var valueToPass: String!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +41,9 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     }
     
     func fetchFolder() {
-        let ref = FIRDatabase.database().reference().child((user?.uid)!).child("UserFolders")
+        let ref = Database.database().reference().child((user?.uid)!).child("UserFolders")
         ref.observe( .childAdded, with: { (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                
         //for snap in snapshots {
                 if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -301,7 +301,7 @@ let cell = UITableViewCell()
         //this is not correct because it shows the whole array in one part
         let post : [String: AnyObject] = ["FolderName" : folderName as AnyObject, "FolderIcon" : folderIcon as AnyObject ]
         
-        let databaseRef = FIRDatabase.database().reference()
+        let databaseRef = Database.database().reference()
         
         databaseRef.child((self.user?.uid)!).child("UserFolders").childByAutoId().setValue(post)
         

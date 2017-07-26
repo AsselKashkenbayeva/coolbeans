@@ -50,7 +50,7 @@ class ConnectMapViewViewController: UIViewController, GMSMapViewDelegate, IGLDro
     
     var tappedMarker = CLLocationCoordinate2D()
     
-    var user = FIRAuth.auth()?.currentUser
+    var user = Auth.auth().currentUser
     
     var dropDownMenuFolder = IGLDropDownMenu()
     
@@ -240,7 +240,7 @@ func setupInIt() {
         let post : [String: AnyObject] = ["StoredPlaceName" : detailName.text as AnyObject, "StoredPlaceID" : self.placeID as AnyObject, "StoredPlaceAddress" : detailAddress.text as AnyObject, "StoredPlaceWebsite" : self.website as AnyObject, "StoredPlaceTelephone" : self.telephone as AnyObject,  "PlaceUnderFolder" : folderItem as AnyObject,"FolderIcon" : folderIconIndex as AnyObject,  "Longitude" : tappedMarker.longitude as AnyObject, "Latitude" : tappedMarker.latitude as AnyObject /*"VisitedCheckbox" : true as AnyObject*/]
         
     //Making a call to Firebase and saving data under the current user
-     let databaseRef = FIRDatabase.database().reference()
+     let databaseRef = Database.database().reference()
  databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
       
     //Closing all the pop up windows after action

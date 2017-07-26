@@ -95,8 +95,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var storedPlaceLatitude = ""
     var storedPlaceLongitude = ""
     
-    var user = FIRAuth.auth()?.currentUser
-    var databaseRef = FIRDatabase.database().reference()
+    var user = Auth.auth().currentUser
+    var databaseRef = Database.database().reference()
     
     var effect:UIVisualEffect!
  //   var blob = placeFromFirebase()
@@ -188,11 +188,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.view = vwGMap
         
 //This is getting access to the database and accessing the stored places child information and storing it into a local STOREDPlaces dictionary
-        let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
+        let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
         
         ref.observe( .value, with: { (snapshot) in
             STOREDPlaces.removeAll()
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let key = snap.key
@@ -207,11 +207,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         )
 
 //This does the same as previous but accesses the stored folders file and places into the STOREDFolders dict
-        let refFolders = FIRDatabase.database().reference().child((user?.uid)!).child("UserFolders")
+        let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
         
         refFolders.observe( .value, with: { (snapshot) in
             STOREDFolders.removeAll()
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let key = snap.key
@@ -711,7 +711,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         //this is not correct because it shows the whole array in one part
         let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject ]
         
-        let databaseRef = FIRDatabase.database().reference()
+        let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
         
         marker.icon = UIImage(named: FolderIcon )

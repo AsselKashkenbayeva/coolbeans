@@ -23,5 +23,7 @@ pod ‘BTNavigationDropdownMenu’, :git => 'https://github.com/PhamBaTho/BTNavi
 pod ‘IGLDropDownMenu’
 pod ‘Firebase/Storage’
 pod ‘BEMCheckBox’
+pod 'HockeySDK', '~> 4.1.5'
+
 
 end

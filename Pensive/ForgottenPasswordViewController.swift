@@ -30,7 +30,7 @@ class ForgottenPasswordViewController: UIViewController {
         }
         else
         {
-            FIRAuth.auth()?.sendPasswordReset(withEmail: self.EmailField.text!, completion: { (error) in
+            Auth.auth().sendPasswordReset(withEmail: self.EmailField.text!, completion: { (error) in
                 var title = ""
                 var message = ""
                 

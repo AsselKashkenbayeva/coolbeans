@@ -12,7 +12,7 @@ import BEMCheckBox
 import Firebase
 
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-var user = FIRAuth.auth()?.currentUser
+var user = Auth.auth().currentUser
     @IBOutlet weak var placeAddressLabel: UILabel!
    
     @IBOutlet var checkBox: BEMCheckBox!
@@ -46,7 +46,7 @@ var user = FIRAuth.auth()?.currentUser
         
        // checkBox.delegate = self.checkBox as! BEMCheckBoxDelegate?
         print(checkBox.delegate?.didTap!(checkBox))
-        let databaseRef = FIRDatabase.database().reference()
+        let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").didChangeValue(forKey: "VisitedCheckbox")
       
         

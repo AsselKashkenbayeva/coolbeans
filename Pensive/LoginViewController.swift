@@ -19,9 +19,9 @@ class LoginViewController: UIViewController {
     var textValue: String = ""
     override func viewDidLoad() {
     super.viewDidLoad()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        if let user = FIRAuth.auth()?.currentUser
+        if let user = Auth.auth().currentUser
         {
             self.LogoutButton.alpha = 1.0
             self.EnterButton.alpha = 1.0
@@ -49,11 +49,11 @@ class LoginViewController: UIViewController {
            
     }
         else {
-            FIRAuth.auth()?.createUser(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
+            Auth.auth().createUser(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
-                    var user = FIRAuth.auth()?.currentUser
-                    var databaseRef = FIRDatabase.database().reference()
+                    var user = Auth.auth().currentUser
+                    var databaseRef = Database.database().reference()
                     let userEmail = self.textFieldLoginEmail.text
                     let userPassword = self.textFieldLoginPassword.text
                     let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
@@ -91,11 +91,11 @@ class LoginViewController: UIViewController {
         }
         else
         {
-            FIRAuth.auth()?.signIn(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
+            Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
-                    var user = FIRAuth.auth()?.currentUser
-                    var databaseRef = FIRDatabase.database().reference()
+                    var user = Auth.auth().currentUser
+                    var databaseRef = Database.database().reference()
                     let userEmail = self.textFieldLoginEmail.text
                     let userPassword = self.textFieldLoginPassword.text
                     let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
@@ -124,7 +124,7 @@ class LoginViewController: UIViewController {
     }
    
     @IBAction func LogoutAction(_ sender: AnyObject) {
-        try! FIRAuth.auth()?.signOut()
+        try! Auth.auth().signOut()
         self.LogoutButton.alpha = 0.0
         self.EnterButton.alpha = 0.0
         self.textFieldLoginEmail.text = ""
