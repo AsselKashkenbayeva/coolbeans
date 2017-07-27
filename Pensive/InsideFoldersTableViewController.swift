@@ -72,8 +72,6 @@ class InsideFoldersTableViewController: UITableViewController {
             let viewController = segue.destination as! TableMapViewController
             // your new view controller should have property that will store passed value
             viewController.selectedPlace = valueToPass
-            // print(viewController.selectedFolder)
-            // print(valueToPass)
         }
     }
    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

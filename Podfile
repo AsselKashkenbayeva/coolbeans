@@ -24,6 +24,7 @@ pod ‘IGLDropDownMenu’
 pod ‘Firebase/Storage’
 pod ‘BEMCheckBox’
 pod 'HockeySDK', '~> 4.1.5'
+pod 'BubbleTransition', '~> 2.0.0'
 
 
 end

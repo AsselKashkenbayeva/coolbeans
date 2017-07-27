@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BubbleTransition.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,7 +72,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5A474F60A830A6F144BBFFB0CF17F0E9</key>
+		<key>38830187D9E171E7B43047ED06A08ADC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>51C3167FFD24C4AFD89FA0B4BD26A5F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -78,6 +88,11 @@
 			<true/>
 		</dict>
 		<key>6D5CEDECD3D8DC52EA507E0431BDA8A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>700F03D6F382A1A0053EB1ED4A570A3A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -113,11 +128,6 @@
 			<true/>
 		</dict>
 		<key>EB9AD825427F216B54E693242E671FA1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F22EA98CA1B1199C95D3DBE68FEA191D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

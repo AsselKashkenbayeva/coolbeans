@@ -12,25 +12,47 @@ import BEMCheckBox
 import Firebase
 
 class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-var user = Auth.auth().currentUser
-    @IBOutlet weak var placeAddressLabel: UILabel!
-   
+    
+    @IBOutlet var closeButton: UIButton!
+    
+    @IBOutlet var placeName: UILabel!
+  
+    @IBOutlet var placeAddress: UILabel!
+    
+    @IBOutlet var placeWebsite: UITextView!
+    
+    @IBOutlet var placeTelephone: UITextView!
+    
+    @IBOutlet var addNotes: UITextField!
+    
+    @IBOutlet var addPicture: UIImageView!
+    
     @IBOutlet var checkBox: BEMCheckBox!
     
-    @IBOutlet weak var placeNameLabel: UILabel!
-  
+    @IBOutlet var ratingControl: RatingControl!
     
-    @IBOutlet weak var ratingControl: RatingControl!
+    var selectedPlaceDetail = [String:AnyObject]()
     
-    @IBOutlet weak var photoImageView: UIImageView!
-    
-    
-    var storedID = ""
-    var detailPlace: NSManagedObject!
-    var storedNames = [String]()
-    var storedName = ""
-    var storedAddresses = [String]()
-    var storedAddress = ""
+    override func viewDidLoad() {
+        closeButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+        
+        placeName.text = selectedPlaceDetail["StoredPlaceName"] as! String?
+        placeAddress.text = selectedPlaceDetail["StoredPlaceAddress"] as! String?
+        placeTelephone.text = selectedPlaceDetail["StoredPlaceTelephone"] as! String?
+        placeWebsite.text = selectedPlaceDetail["StoredPlaceWebsite"] as! String?
+    }
+    //Setting up the animation
+    @IBAction func closeButtonAction(_ sender: Any) {
+         self.dismiss(animated: true, completion: nil)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.setStatusBarStyle(.default, animated: true)
+    }
+    /*
+
     var onCheckbox: Bool = false
    
 
@@ -93,5 +115,5 @@ var user = Auth.auth().currentUser
         // Pass the selected object to the new view controller.
     }
     */
-
+*/
 }

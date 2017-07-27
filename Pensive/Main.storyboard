@@ -933,6 +933,18 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                                             </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKf-BZ-fG3">
+                                                <rect key="frame" x="200" y="38" width="44" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="0.95206789307520734" blue="0.91715440409655513" alpha="0.6974261558219178" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <state key="normal" title="+">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="cCS-CP-T8I" kind="presentation" id="eeT-bo-esF"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -980,6 +992,7 @@
                         <outlet property="detailView" destination="r6Y-bX-DWC" id="PdK-wB-5dM"/>
                         <outlet property="mapView" destination="I79-hh-E2r" id="Yxd-la-hIu"/>
                         <outlet property="nameLabel" destination="Rot-Bf-Nyd" id="0uD-d0-p57"/>
+                        <outlet property="somebutton" destination="FKf-BZ-fG3" id="MPZ-dQ-15P"/>
                         <outlet property="telephoneLabel" destination="BvY-xl-f7R" id="dt6-fy-lPC"/>
                         <outlet property="websiteLabel" destination="cq8-HM-kRe" id="PKV-Rt-BKu"/>
                     </connections>
@@ -988,13 +1001,104 @@
             </objects>
             <point key="canvasLocation" x="6221.6000000000004" y="-241.52923538230885"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="BWc-Kz-b3C">
+            <objects>
+                <viewController id="cCS-CP-T8I" customClass="DetailViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vub-9z-uJG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eil-es-Pzb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8JE-Fc-L8K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhf-Gs-ONL">
+                                <rect key="frame" x="164" y="565" width="46" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="cCS-CP-T8I" eventType="touchUpInside" id="qay-N6-OBa"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROM-xa-8bT">
+                                <rect key="frame" x="47" y="56" width="45" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Th-Om-gfO">
+                                <rect key="frame" x="47" y="103" width="63" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="tags" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-uh-QdB">
+                                <rect key="frame" x="67" y="276" width="240" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Website" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vh8-lv-Joe">
+                                <rect key="frame" x="47" y="141" width="240" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yY3-1r-6Mm">
+                                <rect key="frame" x="135" y="366" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h5h-yN-8Mw" customClass="BEMCheckBox">
+                                <rect key="frame" x="285" y="36" width="63" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utl-Ue-WRq" customClass="RatingControl" customModule="Pensive" customModuleProvider="target">
+                                <rect key="frame" x="88" y="493" width="199" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Telephone" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="M6y-U7-BRm">
+                                <rect key="frame" x="47" y="201" width="240" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.96263836376963607" blue="0.91553669432939622" alpha="0.84278681506849318" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="addNotes" destination="ZdW-uh-QdB" id="Adt-0i-Qh9"/>
+                        <outlet property="addPicture" destination="yY3-1r-6Mm" id="Nnm-jJ-8b2"/>
+                        <outlet property="checkBox" destination="h5h-yN-8Mw" id="FDx-Bt-d1i"/>
+                        <outlet property="closeButton" destination="Nhf-Gs-ONL" id="uNM-Ux-ZX3"/>
+                        <outlet property="placeAddress" destination="4Th-Om-gfO" id="Xem-cW-cXx"/>
+                        <outlet property="placeName" destination="ROM-xa-8bT" id="oTt-ax-5IJ"/>
+                        <outlet property="placeTelephone" destination="M6y-U7-BRm" id="97i-11-4z0"/>
+                        <outlet property="placeWebsite" destination="Vh8-lv-Joe" id="4jD-f1-Aqi"/>
+                        <outlet property="ratingControl" destination="utl-Ue-WRq" id="SfH-iU-W5e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RkS-JM-2tU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7040.8000000000002" y="-240.62968515742131"/>
+        </scene>
         <!--List-->
         <scene sceneID="GmE-HQ-MlH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1013,7 +1117,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="a" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" shadowImage="a" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.60482219827586203" colorSpace="calibratedRGB"/>
