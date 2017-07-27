@@ -95,6 +95,8 @@
                     <connections>
                         <outlet property="AddNewPlaceButton" destination="se1-kN-K1e" id="77z-fr-FUZ"/>
                         <outlet property="CancelAddNewPlace" destination="SjL-h6-9Zb" id="Jn1-DX-DVP"/>
+                        <outlet property="detailsName" destination="iOK-EF-lsV" id="DvD-CP-NAQ"/>
+                        <outlet property="detailsPopUp" destination="sq2-vj-0S1" id="fXB-6c-XFe"/>
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
                         <outlet property="visualEffectView" destination="N1I-Vf-GhM" id="fUO-NW-Mmv"/>
@@ -140,7 +142,7 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-nj-mdt" customClass="RatingControl" customModule="Pensive" customModuleProvider="target">
                             <rect key="frame" x="7" y="85" width="218" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9P-Qd-4be">
                             <rect key="frame" x="163" y="10" width="62" height="57"/>
@@ -992,7 +994,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1011,7 +1013,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" shadowImage="a" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="a" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.60482219827586203" colorSpace="calibratedRGB"/>

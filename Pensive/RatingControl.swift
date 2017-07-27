@@ -66,6 +66,7 @@ class RatingControl: UIView {
        rating = ratingbuttons.index(of: button)! + 1
         
         updateButtonSelectionStates()
+       
     }
     
     func updateButtonSelectionStates() {
