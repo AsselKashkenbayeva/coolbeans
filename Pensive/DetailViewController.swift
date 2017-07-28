@@ -40,6 +40,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         placeAddress.text = selectedPlaceDetail["StoredPlaceAddress"] as! String?
         placeTelephone.text = selectedPlaceDetail["StoredPlaceTelephone"] as! String?
         placeWebsite.text = selectedPlaceDetail["StoredPlaceWebsite"] as! String?
+        ratingControl.rating = selectedPlaceDetail["Rating"] as! Int 
     }
     //Setting up the animation
     @IBAction func closeButtonAction(_ sender: Any) {

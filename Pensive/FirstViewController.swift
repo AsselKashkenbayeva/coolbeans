@@ -47,12 +47,14 @@ class markerUserData{
     var websiteUserData: String
     var telephoneUserData: String
     var firebaseKey : String
-    init(Name: String, Address: String, Website: String, Telephone: String, FirebaseKey: String) {
+    var rating: Int
+    init(Name: String, Address: String, Website: String, Telephone: String, FirebaseKey: String, Rating: Int) {
         self.nameUserData = Name
         self.addressUserData = Address
         self.websiteUserData = Website
         self.telephoneUserData = Telephone
         self.firebaseKey = FirebaseKey
+        self.rating = Rating
     }
 }
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate {
@@ -143,7 +145,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var markerID = ""
  
     var firebaseKey = ""
-
+    var ratingControlRating = 0
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -224,7 +226,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                         var PLACE = (dictionary[key] as? [String: AnyObject]!)!
                         PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
                         STOREDPlaces.append(PLACE!)
-                      
                     }
                 }
                 
@@ -346,6 +347,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 let website = p["StoredPlaceWebsite"] as? String
                 let address = p["StoredPlaceAddress"] as? String
                  let firebaseKey = p["firebaseKey"] as? String
+               let rating = p["Rating"] as? Int
+                
             //  markers.title = name
         markers.accessibilityValue = name
             // markers.snippet = address
@@ -356,8 +359,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                
                 self.vwGMap.setNeedsDisplay()
                 
-                let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!, FirebaseKey: firebaseKey!)
-                markers.userData = storedPlaceUserData
+                let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!, FirebaseKey: firebaseKey!, Rating: rating!)
+               markers.userData = storedPlaceUserData
                
             }
         }
@@ -376,11 +379,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     let website = p["StoredPlaceName"] as? String
                     let address = p["StoredPlaceAddress"] as? String
                      let firebaseKey = p["firebaseKey"] as? String
-             
+             let rating = p["Rating"] as? Int
                     markers.accessibilityValue = name
-                    let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!, FirebaseKey: firebaseKey!)
-                    markers.userData = storedPlaceUserData
-             
+                    let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!, FirebaseKey: firebaseKey!, Rating: rating!)
+                   markers.userData = storedPlaceUserData
+                    print((markers.userData as! markerUserData).firebaseKey)
                     self.placeNamesArray.append(name!)
               //  self.placeWebsiteArray.append(website!)
                     markers.icon = UIImage(named:folderIcon!)
@@ -667,13 +670,21 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
- ratingControl.rating = 5
+  
+// ratingControl.rating = (marker.userData as! markerUserData).rating
+       // self.firebaseKey = (marker.userData as! markerUserData).firebaseKey
+      //  print((marker.userData as! markerUserData).firebaseKey)
+        self.ratingControlRating = ratingControl.rating
+    
                     if marker.userData  == nil {
-              detailsName.text = marker.accessibilityValue
-           // detailsPopUp.removeFromSuperview()
+             detailsName.text = marker.accessibilityValue
+           //detailsPopUp.removeFromSuperview()
         } else {
-                         tappedMarker = marker.position
-             detailsName.text = (marker.userData as! markerUserData).nameUserData
+            tappedMarker = marker.position
+            detailsName.text = (marker.userData as! markerUserData).nameUserData
+            self.firebaseKey = (marker.userData as! markerUserData).firebaseKey
+            ratingControl.firebaseKey = firebaseKey
+        ratingControl.rating = (marker.userData as! markerUserData).rating
         }
           self.view.addSubview(detailsPopUp)
    // detailsName.text = marker.userData
@@ -797,15 +808,19 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     @IBAction func detailMoreDetailAction(_ sender: Any) {
-   
+        if ratingControlRating != 0 {
+            print("not")
+        }
+        
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination as! DetailViewController
        controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
         controller.modalPresentationStyle = .custom
-        var markerDict = ["StoredPlaceName": detailsName.text]
+        var markerDict = ["StoredPlaceName": detailsName.text, "Rating": ratingControlRating, "firebaseKey" : firebaseKey] as [String : Any]
        controller.selectedPlaceDetail = markerDict as [String : AnyObject]
+    //   ratingControl.selectedPlaceDetail = markerDict as [String : AnyObject]
     }
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
