@@ -23,6 +23,8 @@ import FirebaseAuth
 import BTNavigationDropdownMenu
 import IGLDropDownMenu
 
+import BubbleTransition
+
 
 var STOREDPlaces = [[String:AnyObject]]()
 var STOREDFolders = [[String:AnyObject]]()
@@ -44,16 +46,18 @@ class markerUserData{
     var addressUserData: String
     var websiteUserData: String
     var telephoneUserData: String
-    init(Name: String, Address: String, Website: String, Telephone: String) {
+    var firebaseKey : String
+    init(Name: String, Address: String, Website: String, Telephone: String, FirebaseKey: String) {
         self.nameUserData = Name
         self.addressUserData = Address
         self.websiteUserData = Website
         self.telephoneUserData = Telephone
+        self.firebaseKey = FirebaseKey
     }
 }
-class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate {
+class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate {
     
-    
+      let transition = BubbleTransition()
     
     //Container for viewing Gmaps
     @IBOutlet weak var mapView: GMSMapView!
@@ -69,9 +73,16 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet weak var detailImageView: UIImageView!
 */
     
+    @IBOutlet var moreDetailButton: UIButton!
+ 
     @IBOutlet var detailsPopUp: UIView!
     
     @IBOutlet var detailsName: UILabel!
+    
+    
+    @IBOutlet var ratingControl: RatingControl!
+    
+    
     @IBOutlet var mapCustomInfoWindow: UIView!
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
@@ -131,7 +142,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     var markerID = ""
  
-    
+    var firebaseKey = ""
 
    
     override func viewDidLoad() {
@@ -209,7 +220,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let key = snap.key
-                        let PLACE = (dictionary[key] as? [String: AnyObject]!)!
+                        self.firebaseKey = key
+                        var PLACE = (dictionary[key] as? [String: AnyObject]!)!
+                        PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
                         STOREDPlaces.append(PLACE!)
                       
                     }
@@ -320,7 +333,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             for p in STOREDPlaces {
                 let latitude = (p["Latitude"] as? NSString)?.doubleValue
                 let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                let placeIDs = (p["StoredPlaceID"] as? String)
+              //  let placeIDs = (p["StoredPlaceID"] as? String)
+               
                 let markers = GMSMarker()
                 markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
              //  self.placeIDsArray.append(placeIDs!)
@@ -331,6 +345,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 let name = p["StoredPlaceName"] as? String
                 let website = p["StoredPlaceWebsite"] as? String
                 let address = p["StoredPlaceAddress"] as? String
+                 let firebaseKey = p["firebaseKey"] as? String
             //  markers.title = name
         markers.accessibilityValue = name
             // markers.snippet = address
@@ -341,8 +356,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                
                 self.vwGMap.setNeedsDisplay()
                 
-               let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!)
+                let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!, FirebaseKey: firebaseKey!)
                 markers.userData = storedPlaceUserData
+               
             }
         }
         else if self.filterSelected != "All"  {
@@ -359,10 +375,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     let name = p["StoredPlaceName"] as? String
                     let website = p["StoredPlaceName"] as? String
                     let address = p["StoredPlaceAddress"] as? String
-               //   markers.title = name
+                     let firebaseKey = p["firebaseKey"] as? String
+             
                     markers.accessibilityValue = name
-              
-               //     markers.snippet = address
+                    let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!, FirebaseKey: firebaseKey!)
+                    markers.userData = storedPlaceUserData
+             
                     self.placeNamesArray.append(name!)
               //  self.placeWebsiteArray.append(website!)
                     markers.icon = UIImage(named:folderIcon!)
@@ -371,8 +389,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                  
                     self.vwGMap.setNeedsDisplay()
                     
-                    let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: folderIcon!)
-                    markers.userData = storedPlaceUserData
+                
                 }
             }
         }
@@ -588,7 +605,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
        let marker = GMSMarker()
        self.marker = marker
         marker.position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
-        marker.title = place.name
+        marker.accessibilityValue = place.name
       //  marker.snippet = place.formattedAddress
         marker.map = self.vwGMap
         marker.icon = GMSMarker.markerImage(with: UIColor.blue)
@@ -626,6 +643,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             var newWebsite = website!
         self.website = "\(newWebsite)"
         }
+        tappedMarker = marker.position
     }
     
     //Initiated if autocomplete failed
@@ -649,18 +667,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-
-  tappedMarker = marker.position
-        self.view.addSubview(detailsPopUp)
-       // detailsName.text = marker.accessibilityValue
-      
-        if (marker.userData as! markerUserData).nameUserData.contains((marker.userData as! markerUserData).nameUserData)  {
-            detailsName.text = (marker.userData as! markerUserData).nameUserData
+ ratingControl.rating = 5
+                    if marker.userData  == nil {
+              detailsName.text = marker.accessibilityValue
+           // detailsPopUp.removeFromSuperview()
         } else {
-              detailsName.text = marker.title
-           
+                         tappedMarker = marker.position
+             detailsName.text = (marker.userData as! markerUserData).nameUserData
         }
-        
+          self.view.addSubview(detailsPopUp)
    // detailsName.text = marker.userData
     //  detailsPopUp.center = mapView.projection.point(for: marker.position)
     //    detailsPopUp.center.y -= 100
@@ -750,58 +765,17 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let LatitudeCoordinate = self.latitudeText
         let FolderIcon = self.folderIconIndex
         //this is not correct because it shows the whole array in one part
-        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject ]
+        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject, "Rating" : 0 as AnyObject ]
         
         let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
-        
+     
         marker.icon = UIImage(named: FolderIcon )
         mapCustomInfoWindow.removeFromSuperview()
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
         mapCustomInfoWindow.layer.borderWidth = 2
         mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
-        /*
-        self.markersArray.removeAll()
-        self.placeNamesArray.removeAll()
-        self.placeWebsiteArray.removeAll()
-
-        let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
-        
-        ref.observe( .value, with: { (snapshot) in
-            STOREDPlaces.removeAll()
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshots {
-                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                        let key = snap.key
-                        let PLACE = (dictionary[key] as? [String: AnyObject]!)!
-                        STOREDPlaces.append(PLACE!)
-                        
-                    }
-                }
-                
-            }
-        }
-        )
-        
-        let when = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: when) {
-        
-            for p in STOREDPlaces {
-                let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                let markers = GMSMarker()
-                markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-               self.markersArray.append(markers.position)
-                let name = p["StoredPlaceName"] as? String
-                let website = p["StoredPlaceWebsite"] as? String
-                let address = p["StoredPlaceAddress"] as? String
-                self.placeNamesArray.append(name!)
-                self.placeWebsiteArray.append(website!)
-            
-            }
-        }
- */
     }
 
     //This is the cancel button in when a user is asked to add a new place
@@ -823,8 +797,30 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     @IBAction func detailMoreDetailAction(_ sender: Any) {
-        
+   
     }
     
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as! DetailViewController
+       controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
+        controller.modalPresentationStyle = .custom
+        var markerDict = ["StoredPlaceName": detailsName.text]
+       controller.selectedPlaceDetail = markerDict as [String : AnyObject]
+    }
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = moreDetailButton.center
+        transition.bubbleColor = moreDetailButton.backgroundColor!
+        return transition
+    }
+    
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = moreDetailButton.center
+        transition.bubbleColor = moreDetailButton.backgroundColor!
+        return transition
+    }
+    
+
 }
 

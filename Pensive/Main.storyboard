@@ -99,6 +99,8 @@
                         <outlet property="detailsPopUp" destination="sq2-vj-0S1" id="fXB-6c-XFe"/>
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="mapView" destination="StU-9n-GEJ" id="EbE-y8-3WV"/>
+                        <outlet property="moreDetailButton" destination="wNe-KY-2Zl" id="OoK-ji-khC"/>
+                        <outlet property="ratingControl" destination="Toc-nj-mdt" id="2JJ-ho-SPA"/>
                         <outlet property="visualEffectView" destination="N1I-Vf-GhM" id="fUO-NW-Mmv"/>
                     </connections>
                 </viewController>
@@ -132,11 +134,13 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNe-KY-2Zl">
-                            <rect key="frame" x="109" y="132" width="116" height="30"/>
+                            <rect key="frame" x="109" y="132" width="116" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.95206789309999995" blue="0.91715440410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="More Details"/>
                             <connections>
                                 <action selector="detailMoreDetailAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="lGG-fh-m8Q"/>
+                                <segue destination="cCS-CP-T8I" kind="presentation" id="KmK-51-6So"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="Toc-nj-mdt" customClass="RatingControl" customModule="Pensive" customModuleProvider="target">
@@ -1139,5 +1143,8 @@
         <image name="defaultPhoto" width="25" height="25"/>
         <image name="listIcon" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="eeT-bo-esF"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -17,6 +17,7 @@ class RatingControl: UIView {
             setNeedsLayout()
         }
     }
+    
     var ratingbuttons = [UIButton]()
     let spacing = 5
     let starCount = 5
@@ -66,7 +67,7 @@ class RatingControl: UIView {
        rating = ratingbuttons.index(of: button)! + 1
         
         updateButtonSelectionStates()
-       
+       print(rating)
     }
     
     func updateButtonSelectionStates() {
