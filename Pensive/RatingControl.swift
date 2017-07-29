@@ -74,6 +74,8 @@ var firebaseKey = ""
         
         let databaseRef = Database.database().reference()
     databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey).updateChildValues(["Rating" : rating])
+        
+       
   
     }
     

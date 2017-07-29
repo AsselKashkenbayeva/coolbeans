@@ -28,11 +28,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet var addPicture: UIImageView!
     
     @IBOutlet var checkBox: BEMCheckBox!
+  
     
     @IBOutlet var ratingControl: RatingControl!
     
     var selectedPlaceDetail = [String:AnyObject]()
-    
+    let user = Auth.auth().currentUser
     override func viewDidLoad() {
         closeButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
         
@@ -40,7 +41,13 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         placeAddress.text = selectedPlaceDetail["StoredPlaceAddress"] as! String?
         placeTelephone.text = selectedPlaceDetail["StoredPlaceTelephone"] as! String?
         placeWebsite.text = selectedPlaceDetail["StoredPlaceWebsite"] as! String?
-        ratingControl.rating = selectedPlaceDetail["Rating"] as! Int 
+        ratingControl.rating = selectedPlaceDetail["Rating"] as! Int
+       addNotes.text = selectedPlaceDetail["Tags"] as! String?
+        checkBox.offAnimationType = BEMAnimationType.flat
+        checkBox.onAnimationType = BEMAnimationType.oneStroke
+        var onCheckbox = selectedPlaceDetail["Checkbox"] as! Bool
+        self.checkBox.setOn(onCheckbox, animated: true)
+       
     }
     //Setting up the animation
     @IBAction func closeButtonAction(_ sender: Any) {
@@ -66,20 +73,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         placeNameLabel.text = STOREDPlaces[itemIndex]["StoredPlaceName"] as? String
         placeAddressLabel.text = STOREDPlaces[itemIndex]["StoredPlaceAddress"] as? String
-        
        // checkBox.delegate = self.checkBox as! BEMCheckBoxDelegate?
         print(checkBox.delegate?.didTap!(checkBox))
-        let databaseRef = Database.database().reference()
-        databaseRef.child((self.user?.uid)!).child("StoredPlaces").didChangeValue(forKey: "VisitedCheckbox")
-      
-        
-        
+        let databaseRef = Database.database().reference()databaseRef.child((self.user?.uid)!).child("StoredPlaces").didChangeValue(forKey: "VisitedCheckbox")
                 }
-                
-    
-            
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -117,4 +114,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     */
 */
+    
+    @IBAction func addNotesAction(_ sender: Any) {
+        
+        let Notes = addNotes.text
+       let firebaseKey = selectedPlaceDetail["firebaseKey"] as! String? 
+        
+        //this is not correct because it shows the whole array in one part
+  
+        let databaseRef = Database.database().reference()
+        databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey!).updateChildValues(["Tags" : Notes])
+    
+    }
+    
 }

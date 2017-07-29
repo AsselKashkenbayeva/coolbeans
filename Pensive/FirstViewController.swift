@@ -670,10 +670,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-  
-// ratingControl.rating = (marker.userData as! markerUserData).rating
-       // self.firebaseKey = (marker.userData as! markerUserData).firebaseKey
-      //  print((marker.userData as! markerUserData).firebaseKey)
+      
         self.ratingControlRating = ratingControl.rating
     
                     if marker.userData  == nil {
@@ -686,6 +683,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             ratingControl.firebaseKey = firebaseKey
         ratingControl.rating = (marker.userData as! markerUserData).rating
         }
+        
           self.view.addSubview(detailsPopUp)
    // detailsName.text = marker.userData
     //  detailsPopUp.center = mapView.projection.point(for: marker.position)
@@ -739,7 +737,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
        detailsPopUp.center = mapView.projection.point(for: tappedMarker)
        detailsPopUp.center.y -= 110
-        mapCustomInfoWindow.center = mapView.projection.point(for: location)
+        mapCustomInfoWindow.center = mapView.projection.point(for: location )
         mapCustomInfoWindow.center.y -= 150
         dropDownMenuFolder.center = mapCustomInfoWindow.center
         //dropDownMenuFolder.center = mapView.projection.point(for: location)
@@ -776,7 +774,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let LatitudeCoordinate = self.latitudeText
         let FolderIcon = self.folderIconIndex
         //this is not correct because it shows the whole array in one part
-        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject, "Rating" : 0 as AnyObject ]
+        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject, "Rating" : 0 as AnyObject, "Tags" : "" as AnyObject, "Checkbox" : false as AnyObject ]
         
         let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
