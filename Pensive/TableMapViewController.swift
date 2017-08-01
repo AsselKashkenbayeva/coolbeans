@@ -10,14 +10,14 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import BubbleTransition
-
-class TableMapViewController: UIViewController,GMSMapViewDelegate, UIViewControllerTransitioningDelegate {
+ var selectedPlace = [String:AnyObject]()
+class TableMapViewController: UIViewController,GMSMapViewDelegate, UIViewControllerTransitioningDelegate, DataEnteredDelegate {
     
     let transition = BubbleTransition()
     
 let gradientLayer = CAGradientLayer()
     @IBOutlet var mapView: GMSMapView!
-    var selectedPlace = [String:AnyObject]()
+   // var selectedPlace = [String:AnyObject]()
     
     @IBOutlet var somebutton: UIButton!
     @IBOutlet var detailView: UIView!
@@ -91,11 +91,33 @@ let gradientLayer = CAGradientLayer()
         // Pass the selected object to the new view controller.
     }
     */
+    func userDidEnterInformation(info: String) {
+        print(info)
+      selectedPlace.updateValue(info as AnyObject, forKey: "Tags")
+    }
+    func userDidChangePhoto(info2: UIImage) {
+        selectedPlace.updateValue(info2, forKey: "StoredPlacePicture")
+        print(selectedPlace["StoredPlacePicture"])
+    }
+    func userDidChangeRating(info3: Int) {
+        selectedPlace.updateValue(info3 as AnyObject, forKey: "Rating")
+    }
+    func userDidChangeCheckbox(info4: Bool) {
+        selectedPlace.updateValue(info4 as AnyObject, forKey: "Checkbox")
+    }
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination as! DetailViewController
         controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
         controller.modalPresentationStyle = .custom
-        controller.selectedPlaceDetail = selectedPlace
+        controller.delegate = self
+        //controller.selectedPlaceDetail = selectedPlace
+        //selectedPlaceDetail = selectedPlace
+    //    selectedPlace = selectedPlaceDetail
+        //selectedPlace.updateValue("test1" as AnyObject, forKey: "Tags")
+        print("THIS IS SELECTED PLACE")
+        print(selectedPlace)
+        print("THIS IS SELECTED PLACE DETAIL")
+    //    print(selectedPlaceDetail)
     }
     
     // MARK: UIViewControllerTransitioningDelegate

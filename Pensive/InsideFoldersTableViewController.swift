@@ -64,14 +64,16 @@ class InsideFoldersTableViewController: UITableViewController {
         self.performSegue(withIdentifier: "connectTableMapView" , sender: self)
         print(valueToPass)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "connectTableMapView") {
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destination as! TableMapViewController
             // your new view controller should have property that will store passed value
-            viewController.selectedPlace = valueToPass
+            //viewController.
+            selectedPlace = valueToPass
+         
         }
     }
    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
