@@ -27,8 +27,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
   
     @IBOutlet var placeAddress: UILabel!
     
+ 
+
     @IBOutlet var placeWebsite: UITextView!
-    
+   
     @IBOutlet var placeTelephone: UITextView!
     
     @IBOutlet var addNotes: UITextField!
@@ -52,8 +54,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
        
         placeName.text = selectedPlace["StoredPlaceName"] as! String?
         placeAddress.text = selectedPlace["StoredPlaceAddress"] as! String?
+       
         placeTelephone.text = selectedPlace["StoredPlaceTelephone"] as! String?
+        self.view.addSubview(placeWebsite)
+        print(placeTelephone.text)
         placeWebsite.text = selectedPlace["StoredPlaceWebsite"] as! String?
+        print(placeWebsite.text)
        ratingControl.firebaseKey = (selectedPlace["firebaseKey"] as! String?)!
      ratingControl.rating = selectedPlace["Rating"] as! Int
        addNotes.text = selectedPlace["Tags"] as! String?
@@ -71,6 +77,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         addPicture.layer.borderWidth = 1
         addPicture.layer.masksToBounds = false
         addPicture.layer.borderColor = UIColor.orange.cgColor
+    
         //addPicture.layer.cornerRadius = addPicture.frame.height/2
         addPicture.clipsToBounds = true
         addPicture.isUserInteractionEnabled = true

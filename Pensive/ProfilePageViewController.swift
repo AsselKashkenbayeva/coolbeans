@@ -147,6 +147,9 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
 
     //MARK: filling in the textfields
     
+    @IBAction func signOutAction(_ sender: Any) {
+         try! Auth.auth().signOut()
+    }
     
     @IBAction func usernameTextFieldAction(_ sender: Any) {
         

@@ -132,6 +132,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var checkboxBool: Bool = false
     var tagsMarker = ""
     var markerPlacePictureURL = ""
+    var tappedMarkerAddress = ""
+    var tappedMarkerTelephone = ""
     
     var longPressCoordinate = CLLocationCoordinate2D()
    
@@ -258,7 +260,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             )}
         )
         */
-        let when = DispatchTime.now() + 2
+        let when = DispatchTime.now() + 3
         DispatchQueue.main.asyncAfter(deadline: when) {
           self.folderNames.removeAll()
             for r in STOREDFolders  {
@@ -623,6 +625,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
        self.marker = marker
         marker.position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
         marker.accessibilityValue = place.name
+   
       //  marker.snippet = place.formattedAddress
         marker.map = self.vwGMap
         marker.icon = GMSMarker.markerImage(with: UIColor.blue)
@@ -661,7 +664,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.website = "\(newWebsite)"
         }
         tappedMarker = marker.position
-    }
+            }
     
     //Initiated if autocomplete failed
     func viewController(_ viewcontroller: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -690,7 +693,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
                     if marker.userData  == nil {
              detailsName.text = marker.accessibilityValue
-            websiteLabel.text = ""
+          
+            
            //detailsPopUp.removeFromSuperview()
         } else {
             //tappedMarker = marker.position
@@ -703,8 +707,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         tagsMarker = (marker.userData as! markerUserData).tags
         websiteLabel.text = (marker.userData as! markerUserData).websiteUserData
         markerPlacePictureURL = (marker.userData as! markerUserData).placepicture
-                        print("THIS IS IN THE TAPPED FUNCTION")
-                        print((marker.userData as! markerUserData).tags)
+        tappedMarkerTelephone = (marker.userData as! markerUserData).telephoneUserData
+        tappedMarkerAddress = (marker.userData as! markerUserData).addressUserData
           
         }
        detailsPopUp.layer.borderWidth = 2
@@ -862,7 +866,7 @@ filterPlaces()
       //  let drinks = STOREDPlaces.map({$0["Tags"]})
     
        
-        var markerDict = ["StoredPlaceName": detailsName.text, "Rating": ratingControl.rating, "firebaseKey" : firebaseKey, "Checkbox" : checkboxBool, "Tags" : tagsMarker, "StoredPlacePicture" : markerPlacePictureURL] as [String : Any]
+        var markerDict = ["StoredPlaceName": detailsName.text, "Rating": ratingControl.rating, "firebaseKey" : firebaseKey, "Checkbox" : checkboxBool, "Tags" : tagsMarker, "StoredPlacePicture" : markerPlacePictureURL, "StoredPlaceAddress" : tappedMarkerAddress, "StoredPlaceWebsite": websiteLabel.text, "StoredPlaceTelephone": tappedMarkerTelephone] as [String : Any]
         
        selectedPlace = markerDict as [String : AnyObject]
     //   ratingControl.selectedPlaceDetail = markerDict as [String : AnyObject]

@@ -69,12 +69,15 @@ var firebaseKey = ""
     //MARK:Button Action
     func ratingButtonTapped(button: UIButton) {
        rating = ratingbuttons.index(of: button)! + 1
-        
+        print(firebaseKey)
         updateButtonSelectionStates()
-        
+        if firebaseKey == "" {
+            print("firebase key is nil")
+        } else {
         let databaseRef = Database.database().reference()
     databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey).updateChildValues(["Rating" : rating])
         print(rating)
+        }
     }
     
     func updateButtonSelectionStates() {
