@@ -307,6 +307,43 @@ let cell = UITableViewCell()
         
         AddNewFolderPopUp.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
+        let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
+        
+        refFolders.observe( .value, with: { (snapshot) in
+            STOREDFolders.removeAll()
+            print("here has been a new place added")
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let key = snap.key
+                        let FOLDER = (dictionary[key] as? [String: AnyObject]!)!
+                        
+                        STOREDFolders.append(FOLDER!)
+                        
+                    }
+                }
+            }
+        }
+        )
+
+            let when = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: when) {
+        let firstViewController:
+                    FirstViewController = self.storyboard!.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
+            firstViewController.folderNames.removeAll()
+                for r in STOREDFolders  {
+                    let folder = r["FolderName"] as? String
+                  firstViewController.folderNames.append(folder!)
+                }
+                
+               //firstViewController.sortByDropDown()
+                firstViewController.setupInIt()
+                print("this is printing within the dispatch time")
+                print(STOREDFolders.count)
+        }
+
+                     print("this is outside the dispatch time")
+            print(STOREDFolders.count)
         
     }
     
