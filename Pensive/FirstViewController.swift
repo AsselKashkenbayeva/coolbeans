@@ -62,7 +62,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var vwGMap = GMSMapView()
     var Markers = [GMSMarker]()
   
-    @IBOutlet var moreDetailButton: UIButton!
+  
  
     @IBOutlet var detailsPopUp: UIView!
     
@@ -75,7 +75,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet var mapCustomInfoWindow: UIView!
     
-    @IBOutlet var addPlacebutton: UIButton!
+  
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var AddNewPlaceButton: UIButton!
@@ -113,8 +113,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     var effect:UIVisualEffect!
 
-    
-    var dropDownMenuFolder = IGLDropDownMenu()
+ 
+   
+       var dropDownMenuFolder = IGLDropDownMenu()
     
     var tappedMarker = CLLocationCoordinate2D()
     var folderNames = [String]()
@@ -138,16 +139,22 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     var longPressCoordinate = CLLocationCoordinate2D()
    
+   
+    
+    @IBOutlet var closeDetailsButton: UIButton!
+    
+    @IBOutlet var moreDetailButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        /*
         dropDownMenuFolder.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector (TapFuncTwo(_sender:)))
         tap.numberOfTapsRequired = 1
         dropDownMenuFolder.addGestureRecognizer(tap)
         
-        
+        */
         
         
         
@@ -270,30 +277,41 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 self.folderNames.append(folder!)
           //print("This is in the storedfolders for loop")
             }
-          
+            print("this is printing user Uid")
+            print(self.user?.uid)
             self.setupInIt()
+          //  let _menuView = self.updateMenuViewFolders()
             self.sortByDropDown()
             self.filterPlaces()
+         
         }
-  
+        
+        if let navigationBar = self.navigationController?.navigationBar {
+            let firstFrame = CGRect(x: 25, y: 10, width: navigationBar.frame.width/13.5, height: navigationBar.frame.height-17)
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
+            tapGesture.numberOfTapsRequired = 1
+            let firstLabel = UILabel(frame: firstFrame)
+            firstLabel.isUserInteractionEnabled = true
+            firstLabel.backgroundColor = UIColor(patternImage: UIImage (named: "refreshfolderIcon")!)
+            //firstLabel.textColor = UIColor.red
+            firstLabel.addGestureRecognizer(tapGesture)
+            navigationBar.addSubview(firstLabel)
+        
+        }
+    
     }
+    
+
     func TapFunc(sender: UITapGestureRecognizer) {
-        //print("THIS IS BEING TAPPED")
+        print("THIS IS BEING TAPPED")
         self.folderNames.removeAll()
         for r in STOREDFolders  {
             let folder = r["FolderName"] as? String
             self.folderNames.append(folder!)
         }
-         //self.dropDownMenuFolder.reloadView()
-        /*
-        let items = self.folderNames
-        folderNames.append("All")
-           let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
-        menuView.updateItems(self.folderNames as! [AnyObject])
- */
+       // let _menuView = self.updateMenuViewFolders()
         self.sortByDropDown()
         self.setupInIt()
-  // detailsPopUp.markers = markers
     }
  
 
@@ -389,58 +407,46 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: telephone!, FirebaseKey: firebaseKey!, Rating: rating!, Checkbox: checkbox!, Tags: tags!, PlacePicture: placePicture!)
                     markers.userData = storedPlaceUserData
-
-                    /*
-                    print(self.filterSelected)
-                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                    let markers = GMSMarker()
-                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                    self.markersArray.append(markers.position)
-                 
-                    let folderIcon = p["FolderIcon"] as? String
-                    let name = p["StoredPlaceName"] as? String
-                    let website = p["StoredPlaceName"] as? String
-                    let address = p["StoredPlaceAddress"] as? String
-                     let firebaseKey = p["firebaseKey"] as? String
-            let telephone = ["StoredPlaceTelephone"] as? String
-             let rating = p["Rating"] as? Int
-            let checkbox = p["Checkbox"] as? Bool
-            let tags = p["Tags"] as? String
-            let placePicture = p["StoredPlacePicture"] as? String
-            markers.accessibilityValue = name
-            let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: telephone!, FirebaseKey: firebaseKey!, Rating: rating!, Checkbox: checkbox!, Tags: tags!, PlacePicture: placePicture!)
-                   markers.userData = storedPlaceUserData
-                    print((markers.userData as! markerUserData).firebaseKey)
-                    self.placeNamesArray.append(name!)
-              //  self.placeWebsiteArray.append(website!)
-                    markers.icon = UIImage(named:folderIcon!)
-                  // markers.tracksViewChanges = true
-                    markers.map = self.vwGMap
-                 
-                    self.vwGMap.setNeedsDisplay()
-                    
-                */
-                }
+                                  }
             }
         }
       
     }
-
-    func sortByDropDown() {
-    //self.detailsPopUp.removeFromSuperview()
-      print(folderNames)
+    /*
+    func updateMenuViewFolders() -> BTNavigationDropdownMenu? {
+        print("updating folders")
+        print(folderNames)
         let items = self.folderNames
- 
-        folderNames.append("All")
       
-        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
+        //folderNames.append("All")
+        let menuView = BTNavigationDropdownMenu(title: "Sort By", items: items as [AnyObject])
         menuView.updateItems(self.folderNames as [AnyObject])
-      self.navigationItem.titleView = menuView
+
+        return menuView
+    }
+*/
+    func sortByDropDown() {
+        let items = self.folderNames
+      
+        folderNames.append("All")
+       // let menuView = BTNavigationDropdownMenu(title: "Sort By", items: items as [AnyObject])
+        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
+        
+        menuView.updateItems(self.folderNames as [AnyObject])
+
+         self.navigationItem.titleView = menuView
+     
+      //  self.navigationController?.view = menuView
+//        menuView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
+     // self.navigationItem.titleView = menuView
         self.navigationItem.titleView?.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
-        tapGesture.numberOfTapsRequired = 1
-        self.navigationController?.navigationBar.addGestureRecognizer(tapGesture)
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
+      tapGesture.numberOfTapsRequired = 1
+      
+//self.navigationController?.
+        
+        //addGestureRecognizer(tapGesture)
+        
         menuView.cellTextLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         menuView.menuTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         menuView.cellSelectionColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
@@ -454,6 +460,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
         //  print(self?.filterSelected)
            // print(indexPath)
+            menuView.setNeedsDisplay()
+            menuView.setNeedsLayout()
             if indexPath != nil {
           self?.filterSelected = (self?.folderNames[indexPath])!
                // print((self?.filterSelected)!)
@@ -468,46 +476,14 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
            //    menuView.updateItems(self?.folderNames as! [AnyObject])
                 
                 */
+               // menuView.setNeedsLayout()
+                //menuView.setNeedsDisplay()
+               
             }
             return
         }
     }
-    
-    
-    /*
-    //This is fetching the folders from Firebase
-    func fetchFolders() {
-        let ref = FIRDatabase.database().reference().child((self.user?.uid)!).child("UserFolders")
-        ref.observe( .childAdded, with: { (snapshot) in
-            if snapshot.children.allObjects is [FIRDataSnapshot] {
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    
-                    
-                    let folder = (dictionary["FolderName"] as? String?)!
-                    self.Folders.append(folder!)
-                   
-                    
-                    // print(self.Folders)
-                    /*
-                     folders.append(folder!)
-                     DispatchQueue.main.async {
-                     self.Folders = folders
-                     print(self.Folders)      }
-                     */
-                }
-                
-            }
-        })
-        
-    }
-    */
-    
-    //This is setting up the dropdown menu in the add new place pop up
-    func TapFuncTwo(_sender: UITapGestureRecognizer) {
-        print("THIS IS BEING TAPPED")
-        
-        
-    }
+
     func setupInIt() {
         
         let dropdownItems: NSMutableArray = NSMutableArray()
@@ -532,37 +508,17 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         dropDownMenuFolder.menuText = "Choose Folder"
         dropDownMenuFolder.dropDownItems  = dropdownItems as [AnyObject]
         dropDownMenuFolder.paddingLeft = 15
-     //   let x = mapCustomInfoWindow.frame.width
-     //   let y = mapCustomInfoWindow.frame.height
-        
         dropDownMenuFolder.frame = CGRect(x: 50, y: 145 , width: 200, height: 45)
-     // dropDownMenuFolder.center = mapCustomInfoWindow.center
-        //85 x, 120 y
         dropDownMenuFolder.delegate = self
         dropDownMenuFolder.type = IGLDropDownMenuType.stack
         dropDownMenuFolder.gutterY = 5
         dropDownMenuFolder.itemAnimationDelay = 0.1
         dropDownMenuFolder.reloadView()
-/*
-        let myLabel = UILabel()
-//        myLabel.text = "SwiftyOS Blog"
-        myLabel.textColor = UIColor.white
-        myLabel.font = UIFont(name: "Halverica-Neue", size: 17)
-        myLabel.textAlignment = NSTextAlignment.center
-        myLabel.frame = CGRect(x: 40, y: 60, width: 200, height: 45)
-        
-        self.mapCustomInfoWindow.addSubview(myLabel)
-        */
-     
-       
-        dropDownMenuFolder.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector (TapFuncTwo(_sender:)))
-        tap.numberOfTapsRequired = 1
-        dropDownMenuFolder.addGestureRecognizer(tap)
   
- 
-        
-    //mapCustomInfoWindow.addSubview(dropDownMenuFolder)
+      print(dropDownMenuFolder.frame.width)
+      dropDownMenuFolder.frame.origin.x = mapCustomInfoWindow.center.x-dropDownMenuFolder.frame.width/2
+        dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
+      
     }
   
     
@@ -573,7 +529,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.folderItem = folderItem!
         let folderIconIndex = item.iconImage.accessibilityIdentifier
         self.folderIconIndex = folderIconIndex!
-        
+        AddNewPlaceButton.isUserInteractionEnabled = true
+        AddNewPlaceButton.setTitleColor(UIColor.red, for: .normal)
     }
 
     /*
@@ -706,23 +663,36 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
        tappedMarker = marker.position
         
         self.ratingControlRating = ratingControl.rating
-    
+        
                     if marker.userData  == nil {
-           //  detailsName.text = marker.accessibilityValue
-                        mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
-                        mapCustomInfoWindow.center.y -= 150
-                        dropDownMenuFolder.center = mapCustomInfoWindow.center
-                        mapCustomInfoWindow.layer.borderWidth = 2
-                        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
-                        self.mapCustomInfoWindow.addSubview(dropDownMenuFolder)
-                        self.view.addSubview(dropDownMenuFolder)
-
-            self.view.addSubview(mapCustomInfoWindow)
-         
-        } else {
-            //tappedMarker = marker.position
-            detailsName.text = (marker.userData as! markerUserData).nameUserData
+                        AddNewPlaceButton.isUserInteractionEnabled = false
+                        AddNewPlaceButton.setTitleColor(UIColor.gray, for: .normal)
+             detailsName.text = marker.accessibilityValue
                         
+            moreDetailButton.setTitleColor(UIColor.white, for: .normal)
+            closeDetailsButton.setTitleColor(UIColor.white, for: .normal)
+            //websiteLabel.textColor = UIColor.white
+                        websiteLabel.isHidden = true
+            ratingControl.isHidden = true
+                        
+            mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
+            mapCustomInfoWindow.center.y -= 150
+        
+            mapCustomInfoWindow.layer.borderWidth = 2
+            mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
+         //   self.mapCustomInfoWindow.addSubview(dropDownMenuFolder)
+            
+            self.view.addSubview(detailsPopUp)
+            self.view.addSubview(mapCustomInfoWindow)
+          self.view.addSubview(dropDownMenuFolder)
+        } else {
+                        websiteLabel.isHidden = false
+            //tappedMarker = marker.position
+                        moreDetailButton.setTitleColor(UIColor.black, for: .normal)
+                        closeDetailsButton.setTitleColor(UIColor.black, for: .normal)
+                        websiteLabel.textColor = UIColor.blue
+                        ratingControl.isHidden = false
+            detailsName.text = (marker.userData as! markerUserData).nameUserData
             self.firebaseKey = (marker.userData as! markerUserData).firebaseKey
             ratingControl.firebaseKey = firebaseKey
         ratingControl.rating = (marker.userData as! markerUserData).rating
@@ -737,39 +707,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
           self.view.addSubview(detailsPopUp)
         }
-    
-         // self.view.addSubview(detailsPopUp)
-   // detailsName.text = marker.userData
-    //  detailsPopUp.center = mapView.projection.point(for: marker.position)
-    //    detailsPopUp.center.y -= 100
-      //  print(marker.accessibilityValue)
-    
-        //detailsName.text = marker.title
-     // self.view.addSubview(detailsPopUp)
-        /*
-         for i in 0...(markersArray.count-1) {
-            if markersArray[i].latitude == tappedMarker.latitude &&  markersArray[i].longitude == tappedMarker.longitude
-             
-            {
-                 self.view.addSubview(detailsPopUp)
-           // detailsName.text = (marker.userData[i]["StoredPlaceName"] as? String)
-                //self.placeNamesArray[i]
-              
-           // detailWebsite.text = self.placeWebsiteArray[i]
-                print("MATCHING")
-            itemIndex = i
-                //if picture of person who it is taken from
-               
-            } else {
-                detailsName.text = marker.title
-               print("NOTHING MATCHING")
-          
-            }
-            
-        }
-        
-     //   detailImageView.image = UIImage(named: "b")
-        */
         return false
     }
     
@@ -787,22 +724,17 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     //This is so that the addPlace window tacks onto place with marker
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        
-     //   let location = marker.position
-        
        detailsPopUp.center = mapView.projection.point(for: tappedMarker)
-       detailsPopUp.center.y -= 110
+       detailsPopUp.center.y -= 150
         mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
         mapCustomInfoWindow.center.y -= 150
-        dropDownMenuFolder.center = mapCustomInfoWindow.center
-        //dropDownMenuFolder.center = mapView.projection.point(for: location)
-    
-        
-       // dropDownMenuFolder.center.y -= 150
+    dropDownMenuFolder.frame.origin.x = mapCustomInfoWindow.center.x-dropDownMenuFolder.frame.width/2
+    dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
     }
     
     
     //When doing long press, it shows pop up window above icon
+    
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
        let location = coordinate
         longPressCoordinate = location
@@ -831,7 +763,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let LatitudeCoordinate = self.latitudeText
         let FolderIcon = self.folderIconIndex
         //this is not correct because it shows the whole array in one part
-        let post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject, "Rating" : 0 as AnyObject, "Tags" : "" as AnyObject, "Checkbox" : false as AnyObject, "StoredPlacePicture": "" as AnyObject ]
+        var post : [String: AnyObject] = ["StoredPlaceName" : PlaceName as AnyObject, "StoredPlaceID" : PlaceID as AnyObject, "StoredPlaceAddress" : PlaceAddress as AnyObject, "StoredPlaceWebsite" : PlaceWebsite as AnyObject, "StoredPlaceTelephone" : PlaceTelephone as AnyObject,  "PlaceUnderFolder" : PlaceUnderFolder as AnyObject,"FolderIcon" : FolderIcon as AnyObject,  "Longitude" : LongitudeCoordinate as AnyObject, "Latitude" : LatitudeCoordinate as AnyObject, "Rating" : 0 as AnyObject, "Tags" : "" as AnyObject, "Checkbox" : false as AnyObject, "StoredPlacePicture": "" as AnyObject ]
         
         let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
@@ -840,21 +772,18 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         mapCustomInfoWindow.removeFromSuperview()
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
-       view.addSubview(detailsPopUp)
+        detailsPopUp.removeFromSuperview()
+      // view.addSubview(detailsPopUp)
+        post.updateValue("" as AnyObject, forKey: "firebaseKey")
+        STOREDPlaces.append(post)
+         filterPlaces()
     }
 
     //This is the cancel button in when a user is asked to add a new place
     @IBAction func CancelAddNewPlace(_ sender: Any) {
-        //This is a great way to update stuff to update things in the detail view. 
-        /*   let ref = FIRDatabase.database().reference().child((user?.uid)!).child("StoredPlaces")
-         let query = ref.queryOrdered(byChild: "StoredPlaceName").queryEqual(toValue: "Costa Coffee")
-         
-         query.observe(.childAdded, with: { (snapshot) in
-         snapshot.ref.updateChildValues(["StoredPlaceID": self.aaa] )
-         })
-         */
-                mapCustomInfoWindow.removeFromSuperview()
+        mapCustomInfoWindow.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
+        detailsPopUp.removeFromSuperview()
     }
     
     @IBAction func detailCloseAction(_ sender: Any) {

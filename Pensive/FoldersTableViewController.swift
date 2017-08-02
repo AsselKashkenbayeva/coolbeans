@@ -326,7 +326,7 @@ let cell = UITableViewCell()
         }
         )
 
-            let when = DispatchTime.now() + 3
+            let when = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: when) {
         let firstViewController:
                     FirstViewController = self.storyboard!.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
@@ -335,15 +335,10 @@ let cell = UITableViewCell()
                     let folder = r["FolderName"] as? String
                   firstViewController.folderNames.append(folder!)
                 }
-                
-               //firstViewController.sortByDropDown()
+            //    let _menuView = firstViewController.updateMenuViewFolders()
+             //   firstViewController.sortByDropDown(menuView: _menuView!)
                 firstViewController.setupInIt()
-                print("this is printing within the dispatch time")
-                print(STOREDFolders.count)
         }
-
-                     print("this is outside the dispatch time")
-            print(STOREDFolders.count)
         
     }
     
