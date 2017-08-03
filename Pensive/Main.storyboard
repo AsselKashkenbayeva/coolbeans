@@ -707,6 +707,7 @@
                         <outlet property="AddFolderButton" destination="zcr-Yp-vOR" id="kFG-AW-xTP"/>
                         <outlet property="AddFolderCancelButton" destination="Tb9-D6-LeQ" id="UT4-c1-IJK"/>
                         <outlet property="AddFolderTextField" destination="PPX-im-LqN" id="1as-EJ-06o"/>
+                        <outlet property="AddNewFolderButton" destination="4NO-qF-EmF" id="UvB-tC-Fgo"/>
                         <outlet property="AddNewFolderPopUp" destination="Cuq-Jk-Pxd" id="LZI-qa-6eI"/>
                     </connections>
                 </tableViewController>

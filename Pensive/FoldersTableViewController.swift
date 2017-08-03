@@ -22,6 +22,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     @IBOutlet weak var AddFolderTextField: UITextField!
     @IBOutlet weak var AddFolderCancelButton: UIButton!
     @IBOutlet weak var AddFolderButton: UIButton!
+    @IBOutlet var AddNewFolderButton: UIBarButtonItem!
     @IBOutlet var AddNewFolderPopUp: UIView!
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["0", "1", "2", "3"]
@@ -233,7 +234,8 @@ let cell = UITableViewCell()
         let folderIndex = String(item.index)
         
         self.folderIndex = folderIndex
-       
+        AddFolderButton.isUserInteractionEnabled = true
+        AddFolderButton.setTitleColor(UIColor.red, for: .normal)
     }
     
 
@@ -253,37 +255,13 @@ let cell = UITableViewCell()
     }
 */
     @IBAction func addNewFolder(_ sender: Any) {
-    
-          /*  let alert = UIAlertController(title: "Name of new folder",
-                                      message: "Please write the name of your new folder",
-                                      preferredStyle: .alert)
-        
-        alert.addTextField { (textField : UITextField) -> Void in
-            textField.placeholder = "Name"
-           print("\(textField.text)")
-        }
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
-            }
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-               //this doesn't work. it does not append the text
-               let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-                
-                let folder = Folder(context: context)
-                var textField = (alert.textFields!.first! as UITextField).text
-                folder.name = textField
-                
-               (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
- */
-      
+   
         self.view.addSubview(AddNewFolderPopUp)
         //this is to allow the icons to be clickable
         self.view.addSubview(self.dropDownMenuFolder)
         let y = self.view.center.y
+       AddFolderButton.isUserInteractionEnabled = false
+      AddFolderButton.setTitleColor(UIColor.gray, for: .normal)
         AddNewFolderPopUp.center = CGPoint(x: self.view.center.x, y: y/2.8)
             //CGPoint(x: 180, y: 90)
         AddNewFolderPopUp.layer.borderWidth = 2

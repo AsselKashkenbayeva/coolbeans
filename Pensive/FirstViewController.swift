@@ -145,6 +145,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBOutlet var moreDetailButton: UIButton!
     
+    
+    var afterfirebase = Int()
+    var updaterating = Int()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -275,19 +280,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 let folder = r["FolderName"] as? String
                 
                 self.folderNames.append(folder!)
-          //print("This is in the storedfolders for loop")
             }
-            print("this is printing user Uid")
-            print(self.user?.uid)
             self.setupInIt()
-          //  let _menuView = self.updateMenuViewFolders()
             self.sortByDropDown()
             self.filterPlaces()
          
         }
         
         if let navigationBar = self.navigationController?.navigationBar {
-            let firstFrame = CGRect(x: 25, y: 10, width: navigationBar.frame.width/13.5, height: navigationBar.frame.height-17)
+            let firstFrame = CGRect(x: 20, y: 10, width: navigationBar.frame.width/13.2, height: navigationBar.frame.height-17)
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
             tapGesture.numberOfTapsRequired = 1
             let firstLabel = UILabel(frame: firstFrame)
@@ -661,9 +662,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
        tappedMarker = marker.position
-        
+    
         self.ratingControlRating = ratingControl.rating
-        
+        print("Outside tapped")
+        print(ratingControlRating)
                     if marker.userData  == nil {
                         AddNewPlaceButton.isUserInteractionEnabled = false
                         AddNewPlaceButton.setTitleColor(UIColor.gray, for: .normal)
@@ -695,7 +697,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             detailsName.text = (marker.userData as! markerUserData).nameUserData
             self.firebaseKey = (marker.userData as! markerUserData).firebaseKey
             ratingControl.firebaseKey = firebaseKey
+                         print("inside tapped")
+    if self.ratingControlRating != (marker.userData as! markerUserData).rating  {
         ratingControl.rating = (marker.userData as! markerUserData).rating
+    } else {
+         ratingControl.rating = self.ratingControlRating }
+                        print((marker.userData as! markerUserData).rating)
+                        print(ratingControlRating)
+        
+        updaterating = (marker.userData as! markerUserData).rating
         checkboxBool = (marker.userData as! markerUserData).checkbox
         tagsMarker = (marker.userData as! markerUserData).tags
         websiteLabel.text = (marker.userData as! markerUserData).websiteUserData
@@ -734,7 +744,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     
     //When doing long press, it shows pop up window above icon
-    
+    /*
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
        let location = coordinate
         longPressCoordinate = location
@@ -747,6 +757,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.view.addSubview(mapCustomInfoWindow)
         self.view.addSubview(dropDownMenuFolder)
     }
+    */
     
     @IBOutlet weak var CancelAddNewPlace: UIButton!
     
@@ -773,10 +784,48 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
         detailsPopUp.removeFromSuperview()
-      // view.addSubview(detailsPopUp)
-        post.updateValue("" as AnyObject, forKey: "firebaseKey")
-        STOREDPlaces.append(post)
-         filterPlaces()
+          print("before firebase")
+       let beforeFirebase = STOREDPlaces.count
+      print(STOREDPlaces.count)
+        let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
+        
+        ref.observe( .value, with: { (snapshot) in
+            STOREDPlaces.removeAll()
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let key = snap.key
+                        self.firebaseKey = key
+                        var PLACE = (dictionary[key] as? [String: AnyObject]!)!
+                        PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
+                        STOREDPlaces.append(PLACE!)
+                    }
+                }
+                
+            }
+        }
+        )
+      
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.filterPlaces()
+            print("after firebase")
+            print(STOREDPlaces.count)
+            self.afterfirebase = STOREDPlaces.count
+           
+            if beforeFirebase == self.afterfirebase {
+                print("before and after are equal")
+                post.updateValue("" as AnyObject, forKey: "firebaseKey")
+                STOREDPlaces.append(post)
+                self.filterPlaces()
+            } else {
+                print("before and after firebase not equal")
+                
+            }
+   
+       
+        }
+    
     }
 
     //This is the cancel button in when a user is asked to add a new place
@@ -787,13 +836,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     @IBAction func detailCloseAction(_ sender: Any) {
+        self.filterSelected = "All"
+        filterPlaces()
      detailsPopUp.removeFromSuperview()
     }
     
     @IBAction func detailMoreDetailAction(_ sender: Any) {
-        if ratingControlRating != 0 {
-            print("not")
-        }
+      
     }
     func userDidEnterInformation(info: String) {
         print(info)
@@ -802,9 +851,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     func userDidChangePhoto(info2: UIImage) {
     }
     func userDidChangeRating(info3: Int) {
-        selectedPlace.updateValue(info3 as AnyObject, forKey: "Rating")
-    // ratingControlRating = selectedPlace.updateValue(info3 as AnyObject, forKey: "Rating") as! Int
-       
+       selectedPlace.updateValue(info3 as AnyObject, forKey: "Rating")
+        ratingControl.rating = info3
+        print(info3)
+        updaterating = info3
     }
     func userDidChangeCheckbox(info4: Bool) {
         selectedPlace.updateValue(info4 as AnyObject, forKey: "Checkbox")
@@ -836,6 +886,13 @@ filterPlaces()
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.startingPoint = moreDetailButton.center
+        if updaterating != ratingControlRating {
+            print("no match")
+        } else {
+            print("match")
+        }
+        //self.view.addSubview(detailsPopUp)
+   
         transition.bubbleColor = moreDetailButton.backgroundColor!
         return transition
     }

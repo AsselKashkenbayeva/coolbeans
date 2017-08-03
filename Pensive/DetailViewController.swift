@@ -26,8 +26,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet var placeName: UILabel!
   
     @IBOutlet var placeAddress: UILabel!
-    
- 
 
     @IBOutlet var placeWebsite: UITextView!
    
@@ -205,8 +203,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                 delegate?.userDidChangeCheckbox(info4: checkboxstate)
                 print("this is printing the selected place checkbox")
                     let firebaseKey = selectedPlace["firebaseKey"] as! String?
+        if firebaseKey == "" {
+            print("firebase key is nil")
+        } else {
                     let databaseRef = Database.database().reference()
                     databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey!).updateChildValues(["Checkbox" : checkboxstate])
+        }
     }
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) {
@@ -289,6 +291,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let userID: String = (Auth.auth().currentUser?.uid)!
         let firebaseKey = (selectedPlace["firebaseKey"] as! String?)
+        if firebaseKey == "" {
+            print("firebase key is nil")
+        } else {
         let storageRef = Storage.storage().reference().child(userID).child(firebaseKey!).child("StoredPlacePicture")
         var uploadData = NSData()
         uploadData = UIImagePNGRepresentation(addPicture.image!)! as NSData
@@ -312,7 +317,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
             
         }
-        
+        }
 
     }
     /*
@@ -336,10 +341,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
        let firebaseKey = selectedPlace["firebaseKey"] as! String?
         
         //this is not correct because it shows the whole array in one part
-  
+        if firebaseKey == "" {
+            print("firebase key is nil")
+        } else {
         let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey!).updateChildValues(["Tags" : Notes])
-    
+        }
     }
     
 }

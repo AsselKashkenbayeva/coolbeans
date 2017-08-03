@@ -759,7 +759,7 @@
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cattche.July17Cattche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2bc1de88-882d-4a85-a133-3430c524098c";
+				PROVISIONING_PROFILE = "87fe04ce-811a-4541-854f-980b1266f9a7";
 				PROVISIONING_PROFILE_SPECIFIER = Cattche_provisioning_profile_ad_hoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pensive-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
