@@ -12,6 +12,7 @@ import Firebase
 
 class ProfilePageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate {
 
+    @IBOutlet var changePasswordButton: UIButton!
     
     @IBOutlet weak var profilePhoto: UIImageView!
     
@@ -22,8 +23,10 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var dobTextField: UITextField!
     @IBOutlet weak var sexPickerTextFeild: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.isHidden = true
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
@@ -49,12 +52,14 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
             self.emailTextField.text = email
             //.child("Email")
         })
+        /*
         //Retreiving data from Firebase for text-field- Password
         ref.child(userID).child("Password").observe(.value, with: { (snapshot) in
             let password = (snapshot.value as? NSDictionary)?["Password"] as? String ?? ""
             self.passwordTextField.text = password
             //.child("Password")
         })
+ */
         //Retreiving data from Firebase for text-field- DOB
         ref.child(userID).child("DOB").observe(.value, with: { (snapshot) in
             let dob = (snapshot.value as? NSDictionary)?["DOB"] as? String ?? ""
@@ -169,12 +174,19 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     
     @IBAction func passwordTextFieldAction(_ sender: Any) {
+        /*
         var user = Auth.auth().currentUser
         var databaseRef = Database.database().reference()
         let password = self.passwordTextField.text
         let userDataPassword : [String: AnyObject] = ["Password" : password as AnyObject]
         databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
       //.child("Password")
+ */
+   Auth.auth().currentUser?.updatePassword(to: passwordTextField.text!, completion: { (error) in
+print("new password is saved in firebase")
+   })
+        changePasswordButton.isHidden = false
+        passwordTextField.isHidden = true
     }
     
     
@@ -255,4 +267,10 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     }
     */
 
+    @IBAction func changePasswordActionButton(_ sender: Any) {
+        passwordTextField.isHidden = false
+        changePasswordButton.isHidden = true
+    }
+    
+    
 }

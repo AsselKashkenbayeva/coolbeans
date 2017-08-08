@@ -253,6 +253,17 @@
                                     <outlet property="delegate" destination="4WP-6k-L4s" id="cbG-pF-4kS"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-yL-S0e">
+                                <rect key="frame" x="36" y="339" width="303" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SBr-9J-1Xt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Change password"/>
+                                <connections>
+                                    <action selector="changePasswordActionButton:" destination="4WP-6k-L4s" eventType="touchUpInside" id="yX1-SD-anb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.89757543110000004" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -261,9 +272,11 @@
                             <constraint firstItem="beu-Rd-HlC" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="7mX-Vf-Jv6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="97m-cP-j8V" secondAttribute="trailing" constant="20" id="7yN-pj-sUF"/>
                             <constraint firstItem="BDl-5g-086" firstAttribute="centerX" secondItem="beu-Rd-HlC" secondAttribute="centerX" id="A60-jk-q3N"/>
+                            <constraint firstItem="bnc-yL-S0e" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="Dqw-qF-Exe"/>
                             <constraint firstItem="wjE-vb-uil" firstAttribute="centerY" secondItem="d7A-hn-0vB" secondAttribute="centerY" constant="-20" id="Du0-e7-8jk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="flj-TD-czg" secondAttribute="trailing" constant="20" id="ETl-0P-ch9"/>
                             <constraint firstItem="97m-cP-j8V" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="FrI-7L-iCw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bnc-yL-S0e" secondAttribute="trailing" constant="20" id="L0P-yq-OML"/>
                             <constraint firstItem="97m-cP-j8V" firstAttribute="top" secondItem="d7A-hn-0vB" secondAttribute="bottom" constant="30" id="MaO-vk-Pmt"/>
                             <constraint firstItem="flj-TD-czg" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="PMF-Wh-Zew"/>
                             <constraint firstItem="QwH-gB-CDL" firstAttribute="trailing" secondItem="flj-TD-czg" secondAttribute="trailing" id="PaJ-B8-fHA"/>
@@ -275,6 +288,8 @@
                             <constraint firstItem="d7A-hn-0vB" firstAttribute="leading" secondItem="wjE-vb-uil" secondAttribute="trailing" constant="10" id="iCo-Qw-kaa"/>
                             <constraint firstAttribute="bottom" secondItem="QwH-gB-CDL" secondAttribute="bottom" constant="148" id="lVr-7I-zDs"/>
                             <constraint firstItem="xoI-n3-lnS" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="sGa-Wz-yNK"/>
+                            <constraint firstItem="flj-TD-czg" firstAttribute="top" secondItem="bnc-yL-S0e" secondAttribute="bottom" constant="30" id="sgT-IY-2qB"/>
+                            <constraint firstItem="bnc-yL-S0e" firstAttribute="top" secondItem="97m-cP-j8V" secondAttribute="bottom" constant="30" id="suR-DM-q2W"/>
                             <constraint firstAttribute="trailingMargin" secondItem="beu-Rd-HlC" secondAttribute="trailing" constant="20" id="uWD-cQ-YiH"/>
                             <constraint firstItem="QwH-gB-CDL" firstAttribute="top" secondItem="flj-TD-czg" secondAttribute="bottom" constant="30" id="ucr-yh-iFh"/>
                             <constraint firstItem="flj-TD-czg" firstAttribute="top" secondItem="xoI-n3-lnS" secondAttribute="bottom" constant="30" id="xhU-lP-WM0"/>
@@ -290,6 +305,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="changePasswordButton" destination="bnc-yL-S0e" id="lBZ-NF-j69"/>
                         <outlet property="dobTextField" destination="flj-TD-czg" id="ujS-96-6eW"/>
                         <outlet property="emailTextField" destination="97m-cP-j8V" id="7Q4-rf-Nvu"/>
                         <outlet property="passwordTextField" destination="xoI-n3-lnS" id="LUh-id-nZq"/>
@@ -1106,7 +1122,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1125,7 +1141,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="a" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" shadowImage="a" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.60482219827586203" colorSpace="calibratedRGB"/>

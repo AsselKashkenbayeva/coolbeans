@@ -55,17 +55,22 @@ class LoginViewController: UIViewController {
                     var user = Auth.auth().currentUser
                     var databaseRef = Database.database().reference()
                     let userEmail = self.textFieldLoginEmail.text
-                    let userPassword = self.textFieldLoginPassword.text
+                   // let userPassword = self.textFieldLoginPassword.text
                     let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
-                    let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
+                 //   let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
                     databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
-                  databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                  //databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
                  
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                      self.performSegue(withIdentifier: self.loginToList, sender: nil)
+                    
+                    let profilePageViewController:
+                        ProfilePageViewController = self.storyboard!.instantiateViewController(withIdentifier: "ProfilePageViewController") as! ProfilePageViewController
+                 profilePageViewController.passwordTextField.text = self.textFieldLoginPassword.text
+ 
                     
         }
                 else
@@ -91,6 +96,7 @@ class LoginViewController: UIViewController {
         }
         else
         {
+         
             Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
@@ -98,18 +104,20 @@ class LoginViewController: UIViewController {
                     var user = Auth.auth().currentUser
                     var databaseRef = Database.database().reference()
                     let userEmail = self.textFieldLoginEmail.text
-                    let userPassword = self.textFieldLoginPassword.text
+                 //   let userPassword = self.textFieldLoginPassword.text
                     let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
-                    let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
+                   // let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
                     databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
-                databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                //databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
+                
                     self.LogoutButton.alpha = 1.0
                     self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                     self.performSegue(withIdentifier: self.loginToList, sender: nil)
+                
                     //putting the current user email and password into Firebase database
-                  
+              
                 }
                 else
                 {
@@ -136,7 +144,7 @@ class LoginViewController: UIViewController {
     @IBAction func EnterButton(_ sender: AnyObject) {
         self.performSegue(withIdentifier: self.loginToList, sender: nil)
     }
-    
+ 
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
