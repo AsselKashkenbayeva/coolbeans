@@ -15,6 +15,7 @@ class FOLDER: NSObject {
     
     var name: String?
     var icon: String?
+    var key: String?
 }
 
 class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate {
@@ -43,35 +44,36 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     
     func fetchFolder() {
         let ref = Database.database().reference().child((user?.uid)!).child("UserFolders")
-        ref.observe( .childAdded, with: { (snapshot) in
+        ref.observe( .value, with: { (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-               
-        //for snap in snapshots {
+               //is it printing everything double because i have changed this to .value rather then child added and hence have included the for loop at the bottom and also now its dictionary[key] rather then just straight access. this is to allow to remove rows to get access to the snap key 
+        for snap in snapshots {
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     
-                  //  let key = snap.key
+                let key = snap.key
                     //print(key)
                     let folder = FOLDER()
-                folder.name = (dictionary["FolderName"] as? String)!
-                   folder.icon = (dictionary["FolderIcon"] as? String)!
+                folder.name = (dictionary[key]?["FolderName"] as? String)!
+                   folder.icon = (dictionary[key]?["FolderIcon"] as? String)!
+                    folder.key = key
                    // print(dictionary)
                     //folder.name = dictionary["Username"] as? String
                   // print(folder.name!)
                    
                    self.folders.append(folder)
-                  
+            }
                    // if self.folders.contains(folder) {
                        // print("YES")
                     //}
                         DispatchQueue.main.async {
                             
-                           self.tableView.reloadData()
+                          // self.tableView.reloadData()
                         
                     }
             }
                 }
               
-                
+            
         }
     )
     
@@ -289,7 +291,7 @@ let cell = UITableViewCell()
         
         refFolders.observe( .value, with: { (snapshot) in
             STOREDFolders.removeAll()
-            print("here has been a new place added")
+           // print("here has been a new place added")
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -326,4 +328,23 @@ let cell = UITableViewCell()
     }
     
     
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
+        if editingStyle == .delete {
+            let removingfolder = folders[indexPath.row].name
+            let removingfolderkey = folders[indexPath.row].key
+            print(removingfolder)
+            print(folders.count)
+            folders.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            print(folders.count)
+             let ref = Database.database().reference().child((user?.uid)!).child("UserFolders").child(removingfolderkey!)
+            ref.removeValue()
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+     
+}
 }
