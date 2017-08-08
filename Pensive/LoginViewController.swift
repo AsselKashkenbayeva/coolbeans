@@ -94,6 +94,7 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(withEmail: self.textFieldLoginEmail.text!, password: self.textFieldLoginPassword.text!, completion: { (user, error) in
                 if error == nil
                 {
+                
                     var user = Auth.auth().currentUser
                     var databaseRef = Database.database().reference()
                     let userEmail = self.textFieldLoginEmail.text

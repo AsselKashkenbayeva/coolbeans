@@ -30,7 +30,6 @@
 		CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */; };
 		CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */; };
 		CF7EC8691DBE68A1005C8D06 /* PensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8681DBE68A1005C8D06 /* PensiveTests.swift */; };
-		CF7EC8841DBE81C0005C8D06 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC8831DBE81C0005C8D06 /* GoogleMaps.bundle */; };
 		CF7EC8871DBE83A2005C8D06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7EC8861DBE83A2005C8D06 /* AVFoundation.framework */; };
 		CF7EC8891DBE83AF005C8D06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7EC8881DBE83AF005C8D06 /* CoreData.framework */; };
 		CF7EC88B1DBE83BE005C8D06 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7EC88A1DBE83BE005C8D06 /* CoreLocation.framework */; };
@@ -54,8 +53,6 @@
 		CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */; };
 		CFB5B1951DC24BEF00CF071E /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1941DC24BEF00CF071E /* GooglePlaces.framework */; };
 		CFB5B1971DC24C0F00CF071E /* GooglePlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1961DC24C0F00CF071E /* GooglePlacePicker.framework */; };
-		CFB5B1991DC24C2F00CF071E /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFB5B1981DC24C2F00CF071E /* GooglePlaces.bundle */; };
-		CFB5B19B1DC24C6000CF071E /* GooglePlacePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFB5B19A1DC24C6000CF071E /* GooglePlacePicker.bundle */; };
 		CFBBE1481DBEA6EC00635E2C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE1471DBEA6EC00635E2C /* Accelerate.framework */; };
 		CFBBE14A1DBEA6F800635E2C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE1491DBEA6F800635E2C /* CoreBluetooth.framework */; };
 		CFBBE14C1DBEA70300635E2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14B1DBEA70300635E2C /* CoreGraphics.framework */; };
@@ -448,11 +445,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFB5B19B1DC24C6000CF071E /* GooglePlacePicker.bundle in Resources */,
 				CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */,
 				CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */,
-				CF7EC8841DBE81C0005C8D06 /* GoogleMaps.bundle in Resources */,
-				CFB5B1991DC24C2F00CF071E /* GooglePlaces.bundle in Resources */,
 				CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */,
 				CF17DA4A1F24C4C500E664FB /* GoogleService-Info.plist in Resources */,
 			);
@@ -759,8 +753,8 @@
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cattche.July17Cattche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87fe04ce-811a-4541-854f-980b1266f9a7";
-				PROVISIONING_PROFILE_SPECIFIER = Cattche_provisioning_profile_ad_hoc;
+				PROVISIONING_PROFILE = "d794dc8b-e853-4f1b-8ef8-fb453c26e5e4";
+				PROVISIONING_PROFILE_SPECIFIER = "CattcheTestFlightCert-replaceforadhoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "Pensive-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

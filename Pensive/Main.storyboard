@@ -49,7 +49,7 @@
                                 <action selector="detailCloseAction:" destination="9pv-A4-QxB" eventType="touchUpInside" id="HH8-Nu-eCF"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOK-EF-lsV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOK-EF-lsV">
                             <rect key="frame" x="32" y="35" width="248" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -116,7 +116,7 @@
                             <rect key="frame" x="-1" y="0.0" width="301" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <attributedString key="attributedText">
-                                <fragment content="What list would you like to save this? ">
+                                <fragment content="Into which list would you like to save ">
                                     <attributes>
                                         <font key="NSFont" metaFont="system" size="17"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -716,15 +716,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="291" height="182"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add new folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GV7-w6-G3P">
-                            <rect key="frame" x="16" y="9" width="116" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add new list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GV7-w6-G3P">
+                            <rect key="frame" x="16" y="9" width="94" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Folder icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wne-pu-6NE">
-                            <rect key="frame" x="16" y="76" width="85" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="List icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wne-pu-6NE">
+                            <rect key="frame" x="16" y="76" width="64" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -970,7 +970,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhf-Gs-ONL">
-                                <rect key="frame" x="150.5" y="547" width="75" height="66.5"/>
+                                <rect key="frame" x="150.5" y="550.5" width="75" height="66.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="45"/>
                                 <state key="normal" title="+"/>
                                 <connections>
@@ -988,7 +988,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Th-Om-gfO">
-                                <rect key="frame" x="36" y="90" width="220" height="60"/>
+                                <rect key="frame" x="36" y="90" width="220" height="63.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="1pH-yo-5I3"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="nON-vv-EXU"/>
@@ -998,7 +998,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="tags" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-uh-QdB">
-                                <rect key="frame" x="37.5" y="240" width="300" height="66.5"/>
+                                <rect key="frame" x="37.5" y="243.5" width="300" height="66.5"/>
                                 <color key="backgroundColor" red="1" green="0.95206789309999995" blue="0.91715440410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1009,7 +1009,7 @@
                                 </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Website" translatesAutoresizingMaskIntoConstraints="NO" id="Vh8-lv-Joe">
-                                <rect key="frame" x="36" y="160" width="303" height="30"/>
+                                <rect key="frame" x="36" y="163.5" width="303" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.25743963289999999" green="0.34663790680000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1024,10 +1024,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utl-Ue-WRq" customClass="RatingControl" customModule="Pensive" customModuleProvider="target">
-                                <rect key="frame" x="8" y="327" width="375" height="66.5"/>
+                                <rect key="frame" x="8" y="330.5" width="375" height="66.5"/>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Telephone" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="M6y-U7-BRm">
-                                <rect key="frame" x="36" y="200" width="303" height="30"/>
+                                <rect key="frame" x="36" y="203.5" width="303" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AfJ-CG-2Fk"/>
@@ -1038,7 +1038,7 @@
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhotoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yY3-1r-6Mm">
-                                <rect key="frame" x="112.5" y="403.5" width="150" height="133.5"/>
+                                <rect key="frame" x="112.5" y="407" width="150" height="133.5"/>
                                 <color key="backgroundColor" red="1" green="0.95206789309999995" blue="0.91715440410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -1074,6 +1074,7 @@
                             <constraint firstItem="ZdW-uh-QdB" firstAttribute="height" secondItem="8JE-Fc-L8K" secondAttribute="height" multiplier="0.1" id="k9z-uL-LRs"/>
                             <constraint firstItem="utl-Ue-WRq" firstAttribute="leading" secondItem="8JE-Fc-L8K" secondAttribute="leading" constant="8" id="lQe-32-uGf"/>
                             <constraint firstItem="Nhf-Gs-ONL" firstAttribute="top" secondItem="yY3-1r-6Mm" secondAttribute="bottom" constant="10" id="rYb-Tg-5Wn"/>
+                            <constraint firstItem="Eil-es-Pzb" firstAttribute="top" secondItem="Nhf-Gs-ONL" secondAttribute="bottom" constant="50" id="v86-8P-Fzo"/>
                             <constraint firstItem="ROM-xa-8bT" firstAttribute="top" secondItem="Vub-9z-uJG" secondAttribute="bottom" constant="30" id="xiR-tN-hU4"/>
                             <constraint firstItem="Nhf-Gs-ONL" firstAttribute="width" secondItem="8JE-Fc-L8K" secondAttribute="width" multiplier="0.2" id="zoF-p8-tQU"/>
                         </constraints>
@@ -1105,7 +1106,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZC-aw-Pdm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="listIcon" selectedImage="listIcon" id="U7P-sZ-EOa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yGJ-K8-t2R">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGJ-K8-t2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1124,7 +1125,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eCY-Ew-5Hk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" selectedImage="MapIcon" id="acW-dT-cKf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" shadowImage="a" id="88Y-ct-HuL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="a" id="88Y-ct-HuL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.60482219827586203" colorSpace="calibratedRGB"/>
