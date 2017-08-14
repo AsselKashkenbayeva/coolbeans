@@ -11,7 +11,7 @@ import Firebase
 
 //var combinedCourseArray: [[String: AnyObject]] = [[:]]
     class ConnectTableViewController: UITableViewController {
-        
+        /*
         let cellId = "cellId"
         var profilePic = UIImage()
         var userStoredPlaces = [String: AnyObject]()
@@ -148,5 +148,5 @@ class UserCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    */
 }

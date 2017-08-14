@@ -149,6 +149,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var afterfirebase = Int()
     var updaterating = Int()
     
+    var userCurrentLocation = CLLocationCoordinate2D()
+    var jim = CLLocation()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,8 +248,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let key = snap.key
-                        let FOLDER = (dictionary[key] as? [String: AnyObject]!)!
-                        
+                        var FOLDER = (dictionary[key] as? [String: AnyObject]!)!
+                        FOLDER?.updateValue(key as AnyObject, forKey: "firebaseKey")
                         STOREDFolders.append(FOLDER!)
                        
                     }
@@ -558,12 +561,26 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         if (status == CLAuthorizationStatus.authorizedWhenInUse)
         {
             vwGMap.isMyLocationEnabled = true
+            /*
+            let circleCenter = CLLocationManager. ;
+            let circ = GMSCircle(position: circleCenter!, radius: 200)
+            circ.fillColor = UIColor(red: 0.0, green: 0.7, blue: 0, alpha: 0.1)
+            circ.strokeColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 0.5)
+            circ.strokeWidth = 2.5;
+            let CLocation = CLLocation(latitude: 51.5074, longitude: 0.1278)
+            let location = newLocation?.distance(from: CLocation)
+            
+            circ.map = self.vwGMap
+            self.view = self.vwGMap
+ */
         }
     }
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last
+        jim = newLocation!
+        userCurrentLocation = (newLocation?.coordinate)!
         vwGMap.camera = GMSCameraPosition.camera(withTarget: newLocation!.coordinate, zoom: 15.0)
      /*
         let circleCenter = newLocation?.coordinate ;
@@ -577,8 +594,35 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         circ.map = self.vwGMap
         self.view = self.vwGMap 
  */
-        
+        locationsInsideRadius()
+
  }
+    
+    func locationsInsideRadius() {
+        let circleCenter = jim.coordinate
+        let circ = GMSCircle(position: circleCenter, radius: 200)
+        
+        for p in STOREDPlaces {
+            let latitude = (p["Latitude"] as? NSString)?.doubleValue
+            let longitude = (p["Longitude"] as? NSString)?.doubleValue
+            let place = CLLocation(latitude: latitude!, longitude: longitude!)
+    let distanceInMeters = jim.distance(from: place )
+        if distanceInMeters <= 200 {
+            print(p[("StoredPlaceName" as? String)!])
+        } else {
+            print("NOT NOT NOT")
+        }
+        }
+      
+        circ.fillColor = UIColor(red: 0.0, green: 0.7, blue: 0, alpha: 0.1)
+        circ.strokeColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 0.5)
+        circ.strokeWidth = 2.5;
+        let CLocation = CLLocation(latitude: 51.5074, longitude: 0.1278)
+        let location = jim.distance(from: CLocation)
+        
+        circ.map = self.vwGMap
+        self.view = self.vwGMap
+    }
     
     //MARK: GMSMapview Delegate
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
@@ -784,28 +828,30 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
         detailsPopUp.removeFromSuperview()
-          print("before firebase")
+     
        let beforeFirebase = STOREDPlaces.count
-      print(STOREDPlaces.count)
+    
         let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
         
-        ref.observe( .value, with: { (snapshot) in
-            STOREDPlaces.removeAll()
+        ref.observe( .childAdded, with: { (snapshot) in
+          //  STOREDPlaces.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshots {
+               let key = snapshot.key
+              //  for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
-                        let key = snap.key
-                        self.firebaseKey = key
-                        var PLACE = (dictionary[key] as? [String: AnyObject]!)!
-                        PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
+                    //    let key = snap.key
+                   //     self.firebaseKey = key
+                        var PLACE = (dictionary as? [String: AnyObject]!)!
+                        PLACE?.updateValue(key as AnyObject, forKey: "firebaseKey")
                         STOREDPlaces.append(PLACE!)
+                        self.filterPlaces()
                     }
                 }
                 
             }
-        }
+    //    }
         )
-      
+      /*
         let when = DispatchTime.now() + 2
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.filterPlaces()
@@ -825,7 +871,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    
        
         }
-    
+    */
     }
 
     //This is the cancel button in when a user is asked to add a new place

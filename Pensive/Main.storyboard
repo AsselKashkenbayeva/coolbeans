@@ -517,43 +517,138 @@
                         <segue destination="eCY-Ew-5Hk" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="dZC-aw-Pdm" kind="relationship" relationship="viewControllers" id="AHn-xj-kTd"/>
                         <segue destination="4WP-6k-L4s" kind="relationship" relationship="viewControllers" id="yxy-OM-jtx"/>
+                        <segue destination="ykS-m8-pzS" kind="relationship" relationship="viewControllers" id="xhp-NP-btX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-638" y="-974"/>
         </scene>
-        <!--Connect Table View Controller-->
-        <scene sceneID="vcN-vn-b14">
+        <!--Add Friends View Controller-->
+        <scene sceneID="HqG-KO-UUN">
             <objects>
-                <tableViewController storyboardIdentifier="Connect" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3tr-uq-9yM" customClass="ConnectTableViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="164" sectionHeaderHeight="28" sectionFooterHeight="28" id="MK0-ec-jRt">
+                <viewController id="KVQ-Ja-9Fk" customClass="AddFriendsViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bgX-i7-GQ1"/>
+                        <viewControllerLayoutGuide type="bottom" id="yUD-HG-Pw6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d9S-GC-pIK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="164" id="2zq-SF-yeB" customClass="UserCell" customModule="Pensive" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="164"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2zq-SF-yeB" id="F8U-Lh-rvi">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="163.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="165" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AJv-Hs-Uuo">
+                                <rect key="frame" x="0.0" y="112" width="375" height="555"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addFriendsCell" rowHeight="165" id="iPI-ef-G6H" customClass="AddFriendsTableViewCell" customModule="Pensive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="165"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iPI-ef-G6H" id="NLL-9b-OYE">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="164.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hmY-u2-ynf">
+                                                    <rect key="frame" x="16" y="22" width="128" height="120"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SFI-Qn-gbB" customClass="BEMCheckBox">
+                                                    <rect key="frame" x="316" y="59" width="51" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <action selector="checkBoxToFollowAction:" destination="iPI-ef-G6H" eventType="valueChanged" id="QKr-0w-qNe"/>
+                                                    </connections>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgx-hi-77R">
+                                                    <rect key="frame" x="142" y="59" width="177" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkBoxToFollow" destination="SFI-Qn-gbB" id="cgD-nv-nd7"/>
+                                            <outlet property="friendProfileImage" destination="hmY-u2-ynf" id="OUk-LK-jwX"/>
+                                            <outlet property="friendUserName" destination="Rgx-hi-77R" id="ZwE-lQ-cD6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCM-ce-TeG">
+                                <rect key="frame" x="62" y="28" width="110" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="WjQ-xn-Itp" kind="show" identifier="connectMapView" id="dnI-Jw-jnQ"/>
+                                    <segue destination="ykS-m8-pzS" kind="show" id="QRJ-Dy-foa"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="3tr-uq-9yM" id="5e9-02-rh1"/>
-                            <outlet property="delegate" destination="3tr-uq-9yM" id="osG-Eb-pYs"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="kRi-Rl-IQb"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3es-Ix-l6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="addFriendsTableView" destination="AJv-Hs-Uuo" id="iXY-MI-InD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rsI-bn-QTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="272.80000000000001" y="-111.0944527736132"/>
+            <point key="canvasLocation" x="-639" y="587"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="E0q-Gi-Zim">
+            <objects>
+                <viewController id="ykS-m8-pzS" customClass="UserFeedViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="38C-8T-zWO"/>
+                        <viewControllerLayoutGuide type="bottom" id="T4a-P6-nj7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="95l-80-r6R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="acv-sv-Vbk">
+                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bkr-1H-TDz">
+                                <rect key="frame" x="0.0" y="9" width="146" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="UserFeed"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72k-Mg-iZr">
+                                <rect key="frame" x="141" y="9" width="132" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Maps"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ9-rx-GaF">
+                                <rect key="frame" x="-2" y="67" width="148" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Friends"/>
+                                <connections>
+                                    <segue destination="KVQ-Ja-9Fk" kind="show" id="IdJ-K4-25q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcW-K8-whX">
+                                <rect key="frame" x="271" y="12" width="104" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="HeatMap"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="CDY-Ou-l4M"/>
+                    <connections>
+                        <outlet property="UserfeedTableView" destination="acv-sv-Vbk" id="0Sg-0j-2w4"/>
+                        <outlet property="addFriendsAction" destination="zQ9-rx-GaF" id="YyC-Cc-6E5"/>
+                        <outlet property="addFriendsButton" destination="zQ9-rx-GaF" id="XLN-dN-t4J"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9hH-WG-GJa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="233" y="587"/>
         </scene>
         <!--Connect Map View View Controller-->
         <scene sceneID="STr-Vh-2pz">
@@ -664,7 +759,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1221.5999999999999" y="-107.49625187406298"/>
+            <point key="canvasLocation" x="1222" y="609"/>
         </scene>
         <!--Folders Table View Controller-->
         <scene sceneID="mrU-Dt-PpS">
@@ -1166,6 +1261,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SIE-YZ-LZC"/>
+        <segue reference="QRJ-Dy-foa"/>
         <segue reference="KmK-51-6So"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

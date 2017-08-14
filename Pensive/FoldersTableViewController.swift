@@ -36,13 +36,23 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
         super.viewDidLoad()
        setupInIt()
 
-        fetchFolder()
+    fetchFolder()
      //let w = UIScreen.main.bounds.width
    // let l = UIScreen.main.bounds.height
        // AddNewFolderPopUp.center = self.view.center
+    /*    for r in STOREDFolders  {
+            let folder = FOLDER()
+            folder.name = r["FolderName"] as? String
+            folder.icon = r["FolderIcon"] as? String
+            folder.key = r["firebaseKey"] as? String
+            self.folders.append(folder)
+        }
     }
-    
+ */
+    }
+    /*
     func fetchFolder() {
+        folders.removeAll()
         let ref = Database.database().reference().child((user?.uid)!).child("UserFolders")
         ref.observe( .value, with: { (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
@@ -67,7 +77,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
                     //}
                         DispatchQueue.main.async {
                             
-                          // self.tableView.reloadData()
+                          self.tableView.reloadData()
                         
                     }
             }
@@ -77,10 +87,40 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
         }
     )
     
-        
+      
         }
-
+*/
+    func fetchFolder() {
+        folders.removeAll()
+        let ref = Database.database().reference().child((user?.uid)!).child("UserFolders")
+        ref.observe( .childAdded, with: { (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let key = snapshot.key
+                        //print(key)
+                        let folder = FOLDER()
+                        folder.name = (dictionary["FolderName"] as? String)!
+                        folder.icon = (dictionary["FolderIcon"] as? String)!
+                     folder.key = key
+                        // print(dictionary)
+                        //folder.name = dictionary["Username"] as? String
+                        // print(folder.name!)
+                        
+                        self.folders.append(folder)
+                    }
+                    // if self.folders.contains(folder) {
+                    // print("YES")
+                    //}
+                    DispatchQueue.main.async {
+                        
+                        self.tableView.reloadData()
+                        
+                    }
+                }
+            }
+        )}
     
+
    override func viewWillAppear(_ animated: Bool) {
     
         
@@ -287,6 +327,7 @@ let cell = UITableViewCell()
         
         AddNewFolderPopUp.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
+      
         let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
         
         refFolders.observe( .value, with: { (snapshot) in
@@ -318,6 +359,7 @@ let cell = UITableViewCell()
             //    let _menuView = firstViewController.updateMenuViewFolders()
              //   firstViewController.sortByDropDown(menuView: _menuView!)
                 firstViewController.setupInIt()
+              
         }
         
     }
@@ -333,14 +375,29 @@ let cell = UITableViewCell()
     
         if editingStyle == .delete {
             let removingfolder = folders[indexPath.row].name
-            let removingfolderkey = folders[indexPath.row].key
-            print(removingfolder)
-            print(folders.count)
+          let removingfolderkey = folders[indexPath.row].key
+            print(removingfolderkey)
             folders.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             print(folders.count)
-             let ref = Database.database().reference().child((user?.uid)!).child("UserFolders").child(removingfolderkey!)
+             let ref = Database.database().reference().child((user?.uid)!).child("UserFolders").child(removingfolderkey as! String)
             ref.removeValue()
+            
+            for p in STOREDPlaces {
+                if p["PlaceUnderFolder"] as? String == removingfolder {
+                    let i = p.count
+                    print(i)
+                    let key = p["firebaseKey"] as? String
+                    print(key)
+                    print("This is removing from storedplaces")
+                     let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces").child(key!)
+                    ref.removeValue()
+                   
+                } else {
+                    print("nothing to remove")
+                }
+                           }
+
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
