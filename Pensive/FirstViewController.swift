@@ -244,17 +244,23 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
         refFolders.observe( .value, with: { (snapshot) in
             STOREDFolders.removeAll()
+            self.folderNames.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let key = snap.key
                         var FOLDER = (dictionary[key] as? [String: AnyObject]!)!
+                          let folder = (dictionary[key] as? [String: AnyObject]!)!["FolderName"]
+                        self.folderNames.append(folder! as! String)
                         FOLDER?.updateValue(key as AnyObject, forKey: "firebaseKey")
                         STOREDFolders.append(FOLDER!)
                        
                     }
                 }
             }
+            self.setupInIt()
+            self.sortByDropDown()
+            self.filterPlaces()
         }
         )
         /*
@@ -276,14 +282,17 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             )}
         )
         */
+        /*
         let when = DispatchTime.now() + 3
         DispatchQueue.main.asyncAfter(deadline: when) {
+            /*
           self.folderNames.removeAll()
             for r in STOREDFolders  {
                 let folder = r["FolderName"] as? String
                 
                 self.folderNames.append(folder!)
             }
+ */
             self.setupInIt()
             self.sortByDropDown()
             self.filterPlaces()
@@ -292,32 +301,36 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
         if let navigationBar = self.navigationController?.navigationBar {
             let firstFrame = CGRect(x: 20, y: 10, width: navigationBar.frame.width/13.2, height: navigationBar.frame.height-17)
+            /*
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
-            tapGesture.numberOfTapsRequired = 1
+ */
+            //tapGesture.numberOfTapsRequired = 1
             let firstLabel = UILabel(frame: firstFrame)
             firstLabel.isUserInteractionEnabled = true
             firstLabel.backgroundColor = UIColor(patternImage: UIImage (named: "refreshfolderIcon")!)
             //firstLabel.textColor = UIColor.red
-            firstLabel.addGestureRecognizer(tapGesture)
+            //firstLabel.addGestureRecognizer(tapGesture)
             navigationBar.addSubview(firstLabel)
         
         }
-    
+    */
     }
     
-
+/*
     func TapFunc(sender: UITapGestureRecognizer) {
         print("THIS IS BEING TAPPED")
+        /*
         self.folderNames.removeAll()
         for r in STOREDFolders  {
             let folder = r["FolderName"] as? String
             self.folderNames.append(folder!)
         }
        // let _menuView = self.updateMenuViewFolders()
+ */
         self.sortByDropDown()
         self.setupInIt()
     }
- 
+ */
 
  /*
     override func viewDidDisappear(_ animated: Bool) {
@@ -444,9 +457,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 //        menuView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
      // self.navigationItem.titleView = menuView
         self.navigationItem.titleView?.isUserInteractionEnabled = true
+        /*
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
       tapGesture.numberOfTapsRequired = 1
-      
+      */
 //self.navigationController?.
         
         //addGestureRecognizer(tapGesture)

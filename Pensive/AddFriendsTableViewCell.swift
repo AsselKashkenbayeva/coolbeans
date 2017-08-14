@@ -47,11 +47,17 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
             let post : [String: AnyObject] = ["Friend" : p as AnyObject]
             let databaseRef = Database.database().reference().child((user?.uid)!).child("Friends")
         //databaseRef.child(r).removeValue()
-        databaseRef.queryOrdered(byChild: "Friend").queryEqual(toValue: p).observe(.childAdded, with: { (snapshot) in
+      let bob =  databaseRef.queryOrdered(byChild: "Friend").queryEqual(toValue: p)
+            
+        print(bob)
+            
+            
+            /*
+            observe(.childAdded, with: { (snapshot) in
             //print(snapshot)
             snapshot.ref.removeValue()
         })
-            
+        */    
         }
 //print("this is being tapped")
  
