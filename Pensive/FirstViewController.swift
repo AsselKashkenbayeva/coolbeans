@@ -223,6 +223,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
         
         ref.observe( .value, with: { (snapshot) in
+            print("THIS PLACES HAS BEEN TRIGGERED")
             STOREDPlaces.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
@@ -234,15 +235,17 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                         STOREDPlaces.append(PLACE!)
                     }
                 }
-                
+                self.filterPlaces()
+                print("I am now adding this place into the thing")
             }
         }
         )
-
+        
 //This does the same as previous but accesses the stored folders file and places into the STOREDFolders dict
         let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
         
         refFolders.observe( .value, with: { (snapshot) in
+            
             STOREDFolders.removeAll()
             self.folderNames.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
@@ -260,88 +263,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
             self.setupInIt()
             self.sortByDropDown()
-            self.filterPlaces()
+           // self.filterPlaces()
         }
         )
-        /*
-        //retreive Stored Place Photo from firebase
-        let userID: String = (Auth.auth().currentUser?.uid)!
-        
-        let storageRef = Storage.storage().reference().child(userID).child(firebaseKey).child("StoredPlacePicture")
-        ref.child(userID).child(firebaseKey).child("StoredPlacePicture").observe(.value, with: { (snapshot) in
-            storageRef.getData(maxSize: 10*1024*1024, completion: {(data, error) -> Void in
-                if (error != nil) {
-                    print("got no pic")
-                } else {
-                    
-                    let storedPlacePicture = UIImage(data: data!)
-                   // self.image = profilePhoto
-                    print("I HAVE YOUR PHOTO")
-                }
-            }
-            )}
-        )
-        */
-        /*
-        let when = DispatchTime.now() + 3
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            /*
-          self.folderNames.removeAll()
-            for r in STOREDFolders  {
-                let folder = r["FolderName"] as? String
-                
-                self.folderNames.append(folder!)
-            }
- */
-            self.setupInIt()
-            self.sortByDropDown()
-            self.filterPlaces()
-         
-        }
-        
-        if let navigationBar = self.navigationController?.navigationBar {
-            let firstFrame = CGRect(x: 20, y: 10, width: navigationBar.frame.width/13.2, height: navigationBar.frame.height-17)
-            /*
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
- */
-            //tapGesture.numberOfTapsRequired = 1
-            let firstLabel = UILabel(frame: firstFrame)
-            firstLabel.isUserInteractionEnabled = true
-            firstLabel.backgroundColor = UIColor(patternImage: UIImage (named: "refreshfolderIcon")!)
-            //firstLabel.textColor = UIColor.red
-            //firstLabel.addGestureRecognizer(tapGesture)
-            navigationBar.addSubview(firstLabel)
-        
-        }
-    */
+  
     }
-    
-/*
-    func TapFunc(sender: UITapGestureRecognizer) {
-        print("THIS IS BEING TAPPED")
-        /*
-        self.folderNames.removeAll()
-        for r in STOREDFolders  {
-            let folder = r["FolderName"] as? String
-            self.folderNames.append(folder!)
-        }
-       // let _menuView = self.updateMenuViewFolders()
- */
-        self.sortByDropDown()
-        self.setupInIt()
-    }
- */
-
- /*
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        let items = self.folderNames
-        folderNames.append("All")
-     let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
-        menuView.isHidden = true
-        menuView.hide()
-    }
- */
+ 
     func filterPlaces() {
  //       self.detailsPopUp.removeFromSuperview()
         self.markersArray.removeAll()
@@ -429,19 +356,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
       
     }
-    /*
-    func updateMenuViewFolders() -> BTNavigationDropdownMenu? {
-        print("updating folders")
-        print(folderNames)
-        let items = self.folderNames
-      
-        //folderNames.append("All")
-        let menuView = BTNavigationDropdownMenu(title: "Sort By", items: items as [AnyObject])
-        menuView.updateItems(self.folderNames as [AnyObject])
-
-        return menuView
-    }
-*/
+ 
     func sortByDropDown() {
         let items = self.folderNames
       
@@ -453,50 +368,20 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
 
          self.navigationItem.titleView = menuView
      
-      //  self.navigationController?.view = menuView
-//        menuView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Sort By", items: items as [AnyObject])
-     // self.navigationItem.titleView = menuView
         self.navigationItem.titleView?.isUserInteractionEnabled = true
-        /*
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapFunc(sender:)))
-      tapGesture.numberOfTapsRequired = 1
-      */
-//self.navigationController?.
-        
-        //addGestureRecognizer(tapGesture)
-        
+
         menuView.cellTextLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         menuView.menuTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         menuView.cellSelectionColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-      //  menuView.hide()
-      //  menuView.toggle()
+
         menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
-           
-           // print("Did select item at index: \(indexPath)")
-          // print(self?.folderNames[indexPath])
-   //   self?.filterSelected  = (self?.folderNames[indexPath])!
-    
-        //  print(self?.filterSelected)
-           // print(indexPath)
+ 
             menuView.setNeedsDisplay()
             menuView.setNeedsLayout()
             if indexPath != nil {
           self?.filterSelected = (self?.folderNames[indexPath])!
                // print((self?.filterSelected)!)
-            self?.filterPlaces()
-                /*
-                self?.folderNames.removeAll()
-                for r in STOREDFolders  {
-                    let folder = r["FolderName"] as? String
-                    self?.folderNames.append(folder!)
-                }
-           // self?.dropDownMenuFolder.reloadView()
-           //    menuView.updateItems(self?.folderNames as! [AnyObject])
-                
-                */
-               // menuView.setNeedsLayout()
-                //menuView.setNeedsDisplay()
-               
+          //  self?.filterPlaces()
             }
             return
         }
@@ -518,9 +403,15 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 dropdownItems.add(addObject:item)
                // print(item.iconImage.accessibilityIdentifier)
             }
+          
         }
         else {
-            
+                let item = IGLDropDownItem()
+                item.text = "My new list"
+                item.iconImage = UIImage(named: "4")
+                item.iconImage.accessibilityIdentifier = "4"
+                //THERE NEEDS TO BE SOMETHING HERE THAT MAKES SURE IF AN ICON WAS NOT PICKED AND NIL FOUND IT IS HANDLED.
+                dropdownItems.add(addObject:item)
         }
         
         dropDownMenuFolder.menuText = "Choose Folder"
@@ -533,7 +424,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         dropDownMenuFolder.itemAnimationDelay = 0.1
         dropDownMenuFolder.reloadView()
   
-      print(dropDownMenuFolder.frame.width)
+     // print(dropDownMenuFolder.frame.width)
       dropDownMenuFolder.frame.origin.x = mapCustomInfoWindow.center.x-dropDownMenuFolder.frame.width/2
         dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
       
@@ -842,7 +733,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
         detailsPopUp.removeFromSuperview()
-     
+     /*
        let beforeFirebase = STOREDPlaces.count
     
         let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
@@ -865,6 +756,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
     //    }
         )
+ */
       /*
         let when = DispatchTime.now() + 2
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -897,7 +789,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     @IBAction func detailCloseAction(_ sender: Any) {
         self.filterSelected = "All"
-        filterPlaces()
+       // filterPlaces()
      detailsPopUp.removeFromSuperview()
     }
     
@@ -923,7 +815,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-filterPlaces()
+//filterPlaces()
         let controller = segue.destination as! DetailViewController
        controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
         controller.modalPresentationStyle = .custom

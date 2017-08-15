@@ -52,7 +52,10 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func fetchFriends() {
         let ref = Database.database().reference()
+       
         ref.child((self.user?.uid)!).child("Friends").observe( .value, with: { (snapshot) in
+            self.friends.removeAll()
+
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {

@@ -32,6 +32,9 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     var folderIndex = ""
      let user = Auth.auth().currentUser
     var valueToPass: String!
+    
+    let gradientLayer = CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        setupInIt()
@@ -247,25 +250,14 @@ let cell = UITableViewCell()
         dropDownMenuFolder.menuText = "Icon"
         dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
         dropDownMenuFolder.paddingLeft = 15
-        dropDownMenuFolder.frame = CGRect(x: 150, y: 80, width: 70, height: 45)
+        dropDownMenuFolder.frame = CGRect(x: AddNewFolderPopUp.center.x, y: AddNewFolderPopUp.center.y+20, width: 70, height: 45)
+
         dropDownMenuFolder.delegate = self
-        dropDownMenuFolder.type = IGLDropDownMenuType.stack
+        dropDownMenuFolder.type = IGLDropDownMenuType.slidingInBoth
         dropDownMenuFolder.gutterY = 5
         dropDownMenuFolder.itemAnimationDelay = 0.1
         dropDownMenuFolder.reloadView()
-        
-        
-        var myLabel = UILabel()
-      //  myLabel.text = "SwiftyOS Blog"
-        myLabel.textColor = UIColor.white
-        myLabel.font = UIFont(name: "Halverica-Neue", size: 17)
-        myLabel.textAlignment = NSTextAlignment.center
-       // myLabel.frame = CGRect(x: 40, y: 500, width: 250, height: 45)
-        
-        self.AddNewFolderPopUp.addSubview(myLabel)
-        self.AddNewFolderPopUp.addSubview(self.dropDownMenuFolder)
-        
-        
+        //self.AddNewFolderPopUp.addSubview(self.dropDownMenuFolder)
     }
     
     
@@ -300,14 +292,44 @@ let cell = UITableViewCell()
    
         self.view.addSubview(AddNewFolderPopUp)
         //this is to allow the icons to be clickable
-        self.view.addSubview(self.dropDownMenuFolder)
+       // self.view.addSubview(self.dropDownMenuFolder)
         let y = self.view.center.y
        AddFolderButton.isUserInteractionEnabled = false
       AddFolderButton.setTitleColor(UIColor.gray, for: .normal)
-        AddNewFolderPopUp.center = CGPoint(x: self.view.center.x, y: y/2.8)
+        AddNewFolderPopUp.center = CGPoint(x: self.view.center.x, y: self.view.center.y/12)
+      
+        //y/2.8
             //CGPoint(x: 180, y: 90)
-        AddNewFolderPopUp.layer.borderWidth = 2
+        AddNewFolderPopUp.layer.borderWidth = 0.5
         AddNewFolderPopUp.layer.borderColor = UIColor.darkGray.cgColor
+    AddFolderCancelButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+   self.navigationController?.view.addSubview(AddNewFolderPopUp)
+      //  self.navigationController?.view.addSubview(dropDownMenuFolder)
+    /*
+        gradientLayer.frame = self.AddNewFolderPopUp.bounds
+        let color1 = UIColor.clear.cgColor
+        let color2 = UIColor.white.cgColor
+        let color3 = UIColor.lightGray.cgColor
+        gradientLayer.colors = [color1, color3]
+        gradientLayer.locations = [0.8, 1]
+        self.AddNewFolderPopUp.layer.addSublayer(gradientLayer)
+*/
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            //Frame Option 1:
+            self.AddNewFolderPopUp.frame = CGRect(x: 0 , y: 20, width: self.AddNewFolderPopUp.frame.width, height: self.AddNewFolderPopUp.frame.height)
+         
+            
+        },completion: { finish in
+            
+            UIView.animate(withDuration: 1, delay: 0.25,options: UIViewAnimationOptions.curveEaseOut,animations: {
+                self.AddNewFolderPopUp.transform = CGAffineTransform(scaleX: 1, y: 1)
+               
+                    self.navigationController?.view.addSubview(self.dropDownMenuFolder)
+              
+            },completion: nil)})
+    
+
+    
        
     }
     
@@ -365,6 +387,7 @@ let cell = UITableViewCell()
     }
     
     @IBAction func AddFolderCancelButton(_ sender: Any) {
+   
           AddNewFolderPopUp.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
     }
