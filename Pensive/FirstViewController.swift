@@ -40,7 +40,8 @@ class markerUserData{
     var checkbox: Bool
     var tags: String
     var placepicture: String
-    init(Name: String, Address: String, Website: String, Telephone: String, FirebaseKey: String, Rating: Int, Checkbox: Bool, Tags: String, PlacePicture: String) {
+    var folderName: String
+    init(Name: String, Address: String, Website: String, Telephone: String, FirebaseKey: String, Rating: Int, Checkbox: Bool, Tags: String, PlacePicture: String, FolderName: String) {
         self.nameUserData = Name
         self.addressUserData = Address
         self.websiteUserData = Website
@@ -50,6 +51,7 @@ class markerUserData{
         self.checkbox = Checkbox
         self.tags = Tags
         self.placepicture = PlacePicture
+        self.folderName = FolderName
     }
 }
 class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate, DataEnteredDelegate {
@@ -152,6 +154,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var userCurrentLocation = CLLocationCoordinate2D()
     var jim = CLLocation()
     
+    var MARKers = [GMSMarker]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -231,8 +235,42 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                         let key = snap.key
                         self.firebaseKey = key
                         var PLACE = (dictionary[key] as? [String: AnyObject]!)!
-                        PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
+                        
+                        let latitude = (dictionary[key]?["Latitude"] as? NSString)?.doubleValue
+                        let longitude = (dictionary[key]?["Longitude"] as? NSString)?.doubleValue
+
+    let markers = GMSMarker()
+   markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+  self.markersArray.append(markers.position)
+    
+    let folderIcon = (dictionary[key] as? [String: AnyObject]!)!["FolderIcon"]
+   markers.icon = UIImage(named:folderIcon! as! String)
+                      
+    let name = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceName"]
+    let website = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceWebsite"]
+    let address = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceAddress"]
+   // let firebaseKey = p["firebaseKey"] as? String
+    let rating = (dictionary[key] as? [String: AnyObject]!)!["Rating"]
+    let checkbox = (dictionary[key] as? [String: AnyObject]!)!["Checkbox"]
+    let tags = (dictionary[key] as? [String: AnyObject]!)!["Tags"]
+    let placePicture = (dictionary[key] as? [String: AnyObject]!)!["StoredPlacePicture"]
+    let telephone = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceTelephone"]
+    let foldername = (dictionary[key] as? [String: AnyObject]!)!["PlaceUnderFolder"]
+                       
+    
+  markers.accessibilityValue = name as! String
+                       
+    self.placeNamesArray.append(name! as! String)
+                  
+                        
+        let storedPlaceUserData = markerUserData(Name: name! as! String, Address: address! as! String, Website: website! as! String, Telephone: telephone! as! String, FirebaseKey: key, Rating: rating! as! Int, Checkbox: checkbox! as! Bool, Tags: tags! as! String, PlacePicture: placePicture! as! String, FolderName: foldername as! String)
+                        
+    markers.userData = storedPlaceUserData
+                        
+    PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
+                        
                         STOREDPlaces.append(PLACE!)
+                        self.MARKers.append(markers)
                     }
                 }
                 self.filterPlaces()
@@ -270,11 +308,37 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
  
     func filterPlaces() {
- //       self.detailsPopUp.removeFromSuperview()
+        self.vwGMap.clear()
+        print("Filter places function is being called")
+        if self.filterSelected == "All"
+        {
+            for m in MARKers {
+                var marKER = GMSMarker()
+                marKER = m
+                marKER.map = self.vwGMap
+            }
+                self.vwGMap.setNeedsDisplay()
+        }
+        else if self.filterSelected != "All"  {
+            for m in MARKers {
+           if (m.userData as! markerUserData).folderName as? String == self.filterSelected {
+            
+                var marKER = GMSMarker()
+                marKER = m
+                marKER.map = self.vwGMap
+            }
+            }
+              self.vwGMap.setNeedsDisplay()
+        }
+      
+    }
+    /*
+    func filterPlaces() {
+        //       self.detailsPopUp.removeFromSuperview()
         self.markersArray.removeAll()
         //  self.placeIDsArray.removeAll()
-       self.placeNamesArray.removeAll()
-       // self.placeWebsiteArray.removeAll()
+        self.placeNamesArray.removeAll()
+        // self.placeWebsiteArray.removeAll()
         self.vwGMap.clear()
         print("Filter places function is being called")
         if self.filterSelected == "All"
@@ -283,37 +347,37 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             for p in STOREDPlaces {
                 let latitude = (p["Latitude"] as? NSString)?.doubleValue
                 let longitude = (p["Longitude"] as? NSString)?.doubleValue
-              //  let placeIDs = (p["StoredPlaceID"] as? String)
-               
-               let markers = GMSMarker()
+                //  let placeIDs = (p["StoredPlaceID"] as? String)
+                
+                let markers = GMSMarker()
                 markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-             //  self.placeIDsArray.append(placeIDs!)
-               self.markersArray.append(markers.position)
+                //  self.placeIDsArray.append(placeIDs!)
+                self.markersArray.append(markers.position)
                 let folderIcon = p["FolderIcon"] as? String
                 markers.icon = UIImage(named:folderIcon!)
-            //   markers.tracksViewChanges = true
+                //   markers.tracksViewChanges = true
                 let name = p["StoredPlaceName"] as? String
                 let website = p["StoredPlaceWebsite"] as? String
                 let address = p["StoredPlaceAddress"] as? String
-                 let firebaseKey = p["firebaseKey"] as? String
-               let rating = p["Rating"] as? Int
+                let firebaseKey = p["firebaseKey"] as? String
+                let rating = p["Rating"] as? Int
                 let checkbox = p["Checkbox"] as? Bool
                 let tags = p["Tags"] as? String
                 let placePicture = p["StoredPlacePicture"] as? String
                 let telephone = p["StoredPlaceTelephone"] as? String
-            //  markers.title = name
-        markers.accessibilityValue = name
-            // markers.snippet = address
-               self.placeNamesArray.append(name!)
-           //     self.placeWebsiteArray.append(website!)
-
+                //  markers.title = name
+                markers.accessibilityValue = name
+                // markers.snippet = address
+                self.placeNamesArray.append(name!)
+                //     self.placeWebsiteArray.append(website!)
+                
                 markers.map = self.vwGMap
-               
+                
                 self.vwGMap.setNeedsDisplay()
                 
                 let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: telephone!, FirebaseKey: firebaseKey!, Rating: rating!, Checkbox: checkbox!, Tags: tags!, PlacePicture: placePicture!)
-               markers.userData = storedPlaceUserData
-
+                markers.userData = storedPlaceUserData
+                
             }
         }
         else if self.filterSelected != "All"  {
@@ -351,11 +415,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     
                     let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: telephone!, FirebaseKey: firebaseKey!, Rating: rating!, Checkbox: checkbox!, Tags: tags!, PlacePicture: placePicture!)
                     markers.userData = storedPlaceUserData
-                                  }
+                }
             }
         }
-      
+        
     }
+*/
  
     func sortByDropDown() {
         let items = self.folderNames
@@ -381,7 +446,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             if indexPath != nil {
           self?.filterSelected = (self?.folderNames[indexPath])!
                // print((self?.filterSelected)!)
-          //  self?.filterPlaces()
+            self?.filterPlaces()
             }
             return
         }
