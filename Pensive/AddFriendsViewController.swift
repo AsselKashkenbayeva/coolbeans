@@ -138,11 +138,38 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
          cell.imageView?.clipsToBounds = true
          cell.imageView?.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
          */
+      //  cell.friendProfileImage.image = imageWithImage(image: UIImage(named: "MapIcon")!, scaledToSize: CGSize(width: 40, height: 40))
+        
+        if let profileImageURL = User.ProfilePicURL {
+            let url = URL(string: profileImageURL)
+            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    print("THIS IS GOING TO BE A PIC")
+                    cell.friendProfileImage.image = UIImage(data: data!)
+                }
+            }).resume()
+        }
+        /*
+        cell.friendProfileImage.sizeToFit()
+        cell.friendProfileImage.layer.borderWidth = 1
+        cell.friendProfileImage.layer.masksToBounds = false
+        cell.friendProfileImage.layer.borderColor = UIColor.orange.cgColor
+        cell.friendProfileImage.layer.cornerRadius = 70
+        cell.friendProfileImage.clipsToBounds = true
+        cell.friendProfileImage.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
+*/
+       
         cell.checkBoxToFollow.tag = indexPath.row
         
        cell.checkBoxToFollow.addTarget(self, action: "didTap:", for: UIControlEvents.touchUpInside)
         print(indexPath.row)
-      
+ 
         return cell
     }
     

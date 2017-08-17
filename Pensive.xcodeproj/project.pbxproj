@@ -29,6 +29,7 @@
 		CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */; };
 		CF7DB1A71F4061430015492E /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */; };
 		CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */; };
+		CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */; };
 		CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */; };
 		CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */; };
 		CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */; };
@@ -105,6 +106,7 @@
 		CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
 		CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		CF7EC84E1DBE68A1005C8D06 /* Pensive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pensive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */,
 				CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */,
 				CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */,
 				CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */,
@@ -537,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
+				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,

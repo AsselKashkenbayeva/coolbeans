@@ -65,6 +65,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var Markers = [GMSMarker]()
   
   
+    @IBOutlet var pictureOfPlace: UIImageView!
  
     @IBOutlet var detailsPopUp: UIView!
     
@@ -159,27 +160,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*
-        dropDownMenuFolder.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector (TapFuncTwo(_sender:)))
-        tap.numberOfTapsRequired = 1
-        dropDownMenuFolder.addGestureRecognizer(tap)
-        
-        */
-        
-        
-        
-        
+    
        self.filterSelected = "All"
-        
-        //dont forget to set trackchanges for updates to the info window
-        
-    //    fetchFolders()
-        
-        
-        // self.view = dropDownMenuFolder
-        
+    
         // removes the navigation bar
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -189,18 +172,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         effect = visualEffectView?.effect
         visualEffectView?.isHidden = true
         visualEffectView?.effect = nil
-        //addNewItem.layer.cornerRadius = 5
-        
-        
-        /*
-         var blur = UIBlurEffect(style: UIBlurEffectStyle.light )
-         var blurview = UIVisualEffectView(effect: blur)
-         blurview.alpha = 0.8
-         blurview.frame = mapView.bounds
-         self.view.addSubview(blurview)
-         */
-        
-        //Initially uploading googleMaps
+  
         
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 22.300000, longitude: 70.783300, zoom: 10.0)
         vwGMap = GMSMapView.map(withFrame: self.view.frame, camera: camera)
@@ -225,9 +197,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         
 //This is getting access to the database and accessing the stored places child information and storing it into a local STOREDPlaces dictionary
         let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
-        
+        print("THIS IS STORED PLACES IN GOOGLE MAPS VIEW CONTROLLER")
         ref.observe( .value, with: { (snapshot) in
-            print("THIS PLACES HAS BEEN TRIGGERED")
+            print(self.MARKers.count)
+          self.MARKers.removeAll()
+            print(self.MARKers.count)
             STOREDPlaces.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
@@ -249,7 +223,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     let name = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceName"]
     let website = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceWebsite"]
     let address = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceAddress"]
-   // let firebaseKey = p["firebaseKey"] as? String
     let rating = (dictionary[key] as? [String: AnyObject]!)!["Rating"]
     let checkbox = (dictionary[key] as? [String: AnyObject]!)!["Checkbox"]
     let tags = (dictionary[key] as? [String: AnyObject]!)!["Tags"]
@@ -260,7 +233,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
   markers.accessibilityValue = name as! String
                        
-    self.placeNamesArray.append(name! as! String)
+  self.placeNamesArray.append(name! as! String)
                   
                         
         let storedPlaceUserData = markerUserData(Name: name! as! String, Address: address! as! String, Website: website! as! String, Telephone: telephone! as! String, FirebaseKey: key, Rating: rating! as! Int, Checkbox: checkbox! as! Bool, Tags: tags! as! String, PlacePicture: placePicture! as! String, FolderName: foldername as! String)
@@ -270,18 +243,19 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
                         
                         STOREDPlaces.append(PLACE!)
+                        
                         self.MARKers.append(markers)
+                        print(self.MARKers.count)
                     }
                 }
-                self.filterPlaces()
-                print("I am now adding this place into the thing")
+               self.filterPlaces()
             }
         }
         )
         
 //This does the same as previous but accesses the stored folders file and places into the STOREDFolders dict
         let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
-        
+        print("THIS IS STORED FOLDER IN GOOGLE MAPS VIEW CONTROLLER")
         refFolders.observe( .value, with: { (snapshot) in
             
             STOREDFolders.removeAll()
@@ -301,7 +275,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
             self.setupInIt()
             self.sortByDropDown()
-           // self.filterPlaces()
         }
         )
   
@@ -332,96 +305,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
       
     }
-    /*
-    func filterPlaces() {
-        //       self.detailsPopUp.removeFromSuperview()
-        self.markersArray.removeAll()
-        //  self.placeIDsArray.removeAll()
-        self.placeNamesArray.removeAll()
-        // self.placeWebsiteArray.removeAll()
-        self.vwGMap.clear()
-        print("Filter places function is being called")
-        if self.filterSelected == "All"
-            
-        {
-            for p in STOREDPlaces {
-                let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                //  let placeIDs = (p["StoredPlaceID"] as? String)
-                
-                let markers = GMSMarker()
-                markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                //  self.placeIDsArray.append(placeIDs!)
-                self.markersArray.append(markers.position)
-                let folderIcon = p["FolderIcon"] as? String
-                markers.icon = UIImage(named:folderIcon!)
-                //   markers.tracksViewChanges = true
-                let name = p["StoredPlaceName"] as? String
-                let website = p["StoredPlaceWebsite"] as? String
-                let address = p["StoredPlaceAddress"] as? String
-                let firebaseKey = p["firebaseKey"] as? String
-                let rating = p["Rating"] as? Int
-                let checkbox = p["Checkbox"] as? Bool
-                let tags = p["Tags"] as? String
-                let placePicture = p["StoredPlacePicture"] as? String
-                let telephone = p["StoredPlaceTelephone"] as? String
-                //  markers.title = name
-                markers.accessibilityValue = name
-                // markers.snippet = address
-                self.placeNamesArray.append(name!)
-                //     self.placeWebsiteArray.append(website!)
-                
-                markers.map = self.vwGMap
-                
-                self.vwGMap.setNeedsDisplay()
-                
-                let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: telephone!, FirebaseKey: firebaseKey!, Rating: rating!, Checkbox: checkbox!, Tags: tags!, PlacePicture: placePicture!)
-                markers.userData = storedPlaceUserData
-                
-            }
-        }
-        else if self.filterSelected != "All"  {
-            for p in STOREDPlaces {
-                if p["PlaceUnderFolder"] as? String == self.filterSelected {
-                    let latitude = (p["Latitude"] as? NSString)?.doubleValue
-                    let longitude = (p["Longitude"] as? NSString)?.doubleValue
-                    //  let placeIDs = (p["StoredPlaceID"] as? String)
-                    
-                    let markers = GMSMarker()
-                    markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
-                    //  self.placeIDsArray.append(placeIDs!)
-                    self.markersArray.append(markers.position)
-                    let folderIcon = p["FolderIcon"] as? String
-                    markers.icon = UIImage(named:folderIcon!)
-                    //   markers.tracksViewChanges = true
-                    let name = p["StoredPlaceName"] as? String
-                    let website = p["StoredPlaceWebsite"] as? String
-                    let address = p["StoredPlaceAddress"] as? String
-                    let firebaseKey = p["firebaseKey"] as? String
-                    let rating = p["Rating"] as? Int
-                    let checkbox = p["Checkbox"] as? Bool
-                    let tags = p["Tags"] as? String
-                    let placePicture = p["StoredPlacePicture"] as? String
-                    let telephone = p["StoredPlaceTelephone"] as? String
-                    //  markers.title = name
-                    markers.accessibilityValue = name
-                    // markers.snippet = address
-                    self.placeNamesArray.append(name!)
-                    //     self.placeWebsiteArray.append(website!)
-                    
-                    markers.map = self.vwGMap
-                    
-                    self.vwGMap.setNeedsDisplay()
-                    
-                    let storedPlaceUserData = markerUserData(Name: name!, Address: address!, Website: website!, Telephone: telephone!, FirebaseKey: firebaseKey!, Rating: rating!, Checkbox: checkbox!, Tags: tags!, PlacePicture: placePicture!)
-                    markers.userData = storedPlaceUserData
-                }
-            }
-        }
-        
-    }
-*/
- 
+
     func sortByDropDown() {
         let items = self.folderNames
       
@@ -471,12 +355,22 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
           
         }
         else {
+            //If there are no folders, there is a baseline folder set here
                 let item = IGLDropDownItem()
                 item.text = "My new list"
                 item.iconImage = UIImage(named: "4")
                 item.iconImage.accessibilityIdentifier = "4"
-                //THERE NEEDS TO BE SOMETHING HERE THAT MAKES SURE IF AN ICON WAS NOT PICKED AND NIL FOUND IT IS HANDLED.
+
                 dropdownItems.add(addObject:item)
+            
+            let folderName = item.text
+            let folderIcon = item.iconImage.accessibilityIdentifier
+            
+            
+            let post : [String: AnyObject] = ["FolderName" : folderName as AnyObject, "FolderIcon" : folderIcon as AnyObject ]
+
+            let databaseRef = Database.database().reference()
+            databaseRef.child((self.user?.uid)!).child("UserFolders").childByAutoId().setValue(post)
         }
         
         dropDownMenuFolder.menuText = "Choose Folder"
@@ -564,10 +458,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         circ.map = self.vwGMap
         self.view = self.vwGMap 
  */
-        locationsInsideRadius()
+       // locationsInsideRadius()
 
  }
-    
+    /*
     func locationsInsideRadius() {
         let circleCenter = jim.coordinate
         let circ = GMSCircle(position: circleCenter, radius: 200)
@@ -593,7 +487,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         circ.map = self.vwGMap
         self.view = self.vwGMap
     }
-    
+    */
     //MARK: GMSMapview Delegate
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         self.vwGMap.isMyLocationEnabled = true }
@@ -613,8 +507,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
        self.marker = marker
         marker.position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
         marker.accessibilityValue = place.name
-   
-      //  marker.snippet = place.formattedAddress
         marker.map = self.vwGMap
         marker.icon = GMSMarker.markerImage(with: UIColor.blue)
         self.dismiss(animated: true, completion: nil)
@@ -729,10 +621,25 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         tappedMarkerAddress = (marker.userData as! markerUserData).addressUserData
         detailsPopUp.layer.borderWidth = 2
         detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
+    
+        getImage(imageName:(marker.userData as! markerUserData).firebaseKey )
           self.view.addSubview(detailsPopUp)
         }
         return false
     }
+    
+    func getImage(imageName: String){
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        if fileManager.fileExists(atPath: imagePath){
+            pictureOfPlace.image = UIImage(contentsOfFile: imagePath)
+            print("I have uploaded image from internal database")
+        }else{
+            //if there is no image added to the place then rearrange the detail view to look good without the little picture
+            pictureOfPlace.isHidden = true
+        }
+    }
+
     
     //This produces the coordinate of where it tapped on the map, doesn't work on tapped markers
     /*func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
@@ -755,24 +662,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     dropDownMenuFolder.frame.origin.x = mapCustomInfoWindow.center.x-dropDownMenuFolder.frame.width/2
     dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
     }
-    
-    
-    //When doing long press, it shows pop up window above icon
-    /*
-    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-       let location = coordinate
-        longPressCoordinate = location
-        mapCustomInfoWindow.center = mapView.projection.point(for: location)
-        mapCustomInfoWindow.center.y -= 150
-       dropDownMenuFolder.center = mapCustomInfoWindow.center
-    //mapCustomInfoWindow.addSubview(dropDownMenuFolder)
-        mapCustomInfoWindow.layer.borderWidth = 2
-        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
-        self.view.addSubview(mapCustomInfoWindow)
-        self.view.addSubview(dropDownMenuFolder)
-    }
-    */
-    
+
     @IBOutlet weak var CancelAddNewPlace: UIButton!
     
     //When adding new place, saves place to Firebase, changes icon to selected

@@ -149,7 +149,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
      
     }
 */
-                
+                /*
                 let userID: String = (Auth.auth().currentUser?.uid)!
                 let storageRef = Storage.storage().reference().child(userID).child(self.firebaseKey).child("StoredPlacePicture")
                 storageRef.getData(maxSize: 10*1024*1024, completion: {(data, error) -> Void in
@@ -164,7 +164,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                     }
                 }
                     )
-        
+        */
             
 
                 ref.observe( .value, with: { (snapshot) in
@@ -184,17 +184,18 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                 })
             }
         })
-        
+        /*
             // obj is a string array. Do something with stringArray
             if let checkedUrl = URL(string: selectedPlace["StoredPlacePicture"] as! String) {
                 
-                print(selectedPlace["StoredPlacePicture"] as! String)
+                //print(selectedPlace["StoredPlacePicture"] as! String)
                 //addPicture.contentMode = .scaleAspectFit
                 downloadImage(url: checkedUrl)
                 print("data image not nil")
         }
-        
+        */
            checkBox.delegate = self
+        getImage(imageName: (selectedPlace["firebaseKey"] as! String?)!)
     }
     
     func didTap(_ checkBox: BEMCheckBox) {
@@ -210,6 +211,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                     databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey!).updateChildValues(["Checkbox" : checkboxstate])
         }
     }
+    /*
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) {
             (data, response, error) in
@@ -229,7 +231,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
-  
+  */
         
 
     
@@ -269,6 +271,18 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
        // print(selectedPlaceDetail)\
     delegate?.userDidEnterInformation(info: addNotes.text!)
     }
+    
+    func getImage(imageName: String){
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        if fileManager.fileExists(atPath: imagePath){
+            addPicture.image = UIImage(contentsOfFile: imagePath)
+            print("I have uploaded image from internal database")
+        }else{
+            print("Panic! No Image!")
+        }
+    }
+    
     @IBAction func pickPhotoFromLibrary(_ sender: UITapGestureRecognizer) {
         print("I am being tapped")
         let imagePickerController = UIImagePickerController()
@@ -313,12 +327,28 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let userDataProfilePicURL : [String: AnyObject] = ["StoredPlacePicture" : downloadURL as AnyObject]
                   
                     databaseRef.child((user?.uid)!).child("StoredPlaces").child(firebaseKey!).updateChildValues(userDataProfilePicURL)
+                    
+                   
                 }
             }
             
         }
         }
-
+ self.saveImage(imageName: (selectedPlace["firebaseKey"] as! String?)!)
+    }
+    
+    func saveImage(imageName: String){
+        print("The save image function is being called")
+        //create an instance of the FileManager
+        let fileManager = FileManager.default
+        //get the image path
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        //get the image we took with camera
+        let image = addPicture.image!
+        //get the PNG data for this image
+        let data = UIImagePNGRepresentation(image)
+        //store it in the document directory   
+        fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
     }
     /*
     // MARK: - Navigation

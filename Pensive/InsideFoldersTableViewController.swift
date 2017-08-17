@@ -16,6 +16,9 @@ class InsideFoldersTableViewController: UITableViewController {
     var filteredStoredPlaces = [[String:AnyObject]]()
     var selectedFolder: String!
     var valueToPass = [String:AnyObject]()
+    
+      let user = Auth.auth().currentUser
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         for p in STOREDPlaces {
@@ -64,6 +67,10 @@ class InsideFoldersTableViewController: UITableViewController {
         self.performSegue(withIdentifier: "connectTableMapView" , sender: self)
         print(valueToPass)
     }
+    
+
+    
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -75,42 +82,33 @@ class InsideFoldersTableViewController: UITableViewController {
             selectedPlace = valueToPass
          
         }
-        /*
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-            
+        
+        
+        
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+            print("SOMETHING IS HAPPENING")
             if editingStyle == .delete {
-                let removingfolder = filteredStoredPlaces[indexPath.row]["StoredPlaceName"]
-                let removingfolderkey = filteredStoredPlaces[indexPath.row]["firebaseKey"]
-                print(removingfolderkey)
-        filteredStoredPlaces["StoredPlaceName"].remove(at:indexPath.row)
+    
+               let removingplace =  filteredStoredPlaces[indexPath.row]["StoredPlaceName"]
+                let removingfirebasekey = filteredStoredPlaces[indexPath.row]["firebaseKey"]
+                print(removingfirebasekey)
+                filteredStoredPlaces.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 print(filteredStoredPlaces.count)
-                let ref = Database.database().reference().child((user?.uid)!).child("UserFolders").child(removingfolderkey as! String)
+                let ref = Database.database().reference().child((user?.uid)!).child("UserFolders").child(removingfirebasekey as! String)
                 ref.removeValue()
-                
-                for p in STOREDPlaces {
-                    if p["PlaceUnderFolder"] as? String == removingfolder {
-                        let i = p.count
-                        let key = p["firebaseKey"] as? String
-                        print(key)
-                        print("This is removing from storedplaces")
-                        let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces").child(key!)
-                        ref.removeValue()
-                        STOREDPlaces.remove(at: i)
-                    } else {
-                        print("nothing to remove")
-                    }
-                }
-                
-                
-            } else if editingStyle == .insert {
-                // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-            }
             
-        }
-*/
+        } else if editingStyle == .insert {
+    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
+    
+}
  
+ 
+}
+
+}
+
    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
      //   return "Section \(section)"
   //  }
@@ -168,5 +166,5 @@ class InsideFoldersTableViewController: UITableViewController {
     }
 
     */
-}
+
 

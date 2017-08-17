@@ -27,9 +27,12 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+ print("THIS IS ANIMATING THE VIEW")
+            
+        
     }
+    
+  
     @IBAction func checkBoxToFollowAction(_ sender: Any) {
         let buttonRow = (sender as AnyObject).tag
         //print(buttonRow)

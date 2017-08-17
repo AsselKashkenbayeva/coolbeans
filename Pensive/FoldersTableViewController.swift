@@ -349,7 +349,7 @@ let cell = UITableViewCell()
         
         AddNewFolderPopUp.removeFromSuperview()
         dropDownMenuFolder.removeFromSuperview()
-      
+      /*
         let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
         
         refFolders.observe( .value, with: { (snapshot) in
@@ -383,7 +383,7 @@ let cell = UITableViewCell()
                 firstViewController.setupInIt()
               
         }
-        
+        */
     }
     
     @IBAction func AddFolderCancelButton(_ sender: Any) {
