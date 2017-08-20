@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Firebase
+
 
 class RatingControl: UIView {
-
+var firebaseKey = ""
+    var user = Auth.auth().currentUser
+    var databaseRef = Database.database().reference()
     //MARK: Properties
     
     var rating: Int = 0 {
@@ -17,6 +21,7 @@ class RatingControl: UIView {
             setNeedsLayout()
         }
     }
+    
     var ratingbuttons = [UIButton]()
     let spacing = 5
     let starCount = 5
@@ -64,8 +69,14 @@ class RatingControl: UIView {
     //MARK:Button Action
     func ratingButtonTapped(button: UIButton) {
        rating = ratingbuttons.index(of: button)! + 1
-        
+        print(firebaseKey)
         updateButtonSelectionStates()
+        if firebaseKey == "" {
+            print("firebase key is nil")
+        } else {
+        let databaseRef = Database.database().reference()
+    databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey).updateChildValues(["Rating" : rating])
+        }
     }
     
     func updateButtonSelectionStates() {
