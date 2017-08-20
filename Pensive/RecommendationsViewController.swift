@@ -16,11 +16,12 @@ class RecommendationsViewController: UIViewController {
     @IBOutlet var addRecommendationButton: UIButton!
     
     var dictionary = [String: AnyObject]()
+    var cattchefolderexists = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
  
-        let recommendationsURL = NSURL(string: "https://www.cattche.com/")
+        let recommendationsURL = NSURL(string: "https://www.cattche.com/new-page")
         let request = NSURLRequest(url: recommendationsURL! as URL)
         webView.loadRequest(request as URLRequest);
         
@@ -32,7 +33,17 @@ class RecommendationsViewController: UIViewController {
        
             }
     )
-
+webView.isUserInteractionEnabled = false
+        for p in STOREDFolders {
+            let item = p["FolderName"] as? String
+            print(item)
+            if item == "Cattche Recommendations"  {
+            self.cattchefolderexists = true
+                print(self.cattchefolderexists)
+            } else {
+                print("WE HAVE NO CATTCHE")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,8 +66,24 @@ class RecommendationsViewController: UIViewController {
     var user = Auth.auth().currentUser
     let databaseRef = Database.database().reference()
     databaseRef.child((user?.uid)!).child("StoredPlaces").childByAutoId().setValue(self.dictionary)
-        
+      
+        for p in STOREDFolders {
+            let item = p["FolderName"] as? String
+            print(item)
+            if item == "Cattche Recommendations"  {
+                self.cattchefolderexists = true
+                print(self.cattchefolderexists)
+            } else {
+                print("WE HAVE NO CATTCHE")
+            }
+        }
+    
+        if cattchefolderexists == false {
           let post : [String: AnyObject] = ["FolderName" : "Cattche Recommendations" as AnyObject, "FolderIcon" : "3" as AnyObject ]
     databaseRef.child((user?.uid)!).child("UserFolders").childByAutoId().setValue(post)
-    }
+            
+        } else {
+            print("We already have a cattche folder")
+        }
+}
 }

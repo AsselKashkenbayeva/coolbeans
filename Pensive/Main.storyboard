@@ -34,6 +34,7 @@
                         <outlet property="mapCustomInfoWindow" destination="VeW-K7-HuV" id="t9l-Nn-dVz"/>
                         <outlet property="moreDetailButton" destination="wNe-KY-2Zl" id="bPV-90-PqE"/>
                         <outlet property="pictureOfPlace" destination="PSp-Dr-Shk" id="t5M-NW-DCA"/>
+                        <outlet property="placeNameAboveIcon" destination="aXo-jd-IKv" id="HbF-VW-OeR"/>
                         <outlet property="ratingControl" destination="Toc-nj-mdt" id="2JJ-ho-SPA"/>
                         <outlet property="websiteLabel" destination="lfx-gZ-AxD" id="Irv-p5-vlT"/>
                     </connections>
@@ -96,6 +97,11 @@
                         <constraint firstAttribute="trailing" secondItem="wNe-KY-2Zl" secondAttribute="trailing" constant="20" id="gaF-Fb-OLX"/>
                         <constraint firstItem="sOq-Rz-nAm" firstAttribute="leading" secondItem="sq2-vj-0S1" secondAttribute="leading" constant="20" id="pds-Hw-N2V"/>
                     </constraints>
+                </view>
+                <view contentMode="scaleToFill" id="aXo-jd-IKv">
+                    <rect key="frame" x="0.0" y="0.0" width="132" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="VeW-K7-HuV" userLabel="mapInfoWindow">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="220"/>
@@ -466,12 +472,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BeJ-g0-Lyd">
-                                <rect key="frame" x="16" y="28" width="343" height="476"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGv-8N-Iu5">
-                                <rect key="frame" x="174" y="486" width="146" height="112"/>
+                                <rect key="frame" x="114" y="506" width="146" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="addRecommendation"/>
                                 <connections>

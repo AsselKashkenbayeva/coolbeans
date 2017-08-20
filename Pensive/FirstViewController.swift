@@ -79,6 +79,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet var mapCustomInfoWindow: UIView!
     
   
+    @IBOutlet var placeNameAboveIcon: UIView!
+    
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var AddNewPlaceButton: UIButton!

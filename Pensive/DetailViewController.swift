@@ -343,6 +343,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         let fileManager = FileManager.default
         //get the image path
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        
         //get the image we took with camera
         let image = addPicture.image!
         //get the PNG data for this image
