@@ -79,7 +79,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet var mapCustomInfoWindow: UIView!
     
   
-    @IBOutlet var placeNameAboveIcon: UIView!
+ 
     
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
@@ -635,6 +635,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
         if fileManager.fileExists(atPath: imagePath){
             pictureOfPlace.image = UIImage(contentsOfFile: imagePath)
+            pictureOfPlace.layer.borderWidth = 1
+            pictureOfPlace.layer.masksToBounds = false
+            pictureOfPlace.layer.borderColor = UIColor.orange.cgColor
+            pictureOfPlace.layer.cornerRadius = pictureOfPlace.frame.height/2
+            pictureOfPlace.clipsToBounds = true
             print("I have uploaded image from internal database")
         }else{
             //if there is no image added to the place then rearrange the detail view to look good without the little picture

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cattchemapicon_yellow70-2.png",
+      "filename" : "cattchemapicon_purple70-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cattchemapicon_yellow70-1.png",
+      "filename" : "cattchemapicon_purple70-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cattchemapicon_yellow70.png",
+      "filename" : "cattchemapicon_purple70.png",
       "scale" : "3x"
     }
   ],

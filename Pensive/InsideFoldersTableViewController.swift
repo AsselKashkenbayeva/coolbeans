@@ -68,8 +68,28 @@ class InsideFoldersTableViewController: UITableViewController {
         print(valueToPass)
     }
     
-
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("SOMETHING IS HAPPENING")
+        if editingStyle == .delete {
+            
+            let removingplace =  filteredStoredPlaces[indexPath.row]["StoredPlaceName"]
+            let removingfirebasekey = filteredStoredPlaces[indexPath.row]["firebaseKey"]
+            print(removingfirebasekey)
+            filteredStoredPlaces.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            print(filteredStoredPlaces.count)
+            let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces").child(removingfirebasekey as! String)
+            ref.removeValue()
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+        
+    }
     
+    
+
+
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -82,31 +102,9 @@ class InsideFoldersTableViewController: UITableViewController {
             selectedPlace = valueToPass
          
         }
-        
-        
-        
-   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-            print("SOMETHING IS HAPPENING")
-            if editingStyle == .delete {
-    
-               let removingplace =  filteredStoredPlaces[indexPath.row]["StoredPlaceName"]
-                let removingfirebasekey = filteredStoredPlaces[indexPath.row]["firebaseKey"]
-                print(removingfirebasekey)
-                filteredStoredPlaces.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                print(filteredStoredPlaces.count)
-                let ref = Database.database().reference().child((user?.uid)!).child("UserFolders").child(removingfirebasekey as! String)
-                ref.removeValue()
-            
-        } else if editingStyle == .insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-    
-}
- 
- 
-}
 
+}
+    
 }
 
    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

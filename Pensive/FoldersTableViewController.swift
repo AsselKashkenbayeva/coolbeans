@@ -27,7 +27,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     @IBOutlet var AddNewFolderPopUp: UIView!
     var dropDownMenuFolder = IGLDropDownMenu()
     var dataTitle: NSArray = ["0", "1", "2", "3"]
-    var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!]
+    var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!, UIImage(named: "5")!, UIImage(named: "6")!]
    var folders: [FOLDER] = []
     var folderIndex = ""
      let user = Auth.auth().currentUser
@@ -37,6 +37,7 @@ class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
        setupInIt()
 
     fetchFolder()
@@ -204,11 +205,12 @@ let cell = UITableViewCell()
  
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    // print(folders[indexPath.row].name!)
+   
         let indexPath = tableView.indexPathForSelectedRow!
         let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
         valueToPass = currentCell.textLabel?.text
         self.performSegue(withIdentifier: "foldersSegue" , sender: self)
+      
         
     }
     
@@ -427,4 +429,15 @@ let cell = UITableViewCell()
         }
      
 }
+    
+    @IBAction func newListNameAction(_ sender: Any) {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+ 
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+ 
 }

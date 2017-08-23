@@ -14,8 +14,9 @@ class LoginViewController: UIViewController {
     let loginToList = "LoginToList"
     @IBOutlet weak var textFieldLoginEmail: UITextField!
     @IBOutlet weak var textFieldLoginPassword: UITextField!
+    @IBOutlet var testFieldUsername: UITextField!
     @IBOutlet weak var LogoutButton: UIButton!
-    @IBOutlet weak var EnterButton: UIButton!
+  //  @IBOutlet weak var EnterButton: UIButton!
     var textValue: String = ""
     override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,16 +25,20 @@ class LoginViewController: UIViewController {
         if let user = Auth.auth().currentUser
         {
             self.LogoutButton.alpha = 1.0
-            self.EnterButton.alpha = 1.0
+       //     self.EnterButton.alpha = 1.0
         }
         else
         {
             self.LogoutButton.alpha = 0.0
-            self.EnterButton.alpha = 0.0
+          //  self.EnterButton.alpha = 0.0
         }
       textFieldLoginEmail.text = textValue
         
     }
+    
+    @IBAction func textFieldUsernamePassword(_ sender: Any) {
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -59,17 +64,21 @@ class LoginViewController: UIViewController {
                     let userDataEmail : [String: AnyObject] = ["Email" : userEmail as AnyObject]
                  //   let userDataPassword :[String: AnyObject] = ["Password" : userPassword as AnyObject]
                     databaseRef.child((user?.uid)!).child("Email").setValue(userDataEmail)
+                    
+                    let userUsername = self.testFieldUsername.text
+                    let userData : [String: AnyObject] = ["Username" : userUsername as AnyObject]
+                    databaseRef.child((user?.uid)!).child("Username").setValue(userData)
                   //databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
                  
                     self.LogoutButton.alpha = 1.0
-                    self.EnterButton.alpha = 1.0
+                  //  self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                      self.performSegue(withIdentifier: self.loginToList, sender: nil)
                     
-                    let profilePageViewController:
-                        ProfilePageViewController = self.storyboard!.instantiateViewController(withIdentifier: "ProfilePageViewController") as! ProfilePageViewController
-                 profilePageViewController.passwordTextField.text = self.textFieldLoginPassword.text
+                  //  let profilePageViewController:
+                        //ProfilePageViewController = self.storyboard!.instantiateViewController(withIdentifier: "ProfilePageViewController") as! ProfilePageViewController
+              //   profilePageViewController.passwordTextField.text = self.textFieldLoginPassword.text
  
                     
         }
@@ -111,7 +120,7 @@ class LoginViewController: UIViewController {
                 //databaseRef.child((user?.uid)!).child("Password").setValue(userDataPassword)
                 
                     self.LogoutButton.alpha = 1.0
-                    self.EnterButton.alpha = 1.0
+                  //  self.EnterButton.alpha = 1.0
                     self.textFieldLoginEmail.text = ""
                     self.textFieldLoginPassword.text = ""
                     self.performSegue(withIdentifier: self.loginToList, sender: nil)
@@ -135,15 +144,15 @@ class LoginViewController: UIViewController {
     @IBAction func LogoutAction(_ sender: AnyObject) {
         try! Auth.auth().signOut()
         self.LogoutButton.alpha = 0.0
-        self.EnterButton.alpha = 0.0
+       // self.EnterButton.alpha = 0.0
         self.textFieldLoginEmail.text = ""
         self.textFieldLoginPassword.text = ""
     }
 
     
-    @IBAction func EnterButton(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: self.loginToList, sender: nil)
-    }
+ //   @IBAction func EnterButton(_ sender: AnyObject) {
+   //     self.performSegue(withIdentifier: self.loginToList, sender: nil)
+//    }
  
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.

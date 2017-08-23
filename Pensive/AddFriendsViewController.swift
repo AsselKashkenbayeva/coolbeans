@@ -5,13 +5,15 @@
 //  Created by Assel Kashkenbayeva on 13/08/2017.
 //  Copyright © 2017 Assel Kashkenbayeva. All rights reserved.
 //
-
+/*
 import UIKit
 import Firebase
  var allUsers = [USER]()
 var snapKeys = [String]()
-class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+class AddFriendsViewController: UIViewController
+UITableViewDelegate, UITableViewDataSource {
+/*
     @IBOutlet var addFriendsTableView: UITableView!
   //  var allUsers = [USER]()
     var friends = [String]()
@@ -21,10 +23,10 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
 
         addFriendsTableView.delegate = self
         addFriendsTableView.dataSource = self
-        fetchUser()
+    //    fetchUser()
         fetchFriends()
     }
-
+/*
     func fetchUser() {
         let ref = Database.database().reference()
         ref.observe( .childAdded, with: { (snapshot) in
@@ -43,13 +45,45 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
  */
                  allUsers.append(User)
+                   self.saveImage(imageName: User.AuthFirebaseKey!, URL: User.ProfilePicURL)
                 DispatchQueue.main.async {
                     self.addFriendsTableView.reloadData()
                 }
             }
         }
         )}
+*/
+    func saveImage(imageName: String, URL: String){
     
+    if let profileImageURL = URL {
+        let url = URL(string: profileImageURL)
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                print("THIS IS GOING TO BE A PIC")
+                cell.friendProfileImage.image = UIImage(data: data!)
+            }
+        }).resume()
+    }
+    print("The save image function is being called")
+    //create an instance of the FileManager
+    let fileManager = FileManager.default
+    //get the image path
+    let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+    
+    //get the image we took with camera
+    let image = addPicture.image!
+    //get the PNG data for this image
+    let data = UIImagePNGRepresentation(image)
+    //store it in the document directory
+    fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
+}
+
     func fetchFriends() {
         let ref = Database.database().reference()
        
@@ -86,6 +120,7 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allUsers.count
     }
+    
     func imageWithImage(image:UIImage,scaledToSize newSize:CGSize)->UIImage{
         
         UIGraphicsBeginImageContext( newSize )
@@ -99,7 +134,11 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
          let User = allUsers[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "addFriendsCell", for: indexPath) as! AddFriendsTableViewCell
         cell.friendProfileImage.image = UIImage(named: "ProfileIcon")
-        cell.friendUserName.text = User.Username
+       
+        cell.friendUserName.text = User.AuthFirebaseKey
+        print("THIS IS COMING FROM CELL")
+        print(cell.friendUserName.text)
+        print(indexPath.row)
         if self.friends.contains(User.AuthFirebaseKey!) {
             cell.checkBoxToFollow.on = true
         }
@@ -196,5 +235,6 @@ class AddFriendsViewController: UIViewController, UITableViewDelegate, UITableVi
         // Pass the selected object to the new view controller.
     }
     */
-
+*/
 }
+*/
