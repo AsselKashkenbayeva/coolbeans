@@ -10,11 +10,13 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import Firebase
+
 import HockeySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    var storyboard: UIStoryboard?
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -26,10 +28,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
        
  GMSServices.provideAPIKey("AIzaSyArYf3iVy0e1e8IHFRRah7CImHJWzBx_wU")
-        GMSPlacesClient.provideAPIKey("AIzaSyDk4pJ3kW9POyBYaI9-dNW2qvTJIbttS_A")
+GMSPlacesClient.provideAPIKey("AIzaSyDk4pJ3kW9POyBYaI9-dNW2qvTJIbttS_A")
     FirebaseApp.configure()
         
         AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(false)
+        
+        let currentUser = Auth.auth().currentUser
+    self.storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if currentUser != nil {
+            self.window?.rootViewController = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") 
+            print("this is from logged in")
+        } else {
+            self.window?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            print("this is from app delegate")
+        }
+ 
     return true
     }
 

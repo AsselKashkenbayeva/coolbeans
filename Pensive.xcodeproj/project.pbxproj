@@ -26,11 +26,14 @@
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF6BFC1A1F0D6373005F8893 /* TableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */; };
+		CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */; };
+		CF7DB1A71F4061430015492E /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */; };
+		CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */; };
+		CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */; };
 		CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */; };
 		CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85A1DBE68A1005C8D06 /* Assets.xcassets */; };
 		CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC85C1DBE68A1005C8D06 /* LaunchScreen.storyboard */; };
 		CF7EC8691DBE68A1005C8D06 /* PensiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8681DBE68A1005C8D06 /* PensiveTests.swift */; };
-		CF7EC8841DBE81C0005C8D06 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CF7EC8831DBE81C0005C8D06 /* GoogleMaps.bundle */; };
 		CF7EC8871DBE83A2005C8D06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7EC8861DBE83A2005C8D06 /* AVFoundation.framework */; };
 		CF7EC8891DBE83AF005C8D06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7EC8881DBE83AF005C8D06 /* CoreData.framework */; };
 		CF7EC88B1DBE83BE005C8D06 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7EC88A1DBE83BE005C8D06 /* CoreLocation.framework */; };
@@ -54,8 +57,6 @@
 		CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */; };
 		CFB5B1951DC24BEF00CF071E /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1941DC24BEF00CF071E /* GooglePlaces.framework */; };
 		CFB5B1971DC24C0F00CF071E /* GooglePlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1961DC24C0F00CF071E /* GooglePlacePicker.framework */; };
-		CFB5B1991DC24C2F00CF071E /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFB5B1981DC24C2F00CF071E /* GooglePlaces.bundle */; };
-		CFB5B19B1DC24C6000CF071E /* GooglePlacePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFB5B19A1DC24C6000CF071E /* GooglePlacePicker.bundle */; };
 		CFBBE1481DBEA6EC00635E2C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE1471DBEA6EC00635E2C /* Accelerate.framework */; };
 		CFBBE14A1DBEA6F800635E2C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE1491DBEA6F800635E2C /* CoreBluetooth.framework */; };
 		CFBBE14C1DBEA70300635E2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14B1DBEA70300635E2C /* CoreGraphics.framework */; };
@@ -102,6 +103,10 @@
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableMapViewController.swift; sourceTree = "<group>"; };
+		CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
+		CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
+		CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsViewController.swift; sourceTree = "<group>"; };
 		CF7EC84E1DBE68A1005C8D06 /* Pensive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pensive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +251,10 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */,
+				CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */,
+				CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */,
+				CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */,
 				CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */,
 				CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */,
 				CF17D7161E808783006E493D /* ConnectTableViewController.swift */,
@@ -448,11 +457,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFB5B19B1DC24C6000CF071E /* GooglePlacePicker.bundle in Resources */,
 				CF7EC85E1DBE68A1005C8D06 /* LaunchScreen.storyboard in Resources */,
 				CF7EC85B1DBE68A1005C8D06 /* Assets.xcassets in Resources */,
-				CF7EC8841DBE81C0005C8D06 /* GoogleMaps.bundle in Resources */,
-				CFB5B1991DC24C2F00CF071E /* GooglePlaces.bundle in Resources */,
 				CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */,
 				CF17DA4A1F24C4C500E664FB /* GoogleService-Info.plist in Resources */,
 			);
@@ -534,14 +540,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
+				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
+				CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
 				CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */,
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
 				CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */,
+				CF7DB1A71F4061430015492E /* AddFriendsViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
+				CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */,
 				CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */,
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,
 				CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */,
@@ -759,8 +769,8 @@
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cattche.July17Cattche;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ac3eee23-f952-4c48-b609-f66d147318aa";
-				PROVISIONING_PROFILE_SPECIFIER = Cattche_provisioning_profile_ad_hoc;
+				PROVISIONING_PROFILE = "d794dc8b-e853-4f1b-8ef8-fb453c26e5e4";
+				PROVISIONING_PROFILE_SPECIFIER = "CattcheTestFlightCert-replaceforadhoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "Pensive-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Landmarks_Icon_50-2.png",
+      "filename" : "cattchemapicon_yellow70-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "L_Icon.png",
+      "filename" : "cattchemapicon_yellow70-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Landmarks_Icon_50-1.png",
+      "filename" : "cattchemapicon_yellow70.png",
       "scale" : "3x"
     }
   ],

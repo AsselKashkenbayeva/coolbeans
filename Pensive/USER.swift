@@ -16,6 +16,8 @@ class USER: NSObject {
     var Password: String?
     var Username: String?
     var ProfilePicURL: String?
+    var AuthFirebaseKey: String?
     var StoredPlacesOfUser = [String:AnyObject]()
     var StoredFoldersOfUser = [String:AnyObject]()
+    var Friends = [String:AnyObject]()
 }

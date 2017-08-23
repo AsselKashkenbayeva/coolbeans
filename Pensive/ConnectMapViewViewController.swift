@@ -13,6 +13,7 @@ import GooglePlaces
 import IGLDropDownMenu
 
 class ConnectMapViewViewController: UIViewController, GMSMapViewDelegate, IGLDropDownMenuDelegate {
+    /*
 //This is setting the map view
     @IBOutlet var vwGMap: GMSMapView!
 //This is setting the detail pop up when marker is clicked
@@ -251,5 +252,5 @@ func setupInIt() {
         
     }
   
-    
+    */
 }

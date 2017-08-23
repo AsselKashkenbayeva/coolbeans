@@ -16,6 +16,9 @@ class InsideFoldersTableViewController: UITableViewController {
     var filteredStoredPlaces = [[String:AnyObject]]()
     var selectedFolder: String!
     var valueToPass = [String:AnyObject]()
+    
+      let user = Auth.auth().currentUser
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         for p in STOREDPlaces {
@@ -65,17 +68,45 @@ class InsideFoldersTableViewController: UITableViewController {
         print(valueToPass)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("SOMETHING IS HAPPENING")
+        if editingStyle == .delete {
+            
+            let removingplace =  filteredStoredPlaces[indexPath.row]["StoredPlaceName"]
+            let removingfirebasekey = filteredStoredPlaces[indexPath.row]["firebaseKey"]
+            print(removingfirebasekey)
+            filteredStoredPlaces.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            print(filteredStoredPlaces.count)
+            let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces").child(removingfirebasekey as! String)
+            ref.removeValue()
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+        
+    }
+    
+    
+
+
+    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "connectTableMapView") {
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destination as! TableMapViewController
             // your new view controller should have property that will store passed value
-            viewController.selectedPlace = valueToPass
-            // print(viewController.selectedFolder)
-            // print(valueToPass)
+            //viewController.
+            selectedPlace = valueToPass
+         
         }
-    }
+
+}
+    
+}
+
    // override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
      //   return "Section \(section)"
   //  }
@@ -133,5 +164,5 @@ class InsideFoldersTableViewController: UITableViewController {
     }
 
     */
-}
+
 
