@@ -24,11 +24,14 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var sexPickerTextFeild: UITextField!
     
     
+    @IBOutlet var tickImageForChangedPassword: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isHidden = true
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        tickImageForChangedPassword.isHidden = true
         
 //FIRDatabase.database().persistenceEnabled = true
         //Making the profile picture a circle
@@ -184,9 +187,16 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
  */
    Auth.auth().currentUser?.updatePassword(to: passwordTextField.text!, completion: { (error) in
 print("new password is saved in firebase")
+    //self.tickImageForChangedPassword.isHidden = false
    })
-        changePasswordButton.isHidden = false
-        passwordTextField.isHidden = true
+        self.tickImageForChangedPassword.isHidden = false
+         self.passwordTextField.isHidden = true
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+        self.changePasswordButton.isHidden = false
+       // self.passwordTextField.isHidden = true
+        self.tickImageForChangedPassword.isHidden = true
+        }
     }
     
     

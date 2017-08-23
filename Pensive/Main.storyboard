@@ -177,7 +177,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xoI-n3-lnS">
-                                <rect key="frame" x="36" y="205" width="303" height="30"/>
+                                <rect key="frame" x="36" y="194" width="303" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.92782716279999999" blue="0.77290546510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Vak-tP-GXI"/>
@@ -190,7 +190,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDl-5g-086">
-                                <rect key="frame" x="116" y="405" width="143" height="33"/>
+                                <rect key="frame" x="116" y="394" width="143" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="143" id="wqN-0e-Ie0"/>
                                 </constraints>
@@ -204,7 +204,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="D.O.B" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="flj-TD-czg">
-                                <rect key="frame" x="36" y="260" width="303" height="30"/>
+                                <rect key="frame" x="36" y="249" width="303" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.92782716279999999" blue="0.77290546510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="axn-i2-Rog"/>
@@ -230,7 +230,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Sex" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="beu-Rd-HlC">
-                                <rect key="frame" x="36" y="315" width="303" height="30"/>
+                                <rect key="frame" x="36" y="304" width="303" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.92782716279999999" blue="0.77290546510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="NVY-BS-sAp"/>
@@ -243,7 +243,7 @@
                                 </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwH-gB-CDL">
-                                <rect key="frame" x="36" y="315" width="303" height="60"/>
+                                <rect key="frame" x="36" y="304" width="303" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="KNv-8n-rQB"/>
                                 </constraints>
@@ -251,6 +251,17 @@
                                     <outlet property="delegate" destination="4WP-6k-L4s" id="cbG-pF-4kS"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-yL-S0e">
+                                <rect key="frame" x="36" y="194" width="303" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SBr-9J-1Xt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Change password"/>
+                                <connections>
+                                    <action selector="changePasswordActionButton:" destination="4WP-6k-L4s" eventType="touchUpInside" id="yX1-SD-anb"/>
+                                </connections>
+                            </button>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="157" placeholderIntrinsicHeight="144" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="wjE-vb-uil">
                                 <rect key="frame" x="59" y="25" width="100" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -263,17 +274,9 @@
                                     <outletCollection property="gestureRecognizers" destination="oir-o1-7pv" appends="YES" id="bhZ-Uv-aCH"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-yL-S0e">
-                                <rect key="frame" x="36" y="205" width="303" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="SBr-9J-1Xt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Change password"/>
-                                <connections>
-                                    <action selector="changePasswordActionButton:" destination="4WP-6k-L4s" eventType="touchUpInside" id="yX1-SD-anb"/>
-                                </connections>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickImage" translatesAutoresizingMaskIntoConstraints="NO" id="IbY-xI-d7O">
+                                <rect key="frame" x="163" y="200" width="49" height="30"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.89757543110000004" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -292,14 +295,19 @@
                             <constraint firstAttribute="trailingMargin" secondItem="d7A-hn-0vB" secondAttribute="trailing" constant="20" id="TBe-gK-rG4"/>
                             <constraint firstItem="QwH-gB-CDL" firstAttribute="top" secondItem="beu-Rd-HlC" secondAttribute="top" id="Ufj-S2-aGf"/>
                             <constraint firstItem="QwH-gB-CDL" firstAttribute="leading" secondItem="flj-TD-czg" secondAttribute="leading" id="cSF-sg-GP6"/>
+                            <constraint firstItem="flj-TD-czg" firstAttribute="top" secondItem="IbY-xI-d7O" secondAttribute="bottom" constant="19" id="czy-q7-O9U"/>
+                            <constraint firstItem="IbY-xI-d7O" firstAttribute="height" secondItem="bnc-yL-S0e" secondAttribute="height" id="djo-S3-HPC"/>
                             <constraint firstItem="beu-Rd-HlC" firstAttribute="top" secondItem="flj-TD-czg" secondAttribute="bottom" constant="25" id="eIj-VD-4vS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="97m-cP-j8V" secondAttribute="trailing" constant="20" id="f4V-3Y-x9Z"/>
+                            <constraint firstItem="IbY-xI-d7O" firstAttribute="top" secondItem="97m-cP-j8V" secondAttribute="bottom" constant="20" id="fiL-cU-O28"/>
                             <constraint firstItem="d7A-hn-0vB" firstAttribute="leading" secondItem="wjE-vb-uil" secondAttribute="trailing" constant="10" id="g0e-Yy-34D"/>
                             <constraint firstItem="97m-cP-j8V" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="kgc-k0-Pjs"/>
                             <constraint firstAttribute="bottom" secondItem="QwH-gB-CDL" secondAttribute="bottom" constant="148" id="lVr-7I-zDs"/>
+                            <constraint firstItem="IbY-xI-d7O" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="147" id="mV6-Co-a9Z"/>
                             <constraint firstItem="d7A-hn-0vB" firstAttribute="bottom" secondItem="wjE-vb-uil" secondAttribute="bottom" id="s4k-QT-6IQ"/>
                             <constraint firstItem="xoI-n3-lnS" firstAttribute="leading" secondItem="dgu-TV-UO1" secondAttribute="leadingMargin" constant="20" id="sGa-Wz-yNK"/>
                             <constraint firstItem="flj-TD-czg" firstAttribute="top" secondItem="bnc-yL-S0e" secondAttribute="bottom" constant="25" id="sgT-IY-2qB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IbY-xI-d7O" secondAttribute="trailing" constant="147" id="teW-Av-SOx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="beu-Rd-HlC" secondAttribute="trailing" constant="20" id="uWD-cQ-YiH"/>
                             <constraint firstItem="QwH-gB-CDL" firstAttribute="top" secondItem="flj-TD-czg" secondAttribute="bottom" constant="25" id="ucr-yh-iFh"/>
                             <constraint firstItem="flj-TD-czg" firstAttribute="top" secondItem="xoI-n3-lnS" secondAttribute="bottom" constant="25" id="xhU-lP-WM0"/>
@@ -322,6 +330,7 @@
                         <outlet property="profilePhoto" destination="wjE-vb-uil" id="JdH-LK-Aqf"/>
                         <outlet property="sexPicker" destination="QwH-gB-CDL" id="OAk-eg-oRg"/>
                         <outlet property="sexPickerTextFeild" destination="beu-Rd-HlC" id="7ja-j0-bqa"/>
+                        <outlet property="tickImageForChangedPassword" destination="IbY-xI-d7O" id="iuB-qe-PtA"/>
                         <outlet property="usernameTextField" destination="d7A-hn-0vB" id="Wb2-FZ-w0l"/>
                     </connections>
                 </viewController>
@@ -1339,6 +1348,7 @@
         <image name="brainIcon" width="25" height="25"/>
         <image name="defaultPhoto" width="25" height="25"/>
         <image name="listIcon" width="25" height="25"/>
+        <image name="tickImage" width="103" height="103"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MYe-EI-sfa"/>
