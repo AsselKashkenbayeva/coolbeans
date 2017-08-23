@@ -502,6 +502,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     //MARK: GoogleMaps Autocomplete
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        detailsPopUp.removeFromSuperview()
         self.place = place
         let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
         self.vwGMap.camera = camera
@@ -584,7 +585,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             //websiteLabel.textColor = UIColor.white
                         websiteLabel.isHidden = true
             ratingControl.isHidden = true
-                        
+            pictureOfPlace.isHidden = true
             mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
             mapCustomInfoWindow.center.y -= 150
         
@@ -599,7 +600,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                         websiteLabel.isHidden = false
             //tappedMarker = marker.position
                         moreDetailButton.setTitleColor(UIColor.black, for: .normal)
-                        closeDetailsButton.setTitleColor(UIColor.black, for: .normal)
+                        closeDetailsButton.setTitleColor(UIColor.red, for: .normal)
                         websiteLabel.textColor = UIColor.blue
                         ratingControl.isHidden = false
             detailsName.text = (marker.userData as! markerUserData).nameUserData
@@ -640,6 +641,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             pictureOfPlace.layer.borderColor = UIColor.orange.cgColor
             pictureOfPlace.layer.cornerRadius = pictureOfPlace.frame.height/2
             pictureOfPlace.clipsToBounds = true
+            pictureOfPlace.isHidden = false
             print("I have uploaded image from internal database")
         }else{
             //if there is no image added to the place then rearrange the detail view to look good without the little picture
