@@ -159,10 +159,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     var MARKers = [GMSMarker]()
     
+    let placesClient = GMSPlacesClient.shared()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
        self.filterSelected = "All"
     
         // removes the navigation bar
@@ -279,9 +281,36 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             self.sortByDropDown()
         }
         )
-  
+     //   lookUpPlaceID()
     }
- 
+    /*
+    func lookUpPlaceID() {
+        
+        let placeID = "ChIJK6kIb3GuEmsRIMcyFmh9AQU"
+        
+        self.placesClient.lookUpPlaceID(placeID, callback: { (placeID, error) -> Void in
+            if let error = error {
+                print("lookup place id query error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = self.place else {
+                print("No place details for \(placeID)")
+                print("this is coordinates")
+                print(placeID?.coordinate)
+           //     print(placeID?.name)
+                return
+            }
+            /*
+            print("Place name \(place.name)")
+            print("Place address \(place.formattedAddress)")
+            print("Place placeID \(place.placeID)")
+            print("Place attributions \(place.attributions)")
+            print(place.coordinate)
+ */
+        })
+    }
+*/
     func filterPlaces() {
         self.vwGMap.clear()
         print("Filter places function is being called")
@@ -350,7 +379,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 item.iconImage.accessibilityIdentifier = STOREDFolders[i]["FolderIcon"] as! String!
                 print("This is in the choose folder drop down menu")
                 print(item.text)
-              //THERE NEEDS TO BE SOMETHING HERE THAT MAKES SURE IF AN ICON WAS NOT PICKED AND NIL FOUND IT IS HANDLED.
+          
                 dropdownItems.add(addObject:item)
                // print(item.iconImage.accessibilityIdentifier)
             }
@@ -599,7 +628,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         } else {
                         websiteLabel.isHidden = false
             //tappedMarker = marker.position
-                        moreDetailButton.setTitleColor(UIColor.black, for: .normal)
+                        moreDetailButton.setTitleColor(UIColor.red, for: .normal)
                         closeDetailsButton.setTitleColor(UIColor.red, for: .normal)
                         websiteLabel.textColor = UIColor.blue
                         ratingControl.isHidden = false
@@ -660,7 +689,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     //This prints out the details just by clicking on a place need to enable this
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
         
-    }
+     
+               }
+
     
     //This is so that the addPlace window tacks onto place with marker
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
