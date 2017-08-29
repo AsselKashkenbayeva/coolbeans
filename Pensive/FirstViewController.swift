@@ -281,36 +281,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             self.sortByDropDown()
         }
         )
-     //   lookUpPlaceID()
+    
     }
-    /*
-    func lookUpPlaceID() {
-        
-        let placeID = "ChIJK6kIb3GuEmsRIMcyFmh9AQU"
-        
-        self.placesClient.lookUpPlaceID(placeID, callback: { (placeID, error) -> Void in
-            if let error = error {
-                print("lookup place id query error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let place = self.place else {
-                print("No place details for \(placeID)")
-                print("this is coordinates")
-                print(placeID?.coordinate)
-           //     print(placeID?.name)
-                return
-            }
-            /*
-            print("Place name \(place.name)")
-            print("Place address \(place.formattedAddress)")
-            print("Place placeID \(place.placeID)")
-            print("Place attributions \(place.attributions)")
-            print(place.coordinate)
- */
-        })
-    }
-*/
+
     func filterPlaces() {
         self.vwGMap.clear()
         print("Filter places function is being called")
@@ -476,7 +449,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         let newLocation = locations.last
         jim = newLocation!
         userCurrentLocation = (newLocation?.coordinate)!
-        vwGMap.camera = GMSCameraPosition.camera(withTarget: newLocation!.coordinate, zoom: 15.0)
+        vwGMap.camera = GMSCameraPosition.camera(withTarget: newLocation!.coordinate, zoom: 7.0)
      /*
         let circleCenter = newLocation?.coordinate ;
         let circ = GMSCircle(position: circleCenter!, radius: 200)
@@ -688,10 +661,65 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     //This prints out the details just by clicking on a place need to enable this
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
+        let marker = GMSMarker()
+        marker.position = location
+        marker.map = self.vwGMap
+        mapCustomInfoWindow.center = mapView.projection.point(for: marker.position)
+        mapCustomInfoWindow.center.y -= 150
         
-     
-               }
+        mapCustomInfoWindow.layer.borderWidth = 2
+        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
+        //   self.mapCustomInfoWindow.addSubview(dropDownMenuFolder)
+        
+       // self.view.addSubview(detailsPopUp)
+        self.view.addSubview(mapCustomInfoWindow)
+        self.view.addSubview(dropDownMenuFolder)
+ marker.icon = GMSMarker.markerImage(with: UIColor.blue)
+     self.newPlacePlaceID = placeID
+    self.newPlaceNameText = name
+        self.placesClient.lookUpPlaceID(placeID, callback: { (placeID, error) -> Void in
+            if let error = error {
+                print("lookup place id query error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = self.place else {
+                print("No place details for \(placeID)")
+                self.newPlaceNameText = name
+                self.newPlaceAddress = (placeID?.formattedAddress)!
+                let newPlaceLongitude = (placeID?.coordinate.longitude)!
+                var longitudeText:String = "\(newPlaceLongitude)"
+                self.longitudeText = "\(newPlaceLongitude)"
+                
+                let newPlaceLatitude = (placeID?.coordinate.latitude)!
+                var latitudeText:String = "\(newPlaceLatitude)"
+                self.latitudeText = "\(newPlaceLatitude)"
+                var telephone = placeID?.phoneNumber
+                if telephone == nil {
+                    self.telephone = ""
+                } else {
+                    self.telephone = telephone!
+                }
+                
+                var website =  placeID?.website
+                //this doesnt really save the website
+                if website == nil {
+                    self.telephone = ""
+                    print("THERE IS NO WEBSITE")
+                } else {
+                    var newWebsite = website!
+                    self.telephone = "\(newWebsite)"
+                    print("THERE IS A WEBSITE")
+                }
 
+                return
+            }
+            
+        })
+  
+               }
+    
+   
     
     //This is so that the addPlace window tacks onto place with marker
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {

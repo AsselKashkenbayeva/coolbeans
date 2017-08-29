@@ -54,6 +54,7 @@
 		CF91F9CE1DF1CFCE001EE137 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91F9CD1DF1CFCE001EE137 /* SearchResultsController.swift */; };
 		CF91F9CF1DF55D63001EE137 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */; };
 		CF91F9D31DFDDC20001EE137 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91F9D21DFDDC20001EE137 /* RatingControl.swift */; };
+		CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */; };
 		CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */; };
 		CFB5B1951DC24BEF00CF071E /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1941DC24BEF00CF071E /* GooglePlaces.framework */; };
 		CFB5B1971DC24C0F00CF071E /* GooglePlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1961DC24C0F00CF071E /* GooglePlacePicker.framework */; };
@@ -138,6 +139,7 @@
 		CF7EC8B01DBEA21B005C8D06 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
 		CF91F9CD1DF1CFCE001EE137 /* SearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultsController.swift; path = ../SearchResultsController.swift; sourceTree = "<group>"; };
 		CF91F9D21DFDDC20001EE137 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingOutstuffViewController.swift; sourceTree = "<group>"; };
 		CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectMapViewViewController.swift; sourceTree = "<group>"; };
 		CFB5B1941DC24BEF00CF071E /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
 		CFB5B1961DC24C0F00CF071E /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlacePicker.framework; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */,
 				CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */,
 				CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */,
 				CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */,
@@ -541,6 +544,7 @@
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
+				CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
