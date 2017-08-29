@@ -76,6 +76,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     @IBOutlet var ratingControl: RatingControl!
     
     
+    @IBOutlet var nameWhenAddingPlace: UILabel!
+    
+    
     @IBOutlet var mapCustomInfoWindow: UIView!
     
   
@@ -249,13 +252,16 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                         STOREDPlaces.append(PLACE!)
                         
                         self.MARKers.append(markers)
-                        print(self.MARKers.count)
+                        //print(self.MARKers.count)
+                        
                     }
                 }
                self.filterPlaces()
+                
             }
         }
         )
+       
         
 //This does the same as previous but accesses the stored folders file and places into the STOREDFolders dict
         let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
@@ -281,7 +287,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             self.sortByDropDown()
         }
         )
-    
+   // self.lookUpPlaceID()
     }
 
     func filterPlaces() {
@@ -350,8 +356,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 item.text = (STOREDFolders[i]["FolderName"] as! String!)
                 item.iconImage = UIImage(named: STOREDFolders[i]["FolderIcon"] as! String!)
                 item.iconImage.accessibilityIdentifier = STOREDFolders[i]["FolderIcon"] as! String!
-                print("This is in the choose folder drop down menu")
-                print(item.text)
+              //  print("This is in the choose folder drop down menu")
+              //  print(item.text)
           
                 dropdownItems.add(addObject:item)
                // print(item.iconImage.accessibilityIdentifier)
@@ -380,7 +386,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         dropDownMenuFolder.menuText = "Choose Folder"
         dropDownMenuFolder.dropDownItems  = dropdownItems as [AnyObject]
         dropDownMenuFolder.paddingLeft = 15
-        dropDownMenuFolder.frame = CGRect(x: 50, y: 145 , width: 200, height: 45)
+        dropDownMenuFolder.frame = CGRect(x: 50, y: 0 , width: 200, height: 45)
         dropDownMenuFolder.delegate = self
         dropDownMenuFolder.type = IGLDropDownMenuType.stack
         dropDownMenuFolder.gutterY = 5
@@ -389,7 +395,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
   
      // print(dropDownMenuFolder.frame.width)
       dropDownMenuFolder.frame.origin.x = mapCustomInfoWindow.center.x-dropDownMenuFolder.frame.width/2
-        dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
+    //    dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y
       
     }
   
@@ -504,12 +510,14 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     //MARK: GoogleMaps Autocomplete
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        self.marker.map = nil
         detailsPopUp.removeFromSuperview()
         self.place = place
         let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
         self.vwGMap.camera = camera
-       let marker = GMSMarker()
-       self.marker = marker
+        //it appends markers rather than removing them
+      let marker = GMSMarker()
+      self.marker = marker
         marker.position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
         marker.accessibilityValue = place.name
         marker.map = self.vwGMap
@@ -549,6 +557,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.website = "\(newWebsite)"
         }
         tappedMarker = marker.position
+        nameWhenAddingPlace.text = newPlaceNameText
+        AddNewPlaceButton.isUserInteractionEnabled = false
+        AddNewPlaceButton.setTitleColor(UIColor.gray, for: .normal)
+        self.view.addSubview(mapCustomInfoWindow)
+        self.view.addSubview(dropDownMenuFolder)
+        mapCustomInfoWindow.layer.borderWidth = 2
+        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
             }
     
     //Initiated if autocomplete failed
@@ -575,19 +590,19 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
        tappedMarker = marker.position
     
         self.ratingControlRating = ratingControl.rating
-        print("Outside tapped")
-        print(ratingControlRating)
-                    if marker.userData  == nil {
+      //  print("Outside tapped")
+      //  print(ratingControlRating)
+                   if marker.userData  == nil {
                         AddNewPlaceButton.isUserInteractionEnabled = false
                         AddNewPlaceButton.setTitleColor(UIColor.gray, for: .normal)
-             detailsName.text = marker.accessibilityValue
+         //    detailsName.text = marker.accessibilityValue
                         
-            moreDetailButton.setTitleColor(UIColor.white, for: .normal)
-            closeDetailsButton.setTitleColor(UIColor.white, for: .normal)
+          //  moreDetailButton.setTitleColor(UIColor.white, for: .normal)
+            //closeDetailsButton.setTitleColor(UIColor.white, for: .normal)
             //websiteLabel.textColor = UIColor.white
-                        websiteLabel.isHidden = true
-            ratingControl.isHidden = true
-            pictureOfPlace.isHidden = true
+            //            websiteLabel.isHidden = true
+         //   ratingControl.isHidden = true
+         //   pictureOfPlace.isHidden = true
             mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
             mapCustomInfoWindow.center.y -= 150
         
@@ -595,12 +610,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
          //   self.mapCustomInfoWindow.addSubview(dropDownMenuFolder)
             
-            self.view.addSubview(detailsPopUp)
+         //   self.view.addSubview(detailsPopUp)
             self.view.addSubview(mapCustomInfoWindow)
           self.view.addSubview(dropDownMenuFolder)
         } else {
+         //tappedMarker = marker.position
                         websiteLabel.isHidden = false
-            //tappedMarker = marker.position
+        
                         moreDetailButton.setTitleColor(UIColor.red, for: .normal)
                         closeDetailsButton.setTitleColor(UIColor.red, for: .normal)
                         websiteLabel.textColor = UIColor.blue
@@ -608,13 +624,13 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             detailsName.text = (marker.userData as! markerUserData).nameUserData
             self.firebaseKey = (marker.userData as! markerUserData).firebaseKey
             ratingControl.firebaseKey = firebaseKey
-                         print("inside tapped")
+                       //  print("inside tapped")
     if self.ratingControlRating != (marker.userData as! markerUserData).rating  {
         ratingControl.rating = (marker.userData as! markerUserData).rating
     } else {
          ratingControl.rating = self.ratingControlRating }
-                        print((marker.userData as! markerUserData).rating)
-                        print(ratingControlRating)
+                    //    print((marker.userData as! markerUserData).rating)
+                    //    print(ratingControlRating)
         
         updaterating = (marker.userData as! markerUserData).rating
         checkboxBool = (marker.userData as! markerUserData).checkbox
@@ -622,7 +638,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         websiteLabel.text = (marker.userData as! markerUserData).websiteUserData
         markerPlacePictureURL = (marker.userData as! markerUserData).placepicture
         tappedMarkerTelephone = (marker.userData as! markerUserData).telephoneUserData
-                        print(tappedMarkerTelephone)
+                       // print(tappedMarkerTelephone)
         tappedMarkerAddress = (marker.userData as! markerUserData).addressUserData
         detailsPopUp.layer.borderWidth = 2
         detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
@@ -632,7 +648,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
         return false
     }
-    
+  
     func getImage(imageName: String){
         let fileManager = FileManager.default
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
@@ -661,31 +677,47 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     //This prints out the details just by clicking on a place need to enable this
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
+       
+       self.marker.map = nil
         let marker = GMSMarker()
+       
+        self.marker = marker
         marker.position = location
+        tappedMarker = location
         marker.map = self.vwGMap
-        mapCustomInfoWindow.center = mapView.projection.point(for: marker.position)
-        mapCustomInfoWindow.center.y -= 150
-        
+   
+       mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
+     //  self.vwGMap.camera = GMSCameraPosition.camera(withTarget: tappedMarker, zoom: 15)
+      //  mapCustomInfoWindow.center.y -= 150
+      //  dropDownMenuFolder.center = mapView.projection.point(for: tappedMarker)
+     //   dropDownMenuFolder.center.y -= 150
         mapCustomInfoWindow.layer.borderWidth = 2
         mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
-        //   self.mapCustomInfoWindow.addSubview(dropDownMenuFolder)
-        
-       // self.view.addSubview(detailsPopUp)
         self.view.addSubview(mapCustomInfoWindow)
         self.view.addSubview(dropDownMenuFolder)
+        
  marker.icon = GMSMarker.markerImage(with: UIColor.blue)
-     self.newPlacePlaceID = placeID
+self.newPlacePlaceID = placeID
+        print(placeID)
+        print(self.newPlacePlaceID)
+        print(name)
     self.newPlaceNameText = name
-        self.placesClient.lookUpPlaceID(placeID, callback: { (placeID, error) -> Void in
+        nameWhenAddingPlace.text = name
+        lookUpPlaceID()
+               }
+
+    func lookUpPlaceID () {
+  
+         var Place:GMSPlace?
+        self.placesClient.lookUpPlaceID(self.newPlacePlaceID, callback: { (placeID, error) -> Void in
             if let error = error {
+                
                 print("lookup place id query error: \(error.localizedDescription)")
                 return
             }
-            
-            guard let place = self.place else {
+            guard let place = Place else {
                 print("No place details for \(placeID)")
-                self.newPlaceNameText = name
+                
                 self.newPlaceAddress = (placeID?.formattedAddress)!
                 let newPlaceLongitude = (placeID?.coordinate.longitude)!
                 var longitudeText:String = "\(newPlaceLongitude)"
@@ -704,21 +736,20 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                 var website =  placeID?.website
                 //this doesnt really save the website
                 if website == nil {
-                    self.telephone = ""
+                    self.website = ""
                     print("THERE IS NO WEBSITE")
                 } else {
                     var newWebsite = website!
-                    self.telephone = "\(newWebsite)"
+                    self.website = "\(newWebsite)"
                     print("THERE IS A WEBSITE")
                 }
-
+            
                 return
             }
             
         })
-  
-               }
-    
+    }
+
    
     
     //This is so that the addPlace window tacks onto place with marker
@@ -755,7 +786,42 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         mapCustomInfoWindow.removeFromSuperview()
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
-        detailsPopUp.removeFromSuperview()
+      //  detailsPopUp.removeFromSuperview()
+        let when = DispatchTime.now() + 2
+    DispatchQueue.main.asyncAfter(deadline: when) {
+           
+    self.moreDetailButton.setTitleColor(UIColor.red, for: .normal)
+    self.closeDetailsButton.setTitleColor(UIColor.red, for: .normal)
+         //   print((self.MARKers.last?.userData as! markerUserData).firebaseKey)
+            self.websiteLabel.isHidden = false
+        
+            self.ratingControl.isHidden = false
+            self.detailsName.text = (self.MARKers.last?.userData as! markerUserData).nameUserData
+            self.firebaseKey = (self.MARKers.last?.userData as! markerUserData).firebaseKey
+            self.ratingControl.firebaseKey = self.firebaseKey
+            print("inside tapped")
+            if self.ratingControlRating != (self.MARKers.last?.userData as! markerUserData).rating  {
+                self.ratingControl.rating = (self.MARKers.last?.userData as! markerUserData).rating
+            } else {
+                self.ratingControl.rating = self.ratingControlRating }
+       
+            self.updaterating = (self.MARKers.last?.userData as! markerUserData).rating
+            self.checkboxBool = (self.MARKers.last?.userData as! markerUserData).checkbox
+            self.tagsMarker = (self.MARKers.last?.userData as! markerUserData).tags
+            self.websiteLabel.text = (self.MARKers.last?.userData as! markerUserData).websiteUserData
+        print((self.MARKers.last?.userData as! markerUserData).websiteUserData)
+            self.markerPlacePictureURL = (self.MARKers.last?.userData as! markerUserData).placepicture
+            self.tappedMarkerTelephone = (self.MARKers.last?.userData as! markerUserData).telephoneUserData
+           
+            self.tappedMarkerAddress = (self.MARKers.last?.userData as! markerUserData).addressUserData
+         
+            
+            self.getImage(imageName:(self.MARKers.last?.userData as! markerUserData).firebaseKey)
+      
+            self.detailsPopUp.layer.borderWidth = 2
+            self.detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
+            self.view.addSubview(self.detailsPopUp)
+        }
      /*
        let beforeFirebase = STOREDPlaces.count
     
@@ -811,7 +877,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     }
     
     @IBAction func detailCloseAction(_ sender: Any) {
-        self.filterSelected = "All"
+     //   self.filterSelected = "All"
        // filterPlaces()
      detailsPopUp.removeFromSuperview()
     }

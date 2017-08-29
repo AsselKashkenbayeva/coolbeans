@@ -9,7 +9,7 @@
 import UIKit
 
 class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelegate {
-    /*
+    
     
     @IBOutlet var FriendPopUpView: UIView!
 
@@ -28,7 +28,7 @@ class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelega
             },completion: nil)})
         
     
-        
+        /*
         var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
         self.FriendPopUpView.addGestureRecognizer(swipeRight)
@@ -36,9 +36,9 @@ class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelega
         var swipeLeft = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.FriendPopUpView.addGestureRecognizer(swipeLeft)
- 
+ */
     }
-
+/*
     func swiped(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -58,8 +58,8 @@ class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelega
             }
         }
     }
-    
-*/
+    */
+
 
     /*
     // MARK: - Navigation
