@@ -687,8 +687,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         marker.map = self.vwGMap
    
       // mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
-        mapCustomInfoWindow.center = vwGMap.center
-    self.vwGMap.camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 8)
+      //  mapCustomInfoWindow.center = vwGMap.center
+   //self.vwGMap.camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 8)
       //  mapCustomInfoWindow.center.y -= 150
       //  dropDownMenuFolder.center = mapView.projection.point(for: tappedMarker)
      //   dropDownMenuFolder.center.y -= 150

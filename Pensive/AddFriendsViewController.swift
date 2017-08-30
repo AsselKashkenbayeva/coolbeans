@@ -5,37 +5,37 @@
 //  Created by Assel Kashkenbayeva on 13/08/2017.
 //  Copyright © 2017 Assel Kashkenbayeva. All rights reserved.
 //
-/*
+
 import UIKit
 import Firebase
  var allUsers = [USER]()
-var snapKeys = [String]()
+var allFriends = [USER]()
+//var snapKeys = [String]()
+var friends = [String: AnyObject]()
+class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
-class AddFriendsViewController: UIViewController
-UITableViewDelegate, UITableViewDataSource {
-/*
     @IBOutlet var addFriendsTableView: UITableView!
   //  var allUsers = [USER]()
-    var friends = [String]()
+//    var friends = [String]()
      let user = Auth.auth().currentUser
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addFriendsTableView.delegate = self
         addFriendsTableView.dataSource = self
-    //    fetchUser()
+        fetchUser()
         fetchFriends()
     }
-/*
+
     func fetchUser() {
         let ref = Database.database().reference()
         ref.observe( .childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                print(dictionary)
+            //    print(dictionary)
                  let User = USER()
             User.AuthFirebaseKey = snapshot.key
-                print(User.AuthFirebaseKey)
+             //   print(User.AuthFirebaseKey)
                  User.Username = dictionary["Username"]?["Username"] as? String
                  User.ProfilePicURL = dictionary["ProfilePicURL"]?["ProfilePicURL"] as? String
                 /*
@@ -44,60 +44,74 @@ UITableViewDelegate, UITableViewDataSource {
                     print(User.Friends)
                 }
  */
+               // print(type(of: User.ProfilePicURL))
+                 //print(User.ProfilePicURL?.isEmpty)
                  allUsers.append(User)
-                   self.saveImage(imageName: User.AuthFirebaseKey!, URL: User.ProfilePicURL)
+                if User.ProfilePicURL == nil {
+                    print("Profile pic is equal to nil")
+                } else {
+                  self.saveImage(imageName: User.AuthFirebaseKey!, passedURL: User.ProfilePicURL!)
+                    print(User.AuthFirebaseKey)
+                }
                 DispatchQueue.main.async {
                     self.addFriendsTableView.reloadData()
                 }
             }
         }
         )}
-*/
-    func saveImage(imageName: String, URL: String){
+
+   
+    func saveImage(imageName: String, passedURL: String){
     
-    if let profileImageURL = URL {
-        let url = URL(string: profileImageURL)
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+        if passedURL.isEmpty {
+            print("There is no photo")
+            return
+        } else {
+        let url = URL(fileURLWithPath: passedURL)
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             
             if error != nil {
-                print(error!)
+                print("THERE IS AN ERROR")
                 return
             }
-            
-            DispatchQueue.main.async {
+           
+           // DispatchQueue.main. {
                 print("THIS IS GOING TO BE A PIC")
-                cell.friendProfileImage.image = UIImage(data: data!)
-            }
+               // cell.friendProfileImage.image = UIImage(data: data!)
+                let fileManager = FileManager.default
+                //get the image path
+                let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+                  let data = UIImagePNGRepresentation(UIImage(data: data!)!)
+                 fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
+         //  }
         }).resume()
     }
-    print("The save image function is being called")
-    //create an instance of the FileManager
-    let fileManager = FileManager.default
-    //get the image path
-    let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
-    
-    //get the image we took with camera
-    let image = addPicture.image!
-    //get the PNG data for this image
-    let data = UIImagePNGRepresentation(image)
-    //store it in the document directory
-    fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
+
 }
 
+  
+    
     func fetchFriends() {
         let ref = Database.database().reference()
        
         ref.child((self.user?.uid)!).child("Friends").observe( .value, with: { (snapshot) in
-            self.friends.removeAll()
-
+            friends.removeAll()
+           // snapKeys.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let friend = USER()
+                        friend.snapshotKey = snap.key
                         let key = snap.key
-                        let friend = (dictionary[key] as? [String: AnyObject]!)!["Friend"]
-                        self.friends.append(friend! as! String)
-                       snapKeys.append(key)
-            
+                      friend.AuthFirebaseKey = (dictionary[key]?["Friend"] as? String)
+                        
+                        //["Friend"]
+                        
+                        allFriends.append(friend)
+                       // let friend = (dictionary[key] as? [String: AnyObject]!)!
+                        
+                      // snapKeys.append(key)
+          // friends.updateValue(key as AnyObject, forKey: "firebaseKey")
                     }
                 }
             }
@@ -105,9 +119,10 @@ UITableViewDelegate, UITableViewDataSource {
     )
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
-                 print(self.friends)
+                 print(allFriends)
+            
             }
-        print(friends)
+  
     }
            /*
                 if (dictionary["Friends"] != nil) {
@@ -139,13 +154,22 @@ UITableViewDelegate, UITableViewDataSource {
         print("THIS IS COMING FROM CELL")
         print(cell.friendUserName.text)
         print(indexPath.row)
+    
+        for friend in allFriends {
+            if friend.AuthFirebaseKey == User.AuthFirebaseKey {
+                cell.checkBoxToFollow.on = true
+            } else {
+                cell.checkBoxToFollow.on = false
+            }
+        }
+        /*
         if self.friends.contains(User.AuthFirebaseKey!) {
             cell.checkBoxToFollow.on = true
         }
         else {
             cell.checkBoxToFollow.on = false
         }
-        
+        */
        print(cell.checkBoxToFollow.on)
 
         /*
@@ -178,22 +202,16 @@ UITableViewDelegate, UITableViewDataSource {
          cell.imageView?.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
          */
       //  cell.friendProfileImage.image = imageWithImage(image: UIImage(named: "MapIcon")!, scaledToSize: CGSize(width: 40, height: 40))
-        
-        if let profileImageURL = User.ProfilePicURL {
-            let url = URL(string: profileImageURL)
-            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    print("THIS IS GOING TO BE A PIC")
-                    cell.friendProfileImage.image = UIImage(data: data!)
-                }
-            }).resume()
+    
+        let fileManager = FileManager.default
+        let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(User.AuthFirebaseKey!)
+        if fileManager.fileExists(atPath: imagePath){
+           cell.friendProfileImage.image = UIImage(contentsOfFile: imagePath)
+            print("I have uploaded image from internal database")
+        }else{
+            print("Panic! No Image!")
         }
+
         /*
         cell.friendProfileImage.sizeToFit()
         cell.friendProfileImage.layer.borderWidth = 1
@@ -235,6 +253,6 @@ UITableViewDelegate, UITableViewDataSource {
         // Pass the selected object to the new view controller.
     }
     */
-*/
+
 }
-*/
+

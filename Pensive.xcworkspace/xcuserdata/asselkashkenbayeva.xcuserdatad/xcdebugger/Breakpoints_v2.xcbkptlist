@@ -507,6 +507,38 @@
             endingLineNumber = "711"
             landmarkName = "lookUpPlaceID()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pensive.FirstViewController.lookUpPlaceID () -&gt; ()"
+                  moduleName = "Pensive"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/asselkashkenbayeva/Desktop/Pensive/Pensive/FirstViewController.swift"
+                  timestampString = "525736925.981863"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "713"
+                  endingLineNumber = "713"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[2] = Value Promoted from Box&gt; of Pensive.FirstViewController.(lookUpPlaceID () -&gt; ()).(closure #1)"
+                  moduleName = "Pensive"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/asselkashkenbayeva/Desktop/Pensive/Pensive/FirstViewController.swift"
+                  timestampString = "525736925.985281"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "714"
+                  endingLineNumber = "714"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -538,6 +570,38 @@
             startingLineNumber = "719"
             endingLineNumber = "719"
             landmarkName = "lookUpPlaceID()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pensive/AddFriendsViewController.swift"
+            timestampString = "525779864.610874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pensive/AddFriendsViewController.swift"
+            timestampString = "525778667.506146"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "saveImage(imageName:passedURL:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

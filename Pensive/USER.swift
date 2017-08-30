@@ -20,4 +20,5 @@ class USER: NSObject {
     var StoredPlacesOfUser = [String:AnyObject]()
     var StoredFoldersOfUser = [String:AnyObject]()
     var Friends = [String:AnyObject]()
+    var snapshotKey: String?
 }

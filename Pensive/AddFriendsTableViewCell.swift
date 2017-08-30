@@ -5,7 +5,7 @@
 //  Created by Assel Kashkenbayeva on 13/08/2017.
 //  Copyright © 2017 Assel Kashkenbayeva. All rights reserved.
 //
-/*
+
 import UIKit
 import BEMCheckBox
 import Firebase
@@ -44,6 +44,22 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
         let databaseRef = Database.database().reference()
             databaseRef.child((user?.uid)!).child("Friends").childByAutoId().setValue(post)
         } else if checkBoxToFollow.on == false {
+            let p = allUsers[buttonRow!].AuthFirebaseKey
+            
+            for friend in allFriends {
+                if friend.AuthFirebaseKey == p {
+            let databaseRef = Database.database().reference().child((user?.uid)!).child("Friends")
+                databaseRef.child(friend.snapshotKey!).removeValue()
+                    print("deleting")
+                }
+            }
+           // let r = snapKeys[buttonRow!]
+          //  print(r)
+          //  let databaseRef = Database.database().reference().child((user?.uid)!).child("Friends")
+        //    databaseRef.child(r).removeValue()
+        //    print("deleting")
+            
+            /*
             print("deleting")
             let p = allUsers[buttonRow!].AuthFirebaseKey
             let r = snapKeys[buttonRow!]
@@ -58,10 +74,11 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
         }
     })
         })
-            
+         */
         }
 //print("this is being tapped")
+ }
+    
  
-    }
 }
-*/
+
