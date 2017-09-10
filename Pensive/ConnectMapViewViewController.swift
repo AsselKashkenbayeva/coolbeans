@@ -12,8 +12,11 @@ import GoogleMaps
 import GooglePlaces
 import IGLDropDownMenu
 
+
+var allFriends = [USER]()
+
 class ConnectMapViewViewController: UIViewController, GMSMapViewDelegate, IGLDropDownMenuDelegate {
-    /*
+    
 //This is setting the map view
     @IBOutlet var vwGMap: GMSMapView!
 //This is setting the detail pop up when marker is clicked
@@ -51,12 +54,13 @@ class ConnectMapViewViewController: UIViewController, GMSMapViewDelegate, IGLDro
     
     var tappedMarker = CLLocationCoordinate2D()
     
-    var user = Auth.auth().currentUser
+    var currentuser = Auth.auth().currentUser
     
     var dropDownMenuFolder = IGLDropDownMenu()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchFriends()
 //This is rendering the navigation bar at the top seethrough
 navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 navigationController?.navigationBar.shadowImage = UIImage()
@@ -67,6 +71,10 @@ navigationController?.navigationBar.shadowImage = UIImage()
         friendProfilePic.layer.borderColor = UIColor.orange.cgColor
         friendProfilePic.layer.cornerRadius = friendProfilePic.frame.height/2
         friendProfilePic.clipsToBounds = true
+      
+        
+        
+        
         //vwGMap.addSubview(friendProfilePic)
        // friendProfilePic.image = UIImage(named: "a")
       /*
@@ -130,6 +138,56 @@ navigationController?.navigationBar.shadowImage = UIImage()
         
         setupInIt()
 
+    }
+    
+    func fetchFriends() {
+        let ref = Database.database().reference()
+        ref.child((self.currentuser?.uid)!).child("Friends").observe( .value, with: { (snapshot) in
+            //  print("THIS THE FIREBASE VALUE IS BEING CALLED")
+            // snapKeys.removeAll()
+            allFriends.removeAll()
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let friend = USER()
+                        friend.snapshotKey = snap.key
+                        let key = snap.key
+                        friend.AuthFirebaseKey = (dictionary[key]?["Friend"] as? String)
+                        friend.Username = (dictionary[key]?["FriendUsername"] as? String)
+                        
+                        //["Friend"]
+                        
+                        allFriends.append(friend)
+                        // let friend = (dictionary[key] as? [String: AnyObject]!)!
+                        print("this is the firebase all friends func\(allFriends.count)")
+                        // snapKeys.append(key)
+                        // friends.updateValue(key as AnyObject, forKey: "firebaseKey")
+                    }
+                }
+                if allFriends.count > 0 {
+                    print("this is AFTER all friends has been populated\(allFriends.count)")
+                    for friend in allFriends {
+                        let ref = Database.database().reference().child(friend.AuthFirebaseKey!).child("StoredPlaces")
+                        ref.observe( .value, with: { (snapshot) in
+                            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                               // print(snapshot)
+                                for snap in snapshots {
+                                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                                        let key = snap.key
+                                        
+                                        friend.StoredPlacesOfUser = (dictionary[key] as? [String: AnyObject]!)!
+                                        print(friend.StoredPlacesOfUser)
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }
+
+            }
+        }
+        )
+        
     }
     
 
@@ -242,7 +300,7 @@ func setupInIt() {
         
     //Making a call to Firebase and saving data under the current user
      let databaseRef = Database.database().reference()
- databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
+ databaseRef.child((self.currentuser?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
       
     //Closing all the pop up windows after action
            friendDetailMapView.removeFromSuperview()
@@ -252,5 +310,5 @@ func setupInIt() {
         
     }
   
-    */
+    
 }

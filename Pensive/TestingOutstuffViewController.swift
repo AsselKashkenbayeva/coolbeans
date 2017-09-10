@@ -13,6 +13,8 @@ class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelega
     
     @IBOutlet var FriendPopUpView: UIView!
 
+   
+    @IBOutlet var containerview: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         UIView.animate(withDuration: 2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
@@ -26,8 +28,10 @@ class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelega
                 self.FriendPopUpView.transform = CGAffineTransform(scaleX: 1, y: 1)
             
             },completion: nil)})
+        print(childViewControllers)
         
-    
+   // containerView.frame = CGRect(x: 10, y: 100, width: 20, height: 20)
+        
         /*
         var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -38,7 +42,7 @@ class TestingOutstuffViewController: UIViewController, UIGestureRecognizerDelega
         self.FriendPopUpView.addGestureRecognizer(swipeLeft)
  */
     }
-/*
+    /*
     func swiped(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {

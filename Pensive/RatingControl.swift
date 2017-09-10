@@ -23,7 +23,7 @@ var firebaseKey = ""
     }
     
     var ratingbuttons = [UIButton]()
-    let spacing = 5
+    let spacing = 2
     let starCount = 5
     
 
@@ -60,7 +60,7 @@ var firebaseKey = ""
         let buttonSize = Int(frame.size.height)
         var buttonframe =  CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
         for (index, button) in ratingbuttons.enumerated() {
-            buttonframe.origin.x = CGFloat(index * (buttonSize + 5))
+            buttonframe.origin.x = CGFloat(index * (buttonSize + 2))
             button.frame = buttonframe
         }
         updateButtonSelectionStates()

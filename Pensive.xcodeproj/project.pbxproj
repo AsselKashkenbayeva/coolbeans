@@ -21,6 +21,8 @@
 		CF122FAA1DFF2F720011725E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA91DFF2F720011725E /* PhotosUI.framework */; };
 		CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17D7161E808783006E493D /* ConnectTableViewController.swift */; };
 		CF17DA4A1F24C4C500E664FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */; };
+		CF2DA9201F654CFA00C4FF45 /* FriendSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */; };
+		CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
@@ -64,6 +66,7 @@
 		CFBBE14E1DBEA75200635E2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14D1DBEA75200635E2C /* Security.framework */; };
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
+		CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */; };
 		CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */; };
 		CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */; };
 		CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */; };
@@ -98,6 +101,8 @@
 		CF122FA91DFF2F720011725E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		CF17D7161E808783006E493D /* ConnectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectTableViewController.swift; sourceTree = "<group>"; };
 		CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSliderViewController.swift; sourceTree = "<group>"; };
+		CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
@@ -152,6 +157,7 @@
 		CFBFD51F1DBEC20C008EB6E6 /* Pensive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pensive-Bridging-Header.h"; sourceTree = "<group>"; };
 		CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "bridging-header.m"; path = "../bridging-header.m"; sourceTree = "<group>"; };
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = containerviewtestViewController.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
 		CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideFoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersTableViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +259,9 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */,
+				CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */,
+				CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */,
 				CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */,
 				CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */,
 				CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */,
@@ -544,9 +553,11 @@
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
+				CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */,
 				CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */,
+				CF2DA9201F654CFA00C4FF45 /* FriendSliderViewController.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
 				CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */,
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
@@ -555,6 +566,7 @@
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
+				CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */,
 				CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */,
 				CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */,
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,

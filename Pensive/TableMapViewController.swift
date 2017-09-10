@@ -19,24 +19,18 @@ let gradientLayer = CAGradientLayer()
     @IBOutlet var mapView: GMSMapView!
    // var selectedPlace = [String:AnyObject]()
     
-    @IBOutlet var somebutton: UIButton!
-    @IBOutlet var detailView: UIView!
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var detailVIew: UIView!
     
-    @IBOutlet var addressLabel: UILabel!
-    
-    @IBOutlet var telephoneLabel: UITextView!
-    @IBOutlet var websiteLabel: UITextView!
-    
+    var delegate: DetailViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+    /*
         somebutton.layer.borderWidth = 2
         somebutton.layer.masksToBounds = false
         somebutton.layer.borderColor = UIColor.orange.cgColor
         somebutton.layer.cornerRadius = somebutton.frame.height/2
       somebutton.clipsToBounds = true
-        
+       */ 
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -47,7 +41,7 @@ let gradientLayer = CAGradientLayer()
         let color2 = UIColor.white.cgColor
         let color3 = UIColor.lightGray.cgColor
         gradientLayer.colors = [color1,color2]
-        gradientLayer.locations = [0.6,0.7]
+        gradientLayer.locations = [0.6,0.8]
         self.view.layer.addSublayer(gradientLayer)
 
         mapView.delegate = self
@@ -55,11 +49,12 @@ let gradientLayer = CAGradientLayer()
         let long = (selectedPlace["Longitude"] as? NSString)?.doubleValue
       
         //This is setting the default view on London
-       mapView.camera = GMSCameraPosition.camera(withLatitude: lat as! CLLocationDegrees!, longitude: long as! CLLocationDegrees! , zoom: 10.0)
+       mapView.camera = GMSCameraPosition.camera(withLatitude: lat as! CLLocationDegrees!, longitude: long as! CLLocationDegrees! , zoom: 18)
         mapView.settings.scrollGestures = true
         mapView.settings.zoomGestures = true
         mapView.settings.compassButton = true
         mapView.settings.allowScrollGesturesDuringRotateOrZoom = true
+        
         
         let placeMarker = GMSMarker()
         placeMarker.position = CLLocationCoordinate2D(latitude: lat! , longitude: long!)
@@ -67,13 +62,17 @@ let gradientLayer = CAGradientLayer()
         placeMarker.icon = UIImage(named:selectedPlace["FolderIcon"]! as! String)
          placeMarker.map = self.mapView
         
-        nameLabel.text = selectedPlace["StoredPlaceName"] as! String?
-        addressLabel.text = selectedPlace["StoredPlaceAddress"] as! String?
-        telephoneLabel.text = selectedPlace["StoredPlaceTelephone"] as! String?
-        websiteLabel.text = selectedPlace["StoredPlaceWebsite"] as! String?
+        view.addSubview(detailVIew)
+   
+
+        detailVIew.translatesAutoresizingMaskIntoConstraints = false
+    let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController")
+    self.addChildViewController(vc!)
+       // vc?.view.frame = CGRect(x: 0, y: 0, width: self.detailVIew.frame.size.width, height: self.detailVIew.frame.size.height)
+        self.detailVIew.addSubview((vc?.view)!)
+        vc?.didMove(toParentViewController: self)
         
-    self.view.addSubview(detailView)
-        detailView.addSubview(somebutton)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,7 +120,7 @@ let gradientLayer = CAGradientLayer()
     }
     
     // MARK: UIViewControllerTransitioningDelegate
-    
+    /*
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
         transition.startingPoint = somebutton.center
@@ -135,6 +134,6 @@ let gradientLayer = CAGradientLayer()
         transition.bubbleColor = somebutton.backgroundColor!
         return transition
     }
-    
+    */
 
 }

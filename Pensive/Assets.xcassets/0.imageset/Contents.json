@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cattchemapicon_red70-2.png",
+      "filename" : "cattchemapicon_red70-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cattchemapicon_red70-1.png",
+      "filename" : "cattchemapicon_red70-2.png",
       "scale" : "2x"
     },
     {

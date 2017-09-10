@@ -9,15 +9,17 @@
 import UIKit
 import Firebase
  var allUsers = [USER]()
-var allFriends = [USER]()
+
 //var snapKeys = [String]()
 var friends = [String: AnyObject]()
 class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
+
     @IBOutlet var addFriendsTableView: UITableView!
   //  var allUsers = [USER]()
 //    var friends = [String]()
-     let user = Auth.auth().currentUser
+     let currentuser = Auth.auth().currentUser
+    var boolArray = [Bool]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,9 +30,10 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
     }
 
     func fetchUser() {
+        allUsers.removeAll()
         let ref = Database.database().reference()
         ref.observe( .childAdded, with: { (snapshot) in
-            
+          //  print("THe firebase is being called after changing loading")
             if let dictionary = snapshot.value as? [String: AnyObject] {
             //    print(dictionary)
                  let User = USER()
@@ -46,13 +49,21 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
  */
                // print(type(of: User.ProfilePicURL))
                  //print(User.ProfilePicURL?.isEmpty)
-                 allUsers.append(User)
-                if User.ProfilePicURL == nil {
-                    print("Profile pic is equal to nil")
-                } else {
-                  self.saveImage(imageName: User.AuthFirebaseKey!, passedURL: User.ProfilePicURL!)
-                    print(User.AuthFirebaseKey)
+             //  print(User.ProfilePicURL)
+        
+                if User.AuthFirebaseKey != self.currentuser?.uid && User.AuthFirebaseKey != "AddRecommendation" {
+                    allUsers.append(User)
+                    if User.ProfilePicURL == nil {
+                      //  print("Profile pic is equal to nil")
+                    } else {
+                        self.saveImage(imageName: User.AuthFirebaseKey!, passedURL: User.ProfilePicURL!)
+                        // print(User.AuthFirebaseKey)
+                    }
+                    
                 }
+                
+           
+ 
                 DispatchQueue.main.async {
                     self.addFriendsTableView.reloadData()
                 }
@@ -62,21 +73,23 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
 
    
     func saveImage(imageName: String, passedURL: String){
-    
+   
         if passedURL.isEmpty {
-            print("There is no photo")
+          //  print("There is no photo")
             return
         } else {
-        let url = URL(fileURLWithPath: passedURL)
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            
+        let url = NSURL(string: passedURL) as! URL
+         //   print("this is the passed url")
+         //   print(url)
+   
+    URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             if error != nil {
                 print("THERE IS AN ERROR")
                 return
             }
            
            // DispatchQueue.main. {
-                print("THIS IS GOING TO BE A PIC")
+             //   print("THIS IS GOING TO BE A PIC")
                // cell.friendProfileImage.image = UIImage(data: data!)
                 let fileManager = FileManager.default
                 //get the image path
@@ -87,16 +100,17 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
         }).resume()
     }
 
+        
 }
 
   
     
     func fetchFriends() {
         let ref = Database.database().reference()
-       
-        ref.child((self.user?.uid)!).child("Friends").observe( .value, with: { (snapshot) in
-            friends.removeAll()
+    ref.child((self.currentuser?.uid)!).child("Friends").observe( .value, with: { (snapshot) in
+          //  print("THIS THE FIREBASE VALUE IS BEING CALLED")
            // snapKeys.removeAll()
+              allFriends.removeAll()
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -104,6 +118,7 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
                         friend.snapshotKey = snap.key
                         let key = snap.key
                       friend.AuthFirebaseKey = (dictionary[key]?["Friend"] as? String)
+                     friend.Username = (dictionary[key]?["FriendUsername"] as? String)
                         
                         //["Friend"]
                         
@@ -117,12 +132,29 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
             }
         }
     )
-        let when = DispatchTime.now() + 1
+        //havent finished implimenting the child removal
+      
+        let when = DispatchTime.now() + 0.5
         DispatchQueue.main.asyncAfter(deadline: when) {
-                 print(allFriends)
+                // print(allFriends)
+            var bool = Bool()
+       
+            for User in allUsers {
+                for friend in allFriends {
+           if (User.AuthFirebaseKey?.contains(friend.AuthFirebaseKey!))! {
+                  bool = true
+            break
             
+                } else {
+                 bool = false
+        
+                }
+                    
+                }
+                 self.boolArray.append(bool)
             }
-  
+              //   print(self.boolArray)
+    }
     }
            /*
                 if (dictionary["Friends"] != nil) {
@@ -148,20 +180,46 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let User = allUsers[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "addFriendsCell", for: indexPath) as! AddFriendsTableViewCell
-        cell.friendProfileImage.image = UIImage(named: "ProfileIcon")
-       
-        cell.friendUserName.text = User.AuthFirebaseKey
-        print("THIS IS COMING FROM CELL")
-        print(cell.friendUserName.text)
-        print(indexPath.row)
+        cell.friendProfileImage.image = UIImage(named: "funProfileIcon")
+      // cell.checkBoxToFollow.on = checkboxTick
+     cell.friendUserName.text = User.Username
+        
+   //     for User in allUsers {
+       // print("This is printing the allfriends count")
+        //print(allFriends.count)
+            for friend in allFriends {
+                if (User.AuthFirebaseKey?.contains(friend.AuthFirebaseKey!))! {
+                    cell.checkBoxToFollow.on = true
+                       // print("THIS matches the friend list")
+                    break
+                } else {
+                    cell.checkBoxToFollow.on = false
+                   //  print("This does not match friend list ")
+                }
+            }
+      //  }
+     
     
+        
+        
+        
+        
+        
+        
+      //  print("THIS IS COMING FROM CELL")
+       // print(cell.friendUserName.text)
+     //   print(indexPath.row)
+        /*
         for friend in allFriends {
             if friend.AuthFirebaseKey == User.AuthFirebaseKey {
                 cell.checkBoxToFollow.on = true
+                print("THIS matches the friend list")
             } else {
                 cell.checkBoxToFollow.on = false
+                print("This does not match friend list ")
             }
         }
+ */
         /*
         if self.friends.contains(User.AuthFirebaseKey!) {
             cell.checkBoxToFollow.on = true
@@ -170,7 +228,7 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
             cell.checkBoxToFollow.on = false
         }
         */
-       print(cell.checkBoxToFollow.on)
+      // print(cell.checkBoxToFollow.on)
 
         /*
          let user = users[indexPath.row]
@@ -207,9 +265,17 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(User.AuthFirebaseKey!)
         if fileManager.fileExists(atPath: imagePath){
            cell.friendProfileImage.image = UIImage(contentsOfFile: imagePath)
-            print("I have uploaded image from internal database")
+           // print("I have uploaded image from internal database")
+            
         }else{
-            print("Panic! No Image!")
+          //  print("Panic! No Image!")
+            var indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+            indicator.frame = CGRect(x: 150, y: 300, width: 100, height: 100)
+            indicator.center = view.center
+            indicator.bringSubview(toFront: view)
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+           cell.progressImageView.addSubview(indicator)
+          
         }
 
         /*
@@ -225,7 +291,7 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
         cell.checkBoxToFollow.tag = indexPath.row
         
        cell.checkBoxToFollow.addTarget(self, action: "didTap:", for: UIControlEvents.touchUpInside)
-        print(indexPath.row)
+        //print(indexPath.row)
  
         return cell
     }

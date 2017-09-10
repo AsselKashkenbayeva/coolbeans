@@ -16,6 +16,8 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
     
     @IBOutlet var friendUserName: UILabel!
 
+    @IBOutlet var progressImageView: UIView!
+    
     @IBOutlet var checkBoxToFollow: BEMCheckBox!
     
     let user = Auth.auth().currentUser
@@ -23,12 +25,18 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
  print("THIS IS ANIMATING THE VIEW")
-            
+        friendProfileImage.layer.borderWidth = 1
+        friendProfileImage.layer.masksToBounds = false
+        friendProfileImage.layer.borderColor = UIColor.orange.cgColor
+        friendProfileImage.layer.cornerRadius = friendProfileImage.frame.height/2
+        friendProfileImage.clipsToBounds = true
+        
         
     }
     
@@ -40,7 +48,8 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
         if checkBoxToFollow.on == true {
             print("adding")
         let p = allUsers[buttonRow!].AuthFirebaseKey
-        let post : [String: AnyObject] = ["Friend" : p as AnyObject]
+        let b = allUsers[buttonRow!].Username
+        let post : [String: AnyObject] = ["Friend" : p as AnyObject , "FriendUsername" : b as AnyObject]
         let databaseRef = Database.database().reference()
             databaseRef.child((user?.uid)!).child("Friends").childByAutoId().setValue(post)
         } else if checkBoxToFollow.on == false {

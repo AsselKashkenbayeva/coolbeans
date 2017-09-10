@@ -9,10 +9,33 @@
 import UIKit
 import Firebase
 
+extension UIImage {
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+    
+    /// Returns the data for the specified image in PNG format
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the PNG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    var png: Data? { return UIImagePNGRepresentation(self) }
+    
+    /// Returns the data for the specified image in JPEG format.
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    func jpeg(_ quality: JPEGQuality) -> Data? {
+        return UIImageJPEGRepresentation(self, quality.rawValue)
+    }
+}
 
-class ProfilePageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate {
+class ProfilePageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIViewControllerTransitioningDelegate {
 
     @IBOutlet var changePasswordButton: UIButton!
+    
+    @IBOutlet var testingButton: UIButton!
     
     @IBOutlet weak var profilePhoto: UIImageView!
     
@@ -25,6 +48,9 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     
     
     @IBOutlet var tickImageForChangedPassword: UIImageView!
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isHidden = true
@@ -123,17 +149,19 @@ class ProfilePageViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("THIS IS IN THE PICTURE SELECTION")
       let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        let imageData = selectedImage?.jpeg(.lowest)
         profilePhoto.image = selectedImage
          dismiss(animated: true, completion: nil)
         let userID: String = (Auth.auth().currentUser?.uid)!
         let storageRef = Storage.storage().reference().child(userID).child("ProfilePic")
         var uploadData = NSData()
-        uploadData = UIImagePNGRepresentation(profilePhoto.image!)! as NSData
+       // uploadData = UIImagePNGRepresentation(profilePhoto.image!)! as NSData
         let uploadMetadata = StorageMetadata()
         uploadMetadata.contentType = "image/jpeg"
     
-        storageRef.putData(uploadData as Data , metadata: uploadMetadata) { (metadata, error) in
+        storageRef.putData(imageData!, metadata: uploadMetadata) { (metadata, error) in
             if (error != nil) {
                 print("I received an error")
             } else {
@@ -281,6 +309,5 @@ print("new password is saved in firebase")
         passwordTextField.isHidden = false
         changePasswordButton.isHidden = true
     }
-    
-    
+
 }
