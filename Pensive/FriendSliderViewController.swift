@@ -71,7 +71,7 @@ class FriendSliderViewController: UIViewController, UICollectionViewDelegate, UI
                 self.allFilters = self.allFilters.enumerated().flatMap {rmIndices.contains($0.0) ? nil : $0.1}
             }
              var allFolders = [FILTER]()
-        print("THIS IS FETCh FOLDER")
+        
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                 if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -228,7 +228,8 @@ class FriendSliderViewController: UIViewController, UICollectionViewDelegate, UI
                 FirstViewController = self.storyboard!.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
             firstViewController.filterSelected = selectedFilter.name!
             firstViewController.filterPlaces()
-       firstViewController.vwGMap.addSubview(firstViewController.detailsPopUp)
+            
+       //firstViewController.vwGMap.addSubview(firstViewController.detailsPopUp)
         } else {
             
         }

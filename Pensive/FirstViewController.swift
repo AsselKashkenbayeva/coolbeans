@@ -54,9 +54,13 @@ class markerUserData{
         self.folderName = FolderName
     }
 }
-class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate, DataEnteredDelegate {
+class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate, DataEnteredDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout , UICollectionViewDataSource {
     
       let transition = BubbleTransition()
+    
+    //This is for the friend slider view
+      var allFilters: [FILTER] = []
+    @IBOutlet var friendSlider: UICollectionView!
     
     //Container for viewing Gmaps
     @IBOutlet weak var mapView: GMSMapView!
@@ -64,9 +68,6 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     var vwGMap = GMSMapView()
     var Markers = [GMSMarker]()
     
-  
-    @IBOutlet var friendSliderView: UIView!
-
     @IBOutlet var pictureOfPlace: UIImageView!
  
     @IBOutlet var detailsPopUp: UIView!
@@ -196,7 +197,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         visualEffectView?.isHidden = true
         visualEffectView?.effect = nil
   
-    let frame = CGRect(x: 0, y: friendSliderView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height*0.8)
+    let frame = CGRect(x: 0, y: friendSlider.frame.maxY, width: self.view.frame.width, height: self.view.frame.height*0.8)
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 22.300000, longitude: 70.783300, zoom: 10.0)
         vwGMap = GMSMapView.map(withFrame: frame , camera: camera)
         vwGMap.camera = camera
@@ -988,7 +989,190 @@ self.newPlacePlaceID = placeID
     @IBAction func shareButtonAction(_ sender: Any) {
     }
     
+    func fetchFolder() {
+        
+        let ref = Database.database().reference().child((user?.uid)!).child("UserFolders")
+        ref.observe( .value, with: { (snapshot) in
+            var rmIndices = [Int]()
+            //            if let index = self.allFilters.index(where: { $0.type == "folder" }) {
+            //                self.allFilters.remove(at: index)
+            //                //continue do: arrPickerData.append(...)
+            //            }
+            //
+            var count = self.allFilters.count
+            if self.allFilters.count > 0 {
+                for index in 0...(self.allFilters.count-1) {
+                    
+                    if self.allFilters[index].type == "folder" {
+                        rmIndices.append(index)
+                    }
+                }
+                self.allFilters = self.allFilters.enumerated().flatMap {rmIndices.contains($0.0) ? nil : $0.1}
+            }
+            var allFolders = [FILTER]()
+            
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let key = snap.key
+                        //print(key)
+                        let folder = FILTER()
+                        folder.name = (dictionary[key]?["FolderName"] as? String)!
+                        folder.icon = (dictionary[key]?["FolderIcon"] as? String)!
+                        folder.key = key
+                        folder.type = "folder"
+                        // print(dictionary)
+                        //folder.name = dictionary["Username"] as? String
+                        print(folder.name!)
+                        
+                        allFolders.append(folder)
+                        
+                    }
+                }
+                self.allFilters = allFolders + self.allFilters
+                // if self.folders.contains(folder) {
+                // print("YES")
+                //}
+                DispatchQueue.main.async {
+                    self.friendSlider.reloadData()
+                    print("This should print at the end of completed task ")
+                    
+                }
+            }
+        }
+        )
+        
+    }
     
+    func fetchFriends() {
+        let ref = Database.database().reference()
+        ref.child((self.user?.uid)!).child("Friends").observe( .value, with: { (snapshot) in
+            var rmIndices = [Int]()
+            if self.allFilters.count > 0 {
+                for index in 0...(self.allFilters.count-1) {
+                    
+                    if self.allFilters[index].type == "friend" {
+                        rmIndices.append(index)
+                    }
+                }
+                self.allFilters = self.allFilters.enumerated().flatMap {rmIndices.contains($0.0) ? nil : $0.1}
+            }
+            var friends = [FILTER]()
+            allFriends.removeAll()
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let friend = USER()
+                        friend.snapshotKey = snap.key
+                        let key = snap.key
+                        friend.AuthFirebaseKey = (dictionary[key]?["Friend"] as? String)
+                        friend.Username = (dictionary[key]?["FriendUsername"] as? String)
+                        
+                        let friendFilter = FILTER()
+                        friendFilter.path = (dictionary[key]?["Friend"] as? String)
+                        friendFilter.name = (dictionary[key]?["FriendUsername"] as? String)
+                        friendFilter.type = "friend"
+                        friends.append(friendFilter)
+                        
+                        //["Friend"]
+                        
+                        allFriends.append(friend)
+                        // let friend = (dictionary[key] as? [String: AnyObject]!)!
+                        print("this is the firebase all friends func\(allFriends.count)")
+                        // snapKeys.append(key)
+                        // friends.updateValue(key as AnyObject, forKey: "firebaseKey")
+                        
+                    }
+                    
+                    
+                }
+                self.allFilters = self.allFilters + friends
+                DispatchQueue.main.async {
+                    self.friendSlider.reloadData()
+                    print("This should print at the end of completed task ")
+                    
+                }
+                
+                if allFriends.count > 0 {
+                    print("this is AFTER all friends has been populated\(allFriends.count)")
+                    for friend in allFriends {
+                        let ref = Database.database().reference().child(friend.AuthFirebaseKey!).child("StoredPlaces")
+                        ref.observe( .value, with: { (snapshot) in
+                            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                                // print(snapshot)
+                                for snap in snapshots {
+                                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                                        let key = snap.key
+                                        
+                                        friend.StoredPlacesOfUser = (dictionary[key] as? [String: AnyObject]!)!
+                                        print(friend.StoredPlacesOfUser)
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }
+                
+            }
+        }
+        )
+        
+    }
+    
+
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return allFilters.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let folder = allFilters[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        // cell.friendProfileImage.image = UIImage(named: folder.icon!)
+        /*
+         let fileManager = FileManager.default
+         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(folder.icon!)
+         if fileManager.fileExists(atPath: imagePath){
+         cell.friendProfileImage.image = UIImage(contentsOfFile: imagePath)
+         print("I have uploaded image from internal database")
+         }else{
+         print("Panic! No Image!")
+         // cell.friendProfileImage.image = UIImage(named: "funProfilePic")
+         }
+         */
+        cell.friendUsernameLabel.text = folder.name
+        return cell
+
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        /*
+        let selectedFilter = allFilters[indexPath.row]
+        if selectedFilter.type == "folder" {
+            let firstViewController:
+                FirstViewController = self.storyboard!.instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
+            firstViewController.filterSelected = selectedFilter.name!
+            firstViewController.filterPlaces()
+         
+            //firstViewController.vwGMap.addSubview(firstViewController.detailsPopUp)
+        } else {
+            
+        }
+        */
+        
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print("size if cell called ")
+        var size = CGSize(width: 100, height: 100)
+        
+        return size
+    }
     
     
 

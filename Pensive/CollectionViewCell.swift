@@ -11,9 +11,18 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet var friendProfileImage: UIImageView!
     
+  
+    @IBOutlet var friendProfileImageFromMap: UIImageView!
+   
+    @IBOutlet var nameForLabelMap: UILabel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+     
+    }
     override func prepareForReuse() {
     super.prepareForReuse()
-        friendProfileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+       // friendProfileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
     friendProfileImage.layer.borderWidth = 1
     friendProfileImage.layer.masksToBounds = false
     friendProfileImage.layer.borderColor = UIColor.orange.cgColor
