@@ -313,6 +313,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             print("completed storedfolders")
             print(STOREDFolders.count)
         }
+        fetchFolder()
+        fetchFriends()
     }
     
     
@@ -1128,27 +1130,40 @@ self.newPlacePlaceID = placeID
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let folder = allFilters[indexPath.row]
+        let filter = allFilters[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        // cell.friendProfileImage.image = UIImage(named: folder.icon!)
-        /*
-         let fileManager = FileManager.default
-         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(folder.icon!)
-         if fileManager.fileExists(atPath: imagePath){
-         cell.friendProfileImage.image = UIImage(contentsOfFile: imagePath)
-         print("I have uploaded image from internal database")
-         }else{
-         print("Panic! No Image!")
-         // cell.friendProfileImage.image = UIImage(named: "funProfilePic")
-         }
-         */
-        cell.friendUsernameLabel.text = folder.name
+      
+          cell.friendProfileImageFromMap.image = UIImage(named: "funProfileIcon")
+        if filter.type == "folder" {
+            cell.friendProfileImageFromMap.image = UIImage(named: filter.icon!)
+        } else {
+            let fileManager = FileManager.default
+            
+            let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(filter.path!)
+            print(imagePath)
+            if fileManager.fileExists(atPath: imagePath){
+                cell.friendProfileImageFromMap.image = UIImage(contentsOfFile: imagePath)
+                print("I have uploaded image from internal database")
+            }else{
+                print("Panic! No Image!")
+                cell.friendProfileImageFromMap.image = UIImage(named: "funProfileIcon")
+            }
+
+            
+        }
+  
+        
+     
+       // cell.friendProfileImageFromMap.image = UIImage(named: "funProfileIcon")
+        cell.nameForLabelMap.text = filter.name
         return cell
 
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        //print("THIS IS CLICKING ON THE CELL ")
         /*
         let selectedFilter = allFilters[indexPath.row]
         if selectedFilter.type == "folder" {
@@ -1169,7 +1184,7 @@ self.newPlacePlaceID = placeID
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         print("size if cell called ")
-        var size = CGSize(width: 100, height: 100)
+        var size = CGSize(width: 80, height: 80)
         
         return size
     }

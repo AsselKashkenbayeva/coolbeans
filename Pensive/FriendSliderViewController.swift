@@ -204,8 +204,8 @@ class FriendSliderViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        let folder = allFilters[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-       // cell.friendProfileImage.image = UIImage(named: folder.icon!)
-        /*
+        cell.friendProfileImage.image = UIImage(named: folder.icon!)
+        
         let fileManager = FileManager.default
         let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(folder.icon!)
         if fileManager.fileExists(atPath: imagePath){
@@ -213,9 +213,10 @@ class FriendSliderViewController: UIViewController, UICollectionViewDelegate, UI
             print("I have uploaded image from internal database")
         }else{
             print("Panic! No Image!")
-           // cell.friendProfileImage.image = UIImage(named: "funProfilePic")
+            cell.friendProfileImage.image = UIImage(named: "funProfilePic")
         }
- */
+ 
+        cell.friendProfileImage.image = UIImage(named: "funProfileIcon")
         cell.friendUsernameLabel.text = folder.name
         return cell
     }

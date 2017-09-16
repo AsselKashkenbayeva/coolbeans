@@ -10,16 +10,35 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet var friendProfileImage: UIImageView!
-    
-  
+
     @IBOutlet var friendProfileImageFromMap: UIImageView!
    
     @IBOutlet var nameForLabelMap: UILabel!
     
+    @IBOutlet var friendUsernameLabel: UILabel!
+    
+    override func layoutSubviews() {
+        super .layoutSubviews()
+        friendProfileImageFromMap.layer.borderWidth = 1
+        friendProfileImageFromMap.layer.masksToBounds = false
+        friendProfileImageFromMap.layer.borderColor = UIColor.orange.cgColor
+        friendProfileImageFromMap.layer.cornerRadius = 20
+        friendProfileImageFromMap.clipsToBounds = true
+        //self.friendProfileImageFromMap.image = nil
+    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-     
+        //friendProfileImageFromMap.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        /*
+        friendProfileImageFromMap.layer.borderWidth = 1
+        friendProfileImageFromMap.layer.masksToBounds = false
+        friendProfileImageFromMap.layer.borderColor = UIColor.orange.cgColor
+        friendProfileImageFromMap.layer.cornerRadius = 20
+        friendProfileImageFromMap.clipsToBounds = true
+        self.friendProfileImageFromMap.image = nil
+ */
     }
+    /*
     override func prepareForReuse() {
     super.prepareForReuse()
        // friendProfileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -30,7 +49,6 @@ class CollectionViewCell: UICollectionViewCell {
     friendProfileImage.clipsToBounds = true
         self.friendProfileImage.image = nil
     }
-    
-    @IBOutlet var friendUsernameLabel: UILabel!
+    */
    
 }
