@@ -16,6 +16,7 @@
 		CF0F89C51DE2BD8500BC7462 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89C41DE2BD8500BC7462 /* GoogleToolboxForMac.framework */; };
 		CF0F89C71DE2BDBF00BC7462 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89C61DE2BDBF00BC7462 /* FirebaseDatabase.framework */; };
 		CF0F89CD1DE2C6A900BC7462 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89CC1DE2C6A900BC7462 /* MapKit.framework */; };
+		CF1015CE1F6E93E5001F9AFA /* CollectionViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */; };
 		CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF122FA51DFF0DA00011725E /* DetailViewController.swift */; };
 		CF122FA81DFF2F6B0011725E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA71DFF2F6B0011725E /* Photos.framework */; };
 		CF122FAA1DFF2F720011725E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA91DFF2F720011725E /* PhotosUI.framework */; };
@@ -96,6 +97,7 @@
 		CF0F89C81DE2BE2400BC7462 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		CF0F89C91DE2BE5300BC7462 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		CF0F89CC1DE2C6A900BC7462 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell2.swift; sourceTree = "<group>"; };
 		CF122FA51DFF0DA00011725E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CF122FA71DFF2F6B0011725E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CF122FA91DFF2F720011725E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
@@ -261,6 +263,7 @@
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
 				CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */,
 				CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */,
+				CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */,
 				CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */,
 				CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */,
 				CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */,
@@ -568,6 +571,7 @@
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
 				CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */,
 				CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */,
+				CF1015CE1F6E93E5001F9AFA /* CollectionViewCell2.swift in Sources */,
 				CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */,
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,
 				CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */,

@@ -9,22 +9,23 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-    @IBOutlet var friendProfileImage: UIImageView!
+ 
 
     @IBOutlet var friendProfileImageFromMap: UIImageView!
    
     @IBOutlet var nameForLabelMap: UILabel!
     
-    @IBOutlet var friendUsernameLabel: UILabel!
+
     
     override func layoutSubviews() {
-        super .layoutSubviews()
-        friendProfileImageFromMap.layer.borderWidth = 1
+        super.layoutSubviews()
+       // friendProfileImageFromMap.layer.borderWidth = 1
         friendProfileImageFromMap.layer.masksToBounds = false
-        friendProfileImageFromMap.layer.borderColor = UIColor.orange.cgColor
+       // friendProfileImageFromMap.layer.borderColor = UIColor.orange.cgColor
         friendProfileImageFromMap.layer.cornerRadius = 20
         friendProfileImageFromMap.clipsToBounds = true
         //self.friendProfileImageFromMap.image = nil
+ 
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
