@@ -14,6 +14,7 @@ import Firebase
 var friends = [String: AnyObject]()
 class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet var closeAddFriendWindow: UIButton!
 
     @IBOutlet var addFriendsTableView: UITableView!
   //  var allUsers = [USER]()
@@ -319,6 +320,10 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func addCloseFriendsActions(_ sender: Any) {
+    }
+    
 
 }
 

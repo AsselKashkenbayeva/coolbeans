@@ -30,6 +30,7 @@ var STOREDPlaces = [[String:AnyObject]]()
 var STOREDFolders = [[String:AnyObject]]()
 var itemIndex = Int()
 
+//This is the class of a tapped marker
 class markerUserData{
     var nameUserData: String
     var addressUserData: String
@@ -56,115 +57,101 @@ class markerUserData{
 }
 
 
-class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate, DataEnteredDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout , UICollectionViewDataSource {
-    
-    
-    var selectedRowIndex = Int()
- 
-    
-      let transition = BubbleTransition()
-    
+class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, UIGestureRecognizerDelegate, IGLDropDownMenuDelegate, UIViewControllerTransitioningDelegate, DataEnteredDelegate,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout , UICollectionViewDataSource {
+
     //This is for the friend slider view
       var allFilters: [FILTER] = []
+    //slider with the filters and the friends
     @IBOutlet var friendSlider: UICollectionView!
-    
     @IBOutlet var friendSlider2: UICollectionView!
+    //Array of only friends for slider2
      var friendsForSlider2 = [FILTER]()
-
+    //this is for setting the border for the row selected in the slider
+    var selectedRowIndex = Int()
+    //selected friend selected by user to share recommendation with
+    var userToSendRecommendationTo = FILTER()
+    @IBOutlet var messageToFriendTextField: UITextField!
+// when user clicks to share, view shows up with message textfield and confirm button
     @IBOutlet var popSliderViewWindow: UIView!
-  
-    //Container for viewing Gmaps
-   // @IBOutlet weak var mapView: GMSMapView!
+
     var locationManager = CLLocationManager()
     var vwGMap = GMSMapView()
+    
     var Markers = [GMSMarker]()
     
-    @IBOutlet var pictureOfPlace: UIImageView!
- 
+    //pop up window when clicking on location icon on place.
     @IBOutlet var detailsPopUp: UIView!
-    
+    @IBOutlet var pictureOfPlace: UIImageView!
     @IBOutlet var detailsName: UILabel!
-    
-    
     @IBOutlet var websiteButton: UIButton!
-    
     @IBOutlet var telephoneButton: UIButton!
-    
     @IBOutlet var shareButton: UIButton!
+    @IBOutlet var ratingControl: RatingControl!
+    @IBOutlet var moreDetailButton: UIButton!
+    let transition = BubbleTransition()
+    @IBOutlet var closeDetailsButton: UIButton!
     
-    
+    //if tapped marker on friend map, the share button turns into an add button
     @IBOutlet var addToNewFolderButtonInPopUp: UIButton!
     
-    
-    @IBOutlet var ratingControl: RatingControl!
-    
-    
-    @IBOutlet var nameWhenAddingPlace: UILabel!
-    
-    
+    //pop up to add a place with the drop down menu
     @IBOutlet var mapCustomInfoWindow: UIView!
-    
-  
- 
-    
-    //@IBOutlet weak var visualEffectView: UIVisualEffectView!
-    
+    @IBOutlet var nameWhenAddingPlace: UILabel!
     @IBOutlet weak var AddNewPlaceButton: UIButton!
-    
+   var dropDownMenuFolder = IGLDropDownMenu()
+    @IBOutlet weak var CancelAddNewPlace: UIButton!
+   
     var place:GMSPlace?
     
     var marker = GMSMarker()
     
+    //these variables are used for the autocomplete
     var newPlaceName = ""
     var newPlaceAddress = ""
     var newPlacePlaceID = ""
     var newPlaceTelephone = ""
-   
-    var folderItem = ""
-    var folderIconIndex = ""
-    
+
     var telephone = ""
     var openNowStatus = ""
     var types = ""
     var priceLevel = ""
     var website = ""
-    
-    
+
     var latitudeText = ""
     var longitudeText = ""
     var newPlaceNameText = ""
     
-
-
-    var storedPlaceLatitude = ""
-    var storedPlaceLongitude = ""
+    var folderItem = ""
+    var folderIconIndex = ""
     
+    //used for firebase
     var user = Auth.auth().currentUser
-    var databaseRef = Database.database().reference()
     
-    var effect:UIVisualEffect!
-
- 
-   
-       var dropDownMenuFolder = IGLDropDownMenu()
-    
-    var tappedMarker = CLLocationCoordinate2D()
+    //var effect:UIVisualEffect!
    // var folderNames = [String]()
+      // var placeWebsiteArray = [String]()
+    // var placeIDsArray = [String]()
+    //  var storedPlaceLatitude = ""
+    //  var storedPlaceLongitude = ""
+    // @IBOutlet weak var mapView: GMSMapView!
+    //@IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     var markersArray = [CLLocationCoordinate2D]()
-    var placeIDsArray = [String]()
     var placeNamesArray = [String]()
-    var placeWebsiteArray = [String]()
+
     
     var filterSelected = ""
     
     var markerID = ""
- 
+    
+    
+   var tappedMarker = CLLocationCoordinate2D()
     var firebaseKey = ""
     var ratingControlRating = Int()
     var checkboxBool: Bool = false
     var tagsMarker = ""
     var markerPlacePictureURL = ""
+    
     var tappedMarkerAddress = ""
     var tappedMarkerTelephone = ""
     var tappedMarkerWebsite = ""
@@ -173,16 +160,11 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
    
    
     
-    @IBOutlet var closeDetailsButton: UIButton!
-    
-    @IBOutlet var moreDetailButton: UIButton!
-    
-    
     var afterfirebase = Int()
     var updaterating = Int()
-    
-    var userCurrentLocation = CLLocationCoordinate2D()
-    var jim = CLLocation()
+    //this is for trying to render a radius around the users current location.
+   // var userCurrentLocation = CLLocationCoordinate2D()
+   // var jim = CLLocation()
     
     var MARKers = [GMSMarker]()
     
@@ -192,6 +174,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       view.addSubview(friendSlider)
         //This makes sure that the collection view in the container is flush with the searchbar at the top
            self.automaticallyAdjustsScrollViewInsets = false
         //friendSlider.isHidden = true
@@ -212,9 +196,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
       // visualEffectView?.isHidden = true
        // visualEffectView?.effect = nil
   
-    let frame = CGRect(x: 0, y: friendSlider.frame.maxY, width: self.view.frame.width, height: self.view.frame.height*0.8)
+    //let frame = CGRect(x: 0, y: friendSlider.frame.maxY, width: self.view.frame.width, height: self.view.frame.height*0.8)
+        let frameForFriendSlider = CGRect(x: 0, y: 64, width: self.view.frame.width, height: (self.view.frame.height*1/4)-64)
+        friendSlider.frame = frameForFriendSlider
+        let frame = CGRect(x: 0, y: friendSlider.frame.maxY, width: self.view.frame.width, height: (self.view.frame.height*3/4)-50)
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 22.300000, longitude: 70.783300, zoom: 10.0)
-        vwGMap = GMSMapView.map(withFrame: frame , camera: camera)
+        vwGMap = GMSMapView.map(withFrame: frame  , camera: camera)
         vwGMap.camera = camera
         vwGMap.settings.scrollGestures = true
         vwGMap.settings.zoomGestures = true
@@ -233,7 +220,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         locationManager.startUpdatingLocation()
         
         self.view.addSubview(vwGMap)
-        
+        /*
 //This is getting access to the database and accessing the stored places child information and storing it into a local STOREDPlaces dictionary
         let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
        // print("THIS IS STORED PLACES IN GOOGLE MAPS VIEW CONTROLLER")
@@ -293,7 +280,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
             }
         }
         )
-       
+       */
         /*
 //This does the same as previous but accesses the stored folders file and places into the STOREDFolders dict
         let refFolders = Database.database().reference().child((user?.uid)!).child("UserFolders")
@@ -321,8 +308,81 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         }
         )
  */
+        fetchPlaces()
         fetchFolder()
         fetchFriends()
+    }
+    
+    func fetchFriendMessages() {
+        //This retreives the messages sent from the users friends.
+        let ref = Database.database().reference().child((user?.uid)!).child("FriendMessages")
+        
+        ref.observe( .value, with: { (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    
+                    
+                }
+            }
+        }
+        )
+    }
+    func fetchPlaces() {
+        //This is getting access to the database and accessing the stored places child information and storing it into a local STOREDPlaces dictionary. This is called everytime there is an update in the database.
+        let ref = Database.database().reference().child((user?.uid)!).child("StoredPlaces")
+        
+        ref.observe( .value, with: { (snapshot) in
+            //  print(self.MARKers.count)
+            self.MARKers.removeAll()
+            //  print(self.MARKers.count)
+            STOREDPlaces.removeAll()
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let key = snap.key
+                        self.firebaseKey = key
+                        var PLACE = (dictionary[key] as? [String: AnyObject]!)!
+                        
+                        let latitude = (dictionary[key]?["Latitude"] as? NSString)?.doubleValue
+                        let longitude = (dictionary[key]?["Longitude"] as? NSString)?.doubleValue
+                        
+                        let markers = GMSMarker()
+                        markers.position = CLLocationCoordinate2D(latitude: latitude! , longitude: longitude!)
+                        self.markersArray.append(markers.position)
+                        
+                        let folderIcon = (dictionary[key] as? [String: AnyObject]!)!["FolderIcon"]
+                        markers.icon = UIImage(named:folderIcon! as! String)
+                        
+                        let name = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceName"]
+                        let website = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceWebsite"]
+                        let address = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceAddress"]
+                        let rating = (dictionary[key] as? [String: AnyObject]!)!["Rating"]
+                        let checkbox = (dictionary[key] as? [String: AnyObject]!)!["Checkbox"]
+                        let tags = (dictionary[key] as? [String: AnyObject]!)!["Tags"]
+                        let placePicture = (dictionary[key] as? [String: AnyObject]!)!["StoredPlacePicture"]
+                        let telephone = (dictionary[key] as? [String: AnyObject]!)!["StoredPlaceTelephone"]
+                        let foldername = (dictionary[key] as? [String: AnyObject]!)!["PlaceUnderFolder"]
+                        
+                        
+                        markers.accessibilityValue = name as! String
+                        
+                        self.placeNamesArray.append(name! as! String)
+                        
+                        
+                        let storedPlaceUserData = markerUserData(Name: name! as! String, Address: address! as! String, Website: website! as! String, Telephone: telephone! as! String, FirebaseKey: key, Rating: rating! as! Int, Checkbox: checkbox! as! Bool, Tags: tags! as! String, PlacePicture: placePicture! as! String, FolderName: foldername as! String)
+                        
+                        markers.userData = storedPlaceUserData
+                        
+                        PLACE?.updateValue(self.firebaseKey as AnyObject, forKey: "firebaseKey")
+                        STOREDPlaces.append(PLACE!)
+                        self.MARKers.append(markers)
+                        //print(self.MARKers.count)
+                    }
+                }
+                self.filterPlaces()
+            }
+        }
+        )
     }
     
     
@@ -440,8 +500,9 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last
-        jim = newLocation!
-        userCurrentLocation = (newLocation?.coordinate)!
+        //jim = newLocation!
+       // userCurrentLocation = (newLocation?.coordinate)!
+        
         vwGMap.camera = GMSCameraPosition.camera(withTarget: newLocation!.coordinate, zoom: 7)
      /*
         let circleCenter = newLocation?.coordinate ;
@@ -748,7 +809,6 @@ self.newPlacePlaceID = placeID
     dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
     }
 
-    @IBOutlet weak var CancelAddNewPlace: UIButton!
     
     //When adding new place, saves place to Firebase, changes icon to selected
     @IBAction func AddNewPlaceAction(_ sender: Any) {
@@ -900,6 +960,11 @@ self.newPlacePlaceID = placeID
         //"StoredPlaceWebsite": websiteLabel.text,
        selectedPlace = markerDict as [String : AnyObject]
     //   ratingControl.selectedPlaceDetail = markerDict as [String : AnyObject]
+        
+        if (segue.identifier == "testingSegue") {
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destination as! ThirdViewController
+        }
  
     }
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -934,7 +999,7 @@ self.newPlacePlaceID = placeID
     
     @IBAction func shareButtonAction(_ sender: Any) {
    friendSlider2.frame = CGRect(x: 0, y: friendSlider.frame.minY, width: self.view.frame.width, height: friendSlider.frame.height)
-        friendSlider.isHidden = true
+       friendSlider.isHidden = true
         self.view.addSubview(friendSlider2)
     }
    
@@ -989,7 +1054,7 @@ self.newPlacePlaceID = placeID
                 // print("YES")
                 //}
                 DispatchQueue.main.async {
-                    self.friendSlider.reloadData()
+                  //  self.friendSlider.reloadData()
                     print("This should print at the end of completed task ")
                     
                 }
@@ -1083,30 +1148,41 @@ self.newPlacePlaceID = placeID
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.friendSlider2 {
+            print("This is the second slider")
             print(friendsForSlider2.count)
             return friendsForSlider2.count
         }
-        
+ 
+        print("HELLO HELLO")
+        print(allFilters.count)
         return allFilters.count
     }
 
+   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        print("HELLO")
         if collectionView == self.friendSlider {
             let filter = allFilters[indexPath.row]
+            print("this is prnting the filter\(filter.name)")
             let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
             
             cellA.friendProfileImageFromMap.image = UIImage(named: "funProfileIcon")
+            let gradient: CAGradientLayer = CAGradientLayer()
+          
             
             var borderColor: CGColor! = UIColor.clear.cgColor
             var borderWidth: CGFloat = 0
             
            
            if indexPath.row == selectedRowIndex {
-                borderColor = UIColor.orange.cgColor
-                borderWidth = 1.7 //or whatever you please
             
-         
+                borderWidth = 1.7 //or whatever you please
+            borderColor = UIColor.orange.cgColor
+           // gradient.colors = [
+           //     UIColor.green.cgColor,
+            //    UIColor.black.cgColor
+           // ]
+          gradient.locations = [0.5, 1.0]
             print("There is a match between the indexpath and selected index")
             }else{
                 borderColor = UIColor.clear.cgColor
@@ -1114,12 +1190,16 @@ self.newPlacePlaceID = placeID
             print("There is no match")
          
             }
-            cellA.friendProfileImageFromMap.layer.borderWidth = borderWidth
             cellA.friendProfileImageFromMap.layer.borderColor = borderColor
+         cellA.friendProfileImageFromMap.layer.borderWidth = borderWidth
            
             
             if filter.type == "folder" {
+                // let scale1x = UITraitCollection(displayScale: 1.0)
+              // let image = UIImage(named: filter.icon!)?.imageAsset?.image(with: scale1x)
                 cellA.friendProfileImageFromMap.image = UIImage(named: filter.icon!)
+               cellA.friendProfileImageFromMap.contentMode = UIViewContentMode.scaleAspectFit
+                cellA.friendProfileImageFromMap.clipsToBounds = true
             } else if filter.type == "friend" {
                 let fileManager = FileManager.default
                 
@@ -1127,6 +1207,7 @@ self.newPlacePlaceID = placeID
               //  print(imagePath)
                 if fileManager.fileExists(atPath: imagePath){
                     cellA.friendProfileImageFromMap.image = UIImage(contentsOfFile: imagePath)
+                   
                     print("I have uploaded image from internal database")
                 }else{
                     print("Panic! No Image!")
@@ -1144,7 +1225,7 @@ self.newPlacePlaceID = placeID
         else {
             let cellB = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell2", for: indexPath) as! CollectionViewCell2
             let friend = friendsForSlider2[indexPath.row]
-            
+             print("this is prnting the filter\(friend)")
             var borderColor: CGColor! = UIColor.clear.cgColor
             var borderWidth: CGFloat = 0
             if indexPath.row == selectedRowIndex {
@@ -1157,8 +1238,10 @@ self.newPlacePlaceID = placeID
                 print("There is no match")
                 
             }
-            cellB.profilePicForSlider2.layer.borderWidth = borderWidth
-            cellB.profilePicForSlider2.layer.borderColor = borderColor
+            cellB.viewForBorderCollectionView2.layer.borderColor = borderColor
+            cellB.viewForBorderCollectionView2.layer.borderWidth = borderWidth
+            //cellB.profilePicForSlider2.layer.borderWidth = borderWidth
+           // cellB.profilePicForSlider2.layer.borderColor = borderColor
             
            cellB.nameLabelForSlider2.text = friend.name
             let fileManager = FileManager.default
@@ -1237,7 +1320,7 @@ self.newPlacePlaceID = placeID
             }
 
             } else if filter.type == "addButton" {
-            print("I am clicking the add button")
+               self.performSegue(withIdentifier: "testingSegue" , sender: self)
             }
         }
         else  if collectionView == self.friendSlider2 {
@@ -1246,8 +1329,12 @@ self.newPlacePlaceID = placeID
             let filter = friendsForSlider2[indexPath.row]
             selectedRowIndex = indexPath.row
             friendSlider2.reloadData()
+            vwGMap.addSubview(popSliderViewWindow)
+            userToSendRecommendationTo = filter
           //  print("this is the cell selected\(cell)")
         }
+ 
+ 
         }
 
 
@@ -1256,14 +1343,22 @@ self.newPlacePlaceID = placeID
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
        // print("size if cell called ")
-        var size = CGSize(width: 80, height: 80)
+ 
+        var size = CGSize(width: 55, height: 80)
         
         return size
     }
     
     
     @IBAction func addToNewFolderButtonInPopUpAction(_ sender: Any) {
+        let post = ["FriendUsername" : userToSendRecommendationTo.name, "FriendProfilePicture" : userToSendRecommendationTo.path, "FriendSendingMessage" : messageToFriendTextField.text, "FriendRecommendedPlaceName" : detailsName.text ]
+        
+     //    var markerDict = ["StoredPlaceName": detailsName.text, "Rating": ratingControl.rating, "firebaseKey" : firebaseKey, "Checkbox" : checkboxBool, "Tags" : tagsMarker, "StoredPlacePicture" : markerPlacePictureURL, "StoredPlaceAddress" : tappedMarkerAddress,  "StoredPlaceTelephone": tappedMarkerTelephone] as [String : Any]
+        let databaseRef = Database.database().reference()
+        databaseRef.child(userToSendRecommendationTo.path!).child("FriendMessages").childByAutoId().setValue(post)
+        
     }
+    
+
 
 }
-

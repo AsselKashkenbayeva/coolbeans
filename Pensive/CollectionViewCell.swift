@@ -15,15 +15,21 @@ class CollectionViewCell: UICollectionViewCell {
    
     @IBOutlet var nameForLabelMap: UILabel!
     
+    @IBOutlet var viewForeBorderFromFriendSlider: UIView!
 
+  //  @IBOutlet var ViewforBorderInMap: UIView!
     
     override func layoutSubviews() {
         super.layoutSubviews()
        // friendProfileImageFromMap.layer.borderWidth = 1
         friendProfileImageFromMap.layer.masksToBounds = false
        // friendProfileImageFromMap.layer.borderColor = UIColor.orange.cgColor
-        friendProfileImageFromMap.layer.cornerRadius = 20
-        friendProfileImageFromMap.clipsToBounds = true
+        friendProfileImageFromMap.layer.cornerRadius = friendProfileImageFromMap.frame.height/2
+      friendProfileImageFromMap.clipsToBounds = true
+        friendProfileImageFromMap.frame = CGRect(x: 5, y: 5, width: 50, height: 50)
+        viewForeBorderFromFriendSlider.frame = CGRect(x: 0, y: 0, width: (friendProfileImageFromMap.frame.width) + 8 , height: (friendProfileImageFromMap.frame.height) + 8)
+        nameForLabelMap.frame = CGRect(x: friendProfileImageFromMap.frame.minY, y: friendProfileImageFromMap.frame.maxY, width: self.frame.width, height: 30)
+        viewForeBorderFromFriendSlider.center = friendProfileImageFromMap.center
         //self.friendProfileImageFromMap.image = nil
  
     }
@@ -39,17 +45,10 @@ class CollectionViewCell: UICollectionViewCell {
         self.friendProfileImageFromMap.image = nil
  */
     }
-    /*
+
     override func prepareForReuse() {
     super.prepareForReuse()
-       // friendProfileImage.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-    friendProfileImage.layer.borderWidth = 1
-    friendProfileImage.layer.masksToBounds = false
-    friendProfileImage.layer.borderColor = UIColor.orange.cgColor
-    friendProfileImage.layer.cornerRadius = 20
-    friendProfileImage.clipsToBounds = true
-        self.friendProfileImage.image = nil
     }
-    */
+
    
 }

@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "setupInIt()"
             landmarkType = "7">
          </BreakpointContent>
@@ -166,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "FirstViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -182,11 +182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
             landmarkName = "viewController(_:didAutocompleteWith:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -259,38 +259,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "FirstViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "FirstViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Pensive/ProfilePageViewController.swift"
             timestampString = "526667441.229868"
             startingColumnNumber = "9223372036854775807"
@@ -340,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "mapView(_:didTap:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -356,11 +324,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "574"
-            endingLineNumber = "574"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
             landmarkName = "mapView(_:didTap:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -420,11 +388,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -436,11 +404,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -452,11 +420,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "700"
-            endingLineNumber = "700"
+            startingLineNumber = "761"
+            endingLineNumber = "761"
             landmarkName = "lookUpPlaceID()"
             landmarkType = "7">
          </BreakpointContent>
@@ -468,11 +436,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "706"
-            endingLineNumber = "706"
+            startingLineNumber = "767"
+            endingLineNumber = "767"
             landmarkName = "lookUpPlaceID()"
             landmarkType = "7">
          </BreakpointContent>
@@ -484,11 +452,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
+            startingLineNumber = "757"
+            endingLineNumber = "757"
             landmarkName = "lookUpPlaceID()"
             landmarkType = "7">
             <Locations>
@@ -500,11 +468,11 @@
                   moduleName = "Pensive"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/asselkashkenbayeva/Desktop/Pensive/Pensive/FirstViewController.swift"
-                  timestampString = "527354715.764035"
+                  timestampString = "529876116.959051"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "698"
-                  endingLineNumber = "698"
+                  startingLineNumber = "759"
+                  endingLineNumber = "759"
                   offsetFromSymbolStart = "27">
                </Location>
                <Location
@@ -515,11 +483,11 @@
                   moduleName = "Pensive"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/asselkashkenbayeva/Desktop/Pensive/Pensive/FirstViewController.swift"
-                  timestampString = "527354715.766714"
+                  timestampString = "529876116.961313"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "699"
-                  endingLineNumber = "699"
+                  startingLineNumber = "760"
+                  endingLineNumber = "760"
                   offsetFromSymbolStart = "41">
                </Location>
             </Locations>
@@ -532,11 +500,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "703"
-            endingLineNumber = "703"
+            startingLineNumber = "764"
+            endingLineNumber = "764"
             landmarkName = "lookUpPlaceID()"
             landmarkType = "7">
          </BreakpointContent>
@@ -548,11 +516,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "765"
+            endingLineNumber = "765"
             landmarkName = "lookUpPlaceID()"
             landmarkType = "7">
          </BreakpointContent>
@@ -564,11 +532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/AddFriendsViewController.swift"
-            timestampString = "526730434.904912"
+            timestampString = "527364614.105789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -580,11 +548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/AddFriendsViewController.swift"
-            timestampString = "526671859.593474"
+            timestampString = "527364614.105789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "saveImage(imageName:passedURL:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -596,11 +564,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527354714.63852"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1272"
-            endingLineNumber = "1272">
+            startingLineNumber = "1365"
+            endingLineNumber = "1365">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -610,11 +578,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
+            startingLineNumber = "732"
+            endingLineNumber = "732"
             landmarkName = "mapView(_:didTapPOIWithPlaceID:name:location:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -654,11 +622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527351319.47217"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "filterPlaces()"
             landmarkType = "7">
          </BreakpointContent>
@@ -670,11 +638,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527354175.286046"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1087"
-            endingLineNumber = "1087"
+            startingLineNumber = "1153"
+            endingLineNumber = "1153"
             landmarkName = "collectionView(_:numberOfItemsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -686,11 +654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527354175.286046"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1105"
-            endingLineNumber = "1105"
+            startingLineNumber = "1177"
+            endingLineNumber = "1177"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -702,12 +670,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pensive/FirstViewController.swift"
-            timestampString = "527354442.988769"
+            timestampString = "529875604.695814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1187"
-            endingLineNumber = "1187"
+            startingLineNumber = "1270"
+            endingLineNumber = "1270"
             landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pensive/FirstViewController.swift"
+            timestampString = "529875604.695814"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1200"
+            endingLineNumber = "1200"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pensive/FirstViewController.swift"
+            timestampString = "529875604.695814"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
