@@ -311,6 +311,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         fetchPlaces()
         fetchFolder()
         fetchFriends()
+        fetchFriendMessages()
     }
     
     func fetchFriendMessages() {
@@ -961,11 +962,11 @@ self.newPlacePlaceID = placeID
        selectedPlace = markerDict as [String : AnyObject]
     //   ratingControl.selectedPlaceDetail = markerDict as [String : AnyObject]
         
-        if (segue.identifier == "testingSegue") {
+      /*  if (segue.identifier == "testingSegue") {
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destination as! ThirdViewController
         }
- 
+ */
     }
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
@@ -993,8 +994,8 @@ self.newPlacePlaceID = placeID
     }
     
     @IBAction func telephoneButtonAction(_ sender: Any) {
-      //  let phoneCallURL = URL(string: "tel://\(tappedMarkerTelephone)")
-          //  UIApplication.shared.openURL(phoneCallURL!)
+        let phoneCallURL = URL(string: "tel://\(tappedMarkerTelephone)")
+            UIApplication.shared.openURL(phoneCallURL!)
     }
     
     @IBAction func shareButtonAction(_ sender: Any) {
@@ -1153,17 +1154,16 @@ self.newPlacePlaceID = placeID
             return friendsForSlider2.count
         }
  
-        print("HELLO HELLO")
+        //print("HELLO HELLO")
         print(allFilters.count)
         return allFilters.count
     }
 
    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("HELLO")
+    
         if collectionView == self.friendSlider {
             let filter = allFilters[indexPath.row]
-            print("this is prnting the filter\(filter.name)")
             let cellA = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
             
             cellA.friendProfileImageFromMap.image = UIImage(named: "funProfileIcon")
@@ -1183,11 +1183,10 @@ self.newPlacePlaceID = placeID
             //    UIColor.black.cgColor
            // ]
           gradient.locations = [0.5, 1.0]
-            print("There is a match between the indexpath and selected index")
             }else{
                 borderColor = UIColor.clear.cgColor
                 borderWidth = 0
-            print("There is no match")
+    
          
             }
             cellA.friendProfileImageFromMap.layer.borderColor = borderColor
@@ -1265,14 +1264,13 @@ self.newPlacePlaceID = placeID
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if collectionView == self.friendSlider {
          let filter = allFilters[indexPath.row]
             selectedRowIndex = indexPath.row
-            friendSlider.reloadData()
-            print()
-     print(filter)
+            //friendSlider.reloadData()
+          // print(filter.type)
         if filter.type == "folder" {
-           // print(filter.icon!)
             filterSelected = filter.name!
             filterPlaces()
         } else if filter.type == "friend" {
@@ -1320,10 +1318,14 @@ self.newPlacePlaceID = placeID
             }
 
             } else if filter.type == "addButton" {
-               self.performSegue(withIdentifier: "testingSegue" , sender: self)
+              // self.performSegue(withIdentifier: "testingSegue" , sender: self)
+            self.definesPresentationContext = true
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ThirdViewController") as! ThirdViewController
+                
+                self.present(vc, animated: true, completion: nil)
             }
-        }
-        else  if collectionView == self.friendSlider2 {
+ 
+        } else if collectionView == self.friendSlider2 {
        // print("I am selecting something from the friend slider 2")
            // let cell = collectionView.cellForItem(at: indexPath)
             let filter = friendsForSlider2[indexPath.row]
@@ -1331,7 +1333,6 @@ self.newPlacePlaceID = placeID
             friendSlider2.reloadData()
             vwGMap.addSubview(popSliderViewWindow)
             userToSendRecommendationTo = filter
-          //  print("this is the cell selected\(cell)")
         }
  
  
@@ -1358,6 +1359,23 @@ self.newPlacePlaceID = placeID
         databaseRef.child(userToSendRecommendationTo.path!).child("FriendMessages").childByAutoId().setValue(post)
         
     }
+    
+    @IBAction func sendToFriendRecommendation(_ sender: Any) {
+        let post = ["FriendUsername" : userToSendRecommendationTo.name, "FriendProfilePicture" : userToSendRecommendationTo.path, "FriendSendingMessage" : messageToFriendTextField.text, "FriendRecommendedPlaceName" : detailsName.text ]
+        
+        //    var markerDict = ["StoredPlaceName": detailsName.text, "Rating": ratingControl.rating, "firebaseKey" : firebaseKey, "Checkbox" : checkboxBool, "Tags" : tagsMarker, "StoredPlacePicture" : markerPlacePictureURL, "StoredPlaceAddress" : tappedMarkerAddress,  "StoredPlaceTelephone": tappedMarkerTelephone] as [String : Any]
+        let databaseRef = Database.database().reference()
+        databaseRef.child(userToSendRecommendationTo.path!).child("FriendMessages").childByAutoId().setValue(post)
+        popSliderViewWindow.removeFromSuperview()
+        friendSlider2.removeFromSuperview()
+        detailsPopUp.removeFromSuperview()
+        self.view.addSubview(friendSlider)
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
 
 

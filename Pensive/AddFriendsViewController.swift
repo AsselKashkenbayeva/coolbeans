@@ -322,6 +322,7 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
     */
     
     @IBAction func addCloseFriendsActions(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 

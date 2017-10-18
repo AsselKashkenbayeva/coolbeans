@@ -30,7 +30,7 @@ class AddFriendsTableViewCell: UITableViewCell, BEMCheckBoxDelegate {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
- print("THIS IS ANIMATING THE VIEW")
+// print("THIS IS ANIMATING THE VIEW")
         friendProfileImage.layer.borderWidth = 1
         friendProfileImage.layer.masksToBounds = false
         friendProfileImage.layer.borderColor = UIColor.orange.cgColor

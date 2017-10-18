@@ -10,7 +10,7 @@ import UIKit
 import IGLDropDownMenu
 import Firebase
 
-class ThirdViewController: UIViewController, IGLDropDownMenuDelegate {
+class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet var addFriendsWindowView: UIView!
     
@@ -30,6 +30,23 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate {
         
         setupInIt()
 
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                print("Swiped right")
+            case UISwipeGestureRecognizerDirection.down:
+                print("Swiped down")
+                self.dismiss(animated: true, completion: nil)
+            default:
+                break
+            }
+        }
     }
     
     func setupInIt() {

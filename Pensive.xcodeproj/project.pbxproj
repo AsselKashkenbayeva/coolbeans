@@ -26,6 +26,8 @@
 		CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
+		CF4EE23F1F97F15200F0B1D7 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */; };
+		CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF6BFC1A1F0D6373005F8893 /* TableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */; };
@@ -108,6 +110,8 @@
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
+		CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
+		CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableMapViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +265,8 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */,
+				CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */,
 				CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */,
 				CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */,
 				CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */,
@@ -555,12 +561,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
+				CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */,
 				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
 				CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */,
 				CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */,
 				CF2DA9201F654CFA00C4FF45 /* FriendSliderViewController.swift in Sources */,
+				CF4EE23F1F97F15200F0B1D7 /* MessagesTableViewController.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
 				CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */,
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
