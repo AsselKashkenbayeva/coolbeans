@@ -7,33 +7,101 @@
 //
 
 import UIKit
-import BubbleTransition
+import IGLDropDownMenu
+import Firebase
 
-class ThirdViewController: UIViewController, UIViewControllerTransitioningDelegate {
-    /*
-    let transition = BubbleTransition()
+class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureRecognizerDelegate {
     
-    @IBOutlet var somebutton: UIButton!
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination
-        controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
-        controller.modalPresentationStyle = .custom
+    @IBOutlet var addFriendsWindowView: UIView!
+    
+    @IBOutlet var newFolderTextField: UITextField!
+    
+    @IBOutlet var addFolderButton: UIButton!
+    
+      var dropDownMenuFolder = IGLDropDownMenu()
+    
+      var dataImage: [UIImage] = [UIImage(named: "0")!, UIImage(named: "1")!, UIImage(named:"2")!, UIImage(named: "3")!, UIImage(named: "5")!, UIImage(named: "6")!]
+      var folderIndex = ""
+    
+       let user = Auth.auth().currentUser
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupInIt()
+
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(swipeDown)
     }
     
-    // MARK: UIViewControllerTransitioningDelegate
-    
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .present
-        transition.startingPoint = somebutton.center
-        transition.bubbleColor = somebutton.backgroundColor!
-        return transition
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                print("Swiped right")
+            case UISwipeGestureRecognizerDirection.down:
+                print("Swiped down")
+                self.dismiss(animated: true, completion: nil)
+            default:
+                break
+            }
+        }
     }
     
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .dismiss
-        transition.startingPoint = somebutton.center
-        transition.bubbleColor = somebutton.backgroundColor!
-        return transition
+    func setupInIt() {
+        
+        var dropdownItems: NSMutableArray = NSMutableArray()
+        
+        for i in 0...(dataImage.count-1) {
+            
+            var item = IGLDropDownItem()
+            // item.text = "\(dataTitle[i])"
+            item.iconImage = dataImage[i]
+            
+            dropdownItems.add(addObject:item)
+        }
+        
+        dropDownMenuFolder.menuText = "Icon"
+        dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
+        dropDownMenuFolder.paddingLeft = 15
+        dropDownMenuFolder.frame = CGRect(x: 150, y: 150, width: 50, height: 50)
+        dropDownMenuFolder.delegate = self
+        dropDownMenuFolder.type = IGLDropDownMenuType.slidingInBoth
+        dropDownMenuFolder.gutterY = 5
+        dropDownMenuFolder.itemAnimationDelay = 0.1
+        dropDownMenuFolder.reloadView()
+      
+        self.view.addSubview(dropDownMenuFolder)
     }
-    */
+    
+    
+    func dropDownMenu(_ dropDownMenu: IGLDropDownMenu!, selectedItemAt index: Int) {
+        
+        var item:IGLDropDownItem = dropDownMenu.dropDownItems[index] as! IGLDropDownItem
+        
+        let folderIndex = String(item.index)
+        
+        self.folderIndex = folderIndex
+        addFolderButton.isUserInteractionEnabled = true
+        addFolderButton.setTitleColor(UIColor.red, for: .normal)
+    }
+    
+    @IBAction func addFolderAction(_ sender: Any) {
+        
+        let folderName = newFolderTextField.text
+        let folderIcon = folderIndex
+        
+        //this is not correct because it shows the whole array in one part
+        let post : [String: AnyObject] = ["FolderName" : folderName as AnyObject, "FolderIcon" : folderIcon as AnyObject ]
+        
+        let databaseRef = Database.database().reference()
+        databaseRef.child((self.user?.uid)!).child("UserFolders").childByAutoId().setValue(post)
+        
+        //dropDownMenuFolder.removeFromSuperview()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+
+    
 }

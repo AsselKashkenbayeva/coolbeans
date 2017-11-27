@@ -16,13 +16,18 @@
 		CF0F89C51DE2BD8500BC7462 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89C41DE2BD8500BC7462 /* GoogleToolboxForMac.framework */; };
 		CF0F89C71DE2BDBF00BC7462 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89C61DE2BDBF00BC7462 /* FirebaseDatabase.framework */; };
 		CF0F89CD1DE2C6A900BC7462 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF0F89CC1DE2C6A900BC7462 /* MapKit.framework */; };
+		CF1015CE1F6E93E5001F9AFA /* CollectionViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */; };
 		CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF122FA51DFF0DA00011725E /* DetailViewController.swift */; };
 		CF122FA81DFF2F6B0011725E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA71DFF2F6B0011725E /* Photos.framework */; };
 		CF122FAA1DFF2F720011725E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF122FA91DFF2F720011725E /* PhotosUI.framework */; };
 		CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17D7161E808783006E493D /* ConnectTableViewController.swift */; };
 		CF17DA4A1F24C4C500E664FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */; };
+		CF2DA9201F654CFA00C4FF45 /* FriendSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */; };
+		CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
+		CF4EE23F1F97F15200F0B1D7 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */; };
+		CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF6BFC1A1F0D6373005F8893 /* TableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */; };
@@ -54,6 +59,7 @@
 		CF91F9CE1DF1CFCE001EE137 /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91F9CD1DF1CFCE001EE137 /* SearchResultsController.swift */; };
 		CF91F9CF1DF55D63001EE137 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */; };
 		CF91F9D31DFDDC20001EE137 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91F9D21DFDDC20001EE137 /* RatingControl.swift */; };
+		CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */; };
 		CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */; };
 		CFB5B1951DC24BEF00CF071E /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1941DC24BEF00CF071E /* GooglePlaces.framework */; };
 		CFB5B1971DC24C0F00CF071E /* GooglePlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFB5B1961DC24C0F00CF071E /* GooglePlacePicker.framework */; };
@@ -63,6 +69,7 @@
 		CFBBE14E1DBEA75200635E2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBBE14D1DBEA75200635E2C /* Security.framework */; };
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
+		CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */; };
 		CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */; };
 		CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */; };
 		CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */; };
@@ -92,14 +99,19 @@
 		CF0F89C81DE2BE2400BC7462 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		CF0F89C91DE2BE5300BC7462 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		CF0F89CC1DE2C6A900BC7462 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell2.swift; sourceTree = "<group>"; };
 		CF122FA51DFF0DA00011725E /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CF122FA71DFF2F6B0011725E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		CF122FA91DFF2F720011725E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		CF17D7161E808783006E493D /* ConnectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectTableViewController.swift; sourceTree = "<group>"; };
 		CF17DA491F24C4C500E664FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSliderViewController.swift; sourceTree = "<group>"; };
+		CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
+		CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
+		CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableMapViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +150,7 @@
 		CF7EC8B01DBEA21B005C8D06 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
 		CF91F9CD1DF1CFCE001EE137 /* SearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultsController.swift; path = ../SearchResultsController.swift; sourceTree = "<group>"; };
 		CF91F9D21DFDDC20001EE137 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
+		CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingOutstuffViewController.swift; sourceTree = "<group>"; };
 		CFB2FE2B1EB615430060FDB9 /* ConnectMapViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectMapViewViewController.swift; sourceTree = "<group>"; };
 		CFB5B1941DC24BEF00CF071E /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
 		CFB5B1961DC24C0F00CF071E /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlacePicker.framework; sourceTree = "<group>"; };
@@ -150,6 +163,7 @@
 		CFBFD51F1DBEC20C008EB6E6 /* Pensive-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pensive-Bridging-Header.h"; sourceTree = "<group>"; };
 		CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "bridging-header.m"; path = "../bridging-header.m"; sourceTree = "<group>"; };
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = containerviewtestViewController.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
 		CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideFoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersTableViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +265,13 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */,
+				CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */,
+				CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */,
+				CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */,
+				CF1015CD1F6E93E5001F9AFA /* CollectionViewCell2.swift */,
+				CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */,
+				CFA242511F50B27B00A10136 /* TestingOutstuffViewController.swift */,
 				CF7DB1AA1F45B22B0015492E /* RecommendationsViewController.swift */,
 				CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */,
 				CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */,
@@ -540,9 +561,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
+				CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */,
 				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
+				CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */,
+				CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */,
 				CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */,
 				CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */,
+				CF2DA9201F654CFA00C4FF45 /* FriendSliderViewController.swift in Sources */,
+				CF4EE23F1F97F15200F0B1D7 /* MessagesTableViewController.swift in Sources */,
 				CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */,
 				CFB2FE2C1EB615430060FDB9 /* ConnectMapViewViewController.swift in Sources */,
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
@@ -551,7 +577,9 @@
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
+				CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */,
 				CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */,
+				CF1015CE1F6E93E5001F9AFA /* CollectionViewCell2.swift in Sources */,
 				CF17D7171E808783006E493D /* ConnectTableViewController.swift in Sources */,
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,
 				CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */,

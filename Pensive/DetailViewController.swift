@@ -19,27 +19,30 @@ protocol DataEnteredDelegate: class {
 }
 
 // var selectedPlaceDetail = [String:AnyObject]()
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BEMCheckBoxDelegate {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, BEMCheckBoxDelegate, UIGestureRecognizerDelegate {
+    
       weak var delegate: DataEnteredDelegate? = nil
-    @IBOutlet var closeButton: UIButton!
-    
-    @IBOutlet var placeName: UILabel!
-  
-    @IBOutlet var placeAddress: UILabel!
 
-    @IBOutlet var placeWebsite: UITextView!
-   
-    @IBOutlet var placeTelephone: UITextView!
+    @IBOutlet var placeName: UILabel!
     
-    @IBOutlet var addNotes: UITextField!
-     
-    @IBOutlet var addPicture: UIImageView!
-    
-    @IBOutlet var checkBox: BEMCheckBox!
+    @IBOutlet var placeAddress: UILabel!
   
+    @IBOutlet var addPicture: UIImageView!
+  
+ 
+    @IBOutlet var addNotes: UITextField!
+   
+    @IBOutlet var checkBox: BEMCheckBox!
     
+  
     @IBOutlet var ratingControl: RatingControl!
     
+    
+    @IBOutlet var gestureRecognizer: UIPanGestureRecognizer!
+    
+    @IBOutlet var swipeGestureRecognizer: UISwipeGestureRecognizer!
+    
+  
    var jpg = NSData()
     
    // var selectedPlaceDetail = [String:AnyObject]()
@@ -48,16 +51,17 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     var placeNotes = ""
     override func viewDidLoad() {
        
-        closeButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
+      //  closeButton.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
        
         placeName.text = selectedPlace["StoredPlaceName"] as! String?
         placeAddress.text = selectedPlace["StoredPlaceAddress"] as! String?
        
-        placeTelephone.text = selectedPlace["StoredPlaceTelephone"] as! String?
-        self.view.addSubview(placeWebsite)
-        print(placeTelephone.text)
-        placeWebsite.text = selectedPlace["StoredPlaceWebsite"] as! String?
-        print(placeWebsite.text)
+//        placeTelephone.text = selectedPlace["StoredPlaceTelephone"] as! String?
+//        self.view.addSubview(placeWebsite)
+//        print(placeTelephone.text)
+//        
+//        placeWebsite.text = selectedPlace["StoredPlaceWebsite"] as! String?
+//        print(placeWebsite.text)
        ratingControl.firebaseKey = (selectedPlace["firebaseKey"] as! String?)!
      ratingControl.rating = selectedPlace["Rating"] as! Int
        addNotes.text = selectedPlace["Tags"] as! String?
@@ -237,7 +241,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     //Setting up the animation
     
-  
+  /*
     @IBAction func closeButtonAction(_ sender: Any) {
          self.dismiss(animated: true, completion: nil)
         
@@ -252,6 +256,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         print(rating)
         delegate?.userDidChangeRating(info3: rating)
     }
+ */
+    
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
         print(addNotes.text)
@@ -263,6 +269,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         UIApplication.shared.setStatusBarStyle(.default, animated: true)
     }
     
+    /*
     @IBAction func editingTextField(_ sender: Any) {
         //  selectedPlaceDetail.updateValue(addNotes.text as AnyObject, forKey: "Tags")
        self.placeNotes = addNotes.text!
@@ -271,6 +278,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
        // print(selectedPlaceDetail)\
     delegate?.userDidEnterInformation(info: addNotes.text!)
     }
+ */
+    
     
     func getImage(imageName: String){
         let fileManager = FileManager.default
@@ -365,7 +374,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         view.endEditing(true)
     }
 
-    
+    /*
     @IBAction func addNotesAction(_ sender: Any) {
         
         let Notes = addNotes.text
@@ -379,10 +388,57 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").child(firebaseKey!).updateChildValues(["Tags" : Notes])
         }
     }
+    */
     
+    @IBAction func panGestureAction(_ sender: Any) {
+        if gestureRecognizer.state == .possible || gestureRecognizer.state == .changed {
+            
+            let translation = gestureRecognizer.translation(in: self.view)
+            // note: 'view' is optional and need to be unwrapped
+            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            print(gestureRecognizer.view?.center.x)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+        }
+        print("panning")
+    
+        let Tablemapviewcontroller:
+            TableMapViewController = self.storyboard!.instantiateViewController(withIdentifier: "TableMapViewController") as! TableMapViewController
+      
+        
+    }
+    
+    
+    @IBAction func swipeGestureAction(_ sender: Any) {
+        print("This is swiping down")
+        /*
+        if let swipeGesture = swipeGestureRecognizer as? UISwipeGestureRecognizer {
+            
+            
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Right:
+                print("Swiped right")
+            case UISwipeGestureRecognizerDirection.Down:
+                print("Swiped down")
+            case UISwipeGestureRecognizerDirection.Left:
+                print("Swiped left")
+            case UISwipeGestureRecognizerDirection.Up:
+                print("Swiped up")
+            default:
+                break
+            }
+ */
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "containerViewSegue" {
+        let Tablemapviewcontroller = segue.destination as! TableMapViewController
 }
+}
+}
+
+/*
 extension UIImage {
     var jpeg: Data? {
         return UIImageJPEGRepresentation(self, 1)   // QUALITY min = 0 / max = 1
     }
 }
+*/

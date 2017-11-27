@@ -10,12 +10,18 @@ import UIKit
 import Firebase
 import IGLDropDownMenu
 
+class FILTER: NSObject {
+    var name: String?
+    var key: String?
+    var icon: String?
+    var path: String?
+    var type: String?
+}
 
 class FOLDER: NSObject {
-    
     var name: String?
-    var icon: String?
     var key: String?
+    var icon: String?
 }
 
 class FoldersTableViewController: UITableViewController, IGLDropDownMenuDelegate {
@@ -318,7 +324,7 @@ let cell = UITableViewCell()
 */
         UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             //Frame Option 1:
-            self.AddNewFolderPopUp.frame = CGRect(x: 0 , y: 20, width: self.AddNewFolderPopUp.frame.width, height: self.AddNewFolderPopUp.frame.height)
+            self.AddNewFolderPopUp.frame = CGRect(x: 0 , y: 20, width: self.view.frame.width, height: self.AddNewFolderPopUp.frame.height)
          
             
         },completion: { finish in
