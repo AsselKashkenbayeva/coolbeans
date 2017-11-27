@@ -33,6 +33,8 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureR
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
+        addFolderButton.isUserInteractionEnabled = false
+        addFolderButton.setImage(UIImage(named: "addIconGrey"), for: UIControlState.normal)
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -84,7 +86,7 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureR
         
         self.folderIndex = folderIndex
         addFolderButton.isUserInteractionEnabled = true
-        addFolderButton.setTitleColor(UIColor.red, for: .normal)
+     addFolderButton.setImage(UIImage(named: "addIcon"), for: UIControlState.normal)
     }
     
     @IBAction func addFolderAction(_ sender: Any) {

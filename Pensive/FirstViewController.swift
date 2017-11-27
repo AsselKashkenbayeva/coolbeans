@@ -993,9 +993,15 @@ self.newPlacePlaceID = placeID
         UIApplication.shared.openURL(NSURL(string: tappedMarkerWebsite)! as URL)
     }
     
+
+    
     @IBAction func telephoneButtonAction(_ sender: Any) {
-        let phoneCallURL = URL(string: "tel://\(tappedMarkerTelephone)")
-            UIApplication.shared.openURL(phoneCallURL!)
+ print("I am tapping telephone icon 111")
+        print("TEL://\(tappedMarkerTelephone)")
+        let str = tappedMarkerTelephone.replacingOccurrences(of: " ", with: "")
+        let url: NSURL = URL(string: "TEL://\(str)")! as NSURL
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        
     }
     
     @IBAction func shareButtonAction(_ sender: Any) {
@@ -1376,7 +1382,6 @@ self.newPlacePlaceID = placeID
         self.present(vc, animated: true, completion: nil)
     }
     
-    
-
 
 }
+
