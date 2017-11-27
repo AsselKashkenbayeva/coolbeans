@@ -137,11 +137,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" selectedImage="MapIcon" id="rd5-he-lZ6"/>
                     <navigationItem key="navigationItem" title="Cattche" id="Juh-e5-Ova">
-                        <barButtonItem key="leftBarButtonItem" image="mailBox" id="6fX-z3-Cbm">
-                            <connections>
-                                <segue destination="dxw-QM-tII" kind="show" id="3bu-oT-npG"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="mailBox" id="0XD-xF-qvd"/>
                         <barButtonItem key="rightBarButtonItem" image="searchGlass" id="LKY-Cc-bCN">
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
@@ -854,10 +850,10 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
+                        <segue destination="adb-xU-KiL" kind="relationship" relationship="viewControllers" id="Gkm-OW-yW3"/>
                         <segue destination="dZC-aw-Pdm" kind="relationship" relationship="viewControllers" id="AHn-xj-kTd"/>
                         <segue destination="0mG-gD-VGF" kind="relationship" relationship="viewControllers" id="tAc-04-VG9"/>
                         <segue destination="4WP-6k-L4s" kind="relationship" relationship="viewControllers" id="yxy-OM-jtx"/>
-                        <segue destination="adb-xU-KiL" kind="relationship" relationship="viewControllers" id="Gkm-OW-yW3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -1067,14 +1063,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fk-x2-MdU">
-                                <rect key="frame" x="279" y="185" width="44" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="addIcon"/>
-                                <connections>
-                                    <action selector="addFolderAction:" destination="vTc-8n-bsM" eventType="touchUpInside" id="TbW-1G-Hbb"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Folder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRg-43-1XH">
                                 <rect key="frame" x="16" y="72" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1082,6 +1070,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fk-x2-MdU">
+                                <rect key="frame" x="217" y="61" width="44" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="addIcon"/>
+                                <connections>
+                                    <action selector="addFolderAction:" destination="vTc-8n-bsM" eventType="touchUpInside" id="TbW-1G-Hbb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.8549692706408234" green="0.8549692706408234" blue="0.8549692706408234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -1522,11 +1518,11 @@
                         <viewControllerLayoutGuide type="bottom" id="C4O-6u-n0A"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="C7J-Zs-Suy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwK-T2-zmm">
-                                <rect key="frame" x="16" y="115" width="246" height="211"/>
+                                <rect key="frame" x="16" y="164" width="246" height="211"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="7Ca-Wn-Xo8" kind="embed" id="YXH-e8-cbE"/>

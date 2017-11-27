@@ -729,7 +729,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     
     //This prints out the details just by clicking on a place need to enable this
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
-  
+  self.mapCustomInfoWindow.removeFromSuperview()
         vwGMap.animate(to: GMSCameraPosition.camera(withTarget: location, zoom: 10.0))
        self.marker.map = nil
         let marker = GMSMarker()
@@ -1359,7 +1359,7 @@ self.newPlacePlaceID = placeID
         databaseRef.child(userToSendRecommendationTo.path!).child("FriendMessages").childByAutoId().setValue(post)
         
     }
-    
+ 
     @IBAction func sendToFriendRecommendation(_ sender: Any) {
         let post = ["FriendUsername" : userToSendRecommendationTo.name, "FriendProfilePicture" : userToSendRecommendationTo.path, "FriendSendingMessage" : messageToFriendTextField.text, "FriendRecommendedPlaceName" : detailsName.text ]
         

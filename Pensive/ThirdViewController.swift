@@ -98,7 +98,8 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureR
         let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("UserFolders").childByAutoId().setValue(post)
         
-        dropDownMenuFolder.removeFromSuperview()
+        //dropDownMenuFolder.removeFromSuperview()
+        self.dismiss(animated: true, completion: nil)
     }
     
 

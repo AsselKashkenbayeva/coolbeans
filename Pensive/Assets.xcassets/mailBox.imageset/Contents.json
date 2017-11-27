@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "mailBox50.png",
+      "filename" : "mailGrey.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "mailBox50-1.png",
+      "filename" : "mailGrey-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "mailBox50-2.png",
+      "filename" : "mailGrey-2.png",
       "scale" : "3x"
     }
   ],
