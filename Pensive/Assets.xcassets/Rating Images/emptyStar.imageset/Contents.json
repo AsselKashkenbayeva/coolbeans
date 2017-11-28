@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "emptyHear70-3.png",
+      "filename" : "nofillStar.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "emptyHear70-2.png",
+      "filename" : "nofillStar-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "emptyHear70-1.png",
+      "filename" : "nofillStar-2.png",
       "scale" : "3x"
     }
   ],

@@ -42,7 +42,7 @@ class RecommendationsViewController: UIViewController {
         indicator.bringSubview(toFront: view)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         indicator.startAnimating()
-        let recommendationsURL = NSURL(string: "https://www.cattche.com/new-page")
+        let recommendationsURL = NSURL(string: "https://www.cattche.com/instagram")
         let request = NSURLRequest(url: recommendationsURL! as URL)
         webView.loadRequest(request as URLRequest);
        

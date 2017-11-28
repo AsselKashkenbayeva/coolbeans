@@ -10,7 +10,7 @@ import UIKit
 import IGLDropDownMenu
 import Firebase
 
-class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureRecognizerDelegate {
+class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureRecognizerDelegate,UITextFieldDelegate {
     
     @IBOutlet var addFriendsWindowView: UIView!
     
@@ -33,6 +33,14 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureR
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizerDirection.down
         self.view.addGestureRecognizer(swipeDown)
+        addFolderButton.isUserInteractionEnabled = false
+        addFolderButton.setImage(UIImage(named: "addIconGrey"), for: UIControlState.normal)
+        self.newFolderTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ scoreText: UITextField) -> Bool {
+        self.newFolderTextField.endEditing(true)
+        return false
     }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
@@ -62,13 +70,13 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureR
             dropdownItems.add(addObject:item)
         }
         
-        dropDownMenuFolder.menuText = "Icon"
+        dropDownMenuFolder.menuText = "  Icon"
         dropDownMenuFolder.dropDownItems  = dropdownItems as! [AnyObject]
-        dropDownMenuFolder.paddingLeft = 15
+        dropDownMenuFolder.paddingLeft = 2
         dropDownMenuFolder.frame = CGRect(x: 150, y: 150, width: 50, height: 50)
         dropDownMenuFolder.delegate = self
         dropDownMenuFolder.type = IGLDropDownMenuType.slidingInBoth
-        dropDownMenuFolder.gutterY = 5
+        dropDownMenuFolder.gutterY = 2
         dropDownMenuFolder.itemAnimationDelay = 0.1
         dropDownMenuFolder.reloadView()
       
@@ -84,7 +92,7 @@ class ThirdViewController: UIViewController, IGLDropDownMenuDelegate, UIGestureR
         
         self.folderIndex = folderIndex
         addFolderButton.isUserInteractionEnabled = true
-        addFolderButton.setTitleColor(UIColor.red, for: .normal)
+     addFolderButton.setImage(UIImage(named: "addIcon"), for: UIControlState.normal)
     }
     
     @IBAction func addFolderAction(_ sender: Any) {
