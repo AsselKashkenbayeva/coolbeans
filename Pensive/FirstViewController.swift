@@ -312,6 +312,23 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         fetchFolder()
         fetchFriends()
         fetchFriendMessages()
+        
+        let gradient = CAGradientLayer()
+        gradient.frame =  CGRect(origin: CGPoint.zero, size: self.detailsPopUp.frame.size)
+        gradient.colors = [UIColor.black.cgColor, UIColor.gray.cgColor]
+        
+        let shape = CAShapeLayer()
+        shape.lineWidth = 2
+        shape.path = UIBezierPath(rect: self.detailsPopUp.bounds).cgPath
+        shape.strokeColor = UIColor.black.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        gradient.mask = shape
+        
+        self.detailsPopUp.layer.addSublayer(gradient)
+        
+        moreDetailButton.isUserInteractionEnabled = false
+          // moreDetailButton.setTitleColor(UIColor.gray, for: .normal)
+       // moreDetailButton.tintColor = UIColor.gray
     }
     
     func fetchFriendMessages() {
@@ -608,8 +625,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         AddNewPlaceButton.setTitleColor(UIColor.gray, for: .normal)
         self.vwGMap.addSubview(mapCustomInfoWindow)
         self.vwGMap.addSubview(dropDownMenuFolder)
-        mapCustomInfoWindow.layer.borderWidth = 2
-        mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
+        //mapCustomInfoWindow.layer.borderWidth = 2
+        //mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
             }
     
     //Initiated if autocomplete failed
@@ -640,10 +657,10 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                         AddNewPlaceButton.isUserInteractionEnabled = false
                         AddNewPlaceButton.setTitleColor(UIColor.gray, for: .normal)
             mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
-            mapCustomInfoWindow.center.y -= 150
+            mapCustomInfoWindow.center.y -= 123
         
-            mapCustomInfoWindow.layer.borderWidth = 2
-            mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
+           // mapCustomInfoWindow.layer.borderWidth = 2
+           // mapCustomInfoWindow.layer.borderColor = UIColor.darkGray.cgColor
             self.vwGMap.addSubview(mapCustomInfoWindow)
           self.vwGMap.addSubview(dropDownMenuFolder)
         } else {
@@ -665,7 +682,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
                     }
                     
                     
-                        moreDetailButton.setTitleColor(UIColor.red, for: .normal)
+                        //moreDetailButton.setTitleColor(UIColor.red, for: .normal)
                         closeDetailsButton.setTitleColor(UIColor.red, for: .normal)
                    
                         ratingControl.isHidden = false
@@ -693,8 +710,8 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         tappedMarkerTelephone = (marker.userData as! markerUserData).telephoneUserData
                        // print(tappedMarkerTelephone)
         tappedMarkerAddress = (marker.userData as! markerUserData).addressUserData
-        detailsPopUp.layer.borderWidth = 2
-        detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
+       // detailsPopUp.layer.borderWidth = 2
+       // detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
         getImage(imageName:(marker.userData as! markerUserData).firebaseKey )
           self.vwGMap.addSubview(detailsPopUp)
         }
@@ -803,9 +820,9 @@ self.newPlacePlaceID = placeID
     //This is so that the addPlace window tacks onto place with marker
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
        detailsPopUp.center = mapView.projection.point(for: tappedMarker)
-       detailsPopUp.center.y -= 150
+       detailsPopUp.center.y -= 123
         mapCustomInfoWindow.center = mapView.projection.point(for: tappedMarker)
-        mapCustomInfoWindow.center.y -= 150
+        mapCustomInfoWindow.center.y -= 123
     dropDownMenuFolder.frame.origin.x = mapCustomInfoWindow.center.x-dropDownMenuFolder.frame.width/2
     dropDownMenuFolder.frame.origin.y = mapCustomInfoWindow.center.y-30
     }
@@ -829,7 +846,8 @@ self.newPlacePlaceID = placeID
         let databaseRef = Database.database().reference()
         databaseRef.child((self.user?.uid)!).child("StoredPlaces").childByAutoId().setValue(post)
      
-        marker.icon = UIImage(named: FolderIcon )
+        marker.icon = UIImage(named: self.folderIconIndex )
+        print(self.folderIconIndex)
         mapCustomInfoWindow.removeFromSuperview()
         //this drop down menu does not appear after opening the window once
         dropDownMenuFolder.removeFromSuperview()
@@ -837,7 +855,7 @@ self.newPlacePlaceID = placeID
         let when = DispatchTime.now() + 2
     DispatchQueue.main.asyncAfter(deadline: when) {
            
-    self.moreDetailButton.setTitleColor(UIColor.red, for: .normal)
+   // self.moreDetailButton.setTitleColor(UIColor.red, for: .normal)
     self.closeDetailsButton.setTitleColor(UIColor.red, for: .normal)
          //   print((self.MARKers.last?.userData as! markerUserData).firebaseKey)
          //   self.websiteLabel.isHidden = false
@@ -865,8 +883,8 @@ self.newPlacePlaceID = placeID
             
             self.getImage(imageName:(self.MARKers.last?.userData as! markerUserData).firebaseKey)
       
-            self.detailsPopUp.layer.borderWidth = 2
-            self.detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
+           // self.detailsPopUp.layer.borderWidth = 2
+          //  self.detailsPopUp.layer.borderColor = UIColor.darkGray.cgColor
             self.vwGMap.addSubview(self.detailsPopUp)
         }
      /*
@@ -931,6 +949,8 @@ self.newPlacePlaceID = placeID
     
     @IBAction func detailMoreDetailAction(_ sender: Any) {
       print("more detail button is being tapped")
+      // performSegue(withIdentifier: "newsegue", sender: self)
+        
     }
     func userDidEnterInformation(info: String) {
         print(info)
@@ -950,10 +970,10 @@ self.newPlacePlaceID = placeID
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let controller = segue.destination as! ThirdViewController
-//       controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
-//        controller.modalPresentationStyle = .custom
-     //   controller.delegate = self
+       let controller = segue.destination as! ThirdViewController
+     controller.transitioningDelegate = self as! UIViewControllerTransitioningDelegate
+    controller.modalPresentationStyle = .custom
+       
       //  let drinks = STOREDPlaces.map({$0["Tags"]})
     
        
