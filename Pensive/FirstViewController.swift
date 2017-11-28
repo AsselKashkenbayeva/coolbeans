@@ -327,6 +327,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
         self.detailsPopUp.layer.addSublayer(gradient)
         
         moreDetailButton.isUserInteractionEnabled = false
+        shareButton.isUserInteractionEnabled = false
           // moreDetailButton.setTitleColor(UIColor.gray, for: .normal)
        // moreDetailButton.tintColor = UIColor.gray
     }

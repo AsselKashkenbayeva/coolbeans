@@ -74,7 +74,8 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
 
    
     func saveImage(imageName: String, passedURL: String){
-   
+   print(passedURL)
+        print(imageName)
         if passedURL.isEmpty {
           //  print("There is no photo")
             return
@@ -95,6 +96,7 @@ class AddFriendsViewController: UIViewController,UITableViewDelegate, UITableVie
                 let fileManager = FileManager.default
                 //get the image path
                 let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+       
                   let data = UIImagePNGRepresentation(UIImage(data: data!)!)
                  fileManager.createFile(atPath: imagePath as String, contents: data, attributes: nil)
          //  }
