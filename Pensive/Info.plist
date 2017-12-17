@@ -20,6 +20,17 @@
 	<string>1.4.2</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>iOSCattcheApp</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.kaspianltd.Cattche</string>
+		</dict>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

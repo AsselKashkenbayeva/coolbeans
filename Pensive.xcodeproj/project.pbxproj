@@ -25,6 +25,7 @@
 		CF2DA9201F654CFA00C4FF45 /* FriendSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */; };
 		CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */; };
 		CF4BED151DE35F490087EFC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BED141DE35F490087EFC3 /* LoginViewController.swift */; };
+		CF4C38F71FE6FC2100B52E69 /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4C38F61FE6FC2100B52E69 /* IntroPageViewController.swift */; };
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
 		CF4EE23F1F97F15200F0B1D7 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */; };
 		CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */; };
@@ -70,6 +71,7 @@
 		CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */; };
 		CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */; };
 		CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */; };
+		CFC90B281FD427B1009ABB09 /* InstaConstrants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC90B271FD427B1009ABB09 /* InstaConstrants.swift */; };
 		CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */; };
 		CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */; };
 		CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD8EA051E65D70500611294 /* ProfilePageViewController.swift */; };
@@ -109,6 +111,7 @@
 		CF2DA9211F654D1500C4FF45 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		CF4BED141DE35F490087EFC3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CF4C00BB1E638B73001B8D26 /* Googleplacepickerheader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Googleplacepickerheader.h; path = ../Googleplacepickerheader.h; sourceTree = "<group>"; };
+		CF4C38F61FE6FC2100B52E69 /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
 		CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +167,7 @@
 		CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "bridging-header.m"; path = "../bridging-header.m"; sourceTree = "<group>"; };
 		CFBFD58F1DBF786E008EB6E6 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		CFC666501F594DAA00386D15 /* containerviewtestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = containerviewtestViewController.swift; sourceTree = "<group>"; };
+		CFC90B271FD427B1009ABB09 /* InstaConstrants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstaConstrants.swift; path = ../InstaConstrants.swift; sourceTree = "<group>"; };
 		CFCBA3A21DE5B56900E7CD7B /* Pensive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pensive.entitlements; sourceTree = "<group>"; };
 		CFD1D05A1DDF6B4B00012115 /* InsideFoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideFoldersTableViewController.swift; sourceTree = "<group>"; };
 		CFD8EA011E648D5300611294 /* FoldersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersTableViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF4C38F61FE6FC2100B52E69 /* IntroPageViewController.swift */,
 				CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */,
 				CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */,
 				CF2DA91F1F654CFA00C4FF45 /* FriendSliderViewController.swift */,
@@ -370,6 +375,7 @@
 				CFBFD5201DBEC20D008EB6E6 /* bridging-header.m */,
 				CF91F9CD1DF1CFCE001EE137 /* SearchResultsController.swift */,
 				CF7EC8531DBE68A1005C8D06 /* FirstViewController.swift */,
+				CFC90B271FD427B1009ABB09 /* InstaConstrants.swift */,
 			);
 			name = GoogleMaps;
 			sourceTree = "<group>";
@@ -562,6 +568,7 @@
 			files = (
 				CF122FA61DFF0DA00011725E /* DetailViewController.swift in Sources */,
 				CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */,
+				CFC90B281FD427B1009ABB09 /* InstaConstrants.swift in Sources */,
 				CF7DB1AB1F45B22B0015492E /* RecommendationsViewController.swift in Sources */,
 				CF2DA9221F654D1500C4FF45 /* CollectionViewCell.swift in Sources */,
 				CFA242521F50B27B00A10136 /* TestingOutstuffViewController.swift in Sources */,
@@ -574,6 +581,7 @@
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
 				CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */,
 				CF7DB1A71F4061430015492E /* AddFriendsViewController.swift in Sources */,
+				CF4C38F71FE6FC2100B52E69 /* IntroPageViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,

@@ -175,6 +175,23 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let when = DispatchTime.now() + 10
+        
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launcheddd")
+            //let defaults = UserDefaults.standard
+           // defaults.removeObject(forKey: "launcheddd")
+            if launchedBefore  {
+                print("Not first launch.")
+            } else {
+                print("First launch, setting UserDefault.")
+                UserDefaults.standard.set(true, forKey: "launcheddd")
+    let vc = (self.storyboard?.instantiateViewController(
+                        withIdentifier: "IntroPageViewController"))!
+                vc.modalTransitionStyle = .crossDissolve
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
         view.addSubview(friendSlider)
         //This makes sure that the collection view in the container is flush with the searchbar at the top
         self.automaticallyAdjustsScrollViewInsets = false

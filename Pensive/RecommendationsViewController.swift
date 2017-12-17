@@ -32,6 +32,7 @@ class RecommendationsViewController: UIViewController {
     
     var latitudeText = ""
     var longitudeText = ""
+    var instaToken = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +43,14 @@ class RecommendationsViewController: UIViewController {
         indicator.bringSubview(toFront: view)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         indicator.startAnimating()
-        let recommendationsURL = NSURL(string: "https://www.cattche.com/instagram")
+        let authURL = String(format: "%@?client_id=%@&redirect_uri=%@&response_type=token&scope=%@&DEBUG=True", arguments: [API.INSTAGRAM_AUTHURL,API.INSTAGRAM_CLIENT_ID,API.INSTAGRAM_REDIRECT_URI, API.INSTAGRAM_SCOPE])
+        let urlRequest = URLRequest.init(url: URL.init(string: authURL)!)
+        webView.loadRequest(urlRequest)
+  
+       /* let recommendationsURL = NSURL(string: "https://www.cattche.com/instagram")
         let request = NSURLRequest(url: recommendationsURL! as URL)
         webView.loadRequest(request as URLRequest);
-       
+       */
         let ref = Database.database().reference().child("AddRecommendation")
         
         ref.observe( .value, with: { (snapshot) in
@@ -56,7 +61,7 @@ class RecommendationsViewController: UIViewController {
             self.lookUpPlaceID()
             }
     )
-webView.isUserInteractionEnabled = false
+//webView.isUserInteractionEnabled = false
         for p in STOREDFolders {
             let item = p["FolderName"] as? String
             print(item)
@@ -68,7 +73,11 @@ webView.isUserInteractionEnabled = false
             }
         }
         
+        webView.delegate = self
+       
     }
+    
+ 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -171,3 +180,51 @@ webView.isUserInteractionEnabled = false
     
    
 }
+
+extension RecommendationsViewController: UIWebViewDelegate {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+  
+        return checkRequestForCallbackURL(request: request)
+    }
+    
+    func checkRequestForCallbackURL(request: URLRequest) -> Bool {
+    
+        let requestURLString = (request.url?.absoluteString)! as String
+        if requestURLString.hasPrefix(API.INSTAGRAM_REDIRECT_URI) {
+            let range: Range<String.Index> = requestURLString.range(of: "#access_token=")!
+            handleAuth(authToken: requestURLString.substring(from: range.upperBound))
+         
+            return false;
+        }
+        return true
+    }
+    func handleAuth(authToken: String) {
+    self.instaToken = authToken
+        print("Instagram authentication token ==", authToken)
+        print(authToken)
+        print(API.INSTAGRAM_SCOPE)
+        getInstaData()
+    }
+    
+    func getInstaData() {
+        let insta = "https://api.instagram.com/v1/users/self/media/liked?access_token=\(instaToken)"
+    let urlString = URL(string: insta)
+    if let url = urlString {
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error)
+            } else {
+                if let usableData = data {
+                    print(usableData) //JSONSerialization
+                    
+                    let json = try? JSONSerialization.jsonObject(with: usableData, options: [])
+                    print(json)
+                }
+            }
+        }
+        task.resume()
+        
+        }
+    }
+}
+ 
