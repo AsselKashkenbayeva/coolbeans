@@ -32,6 +32,7 @@
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF6BFC1A1F0D6373005F8893 /* TableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */; };
+		CF7819C31FE9482C006FDB76 /* InstagramLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7819C21FE9482C006FDB76 /* InstagramLoginViewController.swift */; };
 		CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */; };
 		CF7DB1A71F4061430015492E /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */; };
 		CF7DB1A91F40E2460015492E /* AddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */; };
@@ -118,6 +119,7 @@
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableMapViewController.swift; sourceTree = "<group>"; };
+		CF7819C21FE9482C006FDB76 /* InstagramLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramLoginViewController.swift; sourceTree = "<group>"; };
 		CF7DB19E1F3F6A530015492E /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
 		CF7DB1A61F4061430015492E /* AddFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		CF7DB1A81F40E2460015492E /* AddFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF7819C21FE9482C006FDB76 /* InstagramLoginViewController.swift */,
 				CF4C38F61FE6FC2100B52E69 /* IntroPageViewController.swift */,
 				CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */,
 				CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */,
@@ -581,6 +584,7 @@
 				CFD8EA061E65D70500611294 /* ProfilePageViewController.swift in Sources */,
 				CFD8EA021E648D5300611294 /* FoldersTableViewController.swift in Sources */,
 				CF7DB1A71F4061430015492E /* AddFriendsViewController.swift in Sources */,
+				CF7819C31FE9482C006FDB76 /* InstagramLoginViewController.swift in Sources */,
 				CF4C38F71FE6FC2100B52E69 /* IntroPageViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,

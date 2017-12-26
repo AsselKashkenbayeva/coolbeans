@@ -33,6 +33,7 @@ extension UIImage {
 
 class ProfilePageViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIViewControllerTransitioningDelegate {
 
+    @IBOutlet var addInstagramButton: UIButton!
     @IBOutlet var changePasswordButton: UIButton!
     
     @IBOutlet var testingButton: UIButton!
@@ -310,4 +311,12 @@ print("new password is saved in firebase")
         changePasswordButton.isHidden = true
     }
 
+    @IBAction func addInstagramButtonAction(_ sender: Any) {
+        let vc = (self.storyboard?.instantiateViewController(
+            withIdentifier: "IntroPageViewController"))!
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .pageSheet
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 }

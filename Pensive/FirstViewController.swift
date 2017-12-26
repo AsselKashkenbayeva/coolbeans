@@ -175,12 +175,12 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let when = DispatchTime.now() + 10
+        let when = DispatchTime.now() + 5
         
         DispatchQueue.main.asyncAfter(deadline: when) {
             let launchedBefore = UserDefaults.standard.bool(forKey: "launcheddd")
-            //let defaults = UserDefaults.standard
-           // defaults.removeObject(forKey: "launcheddd")
+        let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: "launcheddd")
             if launchedBefore  {
                 print("Not first launch.")
             } else {
@@ -189,6 +189,7 @@ class FirstViewController: UIViewController, CLLocationManagerDelegate, GMSMapVi
     let vc = (self.storyboard?.instantiateViewController(
                         withIdentifier: "IntroPageViewController"))!
                 vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .overFullScreen
                 self.present(vc, animated: true, completion: nil)
             }
         }

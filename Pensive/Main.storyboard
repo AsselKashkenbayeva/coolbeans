@@ -543,6 +543,14 @@
                                     <constraint firstAttribute="width" constant="63" id="V7D-gY-hcj"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiR-cf-qVG">
+                                <rect key="frame" x="105" y="460" width="165" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add instagram Account "/>
+                                <connections>
+                                    <action selector="addInstagramButtonAction:" destination="4WP-6k-L4s" eventType="touchUpInside" id="Xz2-Rz-KMo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.88287638260000001" green="0.98115020990000001" blue="1" alpha="0.89757543110000004" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -588,6 +596,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addInstagramButton" destination="fiR-cf-qVG" id="BEs-AK-7Nn"/>
                         <outlet property="changePasswordButton" destination="bnc-yL-S0e" id="lBZ-NF-j69"/>
                         <outlet property="dobTextField" destination="flj-TD-czg" id="ujS-96-6eW"/>
                         <outlet property="emailTextField" destination="97m-cP-j8V" id="7Q4-rf-Nvu"/>
@@ -854,34 +863,58 @@
         <!--View Controller-->
         <scene sceneID="Pu3-4c-s2m">
             <objects>
-                <viewController restorationIdentifier="FirstPage" storyboardIdentifier="FirstPage" id="F5p-kG-8qe" sceneMemberID="viewController">
+                <viewController restorationIdentifier="FirstPage" storyboardIdentifier="FirstPage" modalPresentationStyle="overFullScreen" id="F5p-kG-8qe" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fob-yJ-XWe"/>
                         <viewControllerLayoutGuide type="bottom" id="sUF-H5-49v"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PVU-SR-Pul">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="PVU-SR-Pul">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.25743963289999999" green="0.34663790680000001" blue="1" alpha="0.95520599620000002" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Introslides" translatesAutoresizingMaskIntoConstraints="NO" id="whb-zF-Nms">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBq-Z5-ccQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447" y="-1736"/>
+            <point key="canvasLocation" x="445.60000000000002" y="-1736.5817091454273"/>
         </scene>
-        <!--View Controller-->
+        <!--Instagram Login View Controller-->
         <scene sceneID="15I-5O-mcj">
             <objects>
-                <viewController restorationIdentifier="SecondPage" storyboardIdentifier="SecondPage" id="Jpy-xU-qgx" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SecondPage" storyboardIdentifier="SecondPage" modalPresentationStyle="overCurrentContext" id="Jpy-xU-qgx" customClass="InstagramLoginViewController" customModule="Pensive" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LPq-r1-gkC"/>
                         <viewControllerLayoutGuide type="bottom" id="MHR-vB-DSW"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VCZ-Lk-tyb">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="VCZ-Lk-tyb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.67069294099999999" green="0.55317560649999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gve-DG-hxJ">
+                                <rect key="frame" x="67" y="214" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKy-fx-hEp">
+                                <rect key="frame" x="261" y="28" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="closeIntroButtonAction:" destination="Jpy-xU-qgx" eventType="touchUpInside" id="jho-0G-VI5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="closeIntroButton" destination="uKy-fx-hEp" id="0BV-hP-REJ"/>
+                        <outlet property="instagramLoginWebview" destination="gve-DG-hxJ" id="blv-G3-OMP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9bP-dI-T7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1932,6 +1965,7 @@
     </scenes>
     <resources>
         <image name="Cancel.png" width="14" height="14"/>
+        <image name="Introslides" width="360" height="520"/>
         <image name="MapIcon" width="35" height="33"/>
         <image name="ProfileIcon" width="25" height="25"/>
         <image name="addFriendIcon" width="25" height="25"/>
