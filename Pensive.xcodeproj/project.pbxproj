@@ -29,6 +29,9 @@
 		CF4CAFB71E826F0E000872E2 /* USER.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4CAFB61E826F0E000872E2 /* USER.swift */; };
 		CF4EE23F1F97F15200F0B1D7 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */; };
 		CF4EE2411F97F1DB00F0B1D7 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */; };
+		CF4F4C95200BE7E40077F020 /* InstagramFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F4C94200BE7E40077F020 /* InstagramFeedCollectionViewCell.swift */; };
+		CF4F4C97200BE86F0077F020 /* InstagramPostsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F4C96200BE86F0077F020 /* InstagramPostsFeedViewController.swift */; };
+		CF4F4C9B200BEBFF0077F020 /* InstagramPostStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F4C9A200BEBFF0077F020 /* InstagramPostStructure.swift */; };
 		CF5F24D31DE5FFC90020ABAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5F24D21DE5FFC90020ABAA /* Main.storyboard */; };
 		CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */; };
 		CF6BFC1A1F0D6373005F8893 /* TableMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */; };
@@ -116,6 +119,9 @@
 		CF4CAFB61E826F0E000872E2 /* USER.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USER.swift; sourceTree = "<group>"; };
 		CF4EE23E1F97F15200F0B1D7 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		CF4F4C94200BE7E40077F020 /* InstagramFeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		CF4F4C96200BE86F0077F020 /* InstagramPostsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramPostsFeedViewController.swift; sourceTree = "<group>"; };
+		CF4F4C9A200BEBFF0077F020 /* InstagramPostStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramPostStructure.swift; sourceTree = "<group>"; };
 		CF5F24D21DE5FFC90020ABAA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CF5F24D41DE60B780020ABAA /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		CF6BFC191F0D6373005F8893 /* TableMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableMapViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +277,9 @@
 				CFDE42C31DCFDCFF00F0C111 /* GoogleMaps */,
 				CF7EC8511DBE68A1005C8D06 /* AppDelegate.swift */,
 				CF5F24D21DE5FFC90020ABAA /* Main.storyboard */,
+				CF4F4C9A200BEBFF0077F020 /* InstagramPostStructure.swift */,
+				CF4F4C96200BE86F0077F020 /* InstagramPostsFeedViewController.swift */,
+				CF4F4C94200BE7E40077F020 /* InstagramFeedCollectionViewCell.swift */,
 				CF7819C21FE9482C006FDB76 /* InstagramLoginViewController.swift */,
 				CF4C38F61FE6FC2100B52E69 /* IntroPageViewController.swift */,
 				CF4EE2401F97F1DB00F0B1D7 /* MessageViewController.swift */,
@@ -588,6 +597,7 @@
 				CF4C38F71FE6FC2100B52E69 /* IntroPageViewController.swift in Sources */,
 				CFBFD5211DBEC20D008EB6E6 /* bridging-header.m in Sources */,
 				CFD1D05B1DDF6B4B00012115 /* InsideFoldersTableViewController.swift in Sources */,
+				CF4F4C97200BE86F0077F020 /* InstagramPostsFeedViewController.swift in Sources */,
 				CFBFD5901DBF786E008EB6E6 /* ThirdViewController.swift in Sources */,
 				CFC666511F594DAA00386D15 /* containerviewtestViewController.swift in Sources */,
 				CF7DB19F1F3F6A530015492E /* UserFeedViewController.swift in Sources */,
@@ -596,6 +606,8 @@
 				CF7EC8521DBE68A1005C8D06 /* AppDelegate.swift in Sources */,
 				CF5F24D51DE60B780020ABAA /* ForgottenPasswordViewController.swift in Sources */,
 				CF6BFC1A1F0D6373005F8893 /* TableMapViewController.swift in Sources */,
+				CF4F4C9B200BEBFF0077F020 /* InstagramPostStructure.swift in Sources */,
+				CF4F4C95200BE7E40077F020 /* InstagramFeedCollectionViewCell.swift in Sources */,
 				CF91F9D31DFDDC20001EE137 /* RatingControl.swift in Sources */,
 				CF91F9CE1DF1CFCE001EE137 /* SearchResultsController.swift in Sources */,
 				CF91F9CF1DF55D63001EE137 /* FirstViewController.swift in Sources */,

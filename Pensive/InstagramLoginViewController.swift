@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class InstagramLoginViewController: UIViewController {
 
@@ -84,14 +85,16 @@ extension InstagramLoginViewController: UIWebViewDelegate {
                 } else {
                     if let usableData = data {
                         print("userdataTRHH\(usableData)") //JSONSerialization
+                       
+                        let json = try?JSON(usableData)
                         
-                        let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as! [String:AnyObject]
-                        print("userdataTRHH\(json)")
-                        let posts = json?["data"]?["caption"]
-                        print(posts)
+                print(json)
+                      
+                        
+                        }
                     }
                 }
-            }
+            
             task.resume()
             
         }
