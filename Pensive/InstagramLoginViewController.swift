@@ -83,10 +83,12 @@ extension InstagramLoginViewController: UIWebViewDelegate {
                     print(error)
                 } else {
                     if let usableData = data {
-                        print(usableData) //JSONSerialization
+                        print("userdataTRHH\(usableData)") //JSONSerialization
                         
-                        let json = try? JSONSerialization.jsonObject(with: usableData, options: [])
-                        print(json)
+                        let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as! [String:AnyObject]
+                        print("userdataTRHH\(json)")
+                        let posts = json?["data"]?["caption"]
+                        print(posts)
                     }
                 }
             }
