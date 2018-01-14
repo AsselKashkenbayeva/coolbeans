@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 
+var instagramPostsArray = [InstagramPostStructure]()
 class InstagramLoginViewController: UIViewController {
 
     @IBOutlet var instagramLoginWebview: UIWebView!
@@ -31,6 +32,8 @@ class InstagramLoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
           instagramLoginWebview.delegate = self
+       
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,11 +89,27 @@ extension InstagramLoginViewController: UIWebViewDelegate {
                     if let usableData = data {
                         print("userdataTRHH\(usableData)") //JSONSerialization
                        
-                        let json = try?JSON(usableData)
+                        if let json = try? JSON(usableData) {
+                            //print(json["data"])
+                            instagramPostsArray.removeAll()
+                            var i = 0
+                            for post in json["data"].arrayValue {
+                                i=i+1
+                                print(i)
+                                
+            let newstruct = InstagramPostStructure()
+                                
+                                newstruct.pathToImage = post["images"]["standard_resolution"]["url"].string
+                              newstruct.user = post["caption"]["from"]["full_name"].string
+                                newstruct.postID = post["caption"]["id"].string
+                                
+                                print(newstruct.pathToImage)
+                                instagramPostsArray.append(newstruct)
                         
-                print(json)
-                      
-                        
+                            }
+                            print(instagramPostsArray)
+                        }
+                   
                         }
                     }
                 }

@@ -12,6 +12,8 @@ class InstagramPostStructure: NSObject {
 
     var user: String!
     var pathToImage: String!
+    var postLatitude: String!
+    var postLongitude: String!
     var postLocation: String!
     var postID: String!
 }
